@@ -1,0 +1,50 @@
+{
+  "node-uni-1": {
+    "legalName": "University of California",
+    "alias": "University of California",
+    "port": 3001,
+    "dbConfig": {
+      "user": "node-user-1",
+      "pass": "node-pass-1",
+      "defaultSchemaName": "edublock",
+      "port": 5433
+    },
+    "nodeType": "University"
+  },
+  "node-uni-2": {
+    "legalName": "University of Amsterdam",
+    "alias": "University of Amsterdam",
+    "port": 3002,
+    "dbConfig": {
+      "user": "node-user-2",
+      "pass": "node-pass-2",
+      "defaultSchemaName": "edublock",
+      "port": 5434
+    },
+    "nodeType": "University"
+  },
+  "node-uni-3": {
+    "legalName": "University of Cluj-Napoca",
+    "alias": "University of Cluj-Napoca",
+    "port": 3003,
+    "dbConfig": {
+      "user": "node-user-3",
+      "pass": "node-pass-3",
+      "defaultSchemaName": "edublock",
+      "port": 5435
+    },
+    "nodeType": "University"
+  },
+  "node-uni-4": {
+    "legalName": "University of Bucharest",
+    "alias": "University of Bucharest",
+    "port": 3004,
+    "dbConfig": {
+      "user": "node-user-4",
+      "pass": "node-pass-4",
+      "defaultSchemaName": "edublock",
+      "port": 5436
+    },
+    "nodeType": "University"
+  }
+}

@@ -1,0 +1,57 @@
+version: '3.7'
+
+services:
+  node-uni-1-db:
+    image: "postgres"
+    environment:
+      - POSTGRES_USER=node-user-1
+      - POSTGRES_PASSWORD=node-pass-1
+      - POSTGRES_DB=edublock
+    ports:
+      - 54320:5433
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - backend
+  node-uni-2-db:
+    image: "postgres"
+    environment:
+      - POSTGRES_USER=node-user-2
+      - POSTGRES_PASSWORD=node-pass-2
+      - POSTGRES_DB=edublock
+    ports:
+      - 54320:5434
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - backend
+  node-uni-3-db:
+    image: "postgres"
+    environment:
+      - POSTGRES_USER=node-user-3
+      - POSTGRES_PASSWORD=node-pass-3
+      - POSTGRES_DB=edublock
+    ports:
+      - 54320:5435
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - backend
+  node-uni-4-db:
+    image: "postgres"
+    environment:
+      - POSTGRES_USER=node-user-4
+      - POSTGRES_PASSWORD=node-pass-4
+      - POSTGRES_DB=edublock
+    ports:
+      - 54320:5436
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - backend
+
+volumes:
+  postgres-data:
+
+networks:
+  backend:
