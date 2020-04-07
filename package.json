@@ -18,10 +18,12 @@
     "eosjs-ecc": "^4.0.7",
     "express": "^4.17.1",
     "merkletreejs": "^0.1.11",
+    "pg": "^8.0.0",
     "reflect-metadata": "^0.1.13",
     "sha256": "latest",
     "ts-node-dev": "^1.0.0-pre.44",
     "typedi": "^0.8.0",
+    "typeorm": "latest",
     "typescript": "^3.7.5",
     "uuid": "latest"
   },

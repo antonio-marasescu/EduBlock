@@ -2,7 +2,7 @@ const {exec} = require('child_process');
 const childNames = ['npm run dev node-uni-1', 'npm run dev node-uni-2', 'npm run dev node-uni-3', 'npm run dev node-uni-4'];
 
 exports.runNodeA = function runNodeA(complete) {
-    const child = exec(childNames[0]);
+    const child = exec(childNames[0],);
     child.stdin.pipe(process.stdin);
     child.stdout.pipe(process.stdout);
     complete();

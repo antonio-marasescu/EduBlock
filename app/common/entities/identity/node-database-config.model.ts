@@ -1,6 +1,7 @@
 export interface NodeDatabaseConfigModel {
-    user: string;
-    pass: string;
-    defaultSchemaName: string;
+    username: string;
+    password: string;
+    defaultDatabaseName: string;
+    host: string;
     port: number;
 }
