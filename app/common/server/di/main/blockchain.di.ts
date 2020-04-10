@@ -6,7 +6,7 @@ import {BlockchainValidatorToken} from "../../../services/blockchain/validators/
 import {BlockchainService} from "../../../services/blockchain/blockchain.service";
 import {ConsensusServiceBasic} from "../../../services/blockchain/consensus/consensus.basic";
 import {BlockchainValidatorBasic} from "../../../services/blockchain/validators/blockchain-validator.basic";
-import {BLOCKCHAIN_CONFIG} from "../../config/blockchain.config";
+import {BLOCKCHAIN_CONFIG} from "../../../services/blockchain/blockchain.config";
 
 export class BlockchainDI implements DIInterface {
     inject(_: any): void {

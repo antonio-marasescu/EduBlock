@@ -1,8 +1,8 @@
 import * as fs from 'fs';
-import {NodeIdentityModel} from "../../models/node-identity.model";
+import {NodeIdentityModel} from "../models/node-identity.model";
 import {Container} from "typedi";
 
-export class IdentityReader {
+export class ArgumentHandler {
     public readArguments() {
         if (process.argv.length != 3) {
             throw new Error('Not enough arguments!');

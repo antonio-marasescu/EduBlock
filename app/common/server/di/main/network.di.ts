@@ -1,6 +1,6 @@
 import {DIInterface} from "../di.interface";
 import {Container} from "typedi";
-import {RABBIT_MQ_CONFIG} from "../../config/rabbit-mq.config";
+import {RABBIT_MQ_CONFIG} from "../../../network/rabbitmq/rabbit-mq.config";
 import {RabbitMqServiceToken} from "../../../network/rabbitmq/rabbit-mq.service.interface";
 import {RabbitMqService} from "../../../network/rabbitmq/rabbit-mq.service";
 import {PingPublisher} from "../../../network/rabbitmq/publishers/ping.publisher";

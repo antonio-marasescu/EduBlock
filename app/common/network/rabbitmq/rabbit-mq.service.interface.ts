@@ -1,4 +1,4 @@
-import {RabbitMqConfig} from "../../server/config/rabbit-mq.config";
+import {RabbitMqConfig} from "./rabbit-mq.config";
 import * as Amqp from "amqp-ts";
 import {Queue} from "amqp-ts";
 import {Token} from "typedi";
