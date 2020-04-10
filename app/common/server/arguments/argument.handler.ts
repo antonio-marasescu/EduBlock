@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import {NodeIdentityModel, NodeIdentityModelToken} from "../models/node-identity.model";
+import {NodeConfigurationModel, NodeIdentityModelToken} from "../models/node-configuration.model";
 import {Container} from "typedi";
 
 export class ArgumentHandler {
@@ -9,7 +9,7 @@ export class ArgumentHandler {
         }
         const identityName: string = process.argv[2];
         const rawData: Buffer = fs.readFileSync('resources/identities.json');
-        const identities: { [key: string]: NodeIdentityModel } = JSON.parse(rawData.toString());
+        const identities: { [key: string]: NodeConfigurationModel } = JSON.parse(rawData.toString());
         if (!identities) {
             throw new Error("Invalid 'identities.json'!");
         }

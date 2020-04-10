@@ -6,12 +6,13 @@ export enum EduNodeType {
     CERTIFICATE_AUTHORITY = 'Certificate Authority'
 }
 
-export interface NodeIdentityModel {
+export interface NodeConfigurationModel {
     legalName: string;
     alias: string;
     port: number;
     dbConfig: NodeDatabaseConfigModel;
+    useFileLogging: boolean;
     nodeType: EduNodeType;
 }
 
-export const NodeIdentityModelToken = new Token<NodeIdentityModel>('node.identity');
+export const NodeIdentityModelToken = new Token<NodeConfigurationModel>('node.identity');
