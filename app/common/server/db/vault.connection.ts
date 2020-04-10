@@ -1,6 +1,6 @@
 import {createConnection} from "typeorm";
 import {Inject, Service, Token} from "typedi";
-import {NodeIdentityModel} from "../entities/identity/node-identity.model";
+import {NodeIdentityModel} from "../models/node-identity.model";
 import {Connection} from "typeorm/connection/Connection";
 import {VAULT_SCHEMA} from "./vault.schema";
 

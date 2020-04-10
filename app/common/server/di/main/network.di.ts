@@ -1,9 +1,9 @@
 import {DIInterface} from "../di.interface";
 import {Container} from "typedi";
 import {RABBIT_MQ_CONFIG} from "../../config/rabbit-mq.config";
-import {RabbitMqServiceToken} from "../../network/rabbitmq/rabbit-mq.service.interface";
-import {RabbitMqService} from "../../network/rabbitmq/rabbit-mq.service";
-import {PingPublisher} from "../../network/rabbitmq/publishers/ping.publisher";
+import {RabbitMqServiceToken} from "../../../network/rabbitmq/rabbit-mq.service.interface";
+import {RabbitMqService} from "../../../network/rabbitmq/rabbit-mq.service";
+import {PingPublisher} from "../../../network/rabbitmq/publishers/ping.publisher";
 
 export class NetworkDi implements DIInterface {
     inject(_: any): void {

@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import {NodeIdentityModel} from "../../entities/identity/node-identity.model";
+import {NodeIdentityModel} from "../../models/node-identity.model";
 import {Container} from "typedi";
 
 export class IdentityReader {

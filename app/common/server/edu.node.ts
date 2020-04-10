@@ -2,8 +2,9 @@ import express, {Express} from "express";
 import bodyParser from 'body-parser'
 import {Inject, Service, Token} from "typedi";
 import {BlockchainServiceToken, IBlockchainService} from "../services/blockchain/blockchain.service.interface";
-import {NodeIdentityModel} from "../entities/identity/node-identity.model";
-import {VaultConnection, VaultConnectionToken} from "../db/vault.connection";
+import {NodeIdentityModel} from "./models/node-identity.model";
+import {VaultConnection, VaultConnectionToken} from "./db/vault.connection";
+import {EccService, EccServiceToken} from "../services/security/ecc.service";
 
 export const EduNodeToken = new Token<EduNode>('EduNode');
 
@@ -13,7 +14,8 @@ export class EduNode {
 
     constructor(@Inject(BlockchainServiceToken) private eduBlockService: IBlockchainService,
                 @Inject('node.identity') private nodeIdentity: NodeIdentityModel,
-                @Inject(VaultConnectionToken) private vaultConnection: VaultConnection) {
+                @Inject(VaultConnectionToken) private vaultConnection: VaultConnection,
+                @Inject(EccServiceToken) private eccService: EccService) {
         this.app = express();
     }
 
@@ -26,6 +28,8 @@ export class EduNode {
         const that = this;
         this.app.listen(this.nodeIdentity.port, async function () {
             await that.vaultConnection.initializeConnection();
+            await that.eccService.initializeService();
+            console.log(that.eccService.isServiceInitialized());
             console.log('Node ' + that.nodeIdentity.alias + ' is listening....');
         });
 

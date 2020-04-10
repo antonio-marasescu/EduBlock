@@ -1,4 +1,4 @@
-import {NodeDatabaseConfigModel} from "./node-database-config.model";
+import {NodeDatabaseConfigModel} from "../db/config/node-database-config.model";
 
 export enum EduNodeType {
     UNIVERSITY = 'University',
