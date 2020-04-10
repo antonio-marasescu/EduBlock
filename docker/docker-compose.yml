@@ -9,6 +9,8 @@ services:
       - POSTGRES_DB=edublock
     ports:
       - 5434:5432
+    volumes:
+      - node-1-database-data-volume:/var/lib/postgresql/data
   node-uni-2-db:
     image: "postgres"
     environment:
@@ -17,6 +19,8 @@ services:
       - POSTGRES_DB=edublock
     ports:
       - 5435:5432
+    volumes:
+      - node-2-database-data-volume:/var/lib/postgresql/data
   node-uni-3-db:
     image: "postgres"
     environment:
@@ -25,6 +29,8 @@ services:
       - POSTGRES_DB=edublock
     ports:
       - 5436:5432
+    volumes:
+      - node-3-database-data-volume:/var/lib/postgresql/data
   node-uni-4-db:
     image: "postgres"
     environment:
@@ -33,3 +39,11 @@ services:
       - POSTGRES_DB=edublock
     ports:
       - 5437:5432
+    volumes:
+      - node-4-database-data-volume:/var/lib/postgresql/data
+
+volumes:
+  node-1-database-data-volume:
+  node-2-database-data-volume:
+  node-3-database-data-volume:
+  node-4-database-data-volume:
