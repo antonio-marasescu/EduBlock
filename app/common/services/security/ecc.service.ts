@@ -1,5 +1,6 @@
 import ecc from 'eosjs-ecc'
 import {Service, Token} from "typedi";
+import {PersonalIdentity} from "../../entities/identity/personal-identity.entity";
 
 export const EccServiceToken = new Token<EccService>('services.ecc');
 
@@ -17,5 +18,11 @@ export class EccService {
         }
         await ecc.initialize();
         this.initialized = true;
+    }
+
+    public async generateIdentity(): Promise<PersonalIdentity> {
+        const privateKey: string = await ecc.randomKey();
+        const publicKey: string = ecc.privateToPublic(privateKey);
+        return {privateKey: privateKey, publicKey: publicKey} as PersonalIdentity;
     }
 }

@@ -10,7 +10,7 @@ class App {
     }
 
     public async start(): Promise<void> {
-        await this.eduNode.initialize();
+        await this.eduNode.start();
     }
 }
 

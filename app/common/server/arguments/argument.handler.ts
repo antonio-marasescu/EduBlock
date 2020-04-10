@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import {NodeIdentityModel} from "../models/node-identity.model";
+import {NodeIdentityModel, NodeIdentityModelToken} from "../models/node-identity.model";
 import {Container} from "typedi";
 
 export class ArgumentHandler {
@@ -17,6 +17,6 @@ export class ArgumentHandler {
         if (!ownIdentity) {
             throw new Error("Invalid identity parameter!");
         }
-        Container.set('node.identity', ownIdentity);
+        Container.set(NodeIdentityModelToken, ownIdentity);
     }
 }

@@ -1,9 +1,9 @@
 import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
 
 @Entity()
-export class Identity {
+export class PersonalIdentity {
     @PrimaryGeneratedColumn()
-    id: number;
+    id?: number;
     @Column()
     publicKey: string;
     @Column()
