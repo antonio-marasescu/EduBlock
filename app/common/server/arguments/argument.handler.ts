@@ -1,8 +1,8 @@
 import * as fs from 'fs';
-import {NodeIdentityModel} from "../../entities/identity/node-identity.model";
+import {NodeIdentityModel, NodeIdentityModelToken} from "../models/node-identity.model";
 import {Container} from "typedi";
 
-export class IdentityReader {
+export class ArgumentHandler {
     public readArguments() {
         if (process.argv.length != 3) {
             throw new Error('Not enough arguments!');
@@ -17,6 +17,6 @@ export class IdentityReader {
         if (!ownIdentity) {
             throw new Error("Invalid identity parameter!");
         }
-        Container.set('node.identity', ownIdentity);
+        Container.set(NodeIdentityModelToken, ownIdentity);
     }
 }

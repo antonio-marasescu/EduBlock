@@ -1,6 +1,6 @@
 import {createConnection} from "typeorm";
 import {Inject, Service, Token} from "typedi";
-import {NodeIdentityModel} from "../entities/identity/node-identity.model";
+import {NodeIdentityModel, NodeIdentityModelToken} from "../models/node-identity.model";
 import {Connection} from "typeorm/connection/Connection";
 import {VAULT_SCHEMA} from "./vault.schema";
 
@@ -11,7 +11,7 @@ export class VaultConnection {
 
     public connection: Connection | undefined;
 
-    constructor(@Inject('node.identity') private nodeIdentity: NodeIdentityModel) {
+    constructor(@Inject(NodeIdentityModelToken) private nodeIdentity: NodeIdentityModel) {
     }
 
     public async initializeConnection(): Promise<void> {
@@ -27,7 +27,7 @@ export class VaultConnection {
             .catch(error => console.log(error))
             .then(connection => {
                 this.connection = connection as Connection;
-                console.log("Node Database Connection established...");
+                console.log("Database Connection established...");
             });
         await this.connection?.synchronize();
     }

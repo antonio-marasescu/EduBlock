@@ -1,8 +1,8 @@
 import "reflect-metadata";
 import {Container, Inject, Service} from "typedi";
 import {EduNode, EduNodeToken} from "./common/server/edu.node";
-import DIExecutor from "./common/di/di.executor";
-import {IdentityReader} from "./common/config/arguments/identity.reader";
+import DIExecutor from "./common/server/di/di.executor";
+import {ArgumentHandler} from "./common/server/arguments/argument.handler";
 
 @Service()
 class App {
@@ -10,11 +10,11 @@ class App {
     }
 
     public async start(): Promise<void> {
-        await this.eduNode.initialize();
+        await this.eduNode.start();
     }
 }
 
-const argumentHandler = new IdentityReader();
+const argumentHandler = new ArgumentHandler();
 argumentHandler.readArguments();
 const di = new DIExecutor();
 di.execute(null);

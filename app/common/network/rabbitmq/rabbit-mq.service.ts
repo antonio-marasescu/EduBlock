@@ -1,7 +1,7 @@
 import * as Amqp from "amqp-ts";
 import {Queue} from "amqp-ts";
 import {Inject, Service} from "typedi";
-import {RabbitMqConfig} from "../../config/rabbit-mq.config";
+import {RabbitMqConfig} from "./rabbit-mq.config";
 import {IRabbitMqService, RabbitMqServiceToken} from "./rabbit-mq.service.interface";
 import {BasicConsumer} from "./consumers/basic.consumer";
 
