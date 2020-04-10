@@ -1,11 +1,8 @@
-import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity} from "typeorm";
+import {IdentityModel} from "./identity.model";
 
 @Entity()
-export class PersonalIdentity {
-    @PrimaryGeneratedColumn()
-    id?: number;
-    @Column()
-    publicKey: string;
+export class PersonalIdentity extends IdentityModel {
     @Column()
     privateKey: string;
 }

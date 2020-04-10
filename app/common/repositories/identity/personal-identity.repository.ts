@@ -12,6 +12,6 @@ export class PersonalIdentityRepository extends Repository<PersonalIdentity> imp
     }
 
     async savePersonalIdentity(identity: PersonalIdentity): Promise<PersonalIdentity> {
-        return this.save(identity);
+        return this.save(identity)
     }
 }

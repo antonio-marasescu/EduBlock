@@ -1,11 +1,8 @@
-import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity} from "typeorm";
+import {IdentityModel} from "./identity.model";
 
 @Entity()
-export class CommonIdentity {
-    @PrimaryGeneratedColumn()
-    id: number;
+export class CommonIdentity extends IdentityModel {
     @Column()
-    publicKey: string;
-    @Column()
-    legalName: string;
+    isWellKnown: boolean;
 }

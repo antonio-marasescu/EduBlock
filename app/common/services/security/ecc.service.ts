@@ -21,8 +21,8 @@ export class EccService {
     }
 
     public async generateIdentity(): Promise<PersonalIdentity> {
-        const privateKey: string = await ecc.randomKey();
-        const publicKey: string = ecc.privateToPublic(privateKey);
+        const privateKey: String = await ecc.randomKey();
+        const publicKey: String = ecc.privateToPublic(privateKey);
         return {privateKey: privateKey, publicKey: publicKey} as PersonalIdentity;
     }
 }
