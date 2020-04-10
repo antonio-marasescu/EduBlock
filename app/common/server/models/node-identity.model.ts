@@ -11,6 +11,7 @@ export interface NodeIdentityModel {
     alias: string;
     port: number;
     dbConfig: NodeDatabaseConfigModel;
+    useFileLogging: boolean;
     nodeType: EduNodeType;
 }
 

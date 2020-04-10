@@ -4,4 +4,6 @@ export interface NodeDatabaseConfigModel {
     defaultDatabaseName: string;
     host: string;
     port: number;
+    logging: string[];
+    logger: string;
 }

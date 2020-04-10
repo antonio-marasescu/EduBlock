@@ -4,6 +4,8 @@ import IPersonalIdentityRepository from "./personal-identity.interface.repositor
 
 @EntityRepository(PersonalIdentity)
 export class PersonalIdentityRepository extends Repository<PersonalIdentity> implements IPersonalIdentityRepository {
+
+
     async findPersonalIdentity(): Promise<PersonalIdentity | null> {
         const personalIdentities: PersonalIdentity[] = await this.find({take: 1});
         if (personalIdentities.length < 1)
@@ -12,6 +14,6 @@ export class PersonalIdentityRepository extends Repository<PersonalIdentity> imp
     }
 
     async savePersonalIdentity(identity: PersonalIdentity): Promise<PersonalIdentity> {
-        return this.save(identity)
+        return await this.save(identity);
     }
 }
