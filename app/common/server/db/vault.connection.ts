@@ -1,6 +1,6 @@
 import {createConnection} from "typeorm";
 import {Inject, Service, Token} from "typedi";
-import {NodeIdentityModel, NodeIdentityModelToken} from "../models/node-identity.model";
+import {NodeConfigurationModel, NodeIdentityModelToken} from "../models/node-configuration.model";
 import {Connection} from "typeorm/connection/Connection";
 import {VAULT_SCHEMA} from "./vault.schema";
 import {ServerLogger, ServerLoggerToken} from "../../logger/server-logger.interface";
@@ -12,7 +12,7 @@ export class VaultConnection {
 
     public connection: Connection | undefined;
 
-    constructor(@Inject(NodeIdentityModelToken) private nodeIdentity: NodeIdentityModel,
+    constructor(@Inject(NodeIdentityModelToken) private nodeConfiguration: NodeConfigurationModel,
                 @Inject(ServerLoggerToken) private logger: ServerLogger) {
     }
 
@@ -20,13 +20,13 @@ export class VaultConnection {
         const that = this;
         await createConnection({
             type: "postgres",
-            host: this.nodeIdentity.dbConfig.host,
-            port: this.nodeIdentity.dbConfig.port,
-            username: this.nodeIdentity.dbConfig.username,
-            password: this.nodeIdentity.dbConfig.password,
-            database: this.nodeIdentity.dbConfig.defaultDatabaseName,
-            logging: this.nodeIdentity.dbConfig.logging as any,
-            logger: this.nodeIdentity.dbConfig.logger as any,
+            host: this.nodeConfiguration.dbConfig.host,
+            port: this.nodeConfiguration.dbConfig.port,
+            username: this.nodeConfiguration.dbConfig.username,
+            password: this.nodeConfiguration.dbConfig.password,
+            database: this.nodeConfiguration.dbConfig.defaultDatabaseName,
+            logging: this.nodeConfiguration.dbConfig.logging as any,
+            logger: this.nodeConfiguration.dbConfig.logger as any,
             entities: VAULT_SCHEMA,
         })
             .then(connection => {
