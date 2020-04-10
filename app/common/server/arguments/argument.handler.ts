@@ -1,15 +1,15 @@
 import * as fs from 'fs';
-import {NodeIdentityModel} from "../../entities/identity/node-identity.model";
+import {NodeConfigurationModel, NodeIdentityModelToken} from "../models/node-configuration.model";
 import {Container} from "typedi";
 
-export class IdentityReader {
+export class ArgumentHandler {
     public readArguments() {
         if (process.argv.length != 3) {
             throw new Error('Not enough arguments!');
         }
         const identityName: string = process.argv[2];
         const rawData: Buffer = fs.readFileSync('resources/identities.json');
-        const identities: { [key: string]: NodeIdentityModel } = JSON.parse(rawData.toString());
+        const identities: { [key: string]: NodeConfigurationModel } = JSON.parse(rawData.toString());
         if (!identities) {
             throw new Error("Invalid 'identities.json'!");
         }
@@ -17,6 +17,6 @@ export class IdentityReader {
         if (!ownIdentity) {
             throw new Error("Invalid identity parameter!");
         }
-        Container.set('node.identity', ownIdentity);
+        Container.set(NodeIdentityModelToken, ownIdentity);
     }
 }

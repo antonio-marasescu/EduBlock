@@ -8,7 +8,7 @@ import {Blockchain} from "./entities/blockchain.model";
 import MerkleTree from "merkletreejs";
 import {Base64SHA256, SHA256} from "./crypto/crypto.util";
 import {BlockchainServiceToken, IBlockchainService} from "./blockchain.service.interface";
-import {BlockchainConfig} from "../../config/blockchain.config";
+import {BlockchainConfig} from "./blockchain.config";
 
 @Service(BlockchainServiceToken)
 export class BlockchainService implements IBlockchainService {
