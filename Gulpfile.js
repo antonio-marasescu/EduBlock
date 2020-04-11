@@ -47,6 +47,9 @@ exports.generateDependencyGraph = function generateDependencyGraph(complete) {
         .then((writtenImagePath) => {
             console.log('Image written to ' + writtenImagePath);
         });
+    const child = exec('npm run generate-dependency');
+    child.stdout.pipe(process.stdout);
+    child.stderr.pipe(process.stderr);
     complete();
 };
 
