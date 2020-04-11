@@ -1,9 +1,9 @@
 import {createConnection} from "typeorm";
 import {Inject, Service, Token} from "typedi";
-import {NodeConfigurationModel, NodeIdentityModelToken} from "../../entities/config/node-configuration.model";
+import {NodeConfigurationModel, NodeIdentityModelToken} from "../../common/entities/config/node-configuration.model";
 import {Connection} from "typeorm/connection/Connection";
 import {VAULT_SCHEMA} from "./vault.schema";
-import {ServerLogger, ServerLoggerToken} from "../../logger/server-logger.interface";
+import {ServerLogger, ServerLoggerToken} from "../../common/logger/server-logger.interface";
 
 export const VaultConnectionToken = new Token<VaultConnection>('vault.connection');
 
@@ -17,6 +17,8 @@ export class VaultConnection {
     }
 
     public async initializeConnection(): Promise<void> {
+
+        this.logger.logInfo(this, "Database Connection initializing...");
         const that = this;
         await createConnection({
             type: "postgres",
@@ -31,7 +33,7 @@ export class VaultConnection {
         })
             .then(connection => {
                 that.connection = connection as Connection;
-                that.logger.logSuccess(that, "Database Connection established...");
+                that.logger.logSuccess(that, "Database Connection established.");
             })
             .catch(error => {
                 that.logger.logError(that, error)

@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import {NodeConfigurationModel, NodeIdentityModelToken} from "../../entities/config/node-configuration.model";
+import {NodeConfigurationModel, NodeIdentityModelToken} from "../../common/entities/config/node-configuration.model";
 import {Container} from "typedi";
 
 export class ArgumentHandler {

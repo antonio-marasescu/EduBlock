@@ -1,7 +1,7 @@
 import {Inject, Service, Token} from "typedi";
 import IPersonalIdentityRepository, {IPersonalIdentityRepositoryToken} from "../../repositories/identity/personal-identity.interface.repository";
-import {EccService, EccServiceToken} from "../security/ecc.service";
 import {PersonalIdentity} from "../../entities/identity/personal-identity.entity";
+import {EccService, EccServiceToken} from "../security/ecc.service";
 import {NodeConfigurationModel, NodeIdentityModelToken} from "../../entities/config/node-configuration.model";
 import {ServerLogger, ServerLoggerToken} from "../../logger/server-logger.interface";
 

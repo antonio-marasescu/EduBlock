@@ -2,7 +2,7 @@
   "name": "edublock",
   "version": "0.0.1",
   "description": "An education platform for record keeping",
-  "main": "app/common/server/edu.node.ts",
+  "main": "app/server/edu.node.ts",
   "scripts": {
     "tsc": "tsc",
     "dev": "ts-node-dev --respawn --transpileOnly ./app/app.ts",

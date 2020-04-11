@@ -359,13 +359,13 @@
 <path fill="none" stroke="#757575" d="M820.998,-435.953C872.488,-421.625 960.268,-397.199 1015.86,-381.729"/>
 <polygon fill="#757575" stroke="#757575" points="1016.82,-385.096 1025.51,-379.044 1014.94,-378.353 1016.82,-385.096"/>
 </g>
-<!-- common/server/di/services/network.di.ts -->
-<g id="node29" class="node"><title>common/server/di/services/network.di.ts</title>
+<!-- common/server/di/services/network.rabbitmq.di.ts -->
+<g id="node29" class="node"><title>common/server/di/services/network.rabbitmq.di.ts</title>
 <path fill="none" stroke="#c6c5fe" d="M1195.33,-540C1195.33,-540 940.667,-540 940.667,-540 936.833,-540 933,-536.167 933,-532.333 933,-532.333 933,-524.667 933,-524.667 933,-520.833 936.833,-517 940.667,-517 940.667,-517 1195.33,-517 1195.33,-517 1199.17,-517 1203,-520.833 1203,-524.667 1203,-524.667 1203,-532.333 1203,-532.333 1203,-536.167 1199.17,-540 1195.33,-540"/>
-<text text-anchor="middle" x="1068" y="-524.8" font-family="Arial" font-size="14.00" fill="#c6c5fe">common/server/di/services/network.di.ts</text>
+<text text-anchor="middle" x="1068" y="-524.8" font-family="Arial" font-size="14.00" fill="#c6c5fe">common/server/di/services/network.rabbitmq.di.ts</text>
 </g>
-<!-- common/server/di/di.register.ts&#45;&gt;common/server/di/services/network.di.ts -->
-<g id="edge33" class="edge"><title>common/server/di/di.register.ts&#45;&gt;common/server/di/services/network.di.ts</title>
+<!-- common/server/di/di.register.ts&#45;&gt;common/server/di/services/network.rabbitmq.di.ts -->
+<g id="edge33" class="edge"><title>common/server/di/di.register.ts&#45;&gt;common/server/di/services/network.rabbitmq.di.ts</title>
 <path fill="none" stroke="#757575" d="M820.386,-459.019C871.865,-473.523 960.303,-498.439 1016.11,-514.161"/>
 <polygon fill="#757575" stroke="#757575" points="1015.21,-517.546 1025.79,-516.889 1017.11,-510.809 1015.21,-517.546"/>
 </g>
@@ -474,28 +474,28 @@
 <path fill="none" stroke="#757575" d="M1127.1,-379.047C1200.23,-393.583 1325.65,-418.511 1403.26,-433.938"/>
 <polygon fill="#757575" stroke="#757575" points="1402.93,-437.44 1413.42,-435.956 1404.29,-430.574 1402.93,-437.44"/>
 </g>
-<!-- common/server/di/services/network.di.ts&#45;&gt;common/network/rabbitmq/publishers/ping.publisher.ts -->
-<g id="edge49" class="edge"><title>common/server/di/services/network.di.ts&#45;&gt;common/network/rabbitmq/publishers/ping.publisher.ts</title>
+<!-- common/server/di/services/network.rabbitmq.di.ts&#45;&gt;common/network/rabbitmq/publishers/ping.publisher.ts -->
+<g id="edge49" class="edge"><title>common/server/di/services/network.rabbitmq.di.ts&#45;&gt;common/network/rabbitmq/publishers/ping.publisher.ts</title>
 <path fill="none" stroke="#757575" d="M1184.88,-540.016C1235.17,-545.014 1294.2,-550.88 1345.57,-555.986"/>
 <polygon fill="#757575" stroke="#757575" points="1345.44,-559.49 1355.74,-556.996 1346.14,-552.524 1345.44,-559.49"/>
 </g>
-<!-- common/server/di/services/network.di.ts&#45;&gt;common/network/rabbitmq/rabbit&#45;mq.service.interface.ts -->
-<g id="edge51" class="edge"><title>common/server/di/services/network.di.ts&#45;&gt;common/network/rabbitmq/rabbit&#45;mq.service.interface.ts</title>
+<!-- common/server/di/services/network.rabbitmq.di.ts&#45;&gt;common/network/rabbitmq/rabbit&#45;mq.service.interface.ts -->
+<g id="edge51" class="edge"><title>common/server/di/services/network.rabbitmq.di.ts&#45;&gt;common/network/rabbitmq/rabbit&#45;mq.service.interface.ts</title>
 <path fill="none" stroke="#757575" d="M1203.11,-528.348C1350.62,-528.181 1589.02,-527.911 1757.15,-527.721"/>
 <polygon fill="#757575" stroke="#757575" points="1757.37,-531.221 1767.36,-527.709 1757.36,-524.221 1757.37,-531.221"/>
 </g>
-<!-- common/server/di/services/network.di.ts&#45;&gt;common/network/rabbitmq/rabbit&#45;mq.config.ts -->
-<g id="edge50" class="edge"><title>common/server/di/services/network.di.ts&#45;&gt;common/network/rabbitmq/rabbit&#45;mq.config.ts</title>
+<!-- common/server/di/services/network.rabbitmq.di.ts&#45;&gt;common/network/rabbitmq/rabbit&#45;mq.config.ts -->
+<g id="edge50" class="edge"><title>common/server/di/services/network.rabbitmq.di.ts&#45;&gt;common/network/rabbitmq/rabbit&#45;mq.config.ts</title>
 <path fill="none" stroke="#757575" d="M1095.16,-540.073C1129.94,-554.761 1193.68,-579.295 1251,-588.5 1453.96,-621.091 1972.27,-615.803 2176,-588.5 2241.04,-579.783 2313.96,-557.399 2358.3,-542.31"/>
 <polygon fill="#757575" stroke="#757575" points="2359.54,-545.585 2367.85,-539.02 2357.26,-538.967 2359.54,-545.585"/>
 </g>
-<!-- common/server/di/services/network.di.ts&#45;&gt;common/network/rabbitmq/rabbit&#45;mq.service.ts -->
-<g id="edge52" class="edge"><title>common/server/di/services/network.di.ts&#45;&gt;common/network/rabbitmq/rabbit&#45;mq.service.ts</title>
+<!-- common/server/di/services/network.rabbitmq.di.ts&#45;&gt;common/network/rabbitmq/rabbit&#45;mq.service.ts -->
+<g id="edge52" class="edge"><title>common/server/di/services/network.rabbitmq.di.ts&#45;&gt;common/network/rabbitmq/rabbit&#45;mq.service.ts</title>
 <path fill="none" stroke="#757575" d="M1184.88,-516.984C1235.17,-511.986 1294.2,-506.12 1345.57,-501.014"/>
 <polygon fill="#757575" stroke="#757575" points="1346.14,-504.476 1355.74,-500.004 1345.44,-497.51 1346.14,-504.476"/>
 </g>
-<!-- common/server/di/services/network.di.ts&#45;&gt;common/server/di/di.interface.ts -->
-<g id="edge53" class="edge"><title>common/server/di/services/network.di.ts&#45;&gt;common/server/di/di.interface.ts</title>
+<!-- common/server/di/services/network.rabbitmq.di.ts&#45;&gt;common/server/di/di.interface.ts -->
+<g id="edge53" class="edge"><title>common/server/di/services/network.rabbitmq.di.ts&#45;&gt;common/server/di/di.interface.ts</title>
 <path fill="none" stroke="#757575" d="M1172.76,-516.979C1187.39,-513.181 1201.9,-508.152 1215,-501.5 1234.62,-491.536 1230.94,-476.547 1251,-467.5 1282.33,-453.37 1318.68,-446.671 1352.72,-443.936"/>
 <polygon fill="#757575" stroke="#757575" points="1352.99,-447.425 1362.72,-443.238 1352.5,-440.442 1352.99,-447.425"/>
 </g>

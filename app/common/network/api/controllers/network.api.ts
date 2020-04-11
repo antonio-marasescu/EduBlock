@@ -1,6 +1,8 @@
 import express from "express";
 import {BasicApi} from "../basic.api";
-import {Service, Token} from "typedi";
+import {Inject, Service, Token} from "typedi";
+import {NetworkMembersService, NetworkMembersServiceToken} from "../../../services/common/network-members.service";
+import {IdentityService, IdentityServiceToken} from "../../../services/common/identity.service";
 
 export const NetworkApiToken = new Token<NetworkApi>('network.api.network');
 
@@ -8,7 +10,10 @@ export const NetworkApiToken = new Token<NetworkApi>('network.api.network');
 export class NetworkApi implements BasicApi {
     private readonly router: express.Router;
 
-    constructor() {
+    constructor(
+        @Inject(NetworkMembersServiceToken) private _: NetworkMembersService,
+        @Inject(IdentityServiceToken) private __: IdentityService,
+    ) {
         this.router = express.Router();
         this.registerRoutes();
     }
