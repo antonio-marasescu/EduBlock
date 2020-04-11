@@ -64,13 +64,13 @@
 <path fill="none" stroke="#757575" d="M571.65,-459.004C603.377,-462.466 639.201,-465.796 672,-467.5 913.51,-480.045 1196.48,-466.261 1352.7,-456.168"/>
 <polygon fill="#757575" stroke="#757575" points="1353.05,-459.653 1362.8,-455.509 1352.6,-452.668 1353.05,-459.653"/>
 </g>
-<!-- common/server/di/di.mapper.ts -->
-<g id="node25" class="node"><title>common/server/di/di.mapper.ts</title>
+<!-- common/server/di/di.register.ts -->
+<g id="node25" class="node"><title>common/server/di/di.register.ts</title>
 <path fill="none" stroke="#c6c5fe" d="M877.333,-459C877.333,-459 679.667,-459 679.667,-459 675.833,-459 672,-455.167 672,-451.333 672,-451.333 672,-443.667 672,-443.667 672,-439.833 675.833,-436 679.667,-436 679.667,-436 877.333,-436 877.333,-436 881.167,-436 885,-439.833 885,-443.667 885,-443.667 885,-451.333 885,-451.333 885,-455.167 881.167,-459 877.333,-459"/>
-<text text-anchor="middle" x="778.5" y="-443.8" font-family="Arial" font-size="14.00" fill="#c6c5fe">common/server/di/di.mapper.ts</text>
+<text text-anchor="middle" x="778.5" y="-443.8" font-family="Arial" font-size="14.00" fill="#c6c5fe">common/server/di/di.register.ts</text>
 </g>
-<!-- common/server/di/di.executor.ts&#45;&gt;common/server/di/di.mapper.ts -->
-<g id="edge28" class="edge"><title>common/server/di/di.executor.ts&#45;&gt;common/server/di/di.mapper.ts</title>
+<!-- common/server/di/di.executor.ts&#45;&gt;common/server/di/di.register.ts -->
+<g id="edge28" class="edge"><title>common/server/di/di.executor.ts&#45;&gt;common/server/di/di.register.ts</title>
 <path fill="none" stroke="#757575" d="M588.667,-447.5C612.341,-447.5 637.478,-447.5 661.427,-447.5"/>
 <polygon fill="#757575" stroke="#757575" points="661.61,-451 671.61,-447.5 661.61,-444 661.61,-451"/>
 </g>
@@ -324,8 +324,8 @@
 <path fill="none" stroke="#757575" d="M2071.71,-217.374C2106.77,-214.683 2144.27,-207.464 2176,-191.5 2197.37,-180.75 2191.29,-163.469 2212,-151.5 2232.42,-139.695 2255.91,-131.36 2279.2,-125.48"/>
 <polygon fill="#757575" stroke="#757575" points="2280.24,-128.829 2289.16,-123.107 2278.62,-122.02 2280.24,-128.829"/>
 </g>
-<!-- common/server/di/di.mapper.ts&#45;&gt;common/server/di/di.interface.ts -->
-<g id="edge29" class="edge"><title>common/server/di/di.mapper.ts&#45;&gt;common/server/di/di.interface.ts</title>
+<!-- common/server/di/di.register.ts&#45;&gt;common/server/di/di.interface.ts -->
+<g id="edge29" class="edge"><title>common/server/di/di.register.ts&#45;&gt;common/server/di/di.interface.ts</title>
 <path fill="none" stroke="#757575" d="M885.353,-447.5C1011.37,-447.5 1221.24,-447.5 1352.69,-447.5"/>
 <polygon fill="#757575" stroke="#757575" points="1352.81,-451 1362.8,-447.5 1352.8,-444 1352.81,-451"/>
 </g>
@@ -334,8 +334,8 @@
 <path fill="none" stroke="#c6c5fe" d="M1207.33,-204C1207.33,-204 928.667,-204 928.667,-204 924.833,-204 921,-200.167 921,-196.333 921,-196.333 921,-188.667 921,-188.667 921,-184.833 924.833,-181 928.667,-181 928.667,-181 1207.33,-181 1207.33,-181 1211.17,-181 1215,-184.833 1215,-188.667 1215,-188.667 1215,-196.333 1215,-196.333 1215,-200.167 1211.17,-204 1207.33,-204"/>
 <text text-anchor="middle" x="1068" y="-188.8" font-family="Arial" font-size="14.00" fill="#c6c5fe">common/server/di/repository/repository.di.ts</text>
 </g>
-<!-- common/server/di/di.mapper.ts&#45;&gt;common/server/di/repository/repository.di.ts -->
-<g id="edge30" class="edge"><title>common/server/di/di.mapper.ts&#45;&gt;common/server/di/repository/repository.di.ts</title>
+<!-- common/server/di/di.register.ts&#45;&gt;common/server/di/repository/repository.di.ts -->
+<g id="edge30" class="edge"><title>common/server/di/di.register.ts&#45;&gt;common/server/di/repository/repository.di.ts</title>
 <path fill="none" stroke="#757575" d="M792.6,-435.881C838.25,-395.391 990.563,-260.296 1046.32,-210.841"/>
 <polygon fill="#757575" stroke="#757575" points="1048.66,-213.442 1053.82,-204.188 1044.02,-208.205 1048.66,-213.442"/>
 </g>
@@ -344,8 +344,8 @@
 <path fill="none" stroke="#c6c5fe" d="M1204.33,-740C1204.33,-740 931.667,-740 931.667,-740 927.833,-740 924,-736.167 924,-732.333 924,-732.333 924,-724.667 924,-724.667 924,-720.833 927.833,-717 931.667,-717 931.667,-717 1204.33,-717 1204.33,-717 1208.17,-717 1212,-720.833 1212,-724.667 1212,-724.667 1212,-732.333 1212,-732.333 1212,-736.167 1208.17,-740 1204.33,-740"/>
 <text text-anchor="middle" x="1068" y="-724.8" font-family="Arial" font-size="14.00" fill="#c6c5fe">common/server/di/services/blockchain.di.ts</text>
 </g>
-<!-- common/server/di/di.mapper.ts&#45;&gt;common/server/di/services/blockchain.di.ts -->
-<g id="edge31" class="edge"><title>common/server/di/di.mapper.ts&#45;&gt;common/server/di/services/blockchain.di.ts</title>
+<!-- common/server/di/di.register.ts&#45;&gt;common/server/di/services/blockchain.di.ts -->
+<g id="edge31" class="edge"><title>common/server/di/di.register.ts&#45;&gt;common/server/di/services/blockchain.di.ts</title>
 <path fill="none" stroke="#757575" d="M791.487,-459.216C836.056,-502.777 992.457,-655.643 1047.59,-709.526"/>
 <polygon fill="#757575" stroke="#757575" points="1045.36,-712.247 1054.96,-716.734 1050.26,-707.241 1045.36,-712.247"/>
 </g>
@@ -354,8 +354,8 @@
 <path fill="none" stroke="#c6c5fe" d="M1191.33,-379C1191.33,-379 944.667,-379 944.667,-379 940.833,-379 937,-375.167 937,-371.333 937,-371.333 937,-363.667 937,-363.667 937,-359.833 940.833,-356 944.667,-356 944.667,-356 1191.33,-356 1191.33,-356 1195.17,-356 1199,-359.833 1199,-363.667 1199,-363.667 1199,-371.333 1199,-371.333 1199,-375.167 1195.17,-379 1191.33,-379"/>
 <text text-anchor="middle" x="1068" y="-363.8" font-family="Arial" font-size="14.00" fill="#c6c5fe">common/server/di/services/logger.di.ts</text>
 </g>
-<!-- common/server/di/di.mapper.ts&#45;&gt;common/server/di/services/logger.di.ts -->
-<g id="edge32" class="edge"><title>common/server/di/di.mapper.ts&#45;&gt;common/server/di/services/logger.di.ts</title>
+<!-- common/server/di/di.register.ts&#45;&gt;common/server/di/services/logger.di.ts -->
+<g id="edge32" class="edge"><title>common/server/di/di.register.ts&#45;&gt;common/server/di/services/logger.di.ts</title>
 <path fill="none" stroke="#757575" d="M820.998,-435.953C872.488,-421.625 960.268,-397.199 1015.86,-381.729"/>
 <polygon fill="#757575" stroke="#757575" points="1016.82,-385.096 1025.51,-379.044 1014.94,-378.353 1016.82,-385.096"/>
 </g>
@@ -364,8 +364,8 @@
 <path fill="none" stroke="#c6c5fe" d="M1195.33,-540C1195.33,-540 940.667,-540 940.667,-540 936.833,-540 933,-536.167 933,-532.333 933,-532.333 933,-524.667 933,-524.667 933,-520.833 936.833,-517 940.667,-517 940.667,-517 1195.33,-517 1195.33,-517 1199.17,-517 1203,-520.833 1203,-524.667 1203,-524.667 1203,-532.333 1203,-532.333 1203,-536.167 1199.17,-540 1195.33,-540"/>
 <text text-anchor="middle" x="1068" y="-524.8" font-family="Arial" font-size="14.00" fill="#c6c5fe">common/server/di/services/network.di.ts</text>
 </g>
-<!-- common/server/di/di.mapper.ts&#45;&gt;common/server/di/services/network.di.ts -->
-<g id="edge33" class="edge"><title>common/server/di/di.mapper.ts&#45;&gt;common/server/di/services/network.di.ts</title>
+<!-- common/server/di/di.register.ts&#45;&gt;common/server/di/services/network.di.ts -->
+<g id="edge33" class="edge"><title>common/server/di/di.register.ts&#45;&gt;common/server/di/services/network.di.ts</title>
 <path fill="none" stroke="#757575" d="M820.386,-459.019C871.865,-473.523 960.303,-498.439 1016.11,-514.161"/>
 <polygon fill="#757575" stroke="#757575" points="1015.21,-517.546 1025.79,-516.889 1017.11,-510.809 1015.21,-517.546"/>
 </g>

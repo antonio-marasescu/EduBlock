@@ -17,7 +17,7 @@ class App {
 const argumentHandler = new ArgumentHandler();
 argumentHandler.readArguments();
 const di = new DIExecutor();
-di.execute(null);
+di.inject(null);
 
 const app = Container.get(App);
 app.start().then(async () => {

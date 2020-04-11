@@ -1,12 +1,12 @@
 import {DIInterface} from "./di.interface";
-import {DI_MAPPER, DI_MAPPER_EXTERNAL} from "./di.mapper";
+import {DI_REGISTER, DI_REGISTER_DEPENDENTS} from "./di.register";
 
 export default class DIExecutor {
-    execute(params: any) {
-        DI_MAPPER.forEach((x: DIInterface) => x.inject(params))
+    inject(params: any) {
+        DI_REGISTER.forEach((x: DIInterface) => x.inject(params))
     }
 
-    executeExternal(params: any) {
-        DI_MAPPER_EXTERNAL.forEach((x: DIInterface) => x.inject(params))
+    injectDependents(params: any) {
+        DI_REGISTER_DEPENDENTS.forEach((x: DIInterface) => x.inject(params))
     }
 }

@@ -3,20 +3,6 @@ const madge = require('madge');
 
 const childNames = ['npm run dev node-uni-1', 'npm run dev node-uni-2', 'npm run dev node-uni-3', 'npm run dev node-uni-4'];
 
-exports.dockerComposeUp = function dockerComposeUp(complete) {
-    const child = exec("docker-compose up", {cwd: 'docker'});
-    child.stdin.pipe(process.stdin);
-    child.stdout.pipe(process.stdout);
-    complete();
-};
-
-exports.dockerComposeDown = function dockerComposeDown(complete) {
-    const child = exec("docker-compose down", {cwd: 'docker'});
-    child.stdin.pipe(process.stdin);
-    child.stdout.pipe(process.stdout);
-    complete();
-};
-
 exports.runNodeA = function runNodeA(complete) {
     const child = exec(childNames[0]);
     child.stdin.pipe(process.stdin);

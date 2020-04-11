@@ -1,13 +1,13 @@
 import express, {Express} from "express";
 import bodyParser from 'body-parser'
 import {Container, Inject, Service, Token} from "typedi";
-import {BlockchainServiceToken, IBlockchainService} from "../services/blockchain/blockchain.service.interface";
 import {NodeConfigurationModel, NodeIdentityModelToken} from "../entities/config/node-configuration.model";
 import {VaultConnection, VaultConnectionToken} from "./db/vault.connection";
 import {EccService, EccServiceToken} from "../services/security/ecc.service";
 import {IdentityServiceToken} from "../services/common/identity.service";
 import DIExecutor from "./di/di.executor";
 import {ServerLogger, ServerLoggerToken} from "../logger/server-logger.interface";
+import {API_ROUTER_REGISTER} from "../network/api/basic.api.register";
 
 export const EduNodeToken = new Token<EduNode>('EduNode');
 
@@ -15,8 +15,7 @@ export const EduNodeToken = new Token<EduNode>('EduNode');
 export class EduNode {
     private app: Express;
 
-    constructor(@Inject(BlockchainServiceToken) private eduBlockService: IBlockchainService,
-                @Inject(NodeIdentityModelToken) private nodeConfiguration: NodeConfigurationModel,
+    constructor(@Inject(NodeIdentityModelToken) private nodeConfiguration: NodeConfigurationModel,
                 @Inject(VaultConnectionToken) private vaultConnection: VaultConnection,
                 @Inject(EccServiceToken) private eccService: EccService,
                 @Inject(ServerLoggerToken) private logger: ServerLogger) {
@@ -42,7 +41,7 @@ export class EduNode {
         await this.vaultConnection.initializeConnection();
         await this.eccService.initializeService();
         const di = new DIExecutor();
-        di.executeExternal(null);
+        di.injectDependents(null);
         const identity = await Container.get(IdentityServiceToken).checkOrGenerateIdentity();
         this.logger.logInfo(this, "Identity (Public Key): " + identity);
     }
@@ -50,10 +49,6 @@ export class EduNode {
     private async applyMiddleware(): Promise<void> {
         this.app.use(bodyParser.json());
         this.app.use(bodyParser.urlencoded({extended: false}));
-        const router = express.Router();
-        router.get('/blockchain', async (_, res) => {
-            res.json(await this.eduBlockService.getBlockchain())
-        });
-        this.app.use(router);
+        API_ROUTER_REGISTER.forEach(router => this.app.use(router));
     }
 }
