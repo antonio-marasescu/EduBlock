@@ -43,18 +43,9 @@ exports.runAllNodes = function runAllNodes(complete) {
 
 exports.generateDependencyGraph = function generateDependencyGraph(complete) {
     madge('app/app.ts')
-        .then((res) => res.image('docs/images/dependency-graph.svg'))
+        .then((res) => res.image('docs/images/dependency-graph/complete.svg'))
         .then((writtenImagePath) => {
             console.log('Image written to ' + writtenImagePath);
-        });
-    complete();
-};
-
-exports.generateDependencyGraphAsDot = function generateDependencyGraphAsDot(complete) {
-    madge('app/app.ts')
-        .then((res) => res.dot())
-        .then((output) => {
-            console.log(output);
         });
     complete();
 };
