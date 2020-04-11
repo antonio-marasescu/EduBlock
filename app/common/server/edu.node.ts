@@ -2,7 +2,7 @@ import express, {Express} from "express";
 import bodyParser from 'body-parser'
 import {Container, Inject, Service, Token} from "typedi";
 import {BlockchainServiceToken, IBlockchainService} from "../services/blockchain/blockchain.service.interface";
-import {NodeConfigurationModel, NodeIdentityModelToken} from "./models/node-configuration.model";
+import {NodeConfigurationModel, NodeIdentityModelToken} from "../entities/config/node-configuration.model";
 import {VaultConnection, VaultConnectionToken} from "./db/vault.connection";
 import {EccService, EccServiceToken} from "../services/security/ecc.service";
 import {IdentityServiceToken} from "../services/common/identity.service";
@@ -25,16 +25,16 @@ export class EduNode {
 
     public async start(): Promise<void> {
 
-        this.logger.logInfo(this, 'Node ' + this.nodeConfiguration.alias + ' is starting...');
+        this.logger.logInfo(this, 'Node ' + this.nodeConfiguration.identity.alias + ' is starting...');
         this.logger.logInfo(this, 'Type: ' + this.nodeConfiguration.nodeType);
-        this.logger.logInfo(this, 'Port: ' + this.nodeConfiguration.port);
-        this.logger.logInfo(this, 'Database Port: ' + this.nodeConfiguration.dbConfig.port);
+        this.logger.logInfo(this, 'Port: ' + this.nodeConfiguration.identity.port);
+        this.logger.logInfo(this, 'Database Port: ' + this.nodeConfiguration.databaseConfiguration.port);
 
         await this.applyMiddleware();
         const that = this;
-        this.app.listen(this.nodeConfiguration.port, async function () {
+        this.app.listen(this.nodeConfiguration.identity.port, async function () {
             await that.applyInitialization();
-            that.logger.logSuccess(that, 'Node ' + that.nodeConfiguration.alias + ' is listening....');
+            that.logger.logSuccess(that, 'Node ' + that.nodeConfiguration.identity.alias + ' is listening....');
         });
     }
 

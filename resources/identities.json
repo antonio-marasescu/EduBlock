@@ -1,13 +1,15 @@
 {
   "node-uni-1": {
-    "legalName": "University of California",
-    "alias": "University of California",
-    "port": 3001,
-    "useFileLogging": false,
-    "dbConfig": {
+    "identity": {
+      "legalName": "University of California",
+      "alias": "University of California",
+      "port": 3001,
+      "host": "localhost"
+    },
+    "databaseConfiguration": {
       "username": "nodeuser1",
       "password": "nodepass1",
-      "defaultDatabaseName": "edublock",
+      "databaseName": "edublock",
       "host": "localhost",
       "port": 5434,
       "logging": [
@@ -15,17 +17,20 @@
       ],
       "logger": "advanced-console"
     },
-    "nodeType": "University"
+    "nodeType": "University",
+    "useFileLogging": false
   },
   "node-uni-2": {
-    "legalName": "University of Amsterdam",
-    "alias": "University of Amsterdam",
-    "port": 3002,
-    "useFileLogging": false,
-    "dbConfig": {
+    "identity": {
+      "legalName": "University of Amsterdam",
+      "alias": "University of Amsterdam",
+      "port": 3002,
+      "host": "localhost"
+    },
+    "databaseConfiguration": {
       "username": "nodeuser2",
       "password": "nodepass2",
-      "defaultDatabaseName": "edublock",
+      "databaseName": "edublock",
       "host": "localhost",
       "port": 5435,
       "logging": [
@@ -33,17 +38,20 @@
       ],
       "logger": "advanced-console"
     },
-    "nodeType": "University"
+    "nodeType": "University",
+    "useFileLogging": false
   },
   "node-uni-3": {
-    "legalName": "University of Cluj-Napoca",
-    "alias": "University of Cluj-Napoca",
-    "port": 3003,
-    "useFileLogging": false,
-    "dbConfig": {
+    "identity": {
+      "legalName": "University of Cluj-Napoca",
+      "alias": "University of Cluj-Napoca",
+      "port": 3003,
+      "host": "localhost"
+    },
+    "databaseConfiguration": {
       "username": "nodeuser3",
       "password": "nodepass3",
-      "defaultDatabaseName": "edublock",
+      "databaseName": "edublock",
       "host": "localhost",
       "port": 5436,
       "logging": [
@@ -51,17 +59,20 @@
       ],
       "logger": "advanced-console"
     },
-    "nodeType": "University"
+    "nodeType": "University",
+    "useFileLogging": false
   },
   "node-uni-4": {
-    "legalName": "University of Bucharest",
-    "alias": "University of Bucharest",
-    "port": 3004,
-    "useFileLogging": false,
-    "dbConfig": {
+    "identity": {
+      "legalName": "University of Bucharest",
+      "alias": "University of Bucharest",
+      "port": 3004,
+      "host": "localhost"
+    },
+    "databaseConfiguration": {
       "username": "nodeuser4",
       "password": "nodepass4",
-      "defaultDatabaseName": "edublock",
+      "databaseName": "edublock",
       "host": "localhost",
       "port": 5437,
       "logging": [
@@ -69,6 +80,7 @@
       ],
       "logger": "advanced-console"
     },
-    "nodeType": "University"
+    "nodeType": "University",
+    "useFileLogging": false
   }
 }

@@ -2,7 +2,7 @@ import {Inject, Service, Token} from "typedi";
 import IPersonalIdentityRepository, {IPersonalIdentityRepositoryToken} from "../../repositories/identity/personal-identity.interface.repository";
 import {EccService, EccServiceToken} from "../security/ecc.service";
 import {PersonalIdentity} from "../../entities/identity/personal-identity.entity";
-import {NodeConfigurationModel, NodeIdentityModelToken} from "../../server/models/node-configuration.model";
+import {NodeConfigurationModel, NodeIdentityModelToken} from "../../entities/config/node-configuration.model";
 import {ServerLogger, ServerLoggerToken} from "../../logger/server-logger.interface";
 
 export const IdentityServiceToken = new Token<IdentityService>('services.identity');
@@ -25,7 +25,7 @@ export class IdentityService {
             const fullIdentity: PersonalIdentity = {
                 publicKey: partialIdentity.publicKey,
                 privateKey: partialIdentity.privateKey,
-                legalName: this.nodeConfiguration.legalName
+                legalName: this.nodeConfiguration.identity.legalName
             };
             identity = await this.personalIdentityRepository.savePersonalIdentity(fullIdentity);
         }

@@ -1,5 +1,6 @@
-import {NodeDatabaseConfigModel} from "../db/config/node-database-config.model";
+import {NodeDatabaseConfigModel} from "./node-database-config.model";
 import {Token} from "typedi";
+import {NodeIdentityModel} from "./node-identity.model";
 
 export enum EduNodeType {
     UNIVERSITY = 'University',
@@ -7,10 +8,8 @@ export enum EduNodeType {
 }
 
 export interface NodeConfigurationModel {
-    legalName: string;
-    alias: string;
-    port: number;
-    dbConfig: NodeDatabaseConfigModel;
+    identity: NodeIdentityModel;
+    databaseConfiguration: NodeDatabaseConfigModel;
     useFileLogging: boolean;
     nodeType: EduNodeType;
 }
