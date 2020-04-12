@@ -26,7 +26,7 @@ export class EduNode {
         await this.applyMiddleware();
         const that = this;
         this.app.listen(this.nodeConfiguration.identity.port, async function () {
-            const identity = await Container.get(IdentityServiceToken).checkOrGenerateIdentity();
+            const identity = await Container.get(IdentityServiceToken).checkOrGeneratePersonalIdentity();
             that.logger.logInfo(that, "Identity (Public Key): " + identity);
             that.logger.logSuccess(that, 'Node ' + that.nodeConfiguration.identity.alias + ' is listening....');
         });

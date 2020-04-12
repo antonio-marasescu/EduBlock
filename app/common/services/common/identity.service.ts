@@ -17,9 +17,10 @@ export class IdentityService {
     ) {
     }
 
-    public async checkOrGenerateIdentity(): Promise<string> {
-        let identity = await this.personalIdentityRepository.findPersonalIdentity();
-        if (identity == null) {
+    public async checkOrGeneratePersonalIdentity(): Promise<string> {
+        this.logger.logInfo(this, "Getting personal identity.......");
+        const identity = await this.personalIdentityRepository.findPersonalIdentity();
+        if (!identity) {
             this.logger.logInfo(this, "Generating Identity.......");
             const partialIdentity: PersonalIdentity = await this.eccService.generateIdentity();
             const fullIdentity: PersonalIdentity = {
@@ -27,7 +28,19 @@ export class IdentityService {
                 privateKey: partialIdentity.privateKey,
                 legalName: this.nodeConfiguration.identity.legalName
             };
-            identity = await this.personalIdentityRepository.savePersonalIdentity(fullIdentity);
+            const savedIdentity = await this.personalIdentityRepository.savePersonalIdentity(fullIdentity);
+            return savedIdentity.publicKey;
+        }
+        return identity.publicKey;
+    }
+
+
+    public async getPersonalIdentity(): Promise<string> {
+        this.logger.logInfo(this, "Getting personal identity.......");
+        const identity = await this.personalIdentityRepository.findPersonalIdentity();
+        if (!identity) {
+            this.logger.logError(this, "No identity could be found!");
+            throw new Error("No identity could be found!");
         }
         return identity.publicKey;
     }
