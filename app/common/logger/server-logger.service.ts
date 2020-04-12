@@ -3,7 +3,7 @@ import {ServerLogger, ServerLoggerToken} from "./server-logger.interface";
 import * as winston from 'winston';
 import {format, Logger as WinstonLogger} from 'winston';
 import {SERVER_LOGGER_LEVELS, SERVER_LOGGER_OPTIONS} from "./server-logger.config";
-import {NodeConfigurationModel, NodeIdentityModelToken} from "../server/models/node-configuration.model";
+import {NodeConfigurationModel, NodeIdentityModelToken} from "../entities/config/node-configuration.model";
 
 @Service(ServerLoggerToken)
 export class ServerLoggerService implements ServerLogger {
@@ -25,7 +25,7 @@ export class ServerLoggerService implements ServerLogger {
                 new winston.transports.File(
                     {
                         dirname: 'logs',
-                        filename: this.nodeConfiguration.alias + '.log',
+                        filename: this.nodeConfiguration.identity.alias + '.log',
                         maxsize: 1000,
                         maxFiles: 1,
                         tailable: true,
