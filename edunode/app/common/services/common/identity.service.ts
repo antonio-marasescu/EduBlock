@@ -5,7 +5,7 @@ import {EccService, EccServiceToken} from "../security/ecc.service";
 import {NodeConfigurationModel, NodeIdentityModelToken} from "../../entities/config/node-configuration.model";
 import {ServerLogger, ServerLoggerToken} from "../../logger/server-logger.interface";
 
-export const IdentityServiceToken = new Token<IdentityService>('services.identity');
+export const IdentityServiceToken = new Token<IdentityService>('common.identity');
 
 @Service(IdentityServiceToken)
 export class IdentityService {

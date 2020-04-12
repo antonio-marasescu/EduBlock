@@ -54,12 +54,12 @@
 <path fill="none" stroke="#757575" d="M368.253,-960.078C397.1,-964.916 431.069,-970.613 461.149,-975.658"/>
 <polygon fill="#757575" stroke="#757575" points="460.747,-979.14 471.188,-977.342 461.905,-972.236 460.747,-979.14"/>
 </g>
-<!-- common/services/common/identity.service.ts -->
+<!-- common/common/common/identity.service.ts -->
 <g id="node17" class="node"><title>common/services/common/identity.service.ts</title>
 <path fill="none" stroke="#c6c5fe" d="M1421.33,-723.383C1421.33,-723.383 1135.67,-723.383 1135.67,-723.383 1131.83,-723.383 1128,-719.549 1128,-715.716 1128,-715.716 1128,-708.049 1128,-708.049 1128,-704.216 1131.83,-700.383 1135.67,-700.383 1135.67,-700.383 1421.33,-700.383 1421.33,-700.383 1425.17,-700.383 1429,-704.216 1429,-708.049 1429,-708.049 1429,-715.716 1429,-715.716 1429,-719.549 1425.17,-723.383 1421.33,-723.383"/>
 <text text-anchor="middle" x="1278.5" y="-708.183" font-family="Arial" font-size="14.00" fill="#c6c5fe">common/services/common/identity.service.ts</text>
 </g>
-<!-- server/edu.node.ts&#45;&gt;common/services/common/identity.service.ts -->
+<!-- server/edu.node.ts&#45;&gt;common/common/common/identity.service.ts -->
 <g id="edge88" class="edge"><title>server/edu.node.ts&#45;&gt;common/services/common/identity.service.ts</title>
 <path fill="none" stroke="#757575" d="M368.39,-939.513C463.619,-924.977 631.87,-894.493 678,-854.883 709.437,-827.889 680.894,-793.801 714,-768.883 775.312,-722.734 980.618,-736.278 1057,-728.883 1076.71,-726.975 1097.42,-725.146 1117.93,-723.441"/>
 <polygon fill="#757575" stroke="#757575" points="1118.3,-726.923 1127.98,-722.615 1117.73,-719.946 1118.3,-726.923"/>
@@ -84,12 +84,12 @@
 <path fill="none" stroke="#757575" d="M56.1751,-860.631C104.834,-840.484 206.899,-798.224 262.117,-775.361"/>
 <polygon fill="#757575" stroke="#757575" points="263.634,-778.521 271.535,-771.462 260.956,-772.054 263.634,-778.521"/>
 </g>
-<!-- common/services/security/ecc.service.ts -->
+<!-- common/common/security/ecc.service.ts -->
 <g id="node35" class="node"><title>common/services/security/ecc.service.ts</title>
 <path fill="none" stroke="#c6c5fe" d="M1887.83,-682.383C1887.83,-682.383 1630.17,-682.383 1630.17,-682.383 1626.33,-682.383 1622.5,-678.549 1622.5,-674.716 1622.5,-674.716 1622.5,-667.049 1622.5,-667.049 1622.5,-663.216 1626.33,-659.383 1630.17,-659.383 1630.17,-659.383 1887.83,-659.383 1887.83,-659.383 1891.67,-659.383 1895.5,-663.216 1895.5,-667.049 1895.5,-667.049 1895.5,-674.716 1895.5,-674.716 1895.5,-678.549 1891.67,-682.383 1887.83,-682.383"/>
 <text text-anchor="middle" x="1759" y="-667.183" font-family="Arial" font-size="14.00" fill="#c6c5fe">common/services/security/ecc.service.ts</text>
 </g>
-<!-- di/di.executor.ts&#45;&gt;common/services/security/ecc.service.ts -->
+<!-- di/di.executor.ts&#45;&gt;common/common/security/ecc.service.ts -->
 <g id="edge53" class="edge"><title>di/di.executor.ts&#45;&gt;common/services/security/ecc.service.ts</title>
 <path fill="none" stroke="#757575" d="M306.665,-748.126C319.104,-721.324 353.479,-655.644 404,-624.883 523.452,-552.15 574.667,-582.927 714,-570.883 849.937,-559.131 884.662,-565.483 1021,-570.883 1234.39,-579.334 1309.09,-513.175 1500,-608.883 1521.68,-619.75 1514.4,-638.851 1536,-649.883 1559.31,-661.79 1585.79,-668.873 1612.15,-672.848"/>
 <polygon fill="#757575" stroke="#757575" points="1611.85,-676.341 1622.23,-674.224 1612.8,-669.405 1611.85,-676.341"/>
@@ -224,32 +224,32 @@
 <path fill="none" stroke="#757575" d="M1021.09,-988.883C1066.06,-988.883 1114.62,-988.883 1157.26,-988.883"/>
 <polygon fill="#757575" stroke="#757575" points="1157.4,-992.383 1167.4,-988.883 1157.4,-985.383 1157.4,-992.383"/>
 </g>
-<!-- common/network/api/controllers/network.api.ts&#45;&gt;common/services/common/identity.service.ts -->
+<!-- common/network/api/controllers/network.api.ts&#45;&gt;common/common/common/identity.service.ts -->
 <g id="edge13" class="edge"><title>common/network/api/controllers/network.api.ts&#45;&gt;common/services/common/identity.service.ts</title>
 <path fill="none" stroke="#757575" d="M878.289,-977.379C916.148,-932.908 1051.17,-774.535 1057,-770.883 1093.22,-748.191 1138.06,-734.148 1177.83,-725.492"/>
 <polygon fill="#757575" stroke="#757575" points="1178.75,-728.876 1187.82,-723.406 1177.32,-722.024 1178.75,-728.876"/>
 </g>
-<!-- common/services/common/network&#45;members.service.ts -->
+<!-- common/common/common/network&#45;members.service.ts -->
 <g id="node18" class="node"><title>common/services/common/network&#45;members.service.ts</title>
 <path fill="none" stroke="#c6c5fe" d="M1456.33,-1041.38C1456.33,-1041.38 1100.67,-1041.38 1100.67,-1041.38 1096.83,-1041.38 1093,-1037.55 1093,-1033.72 1093,-1033.72 1093,-1026.05 1093,-1026.05 1093,-1022.22 1096.83,-1018.38 1100.67,-1018.38 1100.67,-1018.38 1456.33,-1018.38 1456.33,-1018.38 1460.17,-1018.38 1464,-1022.22 1464,-1026.05 1464,-1026.05 1464,-1033.72 1464,-1033.72 1464,-1037.55 1460.17,-1041.38 1456.33,-1041.38"/>
 <text text-anchor="middle" x="1278.5" y="-1026.18" font-family="Arial" font-size="14.00" fill="#c6c5fe">common/services/common/network&#45;members.service.ts</text>
 </g>
-<!-- common/network/api/controllers/network.api.ts&#45;&gt;common/services/common/network&#45;members.service.ts -->
+<!-- common/network/api/controllers/network.api.ts&#45;&gt;common/common/common/network&#45;members.service.ts -->
 <g id="edge14" class="edge"><title>common/network/api/controllers/network.api.ts&#45;&gt;common/services/common/network&#45;members.service.ts</title>
 <path fill="none" stroke="#757575" d="M975.146,-1000.4C1001.87,-1003.23 1030.48,-1006.21 1057,-1008.88 1085.15,-1011.72 1115.33,-1014.66 1144.06,-1017.41"/>
 <polygon fill="#757575" stroke="#757575" points="1143.86,-1020.9 1154.15,-1018.37 1144.53,-1013.94 1143.86,-1020.9"/>
 </g>
-<!-- common/services/common/identity.service.ts&#45;&gt;common/entities/config/node&#45;configuration.model.ts -->
+<!-- common/common/common/identity.service.ts&#45;&gt;common/entities/config/node&#45;configuration.model.ts -->
 <g id="edge45" class="edge"><title>common/services/common/identity.service.ts&#45;&gt;common/entities/config/node&#45;configuration.model.ts</title>
 <path fill="none" stroke="#757575" d="M1429.03,-709.184C1454.37,-714.217 1479.18,-723.093 1500,-737.883 1529.82,-759.065 1505.94,-791.046 1536,-811.883 1548.53,-820.567 1562.45,-827.077 1577.05,-831.876"/>
 <polygon fill="#757575" stroke="#757575" points="1576.15,-835.259 1586.73,-834.788 1578.16,-828.556 1576.15,-835.259"/>
 </g>
-<!-- common/services/common/identity.service.ts&#45;&gt;common/entities/identity/personal&#45;identity.entity.ts -->
+<!-- common/common/common/identity.service.ts&#45;&gt;common/entities/identity/personal&#45;identity.entity.ts -->
 <g id="edge46" class="edge"><title>common/services/common/identity.service.ts&#45;&gt;common/entities/identity/personal&#45;identity.entity.ts</title>
 <path fill="none" stroke="#757575" d="M1429.05,-708.491C1593.82,-704.754 1858.44,-698.753 2032.15,-694.814"/>
 <polygon fill="#757575" stroke="#757575" points="2032.25,-698.313 2042.17,-694.587 2032.09,-691.315 2032.25,-698.313"/>
 </g>
-<!-- common/services/common/identity.service.ts&#45;&gt;common/logger/server&#45;logger.interface.ts -->
+<!-- common/common/common/identity.service.ts&#45;&gt;common/logger/server&#45;logger.interface.ts -->
 <g id="edge47" class="edge"><title>common/services/common/identity.service.ts&#45;&gt;common/logger/server&#45;logger.interface.ts</title>
 <path fill="none" stroke="#757575" d="M1397.54,-723.445C1433.7,-731.918 1471.43,-746.364 1500,-770.883 1530.2,-796.805 1504.69,-828.307 1536,-852.883 1557.31,-869.614 1583.34,-880.148 1609.97,-886.612"/>
 <polygon fill="#757575" stroke="#757575" points="1609.28,-890.043 1619.8,-888.813 1610.81,-883.213 1609.28,-890.043"/>
@@ -259,17 +259,17 @@
 <path fill="none" stroke="#c6c5fe" d="M1974.33,-641.383C1974.33,-641.383 1543.67,-641.383 1543.67,-641.383 1539.83,-641.383 1536,-637.549 1536,-633.716 1536,-633.716 1536,-626.049 1536,-626.049 1536,-622.216 1539.83,-618.383 1543.67,-618.383 1543.67,-618.383 1974.33,-618.383 1974.33,-618.383 1978.17,-618.383 1982,-622.216 1982,-626.049 1982,-626.049 1982,-633.716 1982,-633.716 1982,-637.549 1978.17,-641.383 1974.33,-641.383"/>
 <text text-anchor="middle" x="1759" y="-626.183" font-family="Arial" font-size="14.00" fill="#c6c5fe">common/repositories/identity/personal&#45;identity.interface.repository.ts</text>
 </g>
-<!-- common/services/common/identity.service.ts&#45;&gt;common/repositories/identity/personal&#45;identity.interface.repository.ts -->
+<!-- common/common/common/identity.service.ts&#45;&gt;common/repositories/identity/personal&#45;identity.interface.repository.ts -->
 <g id="edge48" class="edge"><title>common/services/common/identity.service.ts&#45;&gt;common/repositories/identity/personal&#45;identity.interface.repository.ts</title>
 <path fill="none" stroke="#757575" d="M1429.15,-712.973C1453.74,-708.891 1478.26,-701.998 1500,-690.883 1521.59,-679.844 1514.38,-660.866 1536,-649.883 1539.2,-648.256 1542.46,-646.721 1545.78,-645.273"/>
 <polygon fill="#757575" stroke="#757575" points="1547.3,-648.432 1555.24,-641.419 1544.66,-641.949 1547.3,-648.432"/>
 </g>
-<!-- common/services/common/identity.service.ts&#45;&gt;common/services/security/ecc.service.ts -->
+<!-- common/common/common/identity.service.ts&#45;&gt;common/common/security/ecc.service.ts -->
 <g id="edge49" class="edge"><title>common/services/common/identity.service.ts&#45;&gt;common/services/security/ecc.service.ts</title>
 <path fill="none" stroke="#757575" d="M1413.74,-700.38C1475.94,-695.051 1549.94,-688.711 1613.36,-683.276"/>
 <polygon fill="#757575" stroke="#757575" points="1613.78,-686.753 1623.45,-682.412 1613.19,-679.778 1613.78,-686.753"/>
 </g>
-<!-- common/services/common/network&#45;members.service.ts&#45;&gt;common/logger/server&#45;logger.interface.ts -->
+<!-- common/common/common/network&#45;members.service.ts&#45;&gt;common/logger/server&#45;logger.interface.ts -->
 <g id="edge50" class="edge"><title>common/services/common/network&#45;members.service.ts&#45;&gt;common/logger/server&#45;logger.interface.ts</title>
 <path fill="none" stroke="#757575" d="M1455.85,-1018.37C1470.9,-1015.79 1485.79,-1012.67 1500,-1008.88 1587.81,-985.49 1683.27,-934.915 1729.59,-908.583"/>
 <polygon fill="#757575" stroke="#757575" points="1731.51,-911.514 1738.44,-903.502 1728.03,-905.443 1731.51,-911.514"/>
@@ -299,207 +299,207 @@
 <path fill="none" stroke="#757575" d="M1472.73,-523.198C1482.29,-527.257 1491.46,-532.108 1500,-537.883 1527.68,-556.595 1508.31,-585.182 1536,-603.883 1541.49,-607.589 1547.23,-610.916 1553.17,-613.899"/>
 <polygon fill="#757575" stroke="#757575" points="1552.11,-617.266 1562.65,-618.307 1555.06,-610.918 1552.11,-617.266"/>
 </g>
-<!-- common/services/blockchain/blockchain.config.ts -->
+<!-- common/common/blockchain/blockchain.config.ts -->
 <g id="node22" class="node"><title>common/services/blockchain/blockchain.config.ts</title>
 <path fill="none" stroke="#cfffac" d="M1915.33,-245.383C1915.33,-245.383 1602.67,-245.383 1602.67,-245.383 1598.83,-245.383 1595,-241.549 1595,-237.716 1595,-237.716 1595,-230.049 1595,-230.049 1595,-226.216 1598.83,-222.383 1602.67,-222.383 1602.67,-222.383 1915.33,-222.383 1915.33,-222.383 1919.17,-222.383 1923,-226.216 1923,-230.049 1923,-230.049 1923,-237.716 1923,-237.716 1923,-241.549 1919.17,-245.383 1915.33,-245.383"/>
 <text text-anchor="middle" x="1759" y="-230.183" font-family="Arial" font-size="14.00" fill="#cfffac">common/services/blockchain/blockchain.config.ts</text>
 </g>
-<!-- common/services/blockchain/blockchain.service.interface.ts -->
+<!-- common/common/blockchain/blockchain.service.interface.ts -->
 <g id="node23" class="node"><title>common/services/blockchain/blockchain.service.interface.ts</title>
 <path fill="none" stroke="#c6c5fe" d="M1947.83,-442.383C1947.83,-442.383 1570.17,-442.383 1570.17,-442.383 1566.33,-442.383 1562.5,-438.549 1562.5,-434.716 1562.5,-434.716 1562.5,-427.049 1562.5,-427.049 1562.5,-423.216 1566.33,-419.383 1570.17,-419.383 1570.17,-419.383 1947.83,-419.383 1947.83,-419.383 1951.67,-419.383 1955.5,-423.216 1955.5,-427.049 1955.5,-427.049 1955.5,-434.716 1955.5,-434.716 1955.5,-438.549 1951.67,-442.383 1947.83,-442.383"/>
 <text text-anchor="middle" x="1759" y="-427.183" font-family="Arial" font-size="14.00" fill="#c6c5fe">common/services/blockchain/blockchain.service.interface.ts</text>
 </g>
-<!-- common/services/blockchain/entities/block.model.ts -->
+<!-- common/common/blockchain/entities/block.model.ts -->
 <g id="node24" class="node"><title>common/services/blockchain/entities/block.model.ts</title>
 <path fill="none" stroke="#c6c5fe" d="M2767.33,-364.383C2767.33,-364.383 2438.67,-364.383 2438.67,-364.383 2434.83,-364.383 2431,-360.549 2431,-356.716 2431,-356.716 2431,-349.049 2431,-349.049 2431,-345.216 2434.83,-341.383 2438.67,-341.383 2438.67,-341.383 2767.33,-341.383 2767.33,-341.383 2771.17,-341.383 2775,-345.216 2775,-349.049 2775,-349.049 2775,-356.716 2775,-356.716 2775,-360.549 2771.17,-364.383 2767.33,-364.383"/>
 <text text-anchor="middle" x="2603" y="-349.183" font-family="Arial" font-size="14.00" fill="#c6c5fe">common/services/blockchain/entities/block.model.ts</text>
 </g>
-<!-- common/services/blockchain/blockchain.service.interface.ts&#45;&gt;common/services/blockchain/entities/block.model.ts -->
+<!-- common/common/blockchain/blockchain.service.interface.ts&#45;&gt;common/common/blockchain/entities/block.model.ts -->
 <g id="edge18" class="edge"><title>common/services/blockchain/blockchain.service.interface.ts&#45;&gt;common/services/blockchain/entities/block.model.ts</title>
 <path fill="none" stroke="#757575" d="M1884.24,-419.374C2040.13,-404.933 2306.46,-380.261 2467.16,-365.374"/>
 <polygon fill="#757575" stroke="#757575" points="2467.96,-368.815 2477.59,-364.407 2467.31,-361.845 2467.96,-368.815"/>
 </g>
-<!-- common/services/blockchain/entities/blockchain.model.ts -->
+<!-- common/common/blockchain/entities/blockchain.model.ts -->
 <g id="node25" class="node"><title>common/services/blockchain/entities/blockchain.model.ts</title>
 <path fill="none" stroke="#c6c5fe" d="M2387.33,-556.383C2387.33,-556.383 2025.67,-556.383 2025.67,-556.383 2021.83,-556.383 2018,-552.549 2018,-548.716 2018,-548.716 2018,-541.049 2018,-541.049 2018,-537.216 2021.83,-533.383 2025.67,-533.383 2025.67,-533.383 2387.33,-533.383 2387.33,-533.383 2391.17,-533.383 2395,-537.216 2395,-541.049 2395,-541.049 2395,-548.716 2395,-548.716 2395,-552.549 2391.17,-556.383 2387.33,-556.383"/>
 <text text-anchor="middle" x="2206.5" y="-541.183" font-family="Arial" font-size="14.00" fill="#c6c5fe">common/services/blockchain/entities/blockchain.model.ts</text>
 </g>
-<!-- common/services/blockchain/blockchain.service.interface.ts&#45;&gt;common/services/blockchain/entities/blockchain.model.ts -->
+<!-- common/common/blockchain/blockchain.service.interface.ts&#45;&gt;common/common/blockchain/entities/blockchain.model.ts -->
 <g id="edge19" class="edge"><title>common/services/blockchain/blockchain.service.interface.ts&#45;&gt;common/services/blockchain/entities/blockchain.model.ts</title>
 <path fill="none" stroke="#757575" d="M1954.35,-442.391C1964.03,-446.4 1973.32,-451.188 1982,-456.883 2008.64,-474.362 1991.55,-501.122 2018,-518.883 2023.77,-522.76 2029.88,-526.173 2036.21,-529.174"/>
 <polygon fill="#757575" stroke="#757575" points="2035.08,-532.499 2045.65,-533.28 2037.87,-526.08 2035.08,-532.499"/>
 </g>
-<!-- common/services/blockchain/entities/proof.model.ts -->
+<!-- common/common/blockchain/entities/proof.model.ts -->
 <g id="node26" class="node"><title>common/services/blockchain/entities/proof.model.ts</title>
 <path fill="none" stroke="#cfffac" d="M3164.83,-324.383C3164.83,-324.383 2836.17,-324.383 2836.17,-324.383 2832.33,-324.383 2828.5,-320.549 2828.5,-316.716 2828.5,-316.716 2828.5,-309.049 2828.5,-309.049 2828.5,-305.216 2832.33,-301.383 2836.17,-301.383 2836.17,-301.383 3164.83,-301.383 3164.83,-301.383 3168.67,-301.383 3172.5,-305.216 3172.5,-309.049 3172.5,-309.049 3172.5,-316.716 3172.5,-316.716 3172.5,-320.549 3168.67,-324.383 3164.83,-324.383"/>
 <text text-anchor="middle" x="3000.5" y="-309.183" font-family="Arial" font-size="14.00" fill="#cfffac">common/services/blockchain/entities/proof.model.ts</text>
 </g>
-<!-- common/services/blockchain/blockchain.service.interface.ts&#45;&gt;common/services/blockchain/entities/proof.model.ts -->
+<!-- common/common/blockchain/blockchain.service.interface.ts&#45;&gt;common/common/blockchain/entities/proof.model.ts -->
 <g id="edge20" class="edge"><title>common/services/blockchain/blockchain.service.interface.ts&#45;&gt;common/services/blockchain/entities/proof.model.ts</title>
 <path fill="none" stroke="#757575" d="M1955.61,-432.88C2161.12,-431.915 2493.03,-421.655 2775,-372.883 2838.2,-361.951 2909.48,-341.458 2954.44,-327.495"/>
 <polygon fill="#757575" stroke="#757575" points="2955.67,-330.775 2964.17,-324.445 2953.58,-324.095 2955.67,-330.775"/>
 </g>
-<!-- common/services/blockchain/entities/transaction.model.ts -->
+<!-- common/common/blockchain/entities/transaction.model.ts -->
 <g id="node27" class="node"><title>common/services/blockchain/entities/transaction.model.ts</title>
 <path fill="none" stroke="#cfffac" d="M3182.33,-460.383C3182.33,-460.383 2818.67,-460.383 2818.67,-460.383 2814.83,-460.383 2811,-456.549 2811,-452.716 2811,-452.716 2811,-445.049 2811,-445.049 2811,-441.216 2814.83,-437.383 2818.67,-437.383 2818.67,-437.383 3182.33,-437.383 3182.33,-437.383 3186.17,-437.383 3190,-441.216 3190,-445.049 3190,-445.049 3190,-452.716 3190,-452.716 3190,-456.549 3186.17,-460.383 3182.33,-460.383"/>
 <text text-anchor="middle" x="3000.5" y="-445.183" font-family="Arial" font-size="14.00" fill="#cfffac">common/services/blockchain/entities/transaction.model.ts</text>
 </g>
-<!-- common/services/blockchain/blockchain.service.interface.ts&#45;&gt;common/services/blockchain/entities/transaction.model.ts -->
+<!-- common/common/blockchain/blockchain.service.interface.ts&#45;&gt;common/common/blockchain/entities/transaction.model.ts -->
 <g id="edge21" class="edge"><title>common/services/blockchain/blockchain.service.interface.ts&#45;&gt;common/services/blockchain/entities/transaction.model.ts</title>
 <path fill="none" stroke="#757575" d="M1955.6,-437.287C1964.66,-439.974 1973.51,-443.149 1982,-446.883 2002.15,-455.744 1997.55,-472.752 2018,-480.883 2174.32,-543.032 2607.2,-492.782 2775,-480.883 2825.64,-477.292 2882.23,-469.199 2925.92,-462.05"/>
 <polygon fill="#757575" stroke="#757575" points="2926.6,-465.487 2935.89,-460.4 2925.45,-458.581 2926.6,-465.487"/>
 </g>
-<!-- common/services/blockchain/entities/block.model.ts&#45;&gt;common/services/blockchain/entities/proof.model.ts -->
+<!-- common/common/blockchain/entities/block.model.ts&#45;&gt;common/common/blockchain/entities/proof.model.ts -->
 <g id="edge37" class="edge"><title>common/services/blockchain/entities/block.model.ts&#45;&gt;common/services/blockchain/entities/proof.model.ts</title>
 <path fill="none" stroke="#757575" d="M2717.86,-341.367C2767.28,-336.369 2825.28,-330.503 2875.76,-325.397"/>
 <polygon fill="#757575" stroke="#757575" points="2876.16,-328.875 2885.75,-324.387 2875.45,-321.911 2876.16,-328.875"/>
 </g>
-<!-- common/services/blockchain/entities/block.model.ts&#45;&gt;common/services/blockchain/entities/transaction.model.ts -->
+<!-- common/common/blockchain/entities/block.model.ts&#45;&gt;common/common/blockchain/entities/transaction.model.ts -->
 <g id="edge38" class="edge"><title>common/services/blockchain/entities/block.model.ts&#45;&gt;common/services/blockchain/entities/transaction.model.ts</title>
 <path fill="none" stroke="#757575" d="M2697.23,-364.444C2722.6,-368.3 2749.98,-373.115 2775,-378.883 2840.09,-393.889 2913.69,-418.309 2958.33,-433.979"/>
 <polygon fill="#757575" stroke="#757575" points="2957.35,-437.345 2967.94,-437.376 2959.68,-430.745 2957.35,-437.345"/>
 </g>
-<!-- common/services/blockchain/entities/blockchain.model.ts&#45;&gt;common/services/blockchain/entities/block.model.ts -->
+<!-- common/common/blockchain/entities/blockchain.model.ts&#45;&gt;common/common/blockchain/entities/block.model.ts -->
 <g id="edge39" class="edge"><title>common/services/blockchain/entities/blockchain.model.ts&#45;&gt;common/services/blockchain/entities/block.model.ts</title>
 <path fill="none" stroke="#757575" d="M2231.29,-533.305C2298.7,-500.494 2491.15,-406.832 2568.86,-369.013"/>
 <polygon fill="#757575" stroke="#757575" points="2570.72,-371.999 2578.18,-364.476 2567.66,-365.705 2570.72,-371.999"/>
 </g>
-<!-- common/services/blockchain/entities/blockchain.model.ts&#45;&gt;common/services/blockchain/entities/transaction.model.ts -->
+<!-- common/common/blockchain/entities/blockchain.model.ts&#45;&gt;common/common/blockchain/entities/transaction.model.ts -->
 <g id="edge40" class="edge"><title>common/services/blockchain/entities/blockchain.model.ts&#45;&gt;common/services/blockchain/entities/transaction.model.ts</title>
 <path fill="none" stroke="#757575" d="M2395.08,-548.302C2506.29,-547.354 2649.57,-540.933 2775,-518.883 2842.1,-507.087 2917.12,-480.924 2961.22,-464.138"/>
 <polygon fill="#757575" stroke="#757575" points="2962.6,-467.357 2970.67,-460.5 2960.08,-460.823 2962.6,-467.357"/>
 </g>
-<!-- common/services/blockchain/blockchain.service.ts -->
+<!-- common/common/blockchain/blockchain.service.ts -->
 <g id="node28" class="node"><title>common/services/blockchain/blockchain.service.ts</title>
 <path fill="none" stroke="#c6c5fe" d="M1438.33,-363.383C1438.33,-363.383 1118.67,-363.383 1118.67,-363.383 1114.83,-363.383 1111,-359.549 1111,-355.716 1111,-355.716 1111,-348.049 1111,-348.049 1111,-344.216 1114.83,-340.383 1118.67,-340.383 1118.67,-340.383 1438.33,-340.383 1438.33,-340.383 1442.17,-340.383 1446,-344.216 1446,-348.049 1446,-348.049 1446,-355.716 1446,-355.716 1446,-359.549 1442.17,-363.383 1438.33,-363.383"/>
 <text text-anchor="middle" x="1278.5" y="-348.183" font-family="Arial" font-size="14.00" fill="#c6c5fe">common/services/blockchain/blockchain.service.ts</text>
 </g>
-<!-- common/services/blockchain/blockchain.service.ts&#45;&gt;common/services/blockchain/blockchain.config.ts -->
+<!-- common/common/blockchain/blockchain.service.ts&#45;&gt;common/common/blockchain/blockchain.config.ts -->
 <g id="edge22" class="edge"><title>common/services/blockchain/blockchain.service.ts&#45;&gt;common/services/blockchain/blockchain.config.ts</title>
 <path fill="none" stroke="#757575" d="M1344.2,-340.294C1389.78,-330.315 1451.14,-313.131 1500,-285.883 1518.7,-275.456 1516.35,-262.381 1536,-253.883 1551.44,-247.205 1568.04,-242.218 1584.95,-238.54"/>
 <polygon fill="#757575" stroke="#757575" points="1585.83,-241.933 1594.94,-236.524 1584.45,-235.072 1585.83,-241.933"/>
 </g>
-<!-- common/services/blockchain/blockchain.service.ts&#45;&gt;common/services/blockchain/blockchain.service.interface.ts -->
+<!-- common/common/blockchain/blockchain.service.ts&#45;&gt;common/common/blockchain/blockchain.service.interface.ts -->
 <g id="edge23" class="edge"><title>common/services/blockchain/blockchain.service.ts&#45;&gt;common/services/blockchain/blockchain.service.interface.ts</title>
 <path fill="none" stroke="#757575" d="M1446.21,-362C1464.72,-365.913 1483,-371.084 1500,-377.883 1518.57,-385.309 1517.43,-397.464 1536,-404.883 1547.99,-409.672 1560.61,-413.655 1573.5,-416.962"/>
 <polygon fill="#757575" stroke="#757575" points="1572.86,-420.408 1583.4,-419.36 1574.51,-413.604 1572.86,-420.408"/>
 </g>
-<!-- common/services/blockchain/blockchain.service.ts&#45;&gt;common/services/blockchain/entities/block.model.ts -->
+<!-- common/common/blockchain/blockchain.service.ts&#45;&gt;common/common/blockchain/entities/block.model.ts -->
 <g id="edge26" class="edge"><title>common/services/blockchain/blockchain.service.ts&#45;&gt;common/services/blockchain/entities/block.model.ts</title>
 <path fill="none" stroke="#757575" d="M1446.33,-352.009C1695.58,-352.197 2163.37,-352.551 2420.76,-352.746"/>
 <polygon fill="#757575" stroke="#757575" points="2420.96,-356.246 2430.97,-352.753 2420.97,-349.246 2420.96,-356.246"/>
 </g>
-<!-- common/services/blockchain/blockchain.service.ts&#45;&gt;common/services/blockchain/entities/blockchain.model.ts -->
+<!-- common/common/blockchain/blockchain.service.ts&#45;&gt;common/common/blockchain/entities/blockchain.model.ts -->
 <g id="edge27" class="edge"><title>common/services/blockchain/blockchain.service.ts&#45;&gt;common/services/blockchain/entities/blockchain.model.ts</title>
 <path fill="none" stroke="#757575" d="M1367.35,-363.428C1409.74,-371.887 1459.96,-386.349 1500,-410.883 1520.39,-423.378 1514.54,-440.328 1536,-450.883 1714.39,-538.61 1800.19,-404.464 1982,-484.883 2002.13,-493.785 1998.16,-509.363 2018,-518.883 2027.43,-523.407 2037.41,-527.208 2047.67,-530.396"/>
 <polygon fill="#757575" stroke="#757575" points="2046.99,-533.845 2057.57,-533.268 2048.94,-527.122 2046.99,-533.845"/>
 </g>
-<!-- common/services/blockchain/blockchain.service.ts&#45;&gt;common/services/blockchain/entities/proof.model.ts -->
+<!-- common/common/blockchain/blockchain.service.ts&#45;&gt;common/common/blockchain/entities/proof.model.ts -->
 <g id="edge28" class="edge"><title>common/services/blockchain/blockchain.service.ts&#45;&gt;common/services/blockchain/entities/proof.model.ts</title>
 <path fill="none" stroke="#757575" d="M1446.38,-348.099C1770.45,-340.751 2482.52,-324.605 2817.95,-316.999"/>
 <polygon fill="#757575" stroke="#757575" points="2818.33,-320.492 2828.25,-316.766 2818.17,-313.493 2818.33,-320.492"/>
 </g>
-<!-- common/services/blockchain/blockchain.service.ts&#45;&gt;common/services/blockchain/entities/transaction.model.ts -->
+<!-- common/common/blockchain/blockchain.service.ts&#45;&gt;common/common/blockchain/entities/transaction.model.ts -->
 <g id="edge29" class="edge"><title>common/services/blockchain/blockchain.service.ts&#45;&gt;common/services/blockchain/entities/transaction.model.ts</title>
 <path fill="none" stroke="#757575" d="M1446.1,-361.685C1476.03,-363.429 1506.94,-365.219 1536,-366.883 1988.2,-392.773 2519.05,-422.301 2800.59,-437.892"/>
 <polygon fill="#757575" stroke="#757575" points="2800.74,-441.406 2810.92,-438.464 2801.12,-434.416 2800.74,-441.406"/>
 </g>
-<!-- common/services/blockchain/consensus/consensus.ts -->
+<!-- common/common/blockchain/consensus/consensus.ts -->
 <g id="node29" class="node"><title>common/services/blockchain/consensus/consensus.ts</title>
 <path fill="none" stroke="#c6c5fe" d="M1931.33,-124.383C1931.33,-124.383 1586.67,-124.383 1586.67,-124.383 1582.83,-124.383 1579,-120.549 1579,-116.716 1579,-116.716 1579,-109.049 1579,-109.049 1579,-105.216 1582.83,-101.383 1586.67,-101.383 1586.67,-101.383 1931.33,-101.383 1931.33,-101.383 1935.17,-101.383 1939,-105.216 1939,-109.049 1939,-109.049 1939,-116.716 1939,-116.716 1939,-120.549 1935.17,-124.383 1931.33,-124.383"/>
 <text text-anchor="middle" x="1759" y="-109.183" font-family="Arial" font-size="14.00" fill="#c6c5fe">common/services/blockchain/consensus/consensus.ts</text>
 </g>
-<!-- common/services/blockchain/blockchain.service.ts&#45;&gt;common/services/blockchain/consensus/consensus.ts -->
+<!-- common/common/blockchain/blockchain.service.ts&#45;&gt;common/common/blockchain/consensus/consensus.ts -->
 <g id="edge24" class="edge"><title>common/services/blockchain/blockchain.service.ts&#45;&gt;common/services/blockchain/consensus/consensus.ts</title>
 <path fill="none" stroke="#757575" d="M1298.3,-340.227C1337.02,-316 1428.05,-257.872 1500,-202.883 1516.78,-190.061 1517.32,-181.733 1536,-171.883 1577.96,-149.751 1628.87,-135.448 1671.34,-126.476"/>
 <polygon fill="#757575" stroke="#757575" points="1672.29,-129.855 1681.38,-124.42 1670.88,-122.997 1672.29,-129.855"/>
 </g>
-<!-- common/services/blockchain/crypto/crypto.util.ts -->
+<!-- common/common/blockchain/crypto/crypto.util.ts -->
 <g id="node30" class="node"><title>common/services/blockchain/crypto/crypto.util.ts</title>
 <path fill="none" stroke="#cfffac" d="M1911.83,-286.383C1911.83,-286.383 1606.17,-286.383 1606.17,-286.383 1602.33,-286.383 1598.5,-282.549 1598.5,-278.716 1598.5,-278.716 1598.5,-271.049 1598.5,-271.049 1598.5,-267.216 1602.33,-263.383 1606.17,-263.383 1606.17,-263.383 1911.83,-263.383 1911.83,-263.383 1915.67,-263.383 1919.5,-267.216 1919.5,-271.049 1919.5,-271.049 1919.5,-278.716 1919.5,-278.716 1919.5,-282.549 1915.67,-286.383 1911.83,-286.383"/>
 <text text-anchor="middle" x="1759" y="-271.183" font-family="Arial" font-size="14.00" fill="#cfffac">common/services/blockchain/crypto/crypto.util.ts</text>
 </g>
-<!-- common/services/blockchain/blockchain.service.ts&#45;&gt;common/services/blockchain/crypto/crypto.util.ts -->
+<!-- common/common/blockchain/blockchain.service.ts&#45;&gt;common/common/blockchain/crypto/crypto.util.ts -->
 <g id="edge25" class="edge"><title>common/services/blockchain/blockchain.service.ts&#45;&gt;common/services/blockchain/crypto/crypto.util.ts</title>
 <path fill="none" stroke="#757575" d="M1331.36,-340.309C1383.01,-329.079 1464.69,-312.129 1536,-300.883 1567.73,-295.878 1602.16,-291.391 1634.22,-287.61"/>
 <polygon fill="#757575" stroke="#757575" points="1635.01,-291.042 1644.54,-286.408 1634.2,-284.089 1635.01,-291.042"/>
 </g>
-<!-- common/services/blockchain/consensus/consensus.ts&#45;&gt;common/services/blockchain/entities/block.model.ts -->
+<!-- common/common/blockchain/consensus/consensus.ts&#45;&gt;common/common/blockchain/entities/block.model.ts -->
 <g id="edge35" class="edge"><title>common/services/blockchain/consensus/consensus.ts&#45;&gt;common/services/blockchain/entities/block.model.ts</title>
 <path fill="none" stroke="#757575" d="M1939.31,-124.201C2112.32,-136.029 2353.94,-155.281 2395,-172.883 2480.46,-209.516 2555.96,-294.964 2586.99,-333.464"/>
 <polygon fill="#757575" stroke="#757575" points="2584.3,-335.697 2593.26,-341.353 2589.78,-331.345 2584.3,-335.697"/>
 </g>
-<!-- common/services/blockchain/consensus/consensus.ts&#45;&gt;common/services/blockchain/entities/proof.model.ts -->
+<!-- common/common/blockchain/consensus/consensus.ts&#45;&gt;common/common/blockchain/entities/proof.model.ts -->
 <g id="edge36" class="edge"><title>common/services/blockchain/consensus/consensus.ts&#45;&gt;common/services/blockchain/entities/proof.model.ts</title>
 <path fill="none" stroke="#757575" d="M1939.11,-104.152C2066.97,-101.065 2242.6,-103.241 2395,-127.883 2616.06,-163.625 2868.73,-259.906 2962.21,-297.524"/>
 <polygon fill="#757575" stroke="#757575" points="2960.94,-300.788 2971.52,-301.293 2963.57,-294.299 2960.94,-300.788"/>
 </g>
-<!-- common/services/blockchain/consensus/consensus.basic.ts -->
+<!-- common/common/blockchain/consensus/consensus.basic.ts -->
 <g id="node31" class="node"><title>common/services/blockchain/consensus/consensus.basic.ts</title>
 <path fill="none" stroke="#c6c5fe" d="M1469.83,-194.383C1469.83,-194.383 1087.17,-194.383 1087.17,-194.383 1083.33,-194.383 1079.5,-190.549 1079.5,-186.716 1079.5,-186.716 1079.5,-179.049 1079.5,-179.049 1079.5,-175.216 1083.33,-171.383 1087.17,-171.383 1087.17,-171.383 1469.83,-171.383 1469.83,-171.383 1473.67,-171.383 1477.5,-175.216 1477.5,-179.049 1477.5,-179.049 1477.5,-186.716 1477.5,-186.716 1477.5,-190.549 1473.67,-194.383 1469.83,-194.383"/>
 <text text-anchor="middle" x="1278.5" y="-179.183" font-family="Arial" font-size="14.00" fill="#c6c5fe">common/services/blockchain/consensus/consensus.basic.ts</text>
 </g>
-<!-- common/services/blockchain/consensus/consensus.basic.ts&#45;&gt;common/services/blockchain/entities/block.model.ts -->
+<!-- common/common/blockchain/consensus/consensus.basic.ts&#45;&gt;common/common/blockchain/entities/block.model.ts -->
 <g id="edge33" class="edge"><title>common/services/blockchain/consensus/consensus.basic.ts&#45;&gt;common/services/blockchain/entities/block.model.ts</title>
 <path fill="none" stroke="#757575" d="M1477.62,-173.539C1497.34,-172.863 1517.06,-172.289 1536,-171.883 1734.18,-167.635 1785.77,-143.826 1982,-171.883 2208.48,-204.265 2467.77,-300.001 2563.72,-337.537"/>
 <polygon fill="#757575" stroke="#757575" points="2562.7,-340.895 2573.28,-341.298 2565.26,-334.381 2562.7,-340.895"/>
 </g>
-<!-- common/services/blockchain/consensus/consensus.basic.ts&#45;&gt;common/services/blockchain/entities/proof.model.ts -->
+<!-- common/common/blockchain/consensus/consensus.basic.ts&#45;&gt;common/common/blockchain/entities/proof.model.ts -->
 <g id="edge34" class="edge"><title>common/services/blockchain/consensus/consensus.basic.ts&#45;&gt;common/services/blockchain/entities/proof.model.ts</title>
 <path fill="none" stroke="#757575" d="M1303.51,-171.223C1348.05,-150.313 1447.06,-107.192 1536,-91.8827 2078.98,1.58196 2263.59,72.1095 2775,-132.883 2865.53,-169.171 2948.55,-254.8 2982.86,-293.406"/>
 <polygon fill="#757575" stroke="#757575" points="2980.57,-296.102 2989.79,-301.317 2985.83,-291.489 2980.57,-296.102"/>
 </g>
-<!-- common/services/blockchain/consensus/consensus.basic.ts&#45;&gt;common/services/blockchain/consensus/consensus.ts -->
+<!-- common/common/blockchain/consensus/consensus.basic.ts&#45;&gt;common/common/blockchain/consensus/consensus.ts -->
 <g id="edge31" class="edge"><title>common/services/blockchain/consensus/consensus.basic.ts&#45;&gt;common/services/blockchain/consensus/consensus.ts</title>
 <path fill="none" stroke="#757575" d="M1341.03,-171.38C1392.9,-161.911 1469.15,-148.525 1536,-138.883 1569.5,-134.051 1605.95,-129.493 1639.44,-125.584"/>
 <polygon fill="#757575" stroke="#757575" points="1640.2,-129.019 1649.73,-124.392 1639.4,-122.066 1640.2,-129.019"/>
 </g>
-<!-- common/services/blockchain/consensus/consensus.basic.ts&#45;&gt;common/services/blockchain/crypto/crypto.util.ts -->
+<!-- common/common/blockchain/consensus/consensus.basic.ts&#45;&gt;common/common/blockchain/crypto/crypto.util.ts -->
 <g id="edge32" class="edge"><title>common/services/blockchain/consensus/consensus.basic.ts&#45;&gt;common/services/blockchain/crypto/crypto.util.ts</title>
 <path fill="none" stroke="#757575" d="M1313.9,-194.49C1362.7,-210.477 1455.11,-238.982 1536,-253.883 1553.35,-257.078 1571.55,-259.802 1589.76,-262.12"/>
 <polygon fill="#757575" stroke="#757575" points="1589.52,-265.616 1599.87,-263.366 1590.37,-258.669 1589.52,-265.616"/>
 </g>
-<!-- common/services/blockchain/consensus/consensus.config.ts -->
+<!-- common/common/blockchain/consensus/consensus.config.ts -->
 <g id="node32" class="node"><title>common/services/blockchain/consensus/consensus.config.ts</title>
 <path fill="none" stroke="#cfffac" d="M1952.83,-204.383C1952.83,-204.383 1565.17,-204.383 1565.17,-204.383 1561.33,-204.383 1557.5,-200.549 1557.5,-196.716 1557.5,-196.716 1557.5,-189.049 1557.5,-189.049 1557.5,-185.216 1561.33,-181.383 1565.17,-181.383 1565.17,-181.383 1952.83,-181.383 1952.83,-181.383 1956.67,-181.383 1960.5,-185.216 1960.5,-189.049 1960.5,-189.049 1960.5,-196.716 1960.5,-196.716 1960.5,-200.549 1956.67,-204.383 1952.83,-204.383"/>
 <text text-anchor="middle" x="1759" y="-189.183" font-family="Arial" font-size="14.00" fill="#cfffac">common/services/blockchain/consensus/consensus.config.ts</text>
 </g>
-<!-- common/services/blockchain/consensus/consensus.basic.ts&#45;&gt;common/services/blockchain/consensus/consensus.config.ts -->
+<!-- common/common/blockchain/consensus/consensus.basic.ts&#45;&gt;common/common/blockchain/consensus/consensus.config.ts -->
 <g id="edge30" class="edge"><title>common/services/blockchain/consensus/consensus.basic.ts&#45;&gt;common/services/blockchain/consensus/consensus.config.ts</title>
 <path fill="none" stroke="#757575" d="M1477.58,-187.022C1500.53,-187.502 1524.01,-187.993 1547.13,-188.476"/>
 <polygon fill="#757575" stroke="#757575" points="1547.3,-191.98 1557.37,-188.69 1547.44,-184.982 1547.3,-191.98"/>
 </g>
-<!-- common/services/blockchain/validators/blockchain&#45;validator.basic.ts -->
+<!-- common/common/blockchain/validators/blockchain&#45;validator.basic.ts -->
 <g id="node33" class="node"><title>common/services/blockchain/validators/blockchain&#45;validator.basic.ts</title>
 <path fill="none" stroke="#c6c5fe" d="M1492.33,-443.383C1492.33,-443.383 1064.67,-443.383 1064.67,-443.383 1060.83,-443.383 1057,-439.549 1057,-435.716 1057,-435.716 1057,-428.049 1057,-428.049 1057,-424.216 1060.83,-420.383 1064.67,-420.383 1064.67,-420.383 1492.33,-420.383 1492.33,-420.383 1496.17,-420.383 1500,-424.216 1500,-428.049 1500,-428.049 1500,-435.716 1500,-435.716 1500,-439.549 1496.17,-443.383 1492.33,-443.383"/>
 <text text-anchor="middle" x="1278.5" y="-428.183" font-family="Arial" font-size="14.00" fill="#c6c5fe">common/services/blockchain/validators/blockchain&#45;validator.basic.ts</text>
 </g>
-<!-- common/services/blockchain/validators/blockchain&#45;validator.basic.ts&#45;&gt;common/services/blockchain/entities/blockchain.model.ts -->
+<!-- common/common/blockchain/validators/blockchain&#45;validator.basic.ts&#45;&gt;common/common/blockchain/entities/blockchain.model.ts -->
 <g id="edge42" class="edge"><title>common/services/blockchain/validators/blockchain&#45;validator.basic.ts&#45;&gt;common/services/blockchain/entities/blockchain.model.ts</title>
 <path fill="none" stroke="#757575" d="M1452.63,-443.41C1468.93,-447.132 1484.97,-451.871 1500,-457.883 1518.57,-465.309 1517.33,-477.717 1536,-484.883 1559.4,-493.862 1852.92,-517.812 2043.46,-532.595"/>
 <polygon fill="#757575" stroke="#757575" points="2043.35,-536.096 2053.59,-533.379 2043.89,-529.117 2043.35,-536.096"/>
 </g>
-<!-- common/services/blockchain/validators/blockchain&#45;validator.basic.ts&#45;&gt;common/services/blockchain/crypto/crypto.util.ts -->
+<!-- common/common/blockchain/validators/blockchain&#45;validator.basic.ts&#45;&gt;common/common/blockchain/crypto/crypto.util.ts -->
 <g id="edge41" class="edge"><title>common/services/blockchain/validators/blockchain&#45;validator.basic.ts&#45;&gt;common/services/blockchain/crypto/crypto.util.ts</title>
 <path fill="none" stroke="#757575" d="M1327.19,-420.284C1372.11,-409.035 1441.11,-390.919 1500,-371.883 1579.4,-346.217 1670.34,-310.511 1720.25,-290.351"/>
 <polygon fill="#757575" stroke="#757575" points="1721.72,-293.532 1729.68,-286.533 1719.09,-287.045 1721.72,-293.532"/>
 </g>
-<!-- common/services/blockchain/validators/blockchain&#45;validator.ts -->
+<!-- common/common/blockchain/validators/blockchain&#45;validator.ts -->
 <g id="node34" class="node"><title>common/services/blockchain/validators/blockchain&#45;validator.ts</title>
 <path fill="none" stroke="#c6c5fe" d="M1954.33,-560.383C1954.33,-560.383 1563.67,-560.383 1563.67,-560.383 1559.83,-560.383 1556,-556.549 1556,-552.716 1556,-552.716 1556,-545.049 1556,-545.049 1556,-541.216 1559.83,-537.383 1563.67,-537.383 1563.67,-537.383 1954.33,-537.383 1954.33,-537.383 1958.17,-537.383 1962,-541.216 1962,-545.049 1962,-545.049 1962,-552.716 1962,-552.716 1962,-556.549 1958.17,-560.383 1954.33,-560.383"/>
 <text text-anchor="middle" x="1759" y="-545.183" font-family="Arial" font-size="14.00" fill="#c6c5fe">common/services/blockchain/validators/blockchain&#45;validator.ts</text>
 </g>
-<!-- common/services/blockchain/validators/blockchain&#45;validator.basic.ts&#45;&gt;common/services/blockchain/validators/blockchain&#45;validator.ts -->
+<!-- common/common/blockchain/validators/blockchain&#45;validator.basic.ts&#45;&gt;common/common/blockchain/validators/blockchain&#45;validator.ts -->
 <g id="edge43" class="edge"><title>common/services/blockchain/validators/blockchain&#45;validator.basic.ts&#45;&gt;common/services/blockchain/validators/blockchain&#45;validator.ts</title>
 <path fill="none" stroke="#757575" d="M1473.22,-443.492C1482.6,-447.487 1491.6,-452.243 1500,-457.883 1527.42,-476.288 1508.57,-504.488 1536,-522.883 1541.68,-526.695 1547.64,-530.105 1553.8,-533.151"/>
 <polygon fill="#757575" stroke="#757575" points="1552.42,-536.368 1562.97,-537.357 1555.34,-530.005 1552.42,-536.368"/>
 </g>
-<!-- common/services/blockchain/validators/blockchain&#45;validator.ts&#45;&gt;common/services/blockchain/entities/blockchain.model.ts -->
+<!-- common/common/blockchain/validators/blockchain&#45;validator.ts&#45;&gt;common/common/blockchain/entities/blockchain.model.ts -->
 <g id="edge44" class="edge"><title>common/services/blockchain/validators/blockchain&#45;validator.ts&#45;&gt;common/services/blockchain/entities/blockchain.model.ts</title>
 <path fill="none" stroke="#757575" d="M1962.22,-547.067C1977.27,-546.932 1992.44,-546.796 2007.46,-546.661"/>
 <polygon fill="#757575" stroke="#757575" points="2007.86,-550.158 2017.83,-546.568 2007.8,-543.158 2007.86,-550.158"/>
 </g>
-<!-- common/services/security/ecc.service.ts&#45;&gt;common/entities/identity/personal&#45;identity.entity.ts -->
+<!-- common/common/security/ecc.service.ts&#45;&gt;common/entities/identity/personal&#45;identity.entity.ts -->
 <g id="edge51" class="edge"><title>common/services/security/ecc.service.ts&#45;&gt;common/entities/identity/personal&#45;identity.entity.ts</title>
 <path fill="none" stroke="#757575" d="M1895.78,-676.978C1938.73,-678.907 1986.8,-681.064 2032.01,-683.094"/>
 <polygon fill="#757575" stroke="#757575" points="2032.07,-686.6 2042.22,-683.552 2032.39,-679.607 2032.07,-686.6"/>
@@ -514,42 +514,42 @@
 <path fill="none" stroke="#757575" d="M596.083,-686.397C727.94,-675.461 1065.72,-647.447 1210.25,-635.46"/>
 <polygon fill="#757575" stroke="#757575" points="1210.64,-638.94 1220.32,-634.625 1210.06,-631.964 1210.64,-638.94"/>
 </g>
-<!-- di/services/blockchain.di.ts -->
+<!-- di/common/blockchain.di.ts -->
 <g id="node40" class="node"><title>di/services/blockchain.di.ts</title>
 <path fill="none" stroke="#c6c5fe" d="M952.333,-403.383C952.333,-403.383 782.667,-403.383 782.667,-403.383 778.833,-403.383 775,-399.549 775,-395.716 775,-395.716 775,-388.049 775,-388.049 775,-384.216 778.833,-380.383 782.667,-380.383 782.667,-380.383 952.333,-380.383 952.333,-380.383 956.167,-380.383 960,-384.216 960,-388.049 960,-388.049 960,-395.716 960,-395.716 960,-399.549 956.167,-403.383 952.333,-403.383"/>
 <text text-anchor="middle" x="867.5" y="-388.183" font-family="Arial" font-size="14.00" fill="#c6c5fe">di/services/blockchain.di.ts</text>
 </g>
-<!-- di/di.register.ts&#45;&gt;di/services/blockchain.di.ts -->
+<!-- di/di.register.ts&#45;&gt;di/common/blockchain.di.ts -->
 <g id="edge59" class="edge"><title>di/di.register.ts&#45;&gt;di/services/blockchain.di.ts</title>
 <path fill="none" stroke="#757575" d="M554.721,-679.162C604.4,-633.386 785.585,-466.439 846.423,-410.382"/>
 <polygon fill="#757575" stroke="#757575" points="848.885,-412.873 853.867,-403.523 844.141,-407.725 848.885,-412.873"/>
 </g>
-<!-- di/services/logger.di.ts -->
+<!-- di/common/logger.di.ts -->
 <g id="node41" class="node"><title>di/services/logger.di.ts</title>
 <path fill="none" stroke="#c6c5fe" d="M939.333,-801.383C939.333,-801.383 795.667,-801.383 795.667,-801.383 791.833,-801.383 788,-797.549 788,-793.716 788,-793.716 788,-786.049 788,-786.049 788,-782.216 791.833,-778.383 795.667,-778.383 795.667,-778.383 939.333,-778.383 939.333,-778.383 943.167,-778.383 947,-782.216 947,-786.049 947,-786.049 947,-793.716 947,-793.716 947,-797.549 943.167,-801.383 939.333,-801.383"/>
 <text text-anchor="middle" x="867.5" y="-786.183" font-family="Arial" font-size="14.00" fill="#c6c5fe">di/services/logger.di.ts</text>
 </g>
-<!-- di/di.register.ts&#45;&gt;di/services/logger.di.ts -->
+<!-- di/di.register.ts&#45;&gt;di/common/logger.di.ts -->
 <g id="edge60" class="edge"><title>di/di.register.ts&#45;&gt;di/services/logger.di.ts</title>
 <path fill="none" stroke="#757575" d="M579.859,-702.433C639.255,-720.554 754.23,-755.631 819.058,-775.409"/>
 <polygon fill="#757575" stroke="#757575" points="818.045,-778.759 828.631,-778.33 820.088,-772.064 818.045,-778.759"/>
 </g>
-<!-- di/services/network.rabbitmq.di.ts -->
+<!-- di/common/network.rabbitmq.di.ts -->
 <g id="node42" class="node"><title>di/services/network.rabbitmq.di.ts</title>
 <path fill="none" stroke="#c6c5fe" d="M973.333,-721.383C973.333,-721.383 761.667,-721.383 761.667,-721.383 757.833,-721.383 754,-717.549 754,-713.716 754,-713.716 754,-706.049 754,-706.049 754,-702.216 757.833,-698.383 761.667,-698.383 761.667,-698.383 973.333,-698.383 973.333,-698.383 977.167,-698.383 981,-702.216 981,-706.049 981,-706.049 981,-713.716 981,-713.716 981,-717.549 977.167,-721.383 973.333,-721.383"/>
 <text text-anchor="middle" x="867.5" y="-706.183" font-family="Arial" font-size="14.00" fill="#c6c5fe">di/services/network.rabbitmq.di.ts</text>
 </g>
-<!-- di/di.register.ts&#45;&gt;di/services/network.rabbitmq.di.ts -->
+<!-- di/di.register.ts&#45;&gt;di/common/network.rabbitmq.di.ts -->
 <g id="edge61" class="edge"><title>di/di.register.ts&#45;&gt;di/services/network.rabbitmq.di.ts</title>
 <path fill="none" stroke="#757575" d="M596.314,-694.063C636.487,-696.415 692.816,-699.713 743.652,-702.69"/>
 <polygon fill="#757575" stroke="#757575" points="743.552,-706.19 753.739,-703.28 743.961,-699.202 743.552,-706.19"/>
 </g>
-<!-- di/services/repository.di.ts -->
+<!-- di/common/repository.di.ts -->
 <g id="node43" class="node"><title>di/services/repository.di.ts</title>
 <path fill="none" stroke="#c6c5fe" d="M950.833,-603.383C950.833,-603.383 784.167,-603.383 784.167,-603.383 780.333,-603.383 776.5,-599.549 776.5,-595.716 776.5,-595.716 776.5,-588.049 776.5,-588.049 776.5,-584.216 780.333,-580.383 784.167,-580.383 784.167,-580.383 950.833,-580.383 950.833,-580.383 954.667,-580.383 958.5,-584.216 958.5,-588.049 958.5,-588.049 958.5,-595.716 958.5,-595.716 958.5,-599.549 954.667,-603.383 950.833,-603.383"/>
 <text text-anchor="middle" x="867.5" y="-588.183" font-family="Arial" font-size="14.00" fill="#c6c5fe">di/services/repository.di.ts</text>
 </g>
-<!-- di/di.register.ts&#45;&gt;di/services/repository.di.ts -->
+<!-- di/di.register.ts&#45;&gt;di/common/repository.di.ts -->
 <g id="edge62" class="edge"><title>di/di.register.ts&#45;&gt;di/services/repository.di.ts</title>
 <path fill="none" stroke="#757575" d="M579.859,-679.332C639.255,-661.212 754.23,-626.135 819.058,-606.356"/>
 <polygon fill="#757575" stroke="#757575" points="820.088,-609.702 828.631,-603.436 818.045,-603.006 820.088,-609.702"/>
@@ -574,87 +574,87 @@
 <path fill="none" stroke="#757575" d="M1377.2,-824.512C1459.59,-817.452 1576.95,-807.396 1659.56,-800.318"/>
 <polygon fill="#757575" stroke="#757575" points="1660.04,-803.789 1669.71,-799.448 1659.44,-796.815 1660.04,-803.789"/>
 </g>
-<!-- di/services/blockchain.di.ts&#45;&gt;common/services/blockchain/blockchain.config.ts -->
+<!-- di/common/blockchain.di.ts&#45;&gt;common/common/blockchain/blockchain.config.ts -->
 <g id="edge63" class="edge"><title>di/services/blockchain.di.ts&#45;&gt;common/services/blockchain/blockchain.config.ts</title>
 <path fill="none" stroke="#757575" d="M899.105,-380.369C936.058,-366.844 1000.32,-344.525 1057,-330.883 1242.62,-286.209 1461.19,-260.029 1604.31,-246.352"/>
 <polygon fill="#757575" stroke="#757575" points="1604.85,-249.816 1614.48,-245.389 1604.19,-242.847 1604.85,-249.816"/>
 </g>
-<!-- di/services/blockchain.di.ts&#45;&gt;common/services/blockchain/blockchain.service.interface.ts -->
+<!-- di/common/blockchain.di.ts&#45;&gt;common/common/blockchain/blockchain.service.interface.ts -->
 <g id="edge64" class="edge"><title>di/services/blockchain.di.ts&#45;&gt;common/services/blockchain/blockchain.service.interface.ts</title>
 <path fill="none" stroke="#757575" d="M960.064,-393.281C1082.97,-395.467 1308.05,-400.561 1500,-410.883 1537.21,-412.884 1577.4,-415.688 1614.72,-418.565"/>
 <polygon fill="#757575" stroke="#757575" points="1614.93,-422.091 1625.17,-419.377 1615.47,-415.112 1614.93,-422.091"/>
 </g>
-<!-- di/services/blockchain.di.ts&#45;&gt;common/services/blockchain/blockchain.service.ts -->
+<!-- di/common/blockchain.di.ts&#45;&gt;common/common/blockchain/blockchain.service.ts -->
 <g id="edge65" class="edge"><title>di/services/blockchain.di.ts&#45;&gt;common/services/blockchain/blockchain.service.ts</title>
 <path fill="none" stroke="#757575" d="M960.033,-382.931C1015.91,-377.466 1088.18,-370.398 1149.65,-364.386"/>
 <polygon fill="#757575" stroke="#757575" points="1150.2,-367.849 1159.81,-363.392 1149.52,-360.882 1150.2,-367.849"/>
 </g>
-<!-- di/services/blockchain.di.ts&#45;&gt;common/services/blockchain/consensus/consensus.ts -->
+<!-- di/common/blockchain.di.ts&#45;&gt;common/common/blockchain/consensus/consensus.ts -->
 <g id="edge67" class="edge"><title>di/services/blockchain.di.ts&#45;&gt;common/services/blockchain/consensus/consensus.ts</title>
 <path fill="none" stroke="#757575" d="M873.739,-380.27C892.152,-341.028 958.162,-212.964 1057,-161.883 1263.24,-55.2946 1550.2,-80.0924 1683.92,-99.844"/>
 <polygon fill="#757575" stroke="#757575" points="1683.65,-103.342 1694.06,-101.375 1684.69,-96.4205 1683.65,-103.342"/>
 </g>
-<!-- di/services/blockchain.di.ts&#45;&gt;common/services/blockchain/consensus/consensus.basic.ts -->
+<!-- di/common/blockchain.di.ts&#45;&gt;common/common/blockchain/consensus/consensus.basic.ts -->
 <g id="edge66" class="edge"><title>di/services/blockchain.di.ts&#45;&gt;common/services/blockchain/consensus/consensus.basic.ts</title>
 <path fill="none" stroke="#757575" d="M881.794,-380.324C911.42,-355.061 985.868,-294.278 1057,-257.883 1110.32,-230.6 1175.76,-209.78 1221.45,-197.077"/>
 <polygon fill="#757575" stroke="#757575" points="1222.45,-200.431 1231.17,-194.413 1220.6,-193.68 1222.45,-200.431"/>
 </g>
-<!-- di/services/blockchain.di.ts&#45;&gt;common/services/blockchain/validators/blockchain&#45;validator.basic.ts -->
+<!-- di/common/blockchain.di.ts&#45;&gt;common/common/blockchain/validators/blockchain&#45;validator.basic.ts -->
 <g id="edge68" class="edge"><title>di/services/blockchain.di.ts&#45;&gt;common/services/blockchain/validators/blockchain&#45;validator.basic.ts</title>
 <path fill="none" stroke="#757575" d="M960.033,-400.835C1015.91,-406.299 1088.18,-413.368 1149.65,-419.379"/>
 <polygon fill="#757575" stroke="#757575" points="1149.52,-422.883 1159.81,-420.373 1150.2,-415.916 1149.52,-422.883"/>
 </g>
-<!-- di/services/blockchain.di.ts&#45;&gt;common/services/blockchain/validators/blockchain&#45;validator.ts -->
+<!-- di/common/blockchain.di.ts&#45;&gt;common/common/blockchain/validators/blockchain&#45;validator.ts -->
 <g id="edge69" class="edge"><title>di/services/blockchain.di.ts&#45;&gt;common/services/blockchain/validators/blockchain&#45;validator.ts</title>
 <path fill="none" stroke="#757575" d="M897.679,-403.392C934.279,-417.307 999.251,-440.298 1057,-451.883 1250.79,-490.76 1317.29,-415.506 1500,-490.883 1519.25,-498.826 1516.9,-512.579 1536,-520.883 1549.03,-526.546 1562.86,-531.162 1577,-534.916"/>
 <polygon fill="#757575" stroke="#757575" points="1576.29,-538.345 1586.84,-537.379 1577.99,-531.554 1576.29,-538.345"/>
 </g>
-<!-- di/services/blockchain.di.ts&#45;&gt;di/di.interface.ts -->
+<!-- di/common/blockchain.di.ts&#45;&gt;di/di.interface.ts -->
 <g id="edge70" class="edge"><title>di/services/blockchain.di.ts&#45;&gt;di/di.interface.ts</title>
 <path fill="none" stroke="#757575" d="M881.955,-403.53C911.901,-429.07 986.948,-490.977 1057,-531.883 1116.65,-566.717 1190.95,-597.337 1236.27,-614.718"/>
 <polygon fill="#757575" stroke="#757575" points="1235.17,-618.044 1245.76,-618.327 1237.66,-611.501 1235.17,-618.044"/>
 </g>
-<!-- di/services/logger.di.ts&#45;&gt;common/entities/config/node&#45;configuration.model.ts -->
+<!-- di/common/logger.di.ts&#45;&gt;common/entities/config/node&#45;configuration.model.ts -->
 <g id="edge71" class="edge"><title>di/services/logger.di.ts&#45;&gt;common/entities/config/node&#45;configuration.model.ts</title>
 <path fill="none" stroke="#757575" d="M947.24,-780.165C980.98,-776.463 1020.86,-772.699 1057,-770.883 1253.64,-760.998 1320.64,-689.68 1500,-770.883 1522.09,-780.884 1514.4,-800.851 1536,-811.883 1548.89,-818.465 1562.74,-823.573 1577.01,-827.497"/>
 <polygon fill="#757575" stroke="#757575" points="1576.39,-830.951 1586.94,-830.028 1578.12,-824.167 1576.39,-830.951"/>
 </g>
-<!-- di/services/logger.di.ts&#45;&gt;common/logger/server&#45;logger.interface.ts -->
+<!-- di/common/logger.di.ts&#45;&gt;common/logger/server&#45;logger.interface.ts -->
 <g id="edge72" class="edge"><title>di/services/logger.di.ts&#45;&gt;common/logger/server&#45;logger.interface.ts</title>
 <path fill="none" stroke="#757575" d="M895.359,-801.404C931.383,-816.261 997.692,-841.534 1057,-852.883 1245.23,-888.9 1466.67,-895.387 1609.52,-895.031"/>
 <polygon fill="#757575" stroke="#757575" points="1609.68,-898.53 1619.67,-894.994 1609.66,-891.53 1609.68,-898.53"/>
 </g>
-<!-- di/services/logger.di.ts&#45;&gt;common/logger/server&#45;logger.service.ts -->
+<!-- di/common/logger.di.ts&#45;&gt;common/logger/server&#45;logger.service.ts -->
 <g id="edge73" class="edge"><title>di/services/logger.di.ts&#45;&gt;common/logger/server&#45;logger.service.ts</title>
 <path fill="none" stroke="#757575" d="M947.359,-790.268C1000.02,-790.526 1070.84,-790.872 1133.37,-791.178"/>
 <polygon fill="#757575" stroke="#757575" points="1133.72,-794.68 1143.74,-791.229 1133.75,-787.68 1133.72,-794.68"/>
 </g>
-<!-- di/services/logger.di.ts&#45;&gt;di/di.interface.ts -->
+<!-- di/common/logger.di.ts&#45;&gt;di/di.interface.ts -->
 <g id="edge74" class="edge"><title>di/services/logger.di.ts&#45;&gt;di/di.interface.ts</title>
 <path fill="none" stroke="#757575" d="M926.462,-778.314C957.702,-769.537 995.05,-754.616 1021,-729.883 1049.22,-702.983 1025.25,-672.512 1057,-649.883 1100.89,-618.603 1162.85,-615.588 1209.92,-619.259"/>
 <polygon fill="#757575" stroke="#757575" points="1209.75,-622.758 1220.02,-620.167 1210.38,-615.786 1209.75,-622.758"/>
 </g>
-<!-- di/services/network.rabbitmq.di.ts&#45;&gt;common/network/rabbitmq/rabbit&#45;mq.config.ts -->
+<!-- di/common/network.rabbitmq.di.ts&#45;&gt;common/network/rabbitmq/rabbit&#45;mq.config.ts -->
 <g id="edge75" class="edge"><title>di/services/network.rabbitmq.di.ts&#45;&gt;common/network/rabbitmq/rabbit&#45;mq.config.ts</title>
 <path fill="none" stroke="#757575" d="M981.116,-698.346C1006.1,-695.838 1032.44,-693.234 1057,-690.883 1083.13,-688.381 1111,-685.792 1137.83,-683.338"/>
 <polygon fill="#757575" stroke="#757575" points="1138.42,-686.8 1148.06,-682.405 1137.78,-679.829 1138.42,-686.8"/>
 </g>
-<!-- di/services/network.rabbitmq.di.ts&#45;&gt;di/di.interface.ts -->
+<!-- di/common/network.rabbitmq.di.ts&#45;&gt;di/di.interface.ts -->
 <g id="edge76" class="edge"><title>di/services/network.rabbitmq.di.ts&#45;&gt;di/di.interface.ts</title>
 <path fill="none" stroke="#757575" d="M981.275,-698.439C995.055,-694.802 1008.62,-690.059 1021,-683.883 1040.69,-674.056 1036.94,-658.93 1057,-649.883 1104.95,-628.26 1164.64,-624.039 1209.82,-624.794"/>
 <polygon fill="#757575" stroke="#757575" points="1210.02,-628.3 1220.1,-625.055 1210.19,-621.302 1210.02,-628.3"/>
 </g>
-<!-- di/services/repository.di.ts&#45;&gt;common/repositories/identity/personal&#45;identity.interface.repository.ts -->
+<!-- di/common/repository.di.ts&#45;&gt;common/repositories/identity/personal&#45;identity.interface.repository.ts -->
 <g id="edge77" class="edge"><title>di/services/repository.di.ts&#45;&gt;common/repositories/identity/personal&#45;identity.interface.repository.ts</title>
 <path fill="none" stroke="#757575" d="M958.759,-592.773C1081.37,-594.334 1307.39,-598.459 1500,-608.883 1540.13,-611.054 1583.7,-614.271 1623.42,-617.538"/>
 <polygon fill="#757575" stroke="#757575" points="1623.17,-621.03 1633.43,-618.369 1623.75,-614.054 1623.17,-621.03"/>
 </g>
-<!-- di/services/repository.di.ts&#45;&gt;common/repositories/identity/personal&#45;identity.repository.ts -->
+<!-- di/common/repository.di.ts&#45;&gt;common/repositories/identity/personal&#45;identity.repository.ts -->
 <g id="edge78" class="edge"><title>di/services/repository.di.ts&#45;&gt;common/repositories/identity/personal&#45;identity.repository.ts</title>
 <path fill="none" stroke="#757575" d="M927.535,-580.335C1002,-565.771 1129.81,-540.77 1208.64,-525.351"/>
 <polygon fill="#757575" stroke="#757575" points="1209.34,-528.781 1218.48,-523.426 1208,-521.911 1209.34,-528.781"/>
 </g>
-<!-- di/services/repository.di.ts&#45;&gt;di/di.interface.ts -->
+<!-- di/common/repository.di.ts&#45;&gt;di/di.interface.ts -->
 <g id="edge79" class="edge"><title>di/services/repository.di.ts&#45;&gt;di/di.interface.ts</title>
 <path fill="none" stroke="#757575" d="M958.51,-600.246C1034.46,-607.302 1141.5,-617.247 1210.2,-623.63"/>
 <polygon fill="#757575" stroke="#757575" points="1210.18,-627.143 1220.46,-624.583 1210.83,-620.173 1210.18,-627.143"/>

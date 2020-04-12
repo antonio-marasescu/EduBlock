@@ -10,12 +10,12 @@ import {BLOCKCHAIN_CONFIG} from "../../common/services/blockchain/blockchain.con
 
 export class BlockchainDI implements DIInterface {
     inject(_: any): void {
-        Container.set('services.blockchain.config', BLOCKCHAIN_CONFIG);
+        Container.set('common.blockchain.config', BLOCKCHAIN_CONFIG);
         Container.set(ConsensusServiceToken, new ConsensusServiceBasic());
         Container.set(BlockchainValidatorToken, new BlockchainValidatorBasic());
         Container.set(BlockchainServiceToken, new BlockchainService(
             Container.get(ConsensusServiceToken),
-            Container.get('services.blockchain.config'))
+            Container.get('common.blockchain.config'))
         );
     }
 

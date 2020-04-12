@@ -15,7 +15,7 @@ export class BlockchainService implements IBlockchainService {
     private readonly blockchain: Blockchain;
 
     constructor(@Inject(ConsensusServiceToken) private consensusService: ConsensusService,
-                @Inject('services.blockchain.config') private configuration: BlockchainConfig) {
+                @Inject('common.blockchain.config') private configuration: BlockchainConfig) {
         this.blockchain = new Blockchain();
     }
 

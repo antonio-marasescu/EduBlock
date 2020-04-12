@@ -1,7 +1,7 @@
 import {Inject, Service, Token} from "typedi";
 import {ServerLogger, ServerLoggerToken} from "../../logger/server-logger.interface";
 
-export const NetworkMembersServiceToken = new Token<NetworkMembersService>('services.network-members');
+export const NetworkMembersServiceToken = new Token<NetworkMembersService>('common.network-members');
 
 @Service(NetworkMembersServiceToken)
 export class NetworkMembersService {
