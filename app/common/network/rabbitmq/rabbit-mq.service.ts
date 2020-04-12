@@ -11,7 +11,7 @@ export class RabbitMqService implements IRabbitMqService {
     private readonly exchange: Amqp.Exchange;
     private queues: { [key: string]: Queue } = {};
 
-    constructor(@Inject('rabbitmq.network.config') private configuration: RabbitMqConfig) {
+    constructor(@Inject('rabbitmq.config') private configuration: RabbitMqConfig) {
         this.connection = new Amqp.Connection(configuration.url);
         this.exchange = this.connection.declareExchange(configuration.exchangeName, 'fanout');
     }
