@@ -1,6 +1,6 @@
 import {Token} from "typedi";
 
-export interface ServerLogger {
+export interface DoormanLogger {
     logError(location: any, message: string): void;
 
     logSuccess(location: any, message: string): void;
@@ -10,4 +10,4 @@ export interface ServerLogger {
     logInfo(location: any, message: string): void;
 }
 
-export const ServerLoggerToken = new Token<ServerLogger>('node.server-logger');
+export const DoormanLoggerToken = new Token<DoormanLogger>('node.server-logger');

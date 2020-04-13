@@ -1,7 +1,7 @@
 {
   "name": "doorman",
   "version": "0.0.1",
-  "description": "The EduBlock Doorman Service",
+  "description": "The EduBlock Network Map Service",
   "main": "app/server/edu.node.ts",
   "scripts": {
     "tsc": "tsc",

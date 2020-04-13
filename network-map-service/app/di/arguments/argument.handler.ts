@@ -1,6 +1,9 @@
 import * as fs from 'fs';
 import {Container} from "typedi";
-import {DoormanConfigurationModel, NodeIdentityModelToken} from "../../common/entities/config/doorman-configuration.model";
+import {
+    DoormanConfigurationModel,
+    DoormanConfigurationModelToken
+} from "../../common/entities/config/doorman-configuration.model";
 
 export class ArgumentHandler {
     public readArguments() {
@@ -17,6 +20,6 @@ export class ArgumentHandler {
         if (!ownIdentity) {
             throw new Error("Invalid identity parameter!");
         }
-        Container.set(NodeIdentityModelToken, ownIdentity);
+        Container.set(DoormanConfigurationModelToken, ownIdentity);
     }
 }

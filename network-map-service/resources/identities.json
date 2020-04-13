@@ -1,0 +1,22 @@
+{
+  "nms": {
+    "identity": {
+      "legalName": "Network Map Service Europe",
+      "alias": "NMS EU",
+      "port": 3005,
+      "host": "localhost"
+    },
+    "databaseConfiguration": {
+      "username": "nmsuser1",
+      "password": "nmspass1",
+      "databaseName": "nms",
+      "host": "localhost",
+      "port": 5438,
+      "logging": [
+        "error"
+      ],
+      "logger": "advanced-console"
+    },
+    "useFileLogging": false
+  }
+}

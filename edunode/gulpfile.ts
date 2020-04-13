@@ -14,8 +14,6 @@ export function initGulpEduNode(gulp, workingDir) {
             }
             child.stdout?.on('data', chunk =>
                 process.stdout.write(chunk));
-            // child.stdin?.pipe(process.stdin);
-            // child.stdout?.pipe(process.stdout);
             complete();
         }
     );

@@ -8,4 +8,4 @@ export interface DoormanConfigurationModel {
     useFileLogging: boolean;
 }
 
-export const NodeIdentityModelToken = new Token<DoormanConfigurationModel>('node.identity');
+export const DoormanConfigurationModelToken = new Token<DoormanConfigurationModel>('node.identity');

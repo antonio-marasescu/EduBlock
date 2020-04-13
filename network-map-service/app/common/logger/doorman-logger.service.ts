@@ -1,15 +1,18 @@
 import {Inject, Service} from "typedi";
-import {ServerLogger, ServerLoggerToken} from "./doorman-logger.interface";
+import {DoormanLogger, DoormanLoggerToken} from "./doorman-logger.interface";
 import * as winston from 'winston';
 import {format, Logger as WinstonLogger} from 'winston';
 import {SERVER_LOGGER_LEVELS, SERVER_LOGGER_OPTIONS} from "./doorman-logger.config";
-import {DoormanConfigurationModel, NodeIdentityModelToken} from "../entities/config/doorman-configuration.model";
+import {
+    DoormanConfigurationModel,
+    DoormanConfigurationModelToken
+} from "../entities/config/doorman-configuration.model";
 
-@Service(ServerLoggerToken)
-export class DoormanLoggerService implements ServerLogger {
+@Service(DoormanLoggerToken)
+export class DoormanLoggerService implements DoormanLogger {
     private readonly logger: WinstonLogger;
 
-    constructor(@Inject(NodeIdentityModelToken) private nodeConfiguration: DoormanConfigurationModel) {
+    constructor(@Inject(DoormanConfigurationModelToken) private nodeConfiguration: DoormanConfigurationModel) {
         this.logger = winston.createLogger(SERVER_LOGGER_OPTIONS);
         this.logger.add(
             new winston.transports.Console(
