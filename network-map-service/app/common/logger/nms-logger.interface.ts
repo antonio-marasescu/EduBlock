@@ -1,6 +1,6 @@
 import {Token} from "typedi";
 
-export interface DoormanLogger {
+export interface NmsLogger {
     logError(location: any, message: string): void;
 
     logSuccess(location: any, message: string): void;
@@ -10,4 +10,4 @@ export interface DoormanLogger {
     logInfo(location: any, message: string): void;
 }
 
-export const DoormanLoggerToken = new Token<DoormanLogger>('node.server-logger');
+export const NmsLoggerToken = new Token<NmsLogger>('node.server-logger');

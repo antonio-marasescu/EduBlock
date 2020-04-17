@@ -3,6 +3,7 @@ import {BasicApi} from "../basic.api";
 import {Inject, Service, Token} from "typedi";
 import {NetworkMembersService, NetworkMembersServiceToken} from "../../../services/common/network-members.service";
 import {IdentityService, IdentityServiceToken} from "../../../services/common/identity.service";
+import {EduNewNetworkMemberDto} from "../../../dto/network/edu-new-network-member.dto";
 
 export const NetworkApiToken = new Token<NetworkApi>('network.api.network');
 
@@ -55,8 +56,10 @@ export class NetworkApi implements BasicApi {
         res.send(data);
     }
 
-    private async handleAddNetworkMember(_, res) {
-        const member = await this.networkMembersService.addMember();
-        res.send(member);
+    private async handleAddNetworkMember(req, res) {
+        const member = new EduNewNetworkMemberDto();
+        Object.assign(member, req.body);
+        const response = await this.networkMembersService.addMember(member);
+        res.send(response);
     }
 }

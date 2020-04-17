@@ -1,18 +1,18 @@
 import {Inject, Service} from "typedi";
-import {DoormanLogger, DoormanLoggerToken} from "./doorman-logger.interface";
+import {NmsLogger, NmsLoggerToken} from "./nms-logger.interface";
 import * as winston from 'winston';
 import {format, Logger as WinstonLogger} from 'winston';
-import {SERVER_LOGGER_LEVELS, SERVER_LOGGER_OPTIONS} from "./doorman-logger.config";
+import {SERVER_LOGGER_LEVELS, SERVER_LOGGER_OPTIONS} from "./nms-logger.config";
 import {
-    DoormanConfigurationModel,
-    DoormanConfigurationModelToken
-} from "../entities/config/doorman-configuration.model";
+    NmsConfigurationModel,
+    NmsConfigurationModelToken
+} from "../entities/config/nms-configuration.model";
 
-@Service(DoormanLoggerToken)
-export class DoormanLoggerService implements DoormanLogger {
+@Service(NmsLoggerToken)
+export class NmsLoggerService implements NmsLogger {
     private readonly logger: WinstonLogger;
 
-    constructor(@Inject(DoormanConfigurationModelToken) private nodeConfiguration: DoormanConfigurationModel) {
+    constructor(@Inject(NmsConfigurationModelToken) private nodeConfiguration: NmsConfigurationModel) {
         this.logger = winston.createLogger(SERVER_LOGGER_OPTIONS);
         this.logger.add(
             new winston.transports.Console(

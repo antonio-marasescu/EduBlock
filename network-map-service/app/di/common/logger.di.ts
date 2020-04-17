@@ -1,11 +1,11 @@
 import {DIInterface} from "../di.interface";
 import {Container} from "typedi";
-import {DoormanLoggerService} from "../../common/logger/doorman-logger.service";
-import {DoormanLoggerToken} from "../../common/logger/doorman-logger.interface";
-import {DoormanConfigurationModelToken} from "../../common/entities/config/doorman-configuration.model";
+import {NmsLoggerService} from "../../common/logger/nms-logger.service";
+import {NmsLoggerToken} from "../../common/logger/nms-logger.interface";
+import {NmsConfigurationModelToken} from "../../common/entities/config/nms-configuration.model";
 
 export class LoggerDI implements DIInterface {
     inject(_: any): void {
-        Container.set(DoormanLoggerToken, new DoormanLoggerService(Container.get(DoormanConfigurationModelToken)));
+        Container.set(NmsLoggerToken, new NmsLoggerService(Container.get(NmsConfigurationModelToken)));
     }
 }

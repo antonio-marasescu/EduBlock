@@ -3,10 +3,10 @@ import {Inject, Service, Token} from "typedi";
 import {Connection} from "typeorm/connection/Connection";
 import {VAULT_SCHEMA} from "./vault.schema";
 import {
-    DoormanConfigurationModel,
-    DoormanConfigurationModelToken
-} from "../../common/entities/config/doorman-configuration.model";
-import {DoormanLogger, DoormanLoggerToken} from "../../common/logger/doorman-logger.interface";
+    NmsConfigurationModel,
+    NmsConfigurationModelToken
+} from "../../common/entities/config/nms-configuration.model";
+import {NmsLogger, NmsLoggerToken} from "../../common/logger/nms-logger.interface";
 
 export const VaultConnectionToken = new Token<VaultConnection>('vault.connection');
 
@@ -15,8 +15,8 @@ export class VaultConnection {
 
     public connection: Connection | undefined;
 
-    constructor(@Inject(DoormanConfigurationModelToken) private nodeConfiguration: DoormanConfigurationModel,
-                @Inject(DoormanLoggerToken) private logger: DoormanLogger) {
+    constructor(@Inject(NmsConfigurationModelToken) private nodeConfiguration: NmsConfigurationModel,
+                @Inject(NmsLoggerToken) private logger: NmsLogger) {
     }
 
     public async initializeConnection(): Promise<void> {

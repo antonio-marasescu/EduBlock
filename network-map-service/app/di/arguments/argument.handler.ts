@@ -1,9 +1,9 @@
 import * as fs from 'fs';
 import {Container} from "typedi";
 import {
-    DoormanConfigurationModel,
-    DoormanConfigurationModelToken
-} from "../../common/entities/config/doorman-configuration.model";
+    NmsConfigurationModel,
+    NmsConfigurationModelToken
+} from "../../common/entities/config/nms-configuration.model";
 
 export class ArgumentHandler {
     public readArguments() {
@@ -12,7 +12,7 @@ export class ArgumentHandler {
         }
         const identityName: string = process.argv[2];
         const rawData: Buffer = fs.readFileSync('resources/identities.json');
-        const identities: { [key: string]: DoormanConfigurationModel } = JSON.parse(rawData.toString());
+        const identities: { [key: string]: NmsConfigurationModel } = JSON.parse(rawData.toString());
         if (!identities) {
             throw new Error("Invalid 'identities.json'!");
         }
@@ -20,6 +20,6 @@ export class ArgumentHandler {
         if (!ownIdentity) {
             throw new Error("Invalid identity parameter!");
         }
-        Container.set(DoormanConfigurationModelToken, ownIdentity);
+        Container.set(NmsConfigurationModelToken, ownIdentity);
     }
 }

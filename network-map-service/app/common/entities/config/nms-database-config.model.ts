@@ -1,4 +1,4 @@
-export interface DoormanDatabaseConfigModel {
+export interface NmsDatabaseConfigModel {
     username: string;
     password: string;
     host: string;

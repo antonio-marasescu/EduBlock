@@ -1,5 +1,6 @@
 import {Inject, Service, Token} from "typedi";
 import {ServerLogger, ServerLoggerToken} from "../../logger/server-logger.interface";
+import {EduNewNetworkMemberDto} from "../../dto/network/edu-new-network-member.dto";
 
 export const NetworkMembersServiceToken = new Token<NetworkMembersService>('common.network-members');
 
@@ -25,7 +26,7 @@ export class NetworkMembersService {
         return "Not implemented";
     }
 
-    public addMember() {
+    public addMember(member: EduNewNetworkMemberDto) {
         this.logger.logInfo(this, "Initializing add member flow");
         return "Not implemented";
     }

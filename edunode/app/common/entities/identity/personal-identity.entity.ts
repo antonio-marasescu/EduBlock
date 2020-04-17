@@ -3,6 +3,6 @@ import {IdentityModel} from "./identity.model";
 
 @Entity()
 export class PersonalIdentity extends IdentityModel {
-    @Column()
+    @Column({unique: true})
     privateKey: string;
 }

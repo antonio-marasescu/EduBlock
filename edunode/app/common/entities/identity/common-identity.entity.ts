@@ -5,4 +5,9 @@ import {IdentityModel} from "./identity.model";
 export class CommonIdentity extends IdentityModel {
     @Column()
     isWellKnown: boolean;
+    @Column()
+    host: string;
+
+    @Column()
+    port: number;
 }

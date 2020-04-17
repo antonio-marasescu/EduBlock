@@ -1,4 +1,4 @@
-export class DoormanIdentityModel {
+export class NmsIdentityModel {
     legalName: string;
     alias: string;
     host: string;
