@@ -1,2 +1,16 @@
 {
+  "seed": [
+    {
+      "publicKey": "EOS89zAE11svAC8P21MgCWXNZ3z88WHKb6vNemFhpCp5VthYs1pJW",
+      "legalIdentity": "University of California",
+      "host": "localhost",
+      "port": 3001
+    },
+    {
+      "publicKey": "EOS6aKAswMnNJojfi5p31QTsvpwGzxk7ZSNjYX98PqYaeQf4M78mK",
+      "legalIdentity": "University of Amsterdam",
+      "host": "localhost",
+      "port": 3002
+    }
+  ]
 }

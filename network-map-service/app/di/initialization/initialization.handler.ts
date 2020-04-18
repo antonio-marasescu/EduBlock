@@ -1,12 +1,9 @@
 import * as fs from 'fs';
 import {Container} from "typedi";
-import {
-    NmsConfigurationModel,
-    NmsConfigurationModelToken
-} from "../../common/entities/config/nms-configuration.model";
+import {NmsConfigurationModel, NmsConfigurationModelToken} from "../../common/entities/config/nms-configuration.model";
 
-export class ArgumentHandler {
-    public readArguments() {
+export class InitializationHandler {
+    public initialization() {
         if (process.argv.length != 3) {
             throw new Error('Not enough arguments!');
         }

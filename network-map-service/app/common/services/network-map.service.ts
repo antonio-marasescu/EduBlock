@@ -48,7 +48,7 @@ export class NetworkMapService {
         return NetworkMapEntityMapper.toDto(entity);
     }
 
-    public async addNetworkMember(newMember: NewNetworkMemberDto): Promise<NetworkMemberDto> {
+    public async addNetworkMember(newMember: NewNetworkMemberDto, isSignatureValidated: boolean = true): Promise<NetworkMemberDto> {
         this.logger.logInfo(this, "Initializing add network member...");
         this.logger.logInfo(this, "Validating network member data transfer object...");
         const validationErrors: ValidationError[] = await validate(newMember);
@@ -59,15 +59,8 @@ export class NetworkMapService {
         }
         this.logger.logSuccess(this, "Validation succeeded.");
 
-        const filteredData = objectWithoutKeys(newMember, ['proof']);
-        const valid: boolean = await this.identityService.verifyData(filteredData, newMember.proof.signature, newMember.proof.publicKey);
-
-        if (!valid) {
-            const error = createInvalidSignatureError(newMember);
-            this.logger.logError(this, JSON.stringify(error));
-            throw error;
-        }
-
+        if (isSignatureValidated)
+            await this.validateDtoSignature(newMember);
 
         this.logger.logInfo(this, "Adding personal signature to new network member...");
         const networkMapEntity = NetworkMapEntityMapper.toEntity(newMember);
@@ -87,5 +80,16 @@ export class NetworkMapService {
         this.logger.logSuccess(this, "New network member added!");
 
         return NetworkMapEntityMapper.toDto(savedEntity);
+    }
+
+    private async validateDtoSignature(newMember: NewNetworkMemberDto) {
+        const filteredData = objectWithoutKeys(newMember, ['proof']);
+        const valid: boolean = await this.identityService.verifyData(filteredData, newMember.proof.signature, newMember.proof.publicKey);
+
+        if (!valid) {
+            const error = createInvalidSignatureError(newMember);
+            this.logger.logError(this, JSON.stringify(error));
+            throw error;
+        }
     }
 }

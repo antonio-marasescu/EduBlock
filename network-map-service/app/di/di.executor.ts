@@ -1,9 +1,9 @@
 import {DIInterface} from "./di.interface";
 import {DI_REGISTER, DI_REGISTER_DEPENDENTS} from "./di.register";
-import {ArgumentHandler} from "./arguments/argument.handler";
 import {VaultConnectionToken} from "../server/db/vault.connection";
 import {Container} from "typedi";
 import {EccServiceToken} from "../common/services/ecc.service";
+import {InitializationHandler} from "./initialization/initialization.handler";
 
 export default class DIExecutor {
     public inject(params: any) {
@@ -15,8 +15,8 @@ export default class DIExecutor {
     }
 
     public async initialize(params: any) {
-        const argumentHandler = new ArgumentHandler();
-        argumentHandler.readArguments();
+        const argumentHandler = new InitializationHandler();
+        argumentHandler.initialization();
         this.inject(params);
         await this.initializeDependents();
         this.injectDependents(params);

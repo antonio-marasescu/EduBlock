@@ -10,8 +10,10 @@ export class NetworkMapEntityMapper {
         networkMapEntity.host = newNetworkMemberDto.host;
         networkMapEntity.port = newNetworkMemberDto.port;
         networkMapEntity.joinedDate = newNetworkMemberDto.joinedDate;
-        networkMapEntity.promoterPublicKey = newNetworkMemberDto.proof.publicKey;
-        networkMapEntity.promoterSignature = newNetworkMemberDto.proof.signature;
+        if (newNetworkMemberDto.proof) {
+            networkMapEntity.promoterPublicKey = newNetworkMemberDto.proof.publicKey;
+            networkMapEntity.promoterSignature = newNetworkMemberDto.proof.signature;
+        }
         return networkMapEntity;
     }
 
