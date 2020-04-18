@@ -1,6 +1,6 @@
 import {IsNotEmpty, IsString} from "class-validator";
 
-export class SignatureDto {
+export class ProofDto {
     @IsString()
     @IsNotEmpty()
     signature: string;

@@ -3,7 +3,7 @@ import {DI_REGISTER, DI_REGISTER_DEPENDENTS} from "./di.register";
 import {Container} from "typedi";
 import {VaultConnectionToken} from "../server/db/vault.connection";
 import {EccServiceToken} from "../common/services/security/ecc.service";
-import {ArgumentHandler} from "./arguments/argument.handler";
+import {InitializationHandler} from "./initialization/initialization.handler";
 
 export default class DIExecutor {
     public inject(params: any) {
@@ -14,9 +14,9 @@ export default class DIExecutor {
         DI_REGISTER_DEPENDENTS.forEach((x: DIInterface) => x.inject(params))
     }
 
-    public async initalize(params: any) {
-        const argumentHandler = new ArgumentHandler();
-        argumentHandler.readArguments();
+    public async initialize(params: any) {
+        const argumentHandler = new InitializationHandler();
+        argumentHandler.handleInitialization();
         this.inject(params);
         await this.initializeDependents();
         this.injectDependents(params);

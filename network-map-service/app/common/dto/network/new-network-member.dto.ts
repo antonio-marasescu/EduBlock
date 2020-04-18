@@ -1,5 +1,5 @@
 import {IsDateString, IsNotEmpty, IsNumber, IsString} from "class-validator";
-import {ProofDto} from "../common/proof.dto";
+import {ProofDto} from "../../../../../edunode/app/common/dto/common/proof.dto";
 
 export class NewNetworkMemberDto {
     @IsString()
@@ -20,7 +20,7 @@ export class NewNetworkMemberDto {
 
     @IsDateString()
     @IsNotEmpty()
-    addedDate: string;
+    joinedDate: string;
 
     @IsNotEmpty()
     proof: ProofDto;

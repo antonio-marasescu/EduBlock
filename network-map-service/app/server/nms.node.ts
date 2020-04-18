@@ -4,6 +4,8 @@ import {Container, Inject, Service, Token} from "typedi";
 import {NmsConfigurationModel, NmsConfigurationModelToken} from "../common/entities/config/nms-configuration.model";
 import {NmsLogger, NmsLoggerToken} from "../common/logger/nms-logger.interface";
 import {API_REGISTER_TOKENS} from "../common/network/basic.api.register";
+import {IdentityServiceToken} from "../common/services/identity.service";
+import {NmsErrorHandler} from "../common/errors/nms.error.handler";
 
 export const NmsNodeToken = new Token<NmsNode>('NmsNode');
 
@@ -24,8 +26,8 @@ export class NmsNode {
         await this.applyMiddleware();
         const that = this;
         this.app.listen(this.nodeConfiguration.identity.port, async function () {
-            // const identity = await Container.get(IdentityServiceToken).checkOrGeneratePersonalIdentity();
-            // that.logger.logInfo(that, "Identity (Public Key): " + identity);
+            const identity = await Container.get(IdentityServiceToken).checkOrGeneratePersonalIdentity();
+            that.logger.logInfo(that, "Identity (Public Key): " + identity);
             that.logger.logSuccess(that, 'Node ' + that.nodeConfiguration.identity.alias + ' is listening....');
         });
     }
@@ -34,5 +36,6 @@ export class NmsNode {
         this.app.use(bodyParser.json());
         this.app.use(bodyParser.urlencoded({extended: false}));
         API_REGISTER_TOKENS.forEach(token => this.app.use(Container.get(token).getRouter()));
+        this.app.use((error, _, res, __) => NmsErrorHandler.handleError(error, res))
     }
 }

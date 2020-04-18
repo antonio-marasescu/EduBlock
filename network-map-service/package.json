@@ -14,7 +14,9 @@
   "dependencies": {
     "@types/body-parser": "^1.19.0",
     "class-validator": "^0.11.1",
+    "eosjs-ecc": "^4.0.7",
     "express": "^4.17.1",
+    "express-async-handler": "^1.1.4",
     "pg": "^8.0.0",
     "reflect-metadata": "^0.1.13",
     "sha256": "latest",

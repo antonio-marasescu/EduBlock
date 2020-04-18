@@ -94,13 +94,13 @@
 <path fill="none" stroke="#757575" d="M306.665,-748.126C319.104,-721.324 353.479,-655.644 404,-624.883 523.452,-552.15 574.667,-582.927 714,-570.883 849.937,-559.131 884.662,-565.483 1021,-570.883 1234.39,-579.334 1309.09,-513.175 1500,-608.883 1521.68,-619.75 1514.4,-638.851 1536,-649.883 1559.31,-661.79 1585.79,-668.873 1612.15,-672.848"/>
 <polygon fill="#757575" stroke="#757575" points="1611.85,-676.341 1622.23,-674.224 1612.8,-669.405 1611.85,-676.341"/>
 </g>
-<!-- di/arguments/argument.handler.ts -->
-<g id="node36" class="node"><title>di/arguments/argument.handler.ts</title>
+<!-- di/arguments/initialization.handler.ts -->
+<g id="node36" class="node"><title>di/arguments/initialization.handler.ts</title>
 <path fill="none" stroke="#c6c5fe" d="M646.833,-846.383C646.833,-846.383 435.167,-846.383 435.167,-846.383 431.333,-846.383 427.5,-842.549 427.5,-838.716 427.5,-838.716 427.5,-831.049 427.5,-831.049 427.5,-827.216 431.333,-823.383 435.167,-823.383 435.167,-823.383 646.833,-823.383 646.833,-823.383 650.667,-823.383 654.5,-827.216 654.5,-831.049 654.5,-831.049 654.5,-838.716 654.5,-838.716 654.5,-842.549 650.667,-846.383 646.833,-846.383"/>
-<text text-anchor="middle" x="541" y="-831.183" font-family="Arial" font-size="14.00" fill="#c6c5fe">di/arguments/argument.handler.ts</text>
+<text text-anchor="middle" x="541" y="-831.183" font-family="Arial" font-size="14.00" fill="#c6c5fe">di/arguments/initialization.handler.ts</text>
 </g>
-<!-- di/di.executor.ts&#45;&gt;di/arguments/argument.handler.ts -->
-<g id="edge54" class="edge"><title>di/di.executor.ts&#45;&gt;di/arguments/argument.handler.ts</title>
+<!-- di/di.executor.ts&#45;&gt;di/arguments/initialization.handler.ts -->
+<g id="edge54" class="edge"><title>di/di.executor.ts&#45;&gt;di/arguments/initialization.handler.ts</title>
 <path fill="none" stroke="#757575" d="M321.663,-771.441C341.881,-782.563 374.206,-799.095 404,-808.883 419.036,-813.822 435.332,-817.941 451.247,-821.334"/>
 <polygon fill="#757575" stroke="#757575" points="450.593,-824.772 461.092,-823.354 452,-817.915 450.593,-824.772"/>
 </g>
@@ -504,8 +504,8 @@
 <path fill="none" stroke="#757575" d="M1895.78,-676.978C1938.73,-678.907 1986.8,-681.064 2032.01,-683.094"/>
 <polygon fill="#757575" stroke="#757575" points="2032.07,-686.6 2042.22,-683.552 2032.39,-679.607 2032.07,-686.6"/>
 </g>
-<!-- di/arguments/argument.handler.ts&#45;&gt;common/entities/config/node&#45;configuration.model.ts -->
-<g id="edge52" class="edge"><title>di/arguments/argument.handler.ts&#45;&gt;common/entities/config/node&#45;configuration.model.ts</title>
+<!-- di/arguments/initialization.handler.ts&#45;&gt;common/entities/config/node&#45;configuration.model.ts -->
+<g id="edge52" class="edge"><title>di/arguments/initialization.handler.ts&#45;&gt;common/entities/config/node&#45;configuration.model.ts</title>
 <path fill="none" stroke="#757575" d="M654.862,-841.199C834.035,-850.282 1194.56,-864.704 1500,-852.883 1540.56,-851.313 1584.62,-848.36 1624.66,-845.196"/>
 <polygon fill="#757575" stroke="#757575" points="1625.07,-848.676 1634.75,-844.388 1624.51,-841.698 1625.07,-848.676"/>
 </g>

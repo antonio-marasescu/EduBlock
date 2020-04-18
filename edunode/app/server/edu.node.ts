@@ -3,8 +3,9 @@ import bodyParser from 'body-parser'
 import {Container, Inject, Service, Token} from "typedi";
 import {NodeConfigurationModel, NodeIdentityModelToken} from "../common/entities/config/node-configuration.model";
 import {ServerLogger, ServerLoggerToken} from "../common/logger/server-logger.interface";
-import {IdentityServiceToken} from "../common/services/common/identity.service";
+import {IdentityServiceToken} from "../common/services/security/identity.service";
 import {API_REGISTER_TOKENS} from "../common/network/api/basic.api.register";
+import {EduErrorHandler} from "../common/errors/edu.error.handler";
 
 export const EduNodeToken = new Token<EduNode>('EduNode');
 
@@ -36,5 +37,6 @@ export class EduNode {
         this.app.use(bodyParser.json());
         this.app.use(bodyParser.urlencoded({extended: false}));
         API_REGISTER_TOKENS.forEach(token => this.app.use(Container.get(token).getRouter()));
+        this.app.use((error, _, res, __) => EduErrorHandler.handleError(error, res))
     }
 }

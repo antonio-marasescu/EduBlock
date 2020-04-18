@@ -2,8 +2,9 @@ import express from "express";
 import {BasicApi} from "../basic.api";
 import {Inject, Service, Token} from "typedi";
 import {NetworkMembersService, NetworkMembersServiceToken} from "../../../services/common/network-members.service";
-import {IdentityService, IdentityServiceToken} from "../../../services/common/identity.service";
+import {IdentityService, IdentityServiceToken} from "../../../services/security/identity.service";
 import {EduNewNetworkMemberDto} from "../../../dto/network/edu-new-network-member.dto";
+import asyncHandler from 'express-async-handler';
 
 export const NetworkApiToken = new Token<NetworkApi>('network.api.network');
 
@@ -25,15 +26,15 @@ export class NetworkApi implements BasicApi {
 
     private registerRoutes() {
         this.router.get('/network/identity/me',
-            (req, res) => this.handleGetPersonalIdentity(req, res));
+            asyncHandler(async (req, res) => this.handleGetPersonalIdentity(req, res)));
         this.router.get('/network/members',
-            (req, res) => this.handleGetNetworkMembers(req, res));
+            asyncHandler(async (req, res) => this.handleGetNetworkMembers(req, res)));
         this.router.get('/network/members/well-known',
-            (req, res) => this.handleGetWellKnownNetworkMembers(req, res));
+            asyncHandler(async (req, res) => this.handleGetWellKnownNetworkMembers(req, res)));
         this.router.get('/network/members/learn',
-            (req, res) => this.handleLearnNetworkMembers(req, res));
+            asyncHandler(async (req, res) => this.handleLearnNetworkMembers(req, res)));
         this.router.post('/network/members',
-            (req, res) => this.handleAddNetworkMember(req, res));
+            asyncHandler(async (req, res) => this.handleAddNetworkMember(req, res)));
     }
 
     private async handleGetPersonalIdentity(_, res) {

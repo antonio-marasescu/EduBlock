@@ -1,5 +1,4 @@
-import {IsDateString, IsNotEmpty, IsNumber, IsString} from "class-validator";
-import {SignatureDto} from "../common/signature.dto";
+import {IsNotEmpty, IsNumber, IsString} from "class-validator";
 
 export class EduNewNetworkMemberDto {
     @IsString()
@@ -17,11 +16,4 @@ export class EduNewNetworkMemberDto {
     @IsNumber()
     @IsNotEmpty()
     port: number;
-
-    @IsDateString()
-    @IsNotEmpty()
-    joinedDate: string;
-
-    @IsNotEmpty()
-    signature: SignatureDto;
 }

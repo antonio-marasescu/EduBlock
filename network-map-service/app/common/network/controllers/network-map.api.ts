@@ -3,6 +3,8 @@ import {NetworkMapService, NetworkMapServiceToken} from "../../services/network-
 import {BasicApi} from "../basic.api";
 import express from "express";
 import {NewNetworkMemberDto} from "../../dto/network/new-network-member.dto";
+import {NetworkMemberDto} from "../../dto/network/network-member.dto";
+import asyncHandler from 'express-async-handler';
 
 export const NetworkMapApiToken = new Token<NetworkMapApi>('network.api.network-map');
 
@@ -21,30 +23,32 @@ export class NetworkMapApi implements BasicApi {
 
     private registerRoutes() {
         this.router.get('/network/healthcheck',
-            (_, res) => res.send(''));
+            asyncHandler(async (_, res) => res.send('')));
         this.router.get('/network/members',
-            (req, res) => this.getAllNetworkMembers(req, res));
+            asyncHandler(async (req, res) => this.getAllNetworkMembers(req, res)));
         this.router.get('/network/members/:publicKey',
-            (req, res) => this.getNetworkMember(req, res));
+            asyncHandler(async (req, res) => this.getNetworkMember(req, res)));
         this.router.post('/network/members',
-            (req, res) => this.addNetworkMember(req, res));
+            asyncHandler(async (req, res) => this.addNetworkMember(req, res)));
     }
 
 
     private async getAllNetworkMembers(_, res) {
-        res.send('Not Implemented');
+        const response: NetworkMemberDto[] = await this.networkMapService.getAllNetworkMembers();
+        res.json(response);
     }
 
     private async getNetworkMember(req, res) {
-        const publicKey = req.params.publicKey;
-        res.send('Not Implemented ' + publicKey);
+        const publicKey: string = req.params.publicKey;
+        const response: NetworkMemberDto = await this.networkMapService.findNetworkMember(publicKey);
+        res.json(response);
 
     }
 
     private async addNetworkMember(req, res) {
         const member = new NewNetworkMemberDto();
         Object.assign(member, req.body);
-        const response = await this.networkMapService.addNetworkMember(member);
+        const response: NetworkMemberDto = await this.networkMapService.addNetworkMember(member);
         res.json(response);
     }
 }

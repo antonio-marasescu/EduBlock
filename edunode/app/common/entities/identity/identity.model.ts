@@ -9,5 +9,6 @@ export class IdentityModel {
     publicKey: string;
 
     @Column()
-    legalName: string;
+    legalIdentity: string;
 }
+

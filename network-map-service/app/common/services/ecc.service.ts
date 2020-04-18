@@ -1,8 +1,8 @@
 import ecc from 'eosjs-ecc'
 import {Service, Token} from "typedi";
-import {PersonalIdentity} from "../../entities/identity/personal-identity.entity";
+import {PersonalIdentity} from "../entities/identity/personal-identity.entity";
 
-export const EccServiceToken = new Token<EccService>('common.ecc');
+export const EccServiceToken = new Token<EccService>('services.ecc');
 
 @Service(EccServiceToken)
 export class EccService {

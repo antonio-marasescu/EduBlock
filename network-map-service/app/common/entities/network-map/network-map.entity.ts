@@ -12,7 +12,7 @@ export class NetworkMapEntity {
     @Column()
     version?: number;
 
-    @Column()
+    @Column({unique: true})
     publicKey: string;
 
     @Column()
@@ -25,7 +25,7 @@ export class NetworkMapEntity {
     port: number;
 
     @Column()
-    joinedDate: Date;
+    joinedDate: string;
 
     @Column({nullable: true})
     promoterSignature?: string;
