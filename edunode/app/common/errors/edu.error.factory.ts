@@ -1,26 +1,32 @@
 import {ValidationError} from "class-validator/validation/ValidationError";
 import {EduError} from "./edu.error";
-import {NmsError} from "../../../../network-map-service/app/common/errors/nms.error";
 
-export function createInvalidSignatureError(target: any): NmsError {
+export function createInvalidSignatureError(target: any): EduError {
     const error = new ValidationError();
     error.target = target;
     error.constraints = {signatureValidation: 'Signature validity check failed'};
-    return new NmsError(400, [error]);
+    return new EduError(400, [error]);
 }
 
 export function createValidationError(validationErrors: ValidationError[]): EduError {
     return new EduError(400, validationErrors);
 }
 
-export function createObjectNotFoundError(target: any) {
+export function createInvalidRequestParamsError(target: any): EduError {
+    const error = new ValidationError();
+    error.target = target;
+    error.constraints = {signatureValidation: 'The request had invalid parameters'};
+    return new EduError(400, [error]);
+}
+
+export function createObjectNotFoundError(target: any): EduError {
     const error = new ValidationError();
     error.target = target;
     error.constraints = {notFound: 'Object was not found!'};
     return new EduError(404, [error]);
 }
 
-export function createObjectCouldNotBeSavedError(target: any, reason?: string) {
+export function createObjectCouldNotBeSavedError(target: any, reason?: string): EduError {
     const error = new ValidationError();
     error.target = target;
     error.constraints = {notFound: 'The object could not be created!'};

@@ -33,12 +33,7 @@ export class NmsCommonIdentityDto {
     @IsNotEmpty()
     joinedDate: Date;
 
-    @IsString()
-    @IsNotEmpty()
     promoterSignature: string;
-
-    @IsString()
-    @IsNotEmpty()
     promoterPublicKey: string;
 
     @IsString()

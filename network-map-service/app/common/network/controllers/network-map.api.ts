@@ -5,6 +5,7 @@ import express from "express";
 import {NewNetworkMemberDto} from "../../dto/network/new-network-member.dto";
 import {NetworkMemberDto} from "../../dto/network/network-member.dto";
 import asyncHandler from 'express-async-handler';
+import {createInvalidRequestParamsError} from "../../errors/nms.error.factory";
 
 export const NetworkMapApiToken = new Token<NetworkMapApi>('network.api.network-map');
 
@@ -40,6 +41,9 @@ export class NetworkMapApi implements BasicApi {
 
     private async getNetworkMember(req, res) {
         const publicKey: string = req.params.publicKey;
+        if (!publicKey) {
+            throw createInvalidRequestParamsError('publicKey');
+        }
         const response: NetworkMemberDto = await this.networkMapService.findNetworkMember(publicKey);
         res.json(response);
 

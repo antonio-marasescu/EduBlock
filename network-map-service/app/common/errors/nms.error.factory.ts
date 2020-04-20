@@ -8,6 +8,13 @@ export function createInvalidSignatureError(target: any): NmsError {
     return new NmsError(400, [error]);
 }
 
+export function createInvalidRequestParamsError(target: any): NmsError {
+    const error = new ValidationError();
+    error.target = target;
+    error.constraints = {signatureValidation: 'The request had invalid parameters'};
+    return new NmsError(400, [error]);
+}
+
 export function createValidationError(validationErrors: ValidationError[]): NmsError {
     return new NmsError(400, validationErrors);
 }

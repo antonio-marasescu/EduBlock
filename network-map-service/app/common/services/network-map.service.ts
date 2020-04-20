@@ -32,8 +32,9 @@ export class NetworkMapService {
     }
 
     public async getAllNetworkMembers(): Promise<NetworkMemberDto[]> {
-        this.logger.logInfo(this, "Initializing get all network members...");
+        this.logger.logInfo(this, "Initializing get all network members flow...");
         const entities = await this.networkMapRepository.getAllNetworkMembers();
+        this.logger.logInfo(this, "Get all network members flow has ended...");
         return entities.map(e => NetworkMapEntityMapper.toDto(e))
     }
 
@@ -41,10 +42,11 @@ export class NetworkMapService {
         this.logger.logInfo(this, "Initializing find network member...");
         const entity = await this.networkMapRepository.findNetworkMember(publicKey);
         if (!entity) {
-            const error = createObjectNotFoundError(publicKey)
+            const error = createObjectNotFoundError(publicKey);
             this.logger.logError(this, JSON.stringify(error));
             throw error;
         }
+        this.logger.logInfo(this, "Find network member flow has ended...");
         return NetworkMapEntityMapper.toDto(entity);
     }
 
