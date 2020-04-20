@@ -8,6 +8,7 @@ import {IdentityServiceToken} from "../common/services/identity.service";
 import {NmsErrorHandler} from "../common/errors/nms.error.handler";
 import {SeederHandler} from "./seed/seeder.handler";
 import {NetworkMapServiceToken} from "../common/services/network-map.service";
+import {AuthMiddlewareToken} from "../common/network/auth/auth.middleware";
 
 export const NmsNodeToken = new Token<NmsNode>('NmsNode');
 
@@ -38,8 +39,11 @@ export class NmsNode {
     }
 
     private async applyMiddleware(): Promise<void> {
+        const authMiddleware = Container.get(AuthMiddlewareToken);
+
         this.app.use(bodyParser.json());
         this.app.use(bodyParser.urlencoded({extended: false}));
+        this.app.use("/", (req, res, next) => authMiddleware.validate(req, res, next));
         API_REGISTER_TOKENS.forEach(token => this.app.use(Container.get(token).getRouter()));
         this.app.use((error, _, res, __) => NmsErrorHandler.handleError(error, res))
     }

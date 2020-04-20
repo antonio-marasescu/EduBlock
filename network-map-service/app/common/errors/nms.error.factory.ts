@@ -1,6 +1,13 @@
 import {ValidationError} from "class-validator/validation/ValidationError";
 import {NmsError} from "./nms.error";
 
+export function createInvalidCredentialsError(target: any): NmsError {
+    const error = new ValidationError();
+    error.target = target;
+    error.constraints = {signatureValidation: 'The request had insufficient or invalid credentials'};
+    return new NmsError(401, [error]);
+}
+
 export function createInvalidSignatureError(target: any): NmsError {
     const error = new ValidationError();
     error.target = target;

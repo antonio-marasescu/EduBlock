@@ -9,12 +9,17 @@ export class NetworkMapRepository extends Repository<NetworkMapEntity> implement
         return await this.save(entity);
     }
 
-    findNetworkMember(publicKey: string): Promise<NetworkMapEntity> {
+    public async findNetworkMember(publicKey: string): Promise<NetworkMapEntity> {
         return this.findOneOrFail({publicKey});
     }
 
-    getAllNetworkMembers(): Promise<NetworkMapEntity[]> {
+    public async getAllNetworkMembers(): Promise<NetworkMapEntity[]> {
         return this.find({});
+    }
+
+    public async networkMemberExists(publicKey: string): Promise<boolean> {
+        const member = this.findOne({publicKey: publicKey});
+        return !!member;
     }
 
 }

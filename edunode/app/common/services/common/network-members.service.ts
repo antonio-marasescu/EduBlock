@@ -52,7 +52,8 @@ export class NetworkMembersService {
     public async learnSingleMember(publicKey: string): Promise<EduCommonIdentityDto> {
         this.logger.logInfo(this, "Initializing Learn Single Member Flow");
         this.logger.logInfo(this, "Sending get member request....");
-        const response: AxiosResponse = await this.nmsAxiosInstance.get('network/members/' + publicKey);
+        const personalIdentity = await this.identityService.getPersonalIdentity();
+        const response: AxiosResponse = await this.nmsAxiosInstance.get('network/members/' + publicKey, {headers: {'public-key': personalIdentity}});
         this.logger.logInfo(this, "Get member request response was received!");
 
         await this.validateAxiosResponse(response);
@@ -67,7 +68,8 @@ export class NetworkMembersService {
     public async learnMembers() {
         this.logger.logInfo(this, "Initializing learn members flow");
         this.logger.logInfo(this, "Sending get members request....");
-        const response: AxiosResponse = await this.nmsAxiosInstance.get('network/members');
+        const personalIdentity = await this.identityService.getPersonalIdentity();
+        const response: AxiosResponse = await this.nmsAxiosInstance.get('network/members', {headers: {'public-key': personalIdentity}});
         this.logger.logInfo(this, "Get members request response was received!");
 
         await this.validateAxiosResponse(response);
@@ -97,7 +99,8 @@ export class NetworkMembersService {
         nmsDto.proof = {publicKey: publicKey, signature: signature};
 
         this.logger.logInfo(this, "Sending add member request....");
-        const response: AxiosResponse = await this.nmsAxiosInstance.post('network/members', nmsDto);
+        const personalIdentity = await this.identityService.getPersonalIdentity();
+        const response: AxiosResponse = await this.nmsAxiosInstance.post('network/members', nmsDto, {headers: {'public-key': personalIdentity}});
         this.logger.logInfo(this, "Add member request response was received!");
 
         await this.validateAxiosResponse(response);
