@@ -5,9 +5,10 @@ export class IdentityModel {
     @PrimaryGeneratedColumn()
     id?: number;
 
-    @Column()
+    @Column({unique: true})
     publicKey: string;
 
     @Column()
-    legalName: string;
+    legalIdentity: string;
 }
+

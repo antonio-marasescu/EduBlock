@@ -12,8 +12,4 @@ export class PersonalIdentityRepository extends Repository<PersonalIdentity> imp
             return null;
         return personalIdentities[0];
     }
-
-    async savePersonalIdentity(identity: PersonalIdentity): Promise<PersonalIdentity> {
-        return await this.save(identity);
-    }
 }

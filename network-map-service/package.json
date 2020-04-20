@@ -1,0 +1,36 @@
+{
+  "name": "doorman",
+  "version": "0.0.1",
+  "description": "The EduBlock Network Map Service",
+  "main": "app/server/edu.node.ts",
+  "scripts": {
+    "tsc": "tsc",
+    "dev": "ts-node-dev --respawn --transpileOnly ./app/app.ts",
+    "prod": "tsc && node ./build/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/body-parser": "^1.19.0",
+    "class-validator": "^0.11.1",
+    "eosjs-ecc": "^4.0.7",
+    "express": "^4.17.1",
+    "express-async-handler": "^1.1.4",
+    "pg": "^8.0.0",
+    "reflect-metadata": "^0.1.13",
+    "sha256": "latest",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "typedi": "^0.8.0",
+    "typeorm": "latest",
+    "typescript": "^3.7.5",
+    "uuid": "latest",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.2",
+    "@types/node": "^13.7.4",
+    "gulp": "^4.0.2",
+    "tslint": "^6.0.0"
+  }
+}

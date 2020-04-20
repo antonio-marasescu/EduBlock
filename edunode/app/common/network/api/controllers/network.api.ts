@@ -2,7 +2,10 @@ import express from "express";
 import {BasicApi} from "../basic.api";
 import {Inject, Service, Token} from "typedi";
 import {NetworkMembersService, NetworkMembersServiceToken} from "../../../services/common/network-members.service";
-import {IdentityService, IdentityServiceToken} from "../../../services/common/identity.service";
+import {IdentityService, IdentityServiceToken} from "../../../services/security/identity.service";
+import {EduNewNetworkMemberDto} from "../../../dto/network/edu-new-network-member.dto";
+import asyncHandler from 'express-async-handler';
+import {createInvalidRequestParamsError} from "../../../errors/edu.error.factory";
 
 export const NetworkApiToken = new Token<NetworkApi>('network.api.network');
 
@@ -24,39 +27,45 @@ export class NetworkApi implements BasicApi {
 
     private registerRoutes() {
         this.router.get('/network/identity/me',
-            (req, res) => this.handleGetPersonalIdentity(req, res));
+            asyncHandler(async (req, res) => this.handleGetPersonalIdentity(req, res)));
         this.router.get('/network/members',
-            (req, res) => this.handleGetNetworkMembers(req, res));
-        this.router.get('/network/members/well-known',
-            (req, res) => this.handleGetWellKnownNetworkMembers(req, res));
-        this.router.get('/network/members/learn',
-            (req, res) => this.handleLearnNetworkMembers(req, res));
+            asyncHandler(async (req, res) => this.handleGetNetworkMembers(req, res)));
+        this.router.get('/network/members/:publicKey',
+            asyncHandler(async (req, res) => this.handleGetNetworkMember(req, res)));
         this.router.post('/network/members',
-            (req, res) => this.handleAddNetworkMember(req, res));
+            asyncHandler(async (req, res) => this.handleAddNetworkMember(req, res)));
+        this.router.get('/network/learn',
+            asyncHandler(async (req, res) => this.handleLearnNetworkMembers(req, res)));
     }
 
     private async handleGetPersonalIdentity(_, res) {
         const identity = await this.identityService.getPersonalIdentity();
-        res.send({identity});
+        res.json({identity});
     }
 
     private async handleGetNetworkMembers(_, res) {
         const members = await this.networkMembersService.getNetworkMembers();
-        res.send(members);
+        res.json(members);
     }
 
-    private async handleGetWellKnownNetworkMembers(_, response) {
-        const members = await this.networkMembersService.getWellKnownNetworkMembers();
-        response.send(members);
+    private async handleGetNetworkMember(req, response) {
+        const publicKey: string = req.params.publicKey;
+        if (!publicKey) {
+            throw createInvalidRequestParamsError('publicKey');
+        }
+        const members = await this.networkMembersService.getSingleNetworkMember(publicKey);
+        response.json(members);
     }
 
     private async handleLearnNetworkMembers(_, res) {
         const data = await this.networkMembersService.learnMembers();
-        res.send(data);
+        res.json(data);
     }
 
-    private async handleAddNetworkMember(_, res) {
-        const member = await this.networkMembersService.addMember();
-        res.send(member);
+    private async handleAddNetworkMember(req, res) {
+        const member = new EduNewNetworkMemberDto();
+        Object.assign(member, req.body);
+        const response = await this.networkMembersService.addMember(member);
+        res.json(response);
     }
 }

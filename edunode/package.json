@@ -7,18 +7,19 @@
     "tsc": "tsc",
     "dev": "ts-node-dev --respawn --transpileOnly app/app.ts",
     "prod": "tsc && node ./build/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "generate-dependency": "dependency-cruise -x \\\"node_modules\\\" -T dot app/app.ts | dot -T svg > docs/images/dependency-graph/clustered_complete.svg"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@types/body-parser": "^1.19.0",
     "amqp-ts": "^1.8.0",
+    "axios": "^0.19.2",
+    "class-validator": "^0.11.1",
     "crypto-js": "^4.0.0",
-    "dependency-cruiser": "^8.2.0",
     "eosjs-ecc": "^4.0.7",
     "express": "^4.17.1",
+    "express-async-handler": "^1.1.4",
     "gulp-stylus": "^2.7.0",
     "madge": "^3.8.0",
     "merkletreejs": "^0.1.11",
