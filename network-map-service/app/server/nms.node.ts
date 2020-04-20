@@ -8,7 +8,7 @@ import {IdentityServiceToken} from "../common/services/identity.service";
 import {NmsErrorHandler} from "../common/errors/nms.error.handler";
 import {SeederHandler} from "./seed/seeder.handler";
 import {NetworkMapServiceToken} from "../common/services/network-map.service";
-import {AuthMiddlewareToken} from "../common/network/auth/auth.middleware";
+import {AuthMiddlewareToken} from "./auth/auth.middleware";
 
 export const NmsNodeToken = new Token<NmsNode>('NmsNode');
 
