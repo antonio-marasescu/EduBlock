@@ -1,0 +1,8 @@
+{
+  "nms": {
+    "legalName": "Network Map Service Europe",
+    "alias": "NMS EU",
+    "port": 3005,
+    "host": "localhost"
+  }
+}
