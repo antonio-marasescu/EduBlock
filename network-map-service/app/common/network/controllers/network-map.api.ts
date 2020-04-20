@@ -6,6 +6,7 @@ import {NewNetworkMemberDto} from "../../dto/network/new-network-member.dto";
 import {NetworkMemberDto} from "../../dto/network/network-member.dto";
 import asyncHandler from 'express-async-handler';
 import {createInvalidRequestParamsError} from "../../errors/nms.error.factory";
+import {IdentityService, IdentityServiceToken} from "../../services/identity.service";
 
 export const NetworkMapApiToken = new Token<NetworkMapApi>('network.api.network-map');
 
@@ -13,7 +14,10 @@ export const NetworkMapApiToken = new Token<NetworkMapApi>('network.api.network-
 export class NetworkMapApi implements BasicApi {
     private readonly router: express.Router;
 
-    constructor(@Inject(NetworkMapServiceToken) private networkMapService: NetworkMapService) {
+    constructor(
+        @Inject(NetworkMapServiceToken) private networkMapService: NetworkMapService,
+        @Inject(IdentityServiceToken) private identityService: IdentityService,
+    ) {
         this.router = express.Router();
         this.registerRoutes();
     }
@@ -24,7 +28,7 @@ export class NetworkMapApi implements BasicApi {
 
     private registerRoutes() {
         this.router.get('/network/healthcheck',
-            asyncHandler(async (_, res) => res.send('')));
+            asyncHandler(async (_, res) => res.json(await this.identityService.getPersonalInformation())));
         this.router.get('/network/members',
             asyncHandler(async (req, res) => this.getAllNetworkMembers(req, res)));
         this.router.get('/network/members/:publicKey',

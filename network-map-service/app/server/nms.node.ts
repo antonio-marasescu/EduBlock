@@ -6,6 +6,8 @@ import {NmsLogger, NmsLoggerToken} from "../common/logger/nms-logger.interface";
 import {API_REGISTER_TOKENS} from "../common/network/basic.api.register";
 import {IdentityServiceToken} from "../common/services/identity.service";
 import {NmsErrorHandler} from "../common/errors/nms.error.handler";
+import {SeederHandler} from "./seed/seeder.handler";
+import {NetworkMapServiceToken} from "../common/services/network-map.service";
 
 export const NmsNodeToken = new Token<NmsNode>('NmsNode');
 
@@ -29,6 +31,9 @@ export class NmsNode {
             const identity = await Container.get(IdentityServiceToken).checkOrGeneratePersonalIdentity();
             that.logger.logInfo(that, "Identity (Public Key): " + identity);
             that.logger.logSuccess(that, 'Node ' + that.nodeConfiguration.identity.alias + ' is listening....');
+            const seeder = new SeederHandler();
+            const networkMapService = Container.get(NetworkMapServiceToken);
+            await seeder.seed(networkMapService);
         });
     }
 

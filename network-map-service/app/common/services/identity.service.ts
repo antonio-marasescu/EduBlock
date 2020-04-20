@@ -5,6 +5,7 @@ import {NmsLogger, NmsLoggerToken} from "../logger/nms-logger.interface";
 import IPersonalIdentityRepository, {IPersonalIdentityRepositoryToken} from "../repositories/identity/personal-identity.interface.repository";
 import {PersonalIdentity} from "../entities/identity/personal-identity.entity";
 import {createIdentityNotFound} from "../errors/nms.error.factory";
+import {objectWithoutKeys} from "../utils/dictionary.utils";
 
 export const IdentityServiceToken = new Token<IdentityService>('common.identity');
 
@@ -35,30 +36,19 @@ export class IdentityService {
         return identity.publicKey;
     }
 
+    public async getPersonalInformation(): Promise<Partial<PersonalIdentity>> {
+        const identity = await this.getPersonalData();
+        return objectWithoutKeys(identity, ['id', 'privateKey']);
+    }
 
     public async getPersonalIdentity(): Promise<string> {
-        this.logger.logInfo(this, "Getting personal identity.......");
-        const identity = await this.personalIdentityRepository.findPersonalIdentity();
-        if (!identity) {
-            const error = createIdentityNotFound(this.nodeConfiguration.identity.legalName);
-            this.logger.logError(this, JSON.stringify(error));
-            throw error;
-        }
-        this.logger.logInfo(this, "Identity found: " + identity.publicKey);
+        const identity = await this.getPersonalData();
         return identity.publicKey;
     }
 
     public async signData(data: any): Promise<string> {
         this.logger.logInfo(this, "Signing of data initialized....");
-
-        this.logger.logInfo(this, "Getting personal identity.......");
-        const identity = await this.personalIdentityRepository.findPersonalIdentity();
-        if (!identity) {
-            const error = createIdentityNotFound(this.nodeConfiguration.identity.legalName);
-            this.logger.logError(this, JSON.stringify(error));
-            throw error;
-        }
-        this.logger.logInfo(this, "Identity found: " + identity.publicKey);
+        const identity = await this.getPersonalData();
 
         const stringData: string = JSON.stringify(data);
         const signature: string = await this.eccService.signData(stringData, identity.privateKey);
@@ -72,5 +62,17 @@ export class IdentityService {
         const result = await this.eccService.verifyData(JSON.stringify(data), signature, signerPublicKey);
         this.logger.logInfo(this, "Verifying of data concluded!");
         return result;
+    }
+
+    private async getPersonalData(): Promise<PersonalIdentity> {
+        this.logger.logInfo(this, "Getting personal identity.......");
+        const identity = await this.personalIdentityRepository.findPersonalIdentity();
+        if (!identity) {
+            const error = createIdentityNotFound(this.nodeConfiguration.identity.legalName);
+            this.logger.logError(this, JSON.stringify(error));
+            throw error;
+        }
+        this.logger.logInfo(this, "Identity found: " + identity.publicKey);
+        return identity;
     }
 }
