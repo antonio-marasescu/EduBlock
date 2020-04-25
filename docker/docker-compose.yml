@@ -51,6 +51,16 @@ services:
       - 5438:5432
     volumes:
       - nms-database-data-volume:/var/lib/postgresql/data
+  ca-db:
+    image: "postgres"
+    environment:
+      - POSTGRES_USER=causer1
+      - POSTGRES_PASSWORD=capass1
+      - POSTGRES_DB=ca
+    ports:
+      - 5439:5432
+    volumes:
+      - ca-database-data-volume:/var/lib/postgresql/data
 
 volumes:
   node-1-database-data-volume:
@@ -58,3 +68,4 @@ volumes:
   node-3-database-data-volume:
   node-4-database-data-volume:
   nms-database-data-volume:
+  ca-database-data-volume:
