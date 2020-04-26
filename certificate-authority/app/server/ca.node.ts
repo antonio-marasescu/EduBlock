@@ -5,6 +5,7 @@ import {CaConfigurationModel, CaConfigurationModelToken} from "../common/entitie
 import {CaLogger, CaLoggerToken} from "../common/logger/ca-logger.interface";
 import {IdentityServiceToken} from "../common/services/identity.service";
 import {CaErrorHandler} from "../common/errors/ca.error.handler";
+import {API_REGISTER_TOKENS} from "../common/network/basic.api.register";
 
 export const CaNodeToken = new Token<CaNode>('CaNode');
 
@@ -34,7 +35,7 @@ export class CaNode {
     private async applyMiddleware(): Promise<void> {
         this.app.use(bodyParser.json());
         this.app.use(bodyParser.urlencoded({extended: false}));
-        // API_REGISTER_TOKENS.forEach(token => this.app.use(Container.get(token).getRouter()));
+        API_REGISTER_TOKENS.forEach(token => this.app.use(Container.get(token).getRouter()));
         this.app.use((error, _, res, __) => CaErrorHandler.handleError(error, res))
     }
 }
