@@ -1,7 +1,7 @@
 {
-  "name": "network-map-service",
+  "name": "certificate-authority",
   "version": "0.0.1",
-  "description": "The EduBlock Network Map Service",
+  "description": "The EduBlock Certificate Authority",
   "main": "app/server/edu.node.ts",
   "scripts": {
     "tsc": "tsc",

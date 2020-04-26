@@ -1,7 +1,7 @@
 import {Inject, Service, Token} from "typedi";
-import {AuthService, AuthServiceToken} from "../../services/auth.service";
-import {createInvalidCredentialsError} from "../../errors/nms.error.factory";
-import {NmsErrorHandler} from "../../errors/nms.error.handler";
+import {AuthService, AuthServiceToken} from "../../common/services/auth.service";
+import {createInvalidCredentialsError} from "../../common/errors/nms.error.factory";
+import {NmsErrorHandler} from "../../common/errors/nms.error.handler";
 
 export const AuthMiddlewareToken = new Token<AuthMiddleware>('network.auth-middleware');
 

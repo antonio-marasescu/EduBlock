@@ -1,0 +1,22 @@
+{
+  "nms": {
+    "identity": {
+      "legalName": "Certificate Authority Romania",
+      "alias": "CA RO",
+      "port": 3006,
+      "host": "localhost"
+    },
+    "databaseConfiguration": {
+      "username": "causer1",
+      "password": "capass1",
+      "databaseName": "ca",
+      "host": "localhost",
+      "port": 5439,
+      "logging": [
+        "error"
+      ],
+      "logger": "advanced-console"
+    },
+    "useFileLogging": false
+  }
+}
