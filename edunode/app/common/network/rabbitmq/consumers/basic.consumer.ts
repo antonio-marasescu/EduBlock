@@ -1,5 +1,9 @@
 import {Message} from "amqp-ts";
 
-export interface BasicConsumer<T> {
-    consume(msg: Message): Promise<T>;
+export interface BasicConsumer {
+    getConsumerName(): Promise<string>;
+
+    getConsumerExtension(): string;
+
+    consume(message: Message): Promise<void>;
 }

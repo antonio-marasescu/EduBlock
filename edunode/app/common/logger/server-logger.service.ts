@@ -3,13 +3,13 @@ import {ServerLogger, ServerLoggerToken} from "./server-logger.interface";
 import * as winston from 'winston';
 import {format, Logger as WinstonLogger} from 'winston';
 import {SERVER_LOGGER_LEVELS, SERVER_LOGGER_OPTIONS} from "./server-logger.config";
-import {NodeConfigurationModel, NodeIdentityModelToken} from "../entities/config/node-configuration.model";
+import {NodeConfigurationModel, NodeConfigurationModelToken} from "../entities/config/node-configuration.model";
 
 @Service(ServerLoggerToken)
 export class ServerLoggerService implements ServerLogger {
     private readonly logger: WinstonLogger;
 
-    constructor(@Inject(NodeIdentityModelToken) private nodeConfiguration: NodeConfigurationModel) {
+    constructor(@Inject(NodeConfigurationModelToken) private nodeConfiguration: NodeConfigurationModel) {
         this.logger = winston.createLogger(SERVER_LOGGER_OPTIONS);
         this.logger.add(
             new winston.transports.Console(

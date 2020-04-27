@@ -1,6 +1,9 @@
 import {createConnection} from "typeorm";
 import {Inject, Service, Token} from "typedi";
-import {NodeConfigurationModel, NodeIdentityModelToken} from "../../common/entities/config/node-configuration.model";
+import {
+    NodeConfigurationModel,
+    NodeConfigurationModelToken
+} from "../../common/entities/config/node-configuration.model";
 import {Connection} from "typeorm/connection/Connection";
 import {VAULT_SCHEMA} from "./vault.schema";
 import {ServerLogger, ServerLoggerToken} from "../../common/logger/server-logger.interface";
@@ -12,7 +15,7 @@ export class VaultConnection {
 
     public connection: Connection | undefined;
 
-    constructor(@Inject(NodeIdentityModelToken) private nodeConfiguration: NodeConfigurationModel,
+    constructor(@Inject(NodeConfigurationModelToken) private nodeConfiguration: NodeConfigurationModel,
                 @Inject(ServerLoggerToken) private logger: ServerLogger) {
     }
 
