@@ -1,11 +1,12 @@
 import express, {Express} from "express";
 import bodyParser from 'body-parser'
 import {Container, Inject, Service, Token} from "typedi";
-import {NodeConfigurationModel, NodeIdentityModelToken} from "../common/entities/config/node-configuration.model";
+import {NodeConfigurationModel, NodeConfigurationModelToken} from "../common/entities/config/node-configuration.model";
 import {ServerLogger, ServerLoggerToken} from "../common/logger/server-logger.interface";
 import {IdentityServiceToken} from "../common/services/security/identity.service";
 import {API_REGISTER_TOKENS} from "../common/network/api/basic.api.register";
 import {EduErrorHandler} from "../common/errors/edu.error.handler";
+import {RabbitMqServiceToken} from "../common/network/rabbitmq/rabbit-mq.service";
 
 export const EduNodeToken = new Token<EduNode>('EduNode');
 
@@ -13,7 +14,7 @@ export const EduNodeToken = new Token<EduNode>('EduNode');
 export class EduNode {
     private app: Express;
 
-    constructor(@Inject(NodeIdentityModelToken) private nodeConfiguration: NodeConfigurationModel,
+    constructor(@Inject(NodeConfigurationModelToken) private nodeConfiguration: NodeConfigurationModel,
                 @Inject(ServerLoggerToken) private logger: ServerLogger) {
         this.app = express();
     }
@@ -21,7 +22,6 @@ export class EduNode {
     public async start(): Promise<void> {
 
         this.logger.logInfo(this, 'Node ' + this.nodeConfiguration.identity.alias + ' is starting...');
-        this.logger.logInfo(this, 'Type: ' + this.nodeConfiguration.nodeType);
         this.logger.logInfo(this, 'Port: ' + this.nodeConfiguration.identity.port);
         this.logger.logInfo(this, 'Database Port: ' + this.nodeConfiguration.databaseConfiguration.port);
         await this.applyMiddleware();
@@ -29,6 +29,7 @@ export class EduNode {
         this.app.listen(this.nodeConfiguration.identity.port, async function () {
             const identity = await Container.get(IdentityServiceToken).checkOrGeneratePersonalIdentity();
             that.logger.logInfo(that, "Identity (Public Key): " + identity);
+            await Container.get(RabbitMqServiceToken).initializeService();
             that.logger.logSuccess(that, 'Node ' + that.nodeConfiguration.identity.alias + ' is listening....');
         });
     }

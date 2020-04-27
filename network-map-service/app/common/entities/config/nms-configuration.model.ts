@@ -8,4 +8,4 @@ export interface NmsConfigurationModel {
     useFileLogging: boolean;
 }
 
-export const NmsConfigurationModelToken = new Token<NmsConfigurationModel>('node.identity');
+export const NmsConfigurationModelToken = new Token<NmsConfigurationModel>('node.configuration');

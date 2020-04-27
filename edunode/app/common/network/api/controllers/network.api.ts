@@ -32,6 +32,8 @@ export class NetworkApi implements BasicApi {
             asyncHandler(async (req, res) => this.handleGetNetworkMembers(req, res)));
         this.router.get('/network/members/:publicKey',
             asyncHandler(async (req, res) => this.handleGetNetworkMember(req, res)));
+        this.router.get('/network/members/:publicKey/ping',
+            asyncHandler(async (req, res) => this.handlePingMember(req, res)));
         this.router.post('/network/members',
             asyncHandler(async (req, res) => this.handleAddNetworkMember(req, res)));
         this.router.get('/network/learn',
@@ -48,13 +50,13 @@ export class NetworkApi implements BasicApi {
         res.json(members);
     }
 
-    private async handleGetNetworkMember(req, response) {
+    private async handleGetNetworkMember(req, res) {
         const publicKey: string = req.params.publicKey;
         if (!publicKey) {
             throw createInvalidRequestParamsError('publicKey');
         }
         const members = await this.networkMembersService.getSingleNetworkMember(publicKey);
-        response.json(members);
+        res.json(members);
     }
 
     private async handleLearnNetworkMembers(_, res) {
@@ -67,5 +69,12 @@ export class NetworkApi implements BasicApi {
         Object.assign(member, req.body);
         const response = await this.networkMembersService.addMember(member);
         res.json(response);
+    }
+
+    private async handlePingMember(req, _) {
+        const publicKey: string = req.params.publicKey;
+        if (!publicKey) {
+            throw createInvalidRequestParamsError('publicKey');
+        }
     }
 }

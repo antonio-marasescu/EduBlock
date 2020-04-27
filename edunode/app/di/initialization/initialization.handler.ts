@@ -1,5 +1,8 @@
 import * as fs from 'fs';
-import {NodeConfigurationModel, NodeIdentityModelToken} from "../../common/entities/config/node-configuration.model";
+import {
+    NodeConfigurationModel,
+    NodeConfigurationModelToken
+} from "../../common/entities/config/node-configuration.model";
 import {Container} from "typedi";
 import {CommonIdentity} from "../../common/entities/identity/common-identity.entity";
 import {AxiosTokenNMS} from "../../common/services/axios/axios.config";
@@ -25,7 +28,7 @@ export class InitializationHandler {
         if (!ownIdentity) {
             throw new Error("Invalid identity parameter!");
         }
-        Container.set(NodeIdentityModelToken, ownIdentity);
+        Container.set(NodeConfigurationModelToken, ownIdentity);
     }
 
     private handleNetwork() {

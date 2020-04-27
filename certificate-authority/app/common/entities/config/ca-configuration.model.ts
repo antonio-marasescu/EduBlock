@@ -8,4 +8,4 @@ export interface CaConfigurationModel {
     useFileLogging: boolean;
 }
 
-export const CaConfigurationModelToken = new Token<CaConfigurationModel>('node.identity');
+export const CaConfigurationModelToken = new Token<CaConfigurationModel>('node.configuration');
