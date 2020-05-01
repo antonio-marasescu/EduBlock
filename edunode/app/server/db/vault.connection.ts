@@ -41,6 +41,6 @@ export class VaultConnection {
             .catch(error => {
                 that.logger.logError(that, error)
             });
-        await this.connection?.synchronize();
+        await this.connection?.synchronize().catch(error => this.logger.logError(this, JSON.stringify(error)));
     }
 }

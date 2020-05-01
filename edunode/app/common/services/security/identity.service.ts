@@ -6,7 +6,7 @@ import {NodeConfigurationModel, NodeConfigurationModelToken} from "../../entitie
 import {ServerLogger, ServerLoggerToken} from "../../logger/server-logger.interface";
 import {createIdentityNotFound} from "../../errors/edu.error.factory";
 
-export const IdentityServiceToken = new Token<IdentityService>('common.identity');
+export const IdentityServiceToken = new Token<IdentityService>('services.security.identity');
 
 @Service(IdentityServiceToken)
 export class IdentityService {

@@ -8,8 +8,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/multer": "^1.4.3",
     "gulp-stylus": "^2.7.0",
     "madge": "^3.8.0",
+    "multer": "^1.4.2",
     "sha256": "latest",
     "ts-node-dev": "^1.0.0-pre.44",
     "typescript": "^3.7.5",
