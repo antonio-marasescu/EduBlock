@@ -2,17 +2,17 @@ import {Inject, Service, Token} from "typedi";
 import IPersonalIdentityRepository, {IPersonalIdentityRepositoryToken} from "../../repositories/identity/personal-identity.interface.repository";
 import {PersonalIdentity} from "../../entities/identity/personal-identity.entity";
 import {EccService, EccServiceToken} from "./ecc.service";
-import {NodeConfigurationModel, NodeIdentityModelToken} from "../../entities/config/node-configuration.model";
+import {NodeConfigurationModel, NodeConfigurationModelToken} from "../../entities/config/node-configuration.model";
 import {ServerLogger, ServerLoggerToken} from "../../logger/server-logger.interface";
 import {createIdentityNotFound} from "../../errors/edu.error.factory";
 
-export const IdentityServiceToken = new Token<IdentityService>('common.identity');
+export const IdentityServiceToken = new Token<IdentityService>('services.security.identity');
 
 @Service(IdentityServiceToken)
 export class IdentityService {
     constructor(
         @Inject(EccServiceToken) private eccService: EccService,
-        @Inject(NodeIdentityModelToken) private nodeConfiguration: NodeConfigurationModel,
+        @Inject(NodeConfigurationModelToken) private nodeConfiguration: NodeConfigurationModel,
         @Inject(IPersonalIdentityRepositoryToken) private  personalIdentityRepository: IPersonalIdentityRepository,
         @Inject(ServerLoggerToken) private logger: ServerLogger
     ) {

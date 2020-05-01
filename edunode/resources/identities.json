@@ -17,7 +17,11 @@
       ],
       "logger": "advanced-console"
     },
-    "nodeType": "University",
+    "rabbitmqConfiguration": {
+      "url": "amqp://localhost",
+      "exchangeName": "edu-node-common-exchange",
+      "exchangeType": "fanout"
+    },
     "useFileLogging": false
   },
   "node-uni-2": {
@@ -38,7 +42,11 @@
       ],
       "logger": "advanced-console"
     },
-    "nodeType": "University",
+    "rabbitmqConfiguration": {
+      "url": "amqp://localhost",
+      "exchangeName": "edu-node-common-exchange",
+      "exchangeType": "fanout"
+    },
     "useFileLogging": false
   },
   "node-uni-3": {
@@ -59,7 +67,11 @@
       ],
       "logger": "advanced-console"
     },
-    "nodeType": "University",
+    "rabbitmqConfiguration": {
+      "url": "amqp://localhost",
+      "exchangeName": "edu-node-common-exchange",
+      "exchangeType": "fanout"
+    },
     "useFileLogging": false
   },
   "node-uni-4": {
@@ -80,7 +92,11 @@
       ],
       "logger": "advanced-console"
     },
-    "nodeType": "University",
+    "rabbitmqConfiguration": {
+      "url": "amqp://localhost",
+      "exchangeName": "edu-node-common-exchange",
+      "exchangeType": "fanout"
+    },
     "useFileLogging": false
   }
 }

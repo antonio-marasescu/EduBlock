@@ -48,13 +48,13 @@ export class NetworkApi implements BasicApi {
         res.json(members);
     }
 
-    private async handleGetNetworkMember(req, response) {
+    private async handleGetNetworkMember(req, res) {
         const publicKey: string = req.params.publicKey;
         if (!publicKey) {
             throw createInvalidRequestParamsError('publicKey');
         }
         const members = await this.networkMembersService.getSingleNetworkMember(publicKey);
-        response.json(members);
+        res.json(members);
     }
 
     private async handleLearnNetworkMembers(_, res) {
