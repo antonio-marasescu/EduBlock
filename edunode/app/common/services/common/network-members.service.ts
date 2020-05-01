@@ -20,7 +20,7 @@ import {objectWithoutKeys} from "../../utils/dictionary.utils";
 import {EduCommonIdentityDto, EduCommonIdentityDtoMapper} from "../../dto/network/edu-common-identity.dto";
 import {CommonIdentity} from "../../entities/identity/common-identity.entity";
 
-export const NetworkMembersServiceToken = new Token<NetworkMembersService>('common.network-members');
+export const NetworkMembersServiceToken = new Token<NetworkMembersService>('services.common.network-members');
 
 @Service(NetworkMembersServiceToken)
 export class NetworkMembersService {
