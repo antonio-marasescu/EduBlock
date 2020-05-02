@@ -10,4 +10,4 @@ export interface IFilesRepository {
 }
 
 
-export const IFilesRepositoryToken = new Token<IFilesRepository>('repositories.files');
+export const IFilesRepositoryToken = new Token<IFilesRepository>('repositories.vault.files');
