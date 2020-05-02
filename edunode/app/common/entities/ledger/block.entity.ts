@@ -16,4 +16,13 @@ export class BlockEntity {
 
     @Column()
     timestamp: number;
+
+    @Column()
+    creatorPublicKey: string;
+
+    @Column()
+    creatorSignature: string;
 }
+
+export const BlockHashBlacklist = ['hash'];
+export const CreatorHashBlacklist = ['creatorSignature', 'hash', 'index'];

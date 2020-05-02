@@ -22,6 +22,10 @@
       "exchangeName": "edu-node-common-exchange",
       "exchangeType": "fanout"
     },
+    "blockchainConfiguration": {
+      "difficultyLevel": 4,
+      "consensusChar": "0"
+    },
     "useFileLogging": false
   },
   "node-uni-2": {
@@ -46,6 +50,10 @@
       "url": "amqp://localhost",
       "exchangeName": "edu-node-common-exchange",
       "exchangeType": "fanout"
+    },
+    "blockchainConfiguration": {
+      "difficultyLevel": 4,
+      "consensusChar": "0"
     },
     "useFileLogging": false
   },
@@ -72,6 +80,10 @@
       "exchangeName": "edu-node-common-exchange",
       "exchangeType": "fanout"
     },
+    "blockchainConfiguration": {
+      "difficultyLevel": 4,
+      "consensusChar": "0"
+    },
     "useFileLogging": false
   },
   "node-uni-4": {
@@ -96,6 +108,10 @@
       "url": "amqp://localhost",
       "exchangeName": "edu-node-common-exchange",
       "exchangeType": "fanout"
+    },
+    "blockchainConfiguration": {
+      "difficultyLevel": 4,
+      "consensusChar": "0"
     },
     "useFileLogging": false
   }

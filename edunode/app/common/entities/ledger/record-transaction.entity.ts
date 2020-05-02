@@ -15,6 +15,9 @@ export class RecordTransactionEntity {
     creatorPublicKey: string;
 
     @Column()
+    creatorSignature: string;
+
+    @Column()
     certificateAuthorityPublicKey: string;
 
     @Column()
@@ -25,4 +28,14 @@ export class RecordTransactionEntity {
 
     @Column("simple-array")
     attachments: string[];
+
+    @Column({default: true, nullable: true})
+    isPending?: boolean;
 }
+
+export const TransactionHashBlacklist =
+    ['isPending', 'hash', 'blockHash'];
+export const CreatorHashBlacklist =
+    ['isPending', 'hash', 'blockHash', 'creatorSignature'];
+export const CertificateAuthorityHashBlacklist =
+    ['isPending', 'hash', 'blockHash', 'creatorSignature', 'creatorPublicKey', 'certificateSignature'];
