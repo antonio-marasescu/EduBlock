@@ -53,3 +53,10 @@ export function createIdentityNotFound(target: any): EduError {
 export function createAxiosResponseError(axiosError: any) {
     return new EduError(axiosError.status, [axiosError.body]);
 }
+
+export function createMessageCouldNotBeSentError(target: any): EduError {
+    const error = new ValidationError();
+    error.target = target;
+    error.constraints = {messageCouldNotBeSent: 'The message could not be sent to the target!'};
+    return new EduError(400, [error]);
+}

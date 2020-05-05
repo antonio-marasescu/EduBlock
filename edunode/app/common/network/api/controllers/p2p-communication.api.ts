@@ -25,8 +25,6 @@ export class P2pCommunicationApi implements BasicApi {
     private registerRoutes() {
         this.router.post('/p2p/messages/:publicKey',
             asyncHandler(async (req, res) => this.handleSendMessage(req, res)));
-        this.router.post('/p2p/messages',
-            asyncHandler(async (req, res) => this.handleBroadcastMessage(req, res)));
     }
 
     private async handleSendMessage(req, res) {
@@ -37,13 +35,6 @@ export class P2pCommunicationApi implements BasicApi {
         const message = new BasicMessageDto();
         Object.assign(message, req.body);
         await this.pingPublisher.publish(message.content, publicKey);
-        res.json({});
-    }
-
-    private async handleBroadcastMessage(req, res) {
-        const message = new BasicMessageDto();
-        Object.assign(message, req.body);
-        await this.pingPublisher.massPublish(message.content);
         res.json({});
     }
 }

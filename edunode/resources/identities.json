@@ -20,7 +20,7 @@
     "rabbitmqConfiguration": {
       "url": "amqp://localhost",
       "exchangeName": "edu-node-common-exchange",
-      "exchangeType": "fanout"
+      "exchangeType": "direct"
     },
     "blockchainConfiguration": {
       "difficultyLevel": 4,
@@ -49,7 +49,7 @@
     "rabbitmqConfiguration": {
       "url": "amqp://localhost",
       "exchangeName": "edu-node-common-exchange",
-      "exchangeType": "fanout"
+      "exchangeType": "direct"
     },
     "blockchainConfiguration": {
       "difficultyLevel": 4,
@@ -78,7 +78,7 @@
     "rabbitmqConfiguration": {
       "url": "amqp://localhost",
       "exchangeName": "edu-node-common-exchange",
-      "exchangeType": "fanout"
+      "exchangeType": "direct"
     },
     "blockchainConfiguration": {
       "difficultyLevel": 4,
@@ -107,7 +107,7 @@
     "rabbitmqConfiguration": {
       "url": "amqp://localhost",
       "exchangeName": "edu-node-common-exchange",
-      "exchangeType": "fanout"
+      "exchangeType": "direct"
     },
     "blockchainConfiguration": {
       "difficultyLevel": 4,

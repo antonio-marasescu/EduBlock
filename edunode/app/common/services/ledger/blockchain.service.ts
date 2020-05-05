@@ -19,6 +19,8 @@ import {CertificateAuthorityService, CertificateAuthorityServiceToken} from "../
 import {CaTransactionDtoMapper} from "../../dto/ca/ca-transaction.dto";
 import {CaSignatureDto} from "../../dto/ca/ca-signature.dto";
 import {EccService, EccServiceToken} from "../security/ecc.service";
+import {TransactionPublisher, TransactionPublisherToken} from "../../network/rabbitmq/publishers/transaction.publisher";
+import {NetworkTransactionDto, NetworkTransactionDtoMapper} from "../../dto/network/blockchain/network-transaction.dto";
 
 export const BlockchainServiceToken = new Token<BlockchainService>('services.ledger.blockchain');
 
@@ -32,6 +34,7 @@ export class BlockchainService {
         @Inject(IdentityServiceToken) private identityService: IdentityService,
         @Inject(CertificateAuthorityServiceToken) private certificateAuthorityService: CertificateAuthorityService,
         @Inject(EccServiceToken) private eccService: EccService,
+        @Inject(TransactionPublisherToken) private transactionPublisher: TransactionPublisher,
         @Inject(ServerLoggerToken) private logger: ServerLogger,
     ) {
     }
@@ -47,9 +50,9 @@ export class BlockchainService {
         transaction.creatorPublicKey = await this.identityService.getPersonalIdentity();
         const pendingTransactionHashObject = objectWithoutKeys(transaction, PendingTransactionHashBlacklist);
         transaction.creatorSignature = await this.identityService.signData(pendingTransactionHashObject);
-        this.checkpointTransaction(transaction, RecordTransactionStatus.Pending);
+        const pendingTransaction = await this.checkpointTransaction(transaction, RecordTransactionStatus.Pending);
 
-        const caDto = CaTransactionDtoMapper.toDto(transaction);
+        const caDto = CaTransactionDtoMapper.toDto(pendingTransaction);
         const caSignatureDto: CaSignatureDto = await this.certificateAuthorityService.signTransaction(caDto);
 
         const validCaSignature = await this.identityService.verifyData(caDto, caSignatureDto.signature, caSignatureDto.publicKey);
@@ -59,25 +62,27 @@ export class BlockchainService {
             throw error;
         }
 
-        transaction.certificateAuthorityPublicKey = caSignatureDto.publicKey;
-        transaction.certificateSignature = caSignatureDto.signature;
-        transaction.creationDate = caSignatureDto.dateSigned;
-        const certifiedTransactionHashObject = objectWithoutKeys(transaction, CertifiedTransactionHashBlacklist);
-        transaction.hash = await this.eccService.hashData(certifiedTransactionHashObject);
-        this.checkpointTransaction(transaction, RecordTransactionStatus.Certified);
+        pendingTransaction.certificateAuthorityPublicKey = caSignatureDto.publicKey;
+        pendingTransaction.certificateSignature = caSignatureDto.signature;
+        pendingTransaction.creationDate = caSignatureDto.dateSigned;
+        const certifiedTransactionHashObject = objectWithoutKeys(pendingTransaction, CertifiedTransactionHashBlacklist);
+        pendingTransaction.hash = await this.eccService.hashData(certifiedTransactionHashObject);
+        const certifiedTransaction = await this.checkpointTransaction(transaction, RecordTransactionStatus.Certified);
 
-        //TODO: Publish transaction
+        const networkTransactionDto = NetworkTransactionDtoMapper.toDto(certifiedTransaction);
+        await this.transactionPublisher.publish(networkTransactionDto);
 
-        return transaction;
+        return certifiedTransaction;
     }
 
     public async getTransactionDetailsByHash() {
 
     }
 
-    // public async addTransaction(networkTransactionDto: NetworkTransactionDto) {
-    // }
-    //
+    public async addTransaction(networkTransactionDto: NetworkTransactionDto) {
+
+    }
+
     // public async createBlock() {
     // }
     //

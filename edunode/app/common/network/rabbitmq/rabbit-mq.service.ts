@@ -38,7 +38,8 @@ export class RabbitMqService {
         for (let token of tokens) {
             const consumer: BasicConsumer = Container.get(token);
             const queueName: string = await consumer.getConsumerName();
-            await this.createQueue(queueName);
+            const routingKey: string = await consumer.getConsumerRoutingKey();
+            await this.createQueue(queueName, routingKey);
             await this.bindConsumerToQueue(queueName, consumer);
         }
 
@@ -59,7 +60,7 @@ export class RabbitMqService {
         this.logger.logSuccess(this, "Consumer has been bound to queue " + queueName + ".");
     }
 
-    private async createQueue(queueName: string): Promise<Queue> {
+    private async createQueue(queueName: string, routingKey: string): Promise<Queue> {
         this.logger.logInfo(this, "Creating queue: " + queueName + "...");
         if (!this.exchange) {
             this.logger.logError(this, "No exchange could be found!");
@@ -69,7 +70,7 @@ export class RabbitMqService {
         this.logger.logInfo(this, "Declaring queue: " + queueName + "...");
         const queue = this.connection.declareQueue(queueName);
         this.logger.logInfo(this, "Binding queue: " + queueName + "...");
-        await queue.bind(this.exchange);
+        await queue.bind(this.exchange, routingKey);
         this.queues[queueName] = queue;
         this.logger.logSuccess(this, "Queue: " + queueName + " created.");
         return queue;
