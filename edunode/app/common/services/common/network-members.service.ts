@@ -6,11 +6,7 @@ import {AxiosTokenNMS} from "../axios/axios.config";
 import {NmsNewNetworkMemberMapper} from "../../dto/nms/nms-new-network-member.dto";
 import {validate, ValidationError} from "class-validator";
 import {IdentityService, IdentityServiceToken} from "../security/identity.service";
-import {
-    createAxiosResponseError,
-    createInvalidSignatureError,
-    createValidationError
-} from "../../errors/edu.error.factory";
+import {createInvalidSignatureError, createValidationError} from "../../errors/edu.error.factory";
 import {NmsCommonIdentityDto, NmsCommonIdentityDtoMapper} from "../../dto/nms/nms-common-identity.dto";
 import {
     ICommonIdentityRepository,
@@ -19,6 +15,7 @@ import {
 import {objectWithoutKeys} from "../../utils/dictionary.utils";
 import {EduCommonIdentityDto, EduCommonIdentityDtoMapper} from "../../dto/network/edu-common-identity.dto";
 import {CommonIdentity} from "../../entities/identity/common-identity.entity";
+import {validateAxiosResponse} from "../../utils/validators.utils";
 
 export const NetworkMembersServiceToken = new Token<NetworkMembersService>('services.common.network-members');
 
@@ -56,7 +53,7 @@ export class NetworkMembersService {
         const response: AxiosResponse = await this.nmsAxiosInstance.get('network/members/' + publicKey, {headers: {'public-key': personalIdentity}});
         this.logger.logInfo(this, "Get member request response was received!");
 
-        await this.validateAxiosResponse(response);
+        await validateAxiosResponse(this, response);
         const nmsResponseDto = await NetworkMembersService.axiosResponseToNmsDto(response);
 
         await this.validateCommonIdentityDto(nmsResponseDto);
@@ -72,7 +69,7 @@ export class NetworkMembersService {
         const response: AxiosResponse = await this.nmsAxiosInstance.get('network/members', {headers: {'public-key': personalIdentity}});
         this.logger.logInfo(this, "Get members request response was received!");
 
-        await this.validateAxiosResponse(response);
+        await validateAxiosResponse(this, response);
         const nmsResponseDtoList = await NetworkMembersService.axiosResponseToNmsDtoList(response);
         for (const dto of nmsResponseDtoList) {
             await this.validateCommonIdentityDto(dto);
@@ -103,7 +100,7 @@ export class NetworkMembersService {
         const response: AxiosResponse = await this.nmsAxiosInstance.post('network/members', nmsDto, {headers: {'public-key': personalIdentity}});
         this.logger.logInfo(this, "Add member request response was received!");
 
-        await this.validateAxiosResponse(response);
+        await validateAxiosResponse(this, response);
         const nmsResponseDto = await NetworkMembersService.axiosResponseToNmsDto(response);
 
         await this.validateCommonIdentityDto(nmsResponseDto);
@@ -158,13 +155,6 @@ export class NetworkMembersService {
         return savedEntityList;
     }
 
-    private async validateAxiosResponse(response: AxiosResponse): Promise<void> {
-        if (response.status !== 200) {
-            const error = createAxiosResponseError(response);
-            this.logger.logError(this, JSON.stringify(error));
-            throw error;
-        }
-    }
 
     private static async axiosResponseToNmsDto(response: AxiosResponse): Promise<NmsCommonIdentityDto> {
         const nmsResponseDto = new NmsCommonIdentityDto();

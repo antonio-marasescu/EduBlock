@@ -19,6 +19,13 @@ export function createInvalidRequestParamsError(target: any): EduError {
     return new EduError(400, [error]);
 }
 
+export function createAttachmentsNotFoundLocallyError(target: any): EduError {
+    const error = new ValidationError();
+    error.target = target;
+    error.constraints = {notFound: 'The attachments for the required object were not found!'};
+    return new EduError(404, [error]);
+}
+
 export function createObjectNotFoundError(target: any): EduError {
     const error = new ValidationError();
     error.target = target;

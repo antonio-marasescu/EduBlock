@@ -5,7 +5,7 @@ import {
 } from "../../common/entities/config/node-configuration.model";
 import {Container} from "typedi";
 import {CommonIdentity} from "../../common/entities/identity/common-identity.entity";
-import {AxiosTokenNMS} from "../../common/services/axios/axios.config";
+import {AxiosTokenCA, AxiosTokenNMS} from "../../common/services/axios/axios.config";
 import Axios from "axios";
 
 export class InitializationHandler {
@@ -35,9 +35,15 @@ export class InitializationHandler {
         const rawData: Buffer = fs.readFileSync('resources/network.json');
         const network: { [key: string]: CommonIdentity } = JSON.parse(rawData.toString());
         const nms = network['nms'];
-        const axiosInstance = Axios.create({
+        const nmsAxiosInstance = Axios.create({
             baseURL: 'http://' + nms.host + ":" + nms.port
         });
-        Container.set(AxiosTokenNMS, axiosInstance);
+        Container.set(AxiosTokenNMS, nmsAxiosInstance);
+
+        const ca = network['ca'];
+        const caAxiosInstance = Axios.create({
+            baseURL: 'http://' + ca.host + ":" + ca.port
+        });
+        Container.set(AxiosTokenCA, caAxiosInstance);
     }
 }

@@ -1,12 +1,16 @@
-import {Column, Entity, PrimaryColumn} from "typeorm";
+import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {RecordTransactionStatus} from "./record-transaction-status.enum";
 
 @Entity()
 export class RecordTransactionEntity {
-    @PrimaryColumn()
-    hash: string;
+    @PrimaryGeneratedColumn("uuid")
+    id?: string;
 
-    @Column()
-    blockHash: string;
+    @Column({nullable: true})
+    hash?: string;
+
+    @Column({nullable: true})
+    blockHash?: string;
 
     @Column()
     version: number;
@@ -14,28 +18,30 @@ export class RecordTransactionEntity {
     @Column()
     creatorPublicKey: string;
 
-    @Column()
-    creatorSignature: string;
+    @Column({nullable: true})
+    creatorSignature?: string;
+
+    @Column({nullable: true})
+    certificateAuthorityPublicKey?: string;
+
+    @Column({nullable: true})
+    certificateSignature?: string;
+
+    @Column({nullable: true})
+    creationDate?: string;
 
     @Column()
-    certificateAuthorityPublicKey: string;
-
-    @Column()
-    certificateSignature: string;
-
-    @Column()
-    creationDate: string;
+    targetPublicKey: string;
 
     @Column("simple-array")
     attachments: string[];
 
-    @Column({default: true, nullable: true})
-    isPending?: boolean;
+    @Column('enum', {name: 'record_transaction_status', enum: RecordTransactionStatus})
+    status?: RecordTransactionStatus;
 }
 
-export const TransactionHashBlacklist =
-    ['isPending', 'hash', 'blockHash'];
-export const CreatorHashBlacklist =
-    ['isPending', 'hash', 'blockHash', 'creatorSignature'];
-export const CertificateAuthorityHashBlacklist =
-    ['isPending', 'hash', 'blockHash', 'creatorSignature', 'creatorPublicKey', 'certificateSignature'];
+export const PendingTransactionHashBlacklist = [
+    'id', 'hash', 'blockHash', 'creatorPublicKey', 'creatorSignature',
+    'certificateAuthorityPublicKey', 'certificateSignature', 'creationDate', 'status'
+];
+export const CertifiedTransactionHashBlacklist = ['id', 'hash', 'blockHash', 'status'];

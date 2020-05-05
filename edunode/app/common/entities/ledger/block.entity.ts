@@ -25,4 +25,4 @@ export class BlockEntity {
 }
 
 export const BlockHashBlacklist = ['hash'];
-export const CreatorHashBlacklist = ['creatorSignature', 'hash', 'index'];
+export const PendingHashBlacklist = ['creatorSignature', 'hash', 'index'];
