@@ -17,6 +17,7 @@ import {
     createCertificateAuthorityCouldNotBeFoundError,
     createInvalidHashError,
     createInvalidSignatureError,
+    createNoTransactionStatusError,
     createSignatureDoesNotExistError,
     createValidationError
 } from "../../errors/edu.error.factory";
@@ -31,14 +32,17 @@ import {TransactionPublisher, TransactionPublisherToken} from "../../network/rab
 import {NetworkTransactionDto, NetworkTransactionDtoMapper} from "../../dto/network/blockchain/network-transaction.dto";
 import {validate, ValidationError} from "class-validator";
 import {NetworkMembersService, NetworkMembersServiceToken} from "../common/network-members.service";
+import {NodeConfigurationModel, NodeConfigurationModelToken} from "../../entities/config/node-configuration.model";
 
 export const BlockchainServiceToken = new Token<BlockchainService>('services.ledger.blockchain');
 
 @Service(BlockchainServiceToken)
 export class BlockchainService {
+
     constructor(
         // @Inject(IConsensusServiceToken) private consensusService: IConsensusService,
         // @Inject(IBlockRepositoryToken) private blockRepository: IBlockRepository,
+        @Inject(NodeConfigurationModelToken) private nodeConfigurationModelToken: NodeConfigurationModel,
         @Inject(IRecordTransactionRepositoryToken) private recordTransactionRepository: IRecordTransactionRepository,
         @Inject(IFilesRepositoryToken) private filesRepository: IFilesRepository,
         @Inject(IdentityServiceToken) private identityService: IdentityService,
@@ -103,14 +107,43 @@ export class BlockchainService {
 
         const transaction: RecordTransactionEntity = NetworkTransactionDtoMapper.toEntity(networkTransactionDto);
         await this.validateNetworkTransaction(transaction);
-        await this.checkpointTransaction(transaction, RecordTransactionStatus.Certified);
+
+        if (!transaction.status) {
+            const error = createNoTransactionStatusError(transaction.status);
+            this.logger.logError(this, JSON.stringify(error));
+            throw error;
+        }
+        await this.checkpointTransaction(transaction, transaction.status);
+        this.runtimeTransactionCheck();
     }
 
-    // public async createBlock() {
-    // }
+    public async createBlock(): Promise<void> {
+        // const testPromise = new Promise((resolve, _reject) => {
+        //     setTimeout(() => resolve(), 5000)
+        // });
+        // await testPromise.then(() => {
+        //     console.log(this.i);
+        //     this.i = this.i + 1;
+        // });
+    }
+
+    public async testWork(): Promise<void> {
+
+    }
+
     //
     // public async addBlock(networkBlockDto: NetworkBlockDto) {
     // }
+
+    private async runtimeTransactionCheck(): Promise<void> {
+        this.logger.logInfo(this, "Running runtime transaction checks...");
+        const certifiedTransactionCount = await this.recordTransactionRepository.count({status: RecordTransactionStatus.Certified});
+        if (certifiedTransactionCount >= this.nodeConfigurationModelToken.blockchainConfiguration.numberOfTransactionUntilBlock) {
+            this.logger.logInfo(this, "Automatic block creation process started!");
+            this.createBlock();
+        }
+        this.logger.logSuccess(this, "Runtime transaction checks have finished...");
+    }
 
     private async validateCreateTransactionDto(transactionDto: CreateTransactionDto): Promise<void> {
         this.logger.logInfo(this, "Validating transaction attachments...");
@@ -171,7 +204,7 @@ export class BlockchainService {
     private async checkpointTransaction(transaction: RecordTransactionEntity, newStatus: RecordTransactionStatus): Promise<RecordTransactionEntity> {
         this.logger.logInfo(this, "Checkpointing transaction to status: " + newStatus);
         transaction.status = newStatus;
-        const savedTransaction: any = await this.recordTransactionRepository.save(transaction).catch(error => console.log(error));
+        const savedTransaction: any = await this.recordTransactionRepository.save(transaction).catch(error => this.logger.logError(this, JSON.stringify(error)));
         this.logger.logSuccess(this, "Checkpointing transaction " + transaction.id + " succeeded.");
         return savedTransaction;
     }

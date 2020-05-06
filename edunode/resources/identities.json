@@ -24,7 +24,8 @@
     },
     "blockchainConfiguration": {
       "difficultyLevel": 4,
-      "consensusChar": "0"
+      "consensusChar": "0",
+      "numberOfTransactionUntilBlock": 4
     },
     "useFileLogging": false
   },
@@ -53,7 +54,8 @@
     },
     "blockchainConfiguration": {
       "difficultyLevel": 4,
-      "consensusChar": "0"
+      "consensusChar": "0",
+      "numberOfTransactionUntilBlock": 4
     },
     "useFileLogging": false
   },
@@ -82,7 +84,8 @@
     },
     "blockchainConfiguration": {
       "difficultyLevel": 4,
-      "consensusChar": "0"
+      "consensusChar": "0",
+      "numberOfTransactionUntilBlock": 4
     },
     "useFileLogging": false
   },
@@ -111,7 +114,8 @@
     },
     "blockchainConfiguration": {
       "difficultyLevel": 4,
-      "consensusChar": "0"
+      "consensusChar": "0",
+      "numberOfTransactionUntilBlock": 4
     },
     "useFileLogging": false
   }

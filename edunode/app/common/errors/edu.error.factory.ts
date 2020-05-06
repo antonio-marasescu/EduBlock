@@ -82,3 +82,10 @@ export function createCertificateAuthorityCouldNotBeFoundError(target: any) {
     error.constraints = {certificateAuthorityCouldNotBeFound: 'The certificate authority could not be found for this transaction!'};
     return new NmsError(400, [error]);
 }
+
+export function createNoTransactionStatusError(target: any): NmsError {
+    const error = new ValidationError();
+    error.target = target;
+    error.constraints = {transactionStatusError: 'The transaction status was invalid!'};
+    return new NmsError(400, [error]);
+}

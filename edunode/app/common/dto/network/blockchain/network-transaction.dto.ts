@@ -1,5 +1,6 @@
 import {RecordTransactionEntity} from "../../../entities/ledger/record-transaction.entity";
 import {IsNotEmpty, IsNumber, IsString} from "class-validator";
+import {RecordTransactionStatus} from "../../../entities/ledger/record-transaction-status.enum";
 
 export class NetworkTransactionDto {
     @IsString()
@@ -40,6 +41,8 @@ export class NetworkTransactionDto {
     targetPublicKey: string;
 
     attachments: string[];
+
+    status: RecordTransactionStatus;
 }
 
 export class NetworkTransactionDtoMapper {
@@ -56,6 +59,7 @@ export class NetworkTransactionDtoMapper {
         dto.creationDate = entity.creationDate as any;
         dto.targetPublicKey = entity.targetPublicKey;
         dto.attachments = entity.attachments;
+        dto.status = entity.status as any;
         return dto;
     }
 
@@ -72,6 +76,7 @@ export class NetworkTransactionDtoMapper {
         entity.creationDate = dto.creationDate as any;
         entity.targetPublicKey = dto.targetPublicKey;
         entity.attachments = dto.attachments;
+        entity.status = dto.status;
         return entity;
     }
 }
