@@ -6,7 +6,6 @@ import {ServerLogger, ServerLoggerToken} from "../common/logger/server-logger.in
 import {IdentityServiceToken} from "../common/services/security/identity.service";
 import {API_REGISTER_TOKENS} from "../common/network/api/basic.api.register";
 import {EduErrorHandler} from "../common/errors/edu.error.handler";
-import {RabbitMqServiceToken} from "../common/network/rabbitmq/rabbit-mq.service";
 
 export const EduNodeToken = new Token<EduNode>('EduNode');
 
@@ -27,9 +26,9 @@ export class EduNode {
         await this.applyMiddleware();
         const that = this;
         this.app.listen(this.nodeConfiguration.identity.port, async function () {
-            const identity = await Container.get(IdentityServiceToken).checkOrGeneratePersonalIdentity();
+            const identityService = Container.get(IdentityServiceToken);
+            const identity = await identityService.getPersonalIdentity();
             that.logger.logInfo(that, "Identity (Public Key): " + identity);
-            await Container.get(RabbitMqServiceToken).initializeService();
             that.logger.logSuccess(that, 'Node ' + that.nodeConfiguration.identity.alias + ' is listening....');
         });
     }

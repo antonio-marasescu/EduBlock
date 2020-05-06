@@ -1,4 +1,4 @@
-import {Inject, Service, Token} from "typedi";
+import {Container, Inject, Service, Token} from "typedi";
 import {RabbitMqService, RabbitMqServiceToken} from "../rabbit-mq.service";
 import {TransactionConsumer, TransactionConsumerToken} from "../consumers/transaction/transaction.consumer";
 import {Message} from "amqp-ts";
@@ -9,10 +9,14 @@ export const TransactionPublisherToken = new Token<TransactionPublisher>('networ
 
 @Service(TransactionPublisherToken)
 export class TransactionPublisher {
-    constructor(@Inject(RabbitMqServiceToken) private rabbitMqService: RabbitMqService,
-                @Inject(TransactionConsumerToken) private consumer: TransactionConsumer,
-                @Inject(ServerLoggerToken) private logger: ServerLogger,
+    private rabbitMqService: RabbitMqService;
+    private consumer: TransactionConsumer;
+
+    constructor(
+        @Inject(ServerLoggerToken) private logger: ServerLogger
     ) {
+        this.rabbitMqService = Container.get(RabbitMqServiceToken);
+        this.consumer = Container.get(TransactionConsumerToken);
     }
 
     public async publish(content: NetworkTransactionDto): Promise<void> {

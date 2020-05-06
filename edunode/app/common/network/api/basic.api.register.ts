@@ -7,5 +7,5 @@ export const API_REGISTER_TOKENS = [
     NetworkApiToken,
     P2pCommunicationApiToken,
     FilesApiToken,
-    BlockchainApiToken
+    BlockchainApiToken,
 ];
