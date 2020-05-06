@@ -44,4 +44,8 @@ export const PendingTransactionHashBlacklist = [
     'id', 'hash', 'blockHash', 'creatorPublicKey', 'creatorSignature',
     'certificateAuthorityPublicKey', 'certificateSignature', 'creationDate', 'status'
 ];
+
+export const CertificateAuthorityTransactionSignatureBlacklist = [
+    'id', 'hash', 'blockHash', 'certificateAuthorityPublicKey', 'certificateSignature', 'creationDate', 'status'
+];
 export const CertifiedTransactionHashBlacklist = ['id', 'hash', 'blockHash', 'status'];

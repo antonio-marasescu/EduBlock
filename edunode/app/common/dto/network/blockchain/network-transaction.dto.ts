@@ -1,16 +1,44 @@
 import {RecordTransactionEntity} from "../../../entities/ledger/record-transaction.entity";
+import {IsNotEmpty, IsNumber, IsString} from "class-validator";
 
 export class NetworkTransactionDto {
+    @IsString()
+    @IsNotEmpty()
     id: string;
+
+    @IsString()
+    @IsNotEmpty()
     hash: string;
+
     blockHash?: string;
+
+    @IsNumber()
     version: number;
+
+    @IsString()
+    @IsNotEmpty()
     creatorPublicKey: string;
+
+    @IsString()
+    @IsNotEmpty()
     creatorSignature: string;
+
+    @IsString()
+    @IsNotEmpty()
     certificateAuthorityPublicKey: string;
+
+    @IsString()
+    @IsNotEmpty()
     certificateSignature: string;
+
+    @IsString()
+    @IsNotEmpty()
     creationDate: string;
+
+    @IsString()
+    @IsNotEmpty()
     targetPublicKey: string;
+
     attachments: string[];
 }
 

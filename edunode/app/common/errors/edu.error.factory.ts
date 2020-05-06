@@ -1,10 +1,18 @@
 import {ValidationError} from "class-validator/validation/ValidationError";
 import {EduError} from "./edu.error";
+import {NmsError} from "../../../../network-map-service/app/common/errors/nms.error";
 
 export function createInvalidSignatureError(target: any): EduError {
     const error = new ValidationError();
     error.target = target;
     error.constraints = {signatureValidation: 'Signature validity check failed'};
+    return new EduError(400, [error]);
+}
+
+export function createSignatureDoesNotExistError(target: any): EduError {
+    const error = new ValidationError();
+    error.target = target;
+    error.constraints = {signatureDoesNotExist: 'Signature does not exist!'};
     return new EduError(400, [error]);
 }
 
@@ -59,4 +67,18 @@ export function createMessageCouldNotBeSentError(target: any): EduError {
     error.target = target;
     error.constraints = {messageCouldNotBeSent: 'The message could not be sent to the target!'};
     return new EduError(400, [error]);
+}
+
+export function createInvalidHashError(target: any): NmsError {
+    const error = new ValidationError();
+    error.target = target;
+    error.constraints = {hashError: 'The hash of the data is not correct!'};
+    return new NmsError(400, [error]);
+}
+
+export function createCertificateAuthorityCouldNotBeFoundError(target: any) {
+    const error = new ValidationError();
+    error.target = target;
+    error.constraints = {certificateAuthorityCouldNotBeFound: 'The certificate authority could not be found for this transaction!'};
+    return new NmsError(400, [error]);
 }

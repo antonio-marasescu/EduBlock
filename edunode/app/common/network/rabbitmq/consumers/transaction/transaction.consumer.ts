@@ -20,9 +20,10 @@ export class TransactionConsumer implements BasicConsumer {
         const consumer = Container.get(TransactionConsumerToken);
         const service = Container.get(BlockchainServiceToken);
         logger.logInfo(consumer, "Consuming Adding Transaction message....");
-        const content: NetworkTransactionDto = x.getContent();
+        const content: NetworkTransactionDto = new NetworkTransactionDto();
+        Object.assign(content, x.getContent());
         logger.logInfo(consumer, JSON.stringify(content));
-        service.addTransaction(content).then();
+        service.addTransaction(content).then(() => logger.logSuccess(consumer, "Message Adding Transaction has been consumed.."));
         x.ack();
     }
 
