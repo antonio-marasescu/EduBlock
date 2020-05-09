@@ -27,6 +27,11 @@
       "consensusChar": "0",
       "numberOfTransactionUntilBlock": 4
     },
+    "workerConfiguration": {
+      "alias": "University of California Worker",
+      "port": 3007,
+      "host": "localhost"
+    },
     "useFileLogging": false
   },
   "node-uni-2": {
@@ -56,6 +61,11 @@
       "difficultyLevel": 4,
       "consensusChar": "0",
       "numberOfTransactionUntilBlock": 4
+    },
+    "workerConfiguration": {
+      "alias": "University of Amsterdam Worker",
+      "port": 3008,
+      "host": "localhost"
     },
     "useFileLogging": false
   },
@@ -87,6 +97,11 @@
       "consensusChar": "0",
       "numberOfTransactionUntilBlock": 4
     },
+    "workerConfiguration": {
+      "alias": "University of Cluj-Napoca Worker",
+      "port": 3009,
+      "host": "localhost"
+    },
     "useFileLogging": false
   },
   "node-uni-4": {
@@ -116,6 +131,11 @@
       "difficultyLevel": 4,
       "consensusChar": "0",
       "numberOfTransactionUntilBlock": 4
+    },
+    "workerConfiguration": {
+      "alias": "University of Bucharest Worker",
+      "port": 3010,
+      "host": "localhost"
     },
     "useFileLogging": false
   }

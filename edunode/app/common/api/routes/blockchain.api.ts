@@ -1,11 +1,11 @@
 import {BasicApi} from "../basic.api";
 import express from "express";
 import {Inject, Service, Token} from "typedi";
-import {BlockchainService, BlockchainServiceToken} from "../../../services/ledger/blockchain.service";
+import {BlockchainService, BlockchainServiceToken} from "../../services/ledger/blockchain.service";
 import asyncHandler from "express-async-handler";
-import {CreateTransactionDto} from "../../../dto/common/create-transaction.dto";
+import {CreateTransactionDto} from "../../dto/common/create-transaction.dto";
 
-export const BlockchainApiToken = new Token<BlockchainApi>('network.api.blockchain');
+export const BlockchainApiToken = new Token<BlockchainApi>('api.routes.blockchain');
 
 @Service(BlockchainApiToken)
 export class BlockchainApi implements BasicApi {

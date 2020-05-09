@@ -2,7 +2,7 @@ import * as Amqp from "amqp-ts";
 import {Queue} from "amqp-ts";
 import {Container, Inject, Service, Token} from "typedi";
 import {BasicConsumer} from "./consumers/basic.consumer";
-import {NodeConfigurationModel, NodeConfigurationModelToken} from "../../entities/config/node-configuration.model";
+import {NodeConfigurationModel, NodeConfigurationModelToken} from "../../config/node-configuration.model";
 import {ServerLogger, ServerLoggerToken} from "../../logger/server-logger.interface";
 import CONSUMER_TOKENS from "./consumer.register";
 

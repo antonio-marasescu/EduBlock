@@ -1,14 +1,14 @@
 import express, {Express} from "express";
 import bodyParser from 'body-parser'
 import {Container, Inject, Service, Token} from "typedi";
-import {NmsConfigurationModel, NmsConfigurationModelToken} from "../common/entities/config/nms-configuration.model";
+import {NmsConfigurationModel, NmsConfigurationModelToken} from "../common/config/nms-configuration.model";
 import {NmsLogger, NmsLoggerToken} from "../common/logger/nms-logger.interface";
-import {API_REGISTER_TOKENS} from "../common/network/basic.api.register";
 import {IdentityServiceToken} from "../common/services/identity.service";
 import {NmsErrorHandler} from "../common/errors/nms.error.handler";
 import {SeederHandler} from "./seed/seeder.handler";
 import {NetworkMapServiceToken} from "../common/services/network-map.service";
 import {AuthMiddlewareToken} from "./auth/auth.middleware";
+import {API_REGISTER_TOKENS} from "../common/api/basic.api.register";
 
 export const NmsNodeToken = new Token<NmsNode>('NmsNode');
 

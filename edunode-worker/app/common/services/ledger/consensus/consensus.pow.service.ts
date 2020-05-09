@@ -1,8 +1,8 @@
 import {Inject, Service, Token} from "typedi";
 import {IConsensusService} from "./consensus.interface.service";
-import {BlockEntity} from "../../../entities/ledger/block.entity";
 import {EccService, EccServiceToken} from "../../security/ecc.service";
-import {NodeConfigurationModel, NodeConfigurationModelToken} from "../../../entities/config/node-configuration.model";
+import {NodeConfigurationModel, NodeConfigurationModelToken} from "../../../config/node-configuration.model";
+import {NetworkBlockDto} from "../../../dto/network-block.dto";
 
 export const IConsensusServiceToken = new Token<ConsensusPowService>('services.ledger.consensus');
 
@@ -15,7 +15,7 @@ export class ConsensusPowService implements IConsensusService {
     ) {
     }
 
-    public async generateProof(block: BlockEntity): Promise<BlockEntity> {
+    public async generateProof(block: NetworkBlockDto): Promise<NetworkBlockDto> {
         const difficultyLevel = this.nodeConfigurationModel.blockchainConfiguration.difficultyLevel;
         const consensusChar = this.nodeConfigurationModel.blockchainConfiguration.consensusChar;
 

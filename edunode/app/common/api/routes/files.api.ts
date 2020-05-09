@@ -1,13 +1,13 @@
 import {Inject, Service, Token} from "typedi";
 import {BasicApi} from "../basic.api";
 import express from "express";
-import {FilesService, FilesServiceToken} from "../../../services/common/files.service";
+import {FilesService, FilesServiceToken} from "../../services/common/files.service";
 import asyncHandler from "express-async-handler";
 import multer from "multer";
-import {EduFileDto} from "../../../dto/common/edu-file.dto";
-import {createInvalidRequestParamsError} from "../../../errors/edu.error.factory";
+import {EduFileDto} from "../../dto/common/edu-file.dto";
+import {createInvalidRequestParamsError} from "../../errors/edu.error.factory";
 
-export const FilesApiToken = new Token<FilesApi>('network.api.files');
+export const FilesApiToken = new Token<FilesApi>('api.routes.files');
 
 @Service(FilesApiToken)
 export class FilesApi implements BasicApi {

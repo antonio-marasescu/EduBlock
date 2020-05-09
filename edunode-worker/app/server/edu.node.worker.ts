@@ -1,9 +1,10 @@
 import express, {Express} from "express";
 import bodyParser from 'body-parser'
-import {Inject, Service, Token} from "typedi";
+import {Container, Inject, Service, Token} from "typedi";
 import {ServerLogger, ServerLoggerToken} from "../common/logger/server-logger.interface";
 import {NodeConfigurationModel, NodeConfigurationModelToken} from "../common/config/node-configuration.model";
 import {EduWorkerErrorHandler} from "../common/errors/edu-worker.error.handler";
+import {API_REGISTER_TOKENS} from "../common/api/basic.api.register";
 
 export const EduNodeWorkerToken = new Token<EduNodeWorker>('EduNodeWorker');
 
@@ -30,7 +31,7 @@ export class EduNodeWorker {
     private async applyMiddleware(): Promise<void> {
         this.app.use(bodyParser.json());
         this.app.use(bodyParser.urlencoded({extended: false}));
-        // API_REGISTER_TOKENS.forEach(token => this.app.use(Container.get(token).getRouter()));
+        API_REGISTER_TOKENS.forEach(token => this.app.use(Container.get(token).getRouter()));
         this.app.use((error, _, res, __) => EduWorkerErrorHandler.handleError(error, res))
     }
 }

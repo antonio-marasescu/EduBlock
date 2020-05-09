@@ -1,4 +1,4 @@
-import {Container, Inject, Service, Token} from "typedi";
+import {Inject, Service, Token} from "typedi";
 import {
     IRecordTransactionRepository,
     IRecordTransactionRepositoryToken
@@ -33,12 +33,13 @@ import {TransactionPublisher, TransactionPublisherToken} from "../rabbitmq/publi
 import {NetworkTransactionDto, NetworkTransactionDtoMapper} from "../../dto/network/blockchain/network-transaction.dto";
 import {validate, ValidationError} from "class-validator";
 import {NetworkMembersService, NetworkMembersServiceToken} from "../common/network-members.service";
-import {NodeConfigurationModel, NodeConfigurationModelToken} from "../../entities/config/node-configuration.model";
+import {NodeConfigurationModel, NodeConfigurationModelToken} from "../../config/node-configuration.model";
 import {IBlockRepository, IBlockRepositoryToken} from "../../repositories/ledger/block.interface.repository";
 import {BlockEntity, BlockSignatureBlacklist} from "../../entities/ledger/block.entity";
-import {IConsensusServiceToken} from "./consensus/consensus.pow.service";
-import {BlockPublisherToken} from "../rabbitmq/publishers/block.publisher";
+import {AxiosTokenWorker} from "../axios/axios.config";
+import {AxiosInstance, AxiosResponse} from "axios";
 import {NetworkBlockDtoMapper} from "../../dto/network/blockchain/network-block.dto";
+import {validateAxiosResponse} from "../../utils/validators.utils";
 
 
 export const BlockchainServiceToken = new Token<BlockchainService>('services.ledger.blockchain');
@@ -56,6 +57,7 @@ export class BlockchainService {
         @Inject(EccServiceToken) private eccService: EccService,
         @Inject(TransactionPublisherToken) private transactionPublisher: TransactionPublisher,
         @Inject(NetworkMembersServiceToken) private networkMembersService: NetworkMembersService,
+        @Inject(AxiosTokenWorker) private workerAxiosInstance: AxiosInstance,
         @Inject(ServerLoggerToken) private logger: ServerLogger,
     ) {
     }
@@ -96,9 +98,9 @@ export class BlockchainService {
         return certifiedTransaction;
     }
 
-    public async getTransactionDetailsByHash() {
-
-    }
+    // public async getTransactionDetailsByHash() {
+    //
+    // }
 
     public async addTransaction(networkTransactionDto: NetworkTransactionDto) {
         this.logger.logInfo(this, "Adding Transaction Flow has started...");
@@ -145,20 +147,9 @@ export class BlockchainService {
         const blockSignatureObject = objectWithoutKeys(blockEntity, BlockSignatureBlacklist);
         blockEntity.creatorSignature = await this.identityService.signData(blockSignatureObject);
         blockEntity.creatorPublicKey = await this.identityService.getPersonalIdentity();
-        const consensusService = Container.get(IConsensusServiceToken);
-        consensusService.generateProof(blockEntity).then(async (hashedBlock) => {
-            const logger = Container.get(ServerLoggerToken);
-            const blockPublisher = Container.get(BlockPublisherToken);
-
-            hashedBlock.timestamp = new Date(Date.now()).toISOString();
-            logger.logInfo(this, "Block work has finished on " + hashedBlock.timestamp);
-            const blockDto = NetworkBlockDtoMapper.toDto(hashedBlock);
-            logger.logInfo(this, "Block will be published to the network");
-            logger.logInfo(this, JSON.stringify(blockDto));
-            await blockPublisher.publish(blockDto);
-            logger.logSuccess(this, "Block has been published to the network");
-
-        });
+        const blockDto = NetworkBlockDtoMapper.toDto(blockEntity);
+        const response: AxiosResponse = await this.workerAxiosInstance.post('blockchain', blockDto);
+        await validateAxiosResponse(this, response);
         return blockEntity.index;
     }
 

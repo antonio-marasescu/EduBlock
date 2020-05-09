@@ -1,13 +1,13 @@
 import express from "express";
 import {BasicApi} from "../basic.api";
 import {Inject, Service, Token} from "typedi";
-import {NetworkMembersService, NetworkMembersServiceToken} from "../../../services/common/network-members.service";
-import {IdentityService, IdentityServiceToken} from "../../../services/security/identity.service";
-import {EduNewNetworkMemberDto} from "../../../dto/network/edu-new-network-member.dto";
+import {NetworkMembersService, NetworkMembersServiceToken} from "../../services/common/network-members.service";
+import {IdentityService, IdentityServiceToken} from "../../services/security/identity.service";
+import {EduNewNetworkMemberDto} from "../../dto/network/edu-new-network-member.dto";
 import asyncHandler from 'express-async-handler';
-import {createInvalidRequestParamsError} from "../../../errors/edu.error.factory";
+import {createInvalidRequestParamsError} from "../../errors/edu.error.factory";
 
-export const NetworkApiToken = new Token<NetworkApi>('network.api.network');
+export const NetworkApiToken = new Token<NetworkApi>('api.routes.network');
 
 @Service(NetworkApiToken)
 export class NetworkApi implements BasicApi {

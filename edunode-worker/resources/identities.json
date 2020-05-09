@@ -1,15 +1,15 @@
 {
   "node-worker-uni-1": {
     "identity": {
-      "legalName": "University of California Worker",
       "alias": "University of California Worker",
-      "port": 3001,
+      "port": 3007,
       "host": "localhost"
     },
     "rabbitmqConfiguration": {
       "url": "amqp://localhost",
       "exchangeName": "edu-node-common-exchange",
-      "exchangeType": "direct"
+      "exchangeType": "direct",
+      "blockPublishQueue": "block-consumer"
     },
     "blockchainConfiguration": {
       "difficultyLevel": 4,
@@ -20,15 +20,15 @@
   },
   "node-worker-uni-2": {
     "identity": {
-      "legalName": "University of Amsterdam Worker",
       "alias": "University of Amsterdam Worker",
-      "port": 3002,
+      "port": 3008,
       "host": "localhost"
     },
     "rabbitmqConfiguration": {
       "url": "amqp://localhost",
       "exchangeName": "edu-node-common-exchange",
-      "exchangeType": "direct"
+      "exchangeType": "direct",
+      "blockPublishQueue": "block-consumer"
     },
     "blockchainConfiguration": {
       "difficultyLevel": 4,
@@ -39,15 +39,15 @@
   },
   "node-worker-uni-3": {
     "identity": {
-      "legalName": "University of Cluj-Napoca Worker",
       "alias": "University of Cluj-Napoca Worker",
-      "port": 3003,
+      "port": 3009,
       "host": "localhost"
     },
     "rabbitmqConfiguration": {
       "url": "amqp://localhost",
       "exchangeName": "edu-node-common-exchange",
-      "exchangeType": "direct"
+      "exchangeType": "direct",
+      "blockPublishQueue": "block-consumer"
     },
     "blockchainConfiguration": {
       "difficultyLevel": 4,
@@ -58,15 +58,15 @@
   },
   "node-worker-uni-4": {
     "identity": {
-      "legalName": "University of Bucharest Worker",
       "alias": "University of Bucharest Worker",
-      "port": 3004,
+      "port": 3010,
       "host": "localhost"
     },
     "rabbitmqConfiguration": {
       "url": "amqp://localhost",
       "exchangeName": "edu-node-common-exchange",
-      "exchangeType": "direct"
+      "exchangeType": "direct",
+      "blockPublishQueue": "block-consumer"
     },
     "blockchainConfiguration": {
       "difficultyLevel": 4,

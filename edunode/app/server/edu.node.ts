@@ -1,11 +1,11 @@
 import express, {Express} from "express";
 import bodyParser from 'body-parser'
 import {Container, Inject, Service, Token} from "typedi";
-import {NodeConfigurationModel, NodeConfigurationModelToken} from "../common/entities/config/node-configuration.model";
+import {NodeConfigurationModel, NodeConfigurationModelToken} from "../common/config/node-configuration.model";
 import {ServerLogger, ServerLoggerToken} from "../common/logger/server-logger.interface";
 import {IdentityServiceToken} from "../common/services/security/identity.service";
-import {API_REGISTER_TOKENS} from "../common/network/api/basic.api.register";
 import {EduErrorHandler} from "../common/errors/edu.error.handler";
+import {API_REGISTER_TOKENS} from "../common/api/basic.api.register";
 
 export const EduNodeToken = new Token<EduNode>('EduNode');
 

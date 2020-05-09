@@ -8,7 +8,7 @@ import asyncHandler from 'express-async-handler';
 import {createInvalidRequestParamsError} from "../../errors/nms.error.factory";
 import {IdentityService, IdentityServiceToken} from "../../services/identity.service";
 
-export const NetworkMapApiToken = new Token<NetworkMapApi>('network.api.network-map');
+export const NetworkMapApiToken = new Token<NetworkMapApi>('api.routes.network-map');
 
 @Service(NetworkMapApiToken)
 export class NetworkMapApi implements BasicApi {

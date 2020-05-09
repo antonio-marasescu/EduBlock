@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import {Container} from "typedi";
-import {NmsConfigurationModel, NmsConfigurationModelToken} from "../../common/entities/config/nms-configuration.model";
+import {NmsConfigurationModel, NmsConfigurationModelToken} from "../../common/config/nms-configuration.model";
 
 export class InitializationHandler {
     public initialization() {

@@ -8,7 +8,7 @@ import express from "express";
 import {SignatureDto} from "../../dto/signature.dto";
 import {IdentityService, IdentityServiceToken} from "../../services/identity.service";
 
-export const CertificateAuthorityApiToken = new Token<CertificateAuthorityApi>('network.api.certificate-authority');
+export const CertificateAuthorityApiToken = new Token<CertificateAuthorityApi>('api.routes.certificate-authority');
 
 @Service(CertificateAuthorityApiToken)
 export class CertificateAuthorityApi {
