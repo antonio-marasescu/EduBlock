@@ -89,3 +89,9 @@ export function createNoTransactionStatusError(target: any): NmsError {
     error.constraints = {transactionStatusError: 'The transaction status was invalid!'};
     return new NmsError(400, [error]);
 }
+
+export function createNotEnoughTransactionsForBlockError(): NmsError {
+    const error = new ValidationError();
+    error.constraints = {transactionBlockCount: 'We do not have enough transactions to create a block!'};
+    return new NmsError(409, [error]);
+}

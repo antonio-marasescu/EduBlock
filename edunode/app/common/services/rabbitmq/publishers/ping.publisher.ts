@@ -1,11 +1,11 @@
 import {Inject, Service, Token} from "typedi";
 import {Message} from "amqp-ts";
 import {RabbitMqService, RabbitMqServiceToken} from "../rabbit-mq.service";
-import {PingConsumer, PingConsumerToken} from "../consumers/ping/ping.consumer";
+import {PingConsumer, PingConsumerToken} from "../consumers/ping.consumer";
 import {ServerLogger, ServerLoggerToken} from "../../../logger/server-logger.interface";
 import {createMessageCouldNotBeSentError} from "../../../errors/edu.error.factory";
 
-export const PingPublisherToken = new Token<PingPublisher>('network.rabbitmq.publisher.ping');
+export const PingPublisherToken = new Token<PingPublisher>('services.rabbitmq.publishers.ping');
 
 @Service(PingPublisherToken)
 export class PingPublisher {

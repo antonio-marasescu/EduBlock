@@ -1,11 +1,11 @@
 import {Container, Inject, Service, Token} from "typedi";
 import {RabbitMqService, RabbitMqServiceToken} from "../rabbit-mq.service";
-import {TransactionConsumer, TransactionConsumerToken} from "../consumers/transaction/transaction.consumer";
+import {TransactionConsumer, TransactionConsumerToken} from "../consumers/transaction.consumer";
 import {Message} from "amqp-ts";
 import {NetworkTransactionDto} from "../../../dto/network/blockchain/network-transaction.dto";
 import {ServerLogger, ServerLoggerToken} from "../../../logger/server-logger.interface";
 
-export const TransactionPublisherToken = new Token<TransactionPublisher>('network.rabbitmq.publisher.transaction');
+export const TransactionPublisherToken = new Token<TransactionPublisher>('services.rabbitmq.publishers.transaction');
 
 @Service(TransactionPublisherToken)
 export class TransactionPublisher {

@@ -23,6 +23,8 @@ export class BlockchainApi implements BasicApi {
     private registerRoutes() {
         this.router.post('/blockchain/transactions',
             asyncHandler(async (req, res) => this.handleCreateTransaction(req, res)));
+        this.router.post('/blockchain',
+            asyncHandler(async (_req, res) => this.handleManualBlockCreation(res)));
     }
 
     private async handleCreateTransaction(req, res) {
@@ -30,5 +32,10 @@ export class BlockchainApi implements BasicApi {
         Object.assign(createTransactionDto, req.body);
         const transactionEntity = await this.blockchainService.createTransaction(createTransactionDto);
         res.json(transactionEntity);
+    }
+
+    private async handleManualBlockCreation(res) {
+        const blockIndex = await this.blockchainService.createBlock();
+        res.json({index: blockIndex});
     }
 }

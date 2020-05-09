@@ -1,11 +1,11 @@
 {
-  "name": "certificate-authority",
+  "name": "edublock-worker",
   "version": "0.0.1",
-  "description": "The EduBlock Certificate Authority",
-  "main": "app/server/edu.node.ts",
+  "description": "An education platform for record keeping. This is the worker which creates the blocks for the blockchain.",
+  "main": "app/app.ts",
   "scripts": {
     "tsc": "tsc",
-    "dev": "ts-node-dev --respawn --transpileOnly ./app/app.ts",
+    "dev": "ts-node-dev --respawn --transpileOnly app/app.ts",
     "prod": "tsc && node ./build/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -13,10 +13,13 @@
   "license": "ISC",
   "dependencies": {
     "@types/body-parser": "^1.19.0",
+    "amqp-ts": "^1.8.0",
+    "axios": "^0.19.2",
     "class-validator": "^0.11.1",
     "eosjs-ecc": "^4.0.7",
     "express": "^4.17.1",
     "express-async-handler": "^1.1.4",
+    "gulp-stylus": "^2.7.0",
     "pg": "^8.0.0",
     "reflect-metadata": "^0.1.13",
     "sha256": "latest",

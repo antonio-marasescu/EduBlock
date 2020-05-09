@@ -15,14 +15,16 @@ export class BlockEntity {
     nonce: number;
 
     @Column()
-    timestamp: number;
+    timestamp: string;
 
     @Column()
     creatorPublicKey: string;
 
     @Column()
     creatorSignature: string;
+
+    @Column("simple-array")
+    transactions: string[];
 }
 
-export const BlockHashBlacklist = ['hash'];
-export const PendingHashBlacklist = ['creatorSignature', 'hash', 'index'];
+export const BlockSignatureBlacklist = ['hash', 'nonce', 'timestamp', 'creatorPublicKey', 'creatorSignature'];

@@ -1,12 +1,12 @@
 import {Container, Inject, Service, Token} from "typedi";
-import {BasicConsumer} from "../basic.consumer";
-import {IdentityService, IdentityServiceToken} from "../../../../services/security/identity.service";
+import {BasicConsumer} from "./basic.consumer";
+import {IdentityService, IdentityServiceToken} from "../../security/identity.service";
 import {Message} from "amqp-ts";
-import {ServerLoggerToken} from "../../../../logger/server-logger.interface";
-import {NetworkTransactionDto} from "../../../../dto/network/blockchain/network-transaction.dto";
-import {BlockchainServiceToken} from "../../../../services/ledger/blockchain.service";
+import {ServerLoggerToken} from "../../../logger/server-logger.interface";
+import {NetworkTransactionDto} from "../../../dto/network/blockchain/network-transaction.dto";
+import {BlockchainServiceToken} from "../../ledger/blockchain.service";
 
-export const TransactionConsumerToken = new Token<TransactionConsumer>('network.rabbitmq.consumers.transaction');
+export const TransactionConsumerToken = new Token<TransactionConsumer>('services.rabbitmq.consumers.transaction');
 
 @Service(TransactionConsumerToken)
 export class TransactionConsumer implements BasicConsumer {

@@ -1,4 +1,4 @@
-import {Inject, Service, Token} from "typedi";
+import {Container, Inject, Service, Token} from "typedi";
 import {
     IRecordTransactionRepository,
     IRecordTransactionRepositoryToken
@@ -17,6 +17,7 @@ import {
     createCertificateAuthorityCouldNotBeFoundError,
     createInvalidHashError,
     createInvalidSignatureError,
+    createNotEnoughTransactionsForBlockError,
     createNoTransactionStatusError,
     createSignatureDoesNotExistError,
     createValidationError
@@ -28,11 +29,17 @@ import {CertificateAuthorityService, CertificateAuthorityServiceToken} from "../
 import {CaTransactionDtoMapper} from "../../dto/ca/ca-transaction.dto";
 import {CaSignatureDto} from "../../dto/ca/ca-signature.dto";
 import {EccService, EccServiceToken} from "../security/ecc.service";
-import {TransactionPublisher, TransactionPublisherToken} from "../../network/rabbitmq/publishers/transaction.publisher";
+import {TransactionPublisher, TransactionPublisherToken} from "../rabbitmq/publishers/transaction.publisher";
 import {NetworkTransactionDto, NetworkTransactionDtoMapper} from "../../dto/network/blockchain/network-transaction.dto";
 import {validate, ValidationError} from "class-validator";
 import {NetworkMembersService, NetworkMembersServiceToken} from "../common/network-members.service";
 import {NodeConfigurationModel, NodeConfigurationModelToken} from "../../entities/config/node-configuration.model";
+import {IBlockRepository, IBlockRepositoryToken} from "../../repositories/ledger/block.interface.repository";
+import {BlockEntity, BlockSignatureBlacklist} from "../../entities/ledger/block.entity";
+import {IConsensusServiceToken} from "./consensus/consensus.pow.service";
+import {BlockPublisherToken} from "../rabbitmq/publishers/block.publisher";
+import {NetworkBlockDtoMapper} from "../../dto/network/blockchain/network-block.dto";
+
 
 export const BlockchainServiceToken = new Token<BlockchainService>('services.ledger.blockchain');
 
@@ -40,8 +47,7 @@ export const BlockchainServiceToken = new Token<BlockchainService>('services.led
 export class BlockchainService {
 
     constructor(
-        // @Inject(IConsensusServiceToken) private consensusService: IConsensusService,
-        // @Inject(IBlockRepositoryToken) private blockRepository: IBlockRepository,
+        @Inject(IBlockRepositoryToken) private blockRepository: IBlockRepository,
         @Inject(NodeConfigurationModelToken) private nodeConfigurationModelToken: NodeConfigurationModel,
         @Inject(IRecordTransactionRepositoryToken) private recordTransactionRepository: IRecordTransactionRepository,
         @Inject(IFilesRepositoryToken) private filesRepository: IFilesRepository,
@@ -117,18 +123,43 @@ export class BlockchainService {
         this.runtimeTransactionCheck();
     }
 
-    public async createBlock(): Promise<void> {
-        // const testPromise = new Promise((resolve, _reject) => {
-        //     setTimeout(() => resolve(), 5000)
-        // });
-        // await testPromise.then(() => {
-        //     console.log(this.i);
-        //     this.i = this.i + 1;
-        // });
-    }
+    public async createBlock(): Promise<number> {
+        this.logger.logInfo(this, "Getting transactions for block creation...");
+        const certifiedTransactions = await this.recordTransactionRepository.find({status: RecordTransactionStatus.Certified});
+        if (!certifiedTransactions || certifiedTransactions.length === 0) {
+            const error = createNotEnoughTransactionsForBlockError();
+            this.logger.logWarning(this, JSON.stringify(error));
+            throw error;
+        }
+        this.logger.logInfo(this, "Transaction found, block will be created with " + certifiedTransactions.length + " transactions");
+        const noBlocks = await this.blockRepository.count({});
+        const previousIndex = noBlocks - 1;
+        let previousBlock = await this.blockRepository.findOne({index: previousIndex});
+        if (!previousBlock) {
+            previousBlock = await this.createGenesisBlock(); // TODO: Just for testing
+        }
+        const blockEntity = new BlockEntity();
+        blockEntity.index = noBlocks + 1;
+        blockEntity.previousHash = previousBlock.hash;
+        blockEntity.transactions = certifiedTransactions.map(x => x.hash!!);
+        const blockSignatureObject = objectWithoutKeys(blockEntity, BlockSignatureBlacklist);
+        blockEntity.creatorSignature = await this.identityService.signData(blockSignatureObject);
+        blockEntity.creatorPublicKey = await this.identityService.getPersonalIdentity();
+        const consensusService = Container.get(IConsensusServiceToken);
+        consensusService.generateProof(blockEntity).then(async (hashedBlock) => {
+            const logger = Container.get(ServerLoggerToken);
+            const blockPublisher = Container.get(BlockPublisherToken);
 
-    public async testWork(): Promise<void> {
+            hashedBlock.timestamp = new Date(Date.now()).toISOString();
+            logger.logInfo(this, "Block work has finished on " + hashedBlock.timestamp);
+            const blockDto = NetworkBlockDtoMapper.toDto(hashedBlock);
+            logger.logInfo(this, "Block will be published to the network");
+            logger.logInfo(this, JSON.stringify(blockDto));
+            await blockPublisher.publish(blockDto);
+            logger.logSuccess(this, "Block has been published to the network");
 
+        });
+        return blockEntity.index;
     }
 
     //
@@ -207,5 +238,18 @@ export class BlockchainService {
         const savedTransaction: any = await this.recordTransactionRepository.save(transaction).catch(error => this.logger.logError(this, JSON.stringify(error)));
         this.logger.logSuccess(this, "Checkpointing transaction " + transaction.id + " succeeded.");
         return savedTransaction;
+    }
+
+    private async createGenesisBlock(): Promise<BlockEntity> {
+        const genesis = new BlockEntity();
+        genesis.index = 0;
+        genesis.previousHash = '0';
+        genesis.timestamp = new Date(Date.now()).toISOString();
+        genesis.nonce = 0;
+        genesis.transactions = [];
+        genesis.creatorPublicKey = '';
+        genesis.creatorSignature = '';
+        genesis.hash = '0';
+        return await this.blockRepository.save(genesis);
     }
 }

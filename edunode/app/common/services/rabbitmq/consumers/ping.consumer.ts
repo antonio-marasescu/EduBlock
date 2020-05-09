@@ -1,10 +1,10 @@
-import {BasicConsumer} from "../basic.consumer";
+import {BasicConsumer} from "./basic.consumer";
 import {Message} from "amqp-ts";
 import {Container, Inject, Service, Token} from "typedi";
-import {IdentityService, IdentityServiceToken} from "../../../../services/security/identity.service";
-import {ServerLoggerToken} from "../../../../logger/server-logger.interface";
+import {IdentityService, IdentityServiceToken} from "../../security/identity.service";
+import {ServerLoggerToken} from "../../../logger/server-logger.interface";
 
-export const PingConsumerToken = new Token<PingConsumer>('network.rabbitmq.consumers.ping');
+export const PingConsumerToken = new Token<PingConsumer>('services.rabbitmq.consumers.ping');
 const extension = ".ping-consumer";
 
 @Service(PingConsumerToken)

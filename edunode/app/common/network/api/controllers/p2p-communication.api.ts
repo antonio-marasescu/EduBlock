@@ -2,7 +2,7 @@ import {BasicApi} from "../basic.api";
 import express from "express";
 import asyncHandler from "express-async-handler";
 import {Inject, Service, Token} from "typedi";
-import {PingPublisher, PingPublisherToken} from "../../rabbitmq/publishers/ping.publisher";
+import {PingPublisher, PingPublisherToken} from "../../../services/rabbitmq/publishers/ping.publisher";
 import {createInvalidRequestParamsError} from "../../../errors/edu.error.factory";
 import {BasicMessageDto} from "../../../dto/network/basic-message.dto";
 

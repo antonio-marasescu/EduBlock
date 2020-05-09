@@ -7,7 +7,7 @@ import {ServerLogger, ServerLoggerToken} from "../../logger/server-logger.interf
 import CONSUMER_TOKENS from "./consumer.register";
 
 
-export const RabbitMqServiceToken = new Token<RabbitMqService>('network.rabbitmq.service');
+export const RabbitMqServiceToken = new Token<RabbitMqService>('services.rabbitmq.service');
 
 @Service(RabbitMqServiceToken)
 export class RabbitMqService {

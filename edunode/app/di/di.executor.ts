@@ -5,7 +5,7 @@ import {VaultConnectionToken} from "../server/db/vault.connection";
 import {EccServiceToken} from "../common/services/security/ecc.service";
 import {InitializationHandler} from "./initialization/initialization.handler";
 import {IdentityServiceToken} from "../common/services/security/identity.service";
-import {RabbitMqServiceToken} from "../common/network/rabbitmq/rabbit-mq.service";
+import {RabbitMqServiceToken} from "../common/services/rabbitmq/rabbit-mq.service";
 
 export default class DIExecutor {
     public inject(params: any) {
