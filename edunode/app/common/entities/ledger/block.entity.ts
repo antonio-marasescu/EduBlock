@@ -28,3 +28,4 @@ export class BlockEntity {
 }
 
 export const BlockSignatureBlacklist = ['hash', 'nonce', 'timestamp', 'creatorPublicKey', 'creatorSignature'];
+export const BlockHashBlacklist = ['hash', 'timestamp'];

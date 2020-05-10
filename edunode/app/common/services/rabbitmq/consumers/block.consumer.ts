@@ -1,7 +1,11 @@
-import {Inject, Service, Token} from "typedi";
+import {Container, Inject, Service, Token} from "typedi";
 import {BasicConsumer} from "./basic.consumer";
 import {Message} from "amqp-ts";
 import {IdentityService, IdentityServiceToken} from "../../security/identity.service";
+import {ServerLoggerToken} from "../../../logger/server-logger.interface";
+import {BlockchainServiceToken} from "../../ledger/blockchain.service";
+import {TransactionConsumerToken} from "./transaction.consumer";
+import {NetworkBlockDto} from "../../../dto/network/blockchain/network-block.dto";
 
 export const BlockConsumerToken = new Token<BlockConsumer>('services.rabbitmq.consumers.block');
 
@@ -13,7 +17,14 @@ export class BlockConsumer implements BasicConsumer {
     }
 
     public async consume(message: Message): Promise<void> {
-        console.log(message.getContent());
+        const logger = Container.get(ServerLoggerToken);
+        const consumer = Container.get(TransactionConsumerToken);
+        const service = Container.get(BlockchainServiceToken);
+        logger.logInfo(consumer, "Consuming Adding Network Block message....");
+        const content: NetworkBlockDto = new NetworkBlockDto();
+        Object.assign(content, message.getContent());
+        logger.logInfo(consumer, JSON.stringify(content));
+        service.addBlock(content).then(() => logger.logSuccess(consumer, "Message Network Block has been consumed.."));
         message.ack();
     }
 

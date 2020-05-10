@@ -95,3 +95,10 @@ export function createNotEnoughTransactionsForBlockError(): NmsError {
     error.constraints = {transactionBlockCount: 'We do not have enough transactions to create a block!'};
     return new NmsError(409, [error]);
 }
+
+export function createInvalidBlockEntityError(target: any, reason: string) {
+    const error = new ValidationError();
+    error.target = target;
+    error.constraints = {invalidBlock: 'The block entity was invalid!', reason: reason};
+    return new NmsError(400, [error]);
+}

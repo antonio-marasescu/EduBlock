@@ -15,16 +15,16 @@ export class TransactionConsumer implements BasicConsumer {
     constructor(@Inject(IdentityServiceToken) private identityService: IdentityService) {
     }
 
-    public async consume(x: Message): Promise<void> {
+    public async consume(message: Message): Promise<void> {
         const logger = Container.get(ServerLoggerToken);
         const consumer = Container.get(TransactionConsumerToken);
         const service = Container.get(BlockchainServiceToken);
         logger.logInfo(consumer, "Consuming Adding Transaction message....");
         const content: NetworkTransactionDto = new NetworkTransactionDto();
-        Object.assign(content, x.getContent());
+        Object.assign(content, message.getContent());
         logger.logInfo(consumer, JSON.stringify(content));
         service.addTransaction(content).then(() => logger.logSuccess(consumer, "Message Adding Transaction has been consumed.."));
-        x.ack();
+        message.ack();
     }
 
     public async getConsumerName(): Promise<string> {

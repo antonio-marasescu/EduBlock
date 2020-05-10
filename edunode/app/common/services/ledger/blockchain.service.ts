@@ -6,7 +6,6 @@ import {
 import {ServerLogger, ServerLoggerToken} from "../../logger/server-logger.interface";
 import {CreateTransactionDto, CreateTransactionDtoMapper} from "../../dto/common/create-transaction.dto";
 import {
-    CertificateAuthorityTransactionSignatureBlacklist,
     CertifiedTransactionHashBlacklist,
     PendingTransactionHashBlacklist,
     RecordTransactionEntity
@@ -14,12 +13,9 @@ import {
 import {IFilesRepository, IFilesRepositoryToken} from "../../repositories/vault/files.interface.repository";
 import {
     createAttachmentsNotFoundLocallyError,
-    createCertificateAuthorityCouldNotBeFoundError,
-    createInvalidHashError,
     createInvalidSignatureError,
     createNotEnoughTransactionsForBlockError,
     createNoTransactionStatusError,
-    createSignatureDoesNotExistError,
     createValidationError
 } from "../../errors/edu.error.factory";
 import {RecordTransactionStatus} from "../../entities/ledger/record-transaction-status.enum";
@@ -32,21 +28,20 @@ import {EccService, EccServiceToken} from "../security/ecc.service";
 import {TransactionPublisher, TransactionPublisherToken} from "../rabbitmq/publishers/transaction.publisher";
 import {NetworkTransactionDto, NetworkTransactionDtoMapper} from "../../dto/network/blockchain/network-transaction.dto";
 import {validate, ValidationError} from "class-validator";
-import {NetworkMembersService, NetworkMembersServiceToken} from "../common/network-members.service";
 import {NodeConfigurationModel, NodeConfigurationModelToken} from "../../config/node-configuration.model";
 import {IBlockRepository, IBlockRepositoryToken} from "../../repositories/ledger/block.interface.repository";
 import {BlockEntity, BlockSignatureBlacklist} from "../../entities/ledger/block.entity";
 import {AxiosTokenWorker} from "../axios/axios.config";
 import {AxiosInstance, AxiosResponse} from "axios";
-import {NetworkBlockDtoMapper} from "../../dto/network/blockchain/network-block.dto";
+import {NetworkBlockDto, NetworkBlockDtoMapper} from "../../dto/network/blockchain/network-block.dto";
 import {validateAxiosResponse} from "../../utils/validators.utils";
+import {BlockchainValidatorService, BlockchainValidatorServiceToken} from "./blockchain-validator.service";
 
 
 export const BlockchainServiceToken = new Token<BlockchainService>('services.ledger.blockchain');
 
 @Service(BlockchainServiceToken)
 export class BlockchainService {
-
     constructor(
         @Inject(IBlockRepositoryToken) private blockRepository: IBlockRepository,
         @Inject(NodeConfigurationModelToken) private nodeConfigurationModelToken: NodeConfigurationModel,
@@ -56,7 +51,7 @@ export class BlockchainService {
         @Inject(CertificateAuthorityServiceToken) private certificateAuthorityService: CertificateAuthorityService,
         @Inject(EccServiceToken) private eccService: EccService,
         @Inject(TransactionPublisherToken) private transactionPublisher: TransactionPublisher,
-        @Inject(NetworkMembersServiceToken) private networkMembersService: NetworkMembersService,
+        @Inject(BlockchainValidatorServiceToken) private blockchainValidatorService: BlockchainValidatorService,
         @Inject(AxiosTokenWorker) private workerAxiosInstance: AxiosInstance,
         @Inject(ServerLoggerToken) private logger: ServerLogger,
     ) {
@@ -114,7 +109,7 @@ export class BlockchainService {
         this.logger.logSuccess(this, "Validation of network transaction data transfer object succeeded...");
 
         const transaction: RecordTransactionEntity = NetworkTransactionDtoMapper.toEntity(networkTransactionDto);
-        await this.validateNetworkTransaction(transaction);
+        await this.blockchainValidatorService.validateNetworkTransaction(transaction);
 
         if (!transaction.status) {
             const error = createNoTransactionStatusError(transaction.status);
@@ -153,9 +148,33 @@ export class BlockchainService {
         return blockEntity.index;
     }
 
-    //
-    // public async addBlock(networkBlockDto: NetworkBlockDto) {
-    // }
+    public async addBlock(networkBlockDto: NetworkBlockDto): Promise<void> {
+        this.logger.logInfo(this, "Request to add block to the blockchain started...");
+        const networkEntity = NetworkBlockDtoMapper.toEntity(networkBlockDto);
+        this.logger.logInfo(this, JSON.stringify(networkEntity));
+        this.logger.logInfo(this, "Validating block...");
+        await this.blockchainValidatorService.validateBlock(networkEntity);
+        this.logger.logSuccess(this, "The validation for the block has succeeded...");
+        this.logger.logInfo(this, "Adding the block to the ledger...");
+        await this.blockRepository.save(networkEntity);
+        this.logger.logSuccess(this, "The block was added to the ledger.");
+        this.logger.logInfo(this, "Updating local transactions block hash to the new block.");
+        for (let transaction of networkEntity.transactions) {
+            const localTransaction = await this.recordTransactionRepository.findOne({hash: transaction});
+            if (!localTransaction) {
+                this.logger.logWarning(this, "We do not own transaction: " + transaction);
+                continue;
+            }
+            localTransaction.blockHash = networkEntity.hash;
+            await this.recordTransactionRepository.save(localTransaction);
+        }
+        this.logger.logSuccess(this, "Local transactions block hash updated.");
+        this.learnLatestBlockchainStatus();
+    }
+
+    public async learnLatestBlockchainStatus(): Promise<void> {
+
+    }
 
     private async runtimeTransactionCheck(): Promise<void> {
         this.logger.logInfo(this, "Running runtime transaction checks...");
@@ -176,51 +195,6 @@ export class BlockchainService {
             throw error;
         }
         this.logger.logSuccess(this, "Validation succeeded of transaction attachments...");
-    }
-
-    private async validateNetworkTransaction(transaction: RecordTransactionEntity): Promise<void> {
-        this.logger.logInfo(this, "Validating identity of the transaction creator...");
-        await this.networkMembersService.getSingleNetworkMember(transaction.creatorPublicKey);
-        this.logger.logSuccess(this, "Validation of the identity of the transaction creator succeeded...");
-
-        this.logger.logInfo(this, "Validating the transaction hash...");
-        const certifiedTransactionHashObject = objectWithoutKeys(transaction, CertifiedTransactionHashBlacklist);
-        const verificationHash = await this.eccService.hashData(certifiedTransactionHashObject);
-        if (verificationHash !== transaction.hash) {
-            const error = createInvalidHashError(transaction.hash);
-            this.logger.logError(this, JSON.stringify(error));
-            throw error;
-        }
-        this.logger.logSuccess(this, "Validation of the transaction hash succeeded...");
-
-
-        this.logger.logInfo(this, "Validating the creator signature of the data...");
-        if (!transaction.creatorSignature) {
-            const error = createSignatureDoesNotExistError('transaction.creatorSignature');
-            this.logger.logError(this, JSON.stringify(error));
-            throw error;
-        }
-        const creatorTransactionSignatureObject = objectWithoutKeys(transaction, PendingTransactionHashBlacklist);
-        const transactionCreatorSignature: string = transaction.creatorSignature;
-        await this.identityService.verifyData(creatorTransactionSignatureObject, transactionCreatorSignature, transaction.creatorPublicKey);
-        this.logger.logSuccess(this, "Validation of the creator signature of the data succeeded...");
-
-
-        this.logger.logInfo(this, "Validating the certificate authority signature of the data...");
-        if (!transaction.certificateSignature) {
-            const error = createSignatureDoesNotExistError('transaction.certificateSignature');
-            this.logger.logError(this, JSON.stringify(error));
-            throw error;
-        }
-        if (!transaction.certificateAuthorityPublicKey) {
-            const error = createCertificateAuthorityCouldNotBeFoundError('transaction.certificateAuthorityPublicKey');
-            this.logger.logError(this, JSON.stringify(error));
-            throw error;
-        }
-        const certificateAuthorityTransactionSignatureObject = objectWithoutKeys(transaction, CertificateAuthorityTransactionSignatureBlacklist);
-        const transactionCertificateAuthoritySignature: string = transaction.certificateSignature;
-        await this.identityService.verifyData(certificateAuthorityTransactionSignatureObject, transactionCertificateAuthoritySignature, transaction.certificateAuthorityPublicKey);
-        this.logger.logSuccess(this, "Validation of the certificate authority signature of the data succeeded...");
     }
 
     private async checkpointTransaction(transaction: RecordTransactionEntity, newStatus: RecordTransactionStatus): Promise<RecordTransactionEntity> {
