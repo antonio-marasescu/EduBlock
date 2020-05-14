@@ -76,7 +76,7 @@ export class BlockchainValidatorService {
         const blockHash = await this.eccService.hashData(blockHashObject);
         const hashCondition = this.nodeConfigurationModelToken.blockchainConfiguration.consensusChar.repeat(
             this.nodeConfigurationModelToken.blockchainConfiguration.difficultyLevel);
-        if (blockHash !== block.hash || block.hash !== hashCondition) {
+        if (blockHash !== block.hash || blockHash.substring(0, this.nodeConfigurationModelToken.blockchainConfiguration.difficultyLevel) !== hashCondition) {
             const error = createInvalidBlockEntityError(block.hash, "Block hash is invalid!");
             this.logger.logError(this, JSON.stringify(error));
             throw error;
@@ -166,6 +166,31 @@ export class BlockchainValidatorService {
             }
             this.logger.logSuccess(this, "Validation of the transaction block succeeded!");
         }
+    }
+
+    public async validateChain(blockchain: BlockEntity[]): Promise<boolean> {
+
+        this.logger.logInfo(this, "Validating new blockchain");
+        for (let i = 1; i < blockchain.length; i++) {
+            const currentBlock = blockchain[i];
+            const previousBlock = blockchain[i - 1];
+            if (!currentBlock.previousHash || currentBlock.previousHash !== previousBlock.hash) {
+                this.logger.logWarning(this, "Validating new blockchain has failed!");
+                return false;
+            }
+
+            const blockHashObject = objectWithoutKeys(currentBlock, BlockHashBlacklist);
+            const blockHash = await this.eccService.hashData(blockHashObject);
+            const hashCondition = this.nodeConfigurationModelToken.blockchainConfiguration.consensusChar.repeat(
+                this.nodeConfigurationModelToken.blockchainConfiguration.difficultyLevel);
+
+            if (blockHash !== currentBlock.hash || blockHash.substring(0, this.nodeConfigurationModelToken.blockchainConfiguration.difficultyLevel) !== hashCondition) {
+                this.logger.logWarning(this, "Validating new blockchain has failed!");
+                return false;
+            }
+        }
+        this.logger.logSuccess(this, "Validating new blockchain has succeeded!");
+        return true;
     }
 
 }

@@ -6,6 +6,7 @@ import {SignatureEntity} from "../entities/signatures/signature.entity";
 import {CaLogger, CaLoggerToken} from "../logger/ca-logger.interface";
 import {createNoDataToSignError} from "../errors/ca.error.factory";
 import {SignatureDto} from "../dto/signature.dto";
+import {objectWithoutKeys} from "../utils/dictionary.utils";
 
 export const CertificateAuthorityServiceToken = new Token<CertificateAuthorityService>('services.certificate-authority');
 
@@ -19,9 +20,10 @@ export class CertificateAuthorityService {
     }
 
 
-    public async signData(data: any): Promise<SignatureDto> {
+    public async signData(networkData: any): Promise<SignatureDto> {
         this.logger.logInfo(this, "Starting sign record data flow...");
         this.logger.logWarning(this, "This is just a mock signature, should not be considered as a legal signature of a record");
+        const data = objectWithoutKeys(networkData, []);
         if (!data) {
             const error = createNoDataToSignError(data);
             this.logger.logError(this, JSON.stringify(error));
@@ -32,7 +34,7 @@ export class CertificateAuthorityService {
 
         this.logger.logInfo(this, "Signature data is been notarized...");
         const signedData: SignatureEntity = {
-            signedData: data,
+            signedData: JSON.stringify(data),
             signature: signature,
             dateSigned: now
         };

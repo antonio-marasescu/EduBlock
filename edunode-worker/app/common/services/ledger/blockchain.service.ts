@@ -26,8 +26,6 @@ export class BlockchainService {
             this.logger.logInfo(this, "Block will be published to the network");
             this.logger.logInfo(this, JSON.stringify(hashedBlock));
             await blockPublisher.publish(hashedBlock);
-            this.logger.logSuccess(this, "Block has been published to the network");
-
         });
     }
 }

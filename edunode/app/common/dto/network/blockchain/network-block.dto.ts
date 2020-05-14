@@ -1,4 +1,5 @@
 import {BlockEntity} from "../../../entities/ledger/block.entity";
+import {objectWithoutKeys} from "../../../utils/dictionary.utils";
 
 export class NetworkBlockDto {
     hash: string;
@@ -23,7 +24,9 @@ export class NetworkBlockDtoMapper {
         entity.creatorPublicKey = dto.creatorPublicKey;
         entity.creatorSignature = dto.creatorSignature;
         entity.transactions = dto.transactions;
-        return entity;
+        const sortedEntity = new BlockEntity();
+        Object.assign(sortedEntity, objectWithoutKeys(entity, []));
+        return sortedEntity;
     }
 
     public static toDto(entity: BlockEntity): NetworkBlockDto {
@@ -36,6 +39,8 @@ export class NetworkBlockDtoMapper {
         dto.creatorPublicKey = entity.creatorPublicKey;
         dto.creatorSignature = entity.creatorSignature;
         dto.transactions = entity.transactions;
-        return dto;
+        const sortedDto = new NetworkBlockDto();
+        Object.assign(sortedDto, objectWithoutKeys(dto, []));
+        return sortedDto;
     }
 }

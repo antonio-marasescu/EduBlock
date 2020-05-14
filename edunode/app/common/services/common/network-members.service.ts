@@ -62,7 +62,7 @@ export class NetworkMembersService {
         return EduCommonIdentityDtoMapper.toDto(savedEntity);
     }
 
-    public async learnMembers() {
+    public async learnMembers(): Promise<EduCommonIdentityDto[]> {
         this.logger.logInfo(this, "Initializing learn members flow");
         this.logger.logInfo(this, "Sending get members request....");
         const personalIdentity = await this.identityService.getPersonalIdentity();
