@@ -1,6 +1,6 @@
 import {Inject, Service, Token} from "typedi";
 import {EccService, EccServiceToken} from "./ecc.service";
-import {NmsConfigurationModel, NmsConfigurationModelToken} from "../entities/config/nms-configuration.model";
+import {NmsConfigurationModel, NmsConfigurationModelToken} from "../config/nms-configuration.model";
 import {NmsLogger, NmsLoggerToken} from "../logger/nms-logger.interface";
 import IPersonalIdentityRepository, {IPersonalIdentityRepositoryToken} from "../repositories/identity/personal-identity.interface.repository";
 import {PersonalIdentity} from "../entities/identity/personal-identity.entity";

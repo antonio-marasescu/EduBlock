@@ -1,11 +1,11 @@
 import express, {Express} from "express";
 import bodyParser from 'body-parser'
 import {Container, Inject, Service, Token} from "typedi";
-import {CaConfigurationModel, CaConfigurationModelToken} from "../common/entities/config/ca-configuration.model";
+import {CaConfigurationModel, CaConfigurationModelToken} from "../common/config/ca-configuration.model";
 import {CaLogger, CaLoggerToken} from "../common/logger/ca-logger.interface";
 import {IdentityServiceToken} from "../common/services/identity.service";
 import {CaErrorHandler} from "../common/errors/ca.error.handler";
-import {API_REGISTER_TOKENS} from "../common/network/basic.api.register";
+import {API_REGISTER_TOKENS} from "../common/api/basic.api.register";
 
 export const CaNodeToken = new Token<CaNode>('CaNode');
 

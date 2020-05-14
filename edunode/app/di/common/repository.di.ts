@@ -5,8 +5,12 @@ import {PersonalIdentityRepository} from "../../common/repositories/identity/per
 import {getCustomRepository} from "typeorm";
 import {ICommonIdentityRepositoryToken} from "../../common/repositories/identity/common-identity.interface.repository";
 import {CommonIdentityRepository} from "../../common/repositories/identity/common-identity.repository";
-import {IFilesRepositoryToken} from "../../common/repositories/files/files.interface.repository";
-import {FilesRepository} from "../../common/repositories/files/files.repository";
+import {IFilesRepositoryToken} from "../../common/repositories/vault/files.interface.repository";
+import {FilesRepository} from "../../common/repositories/vault/files.repository";
+import {IBlockRepositoryToken} from "../../common/repositories/ledger/block.interface.repository";
+import {BlockRepository} from "../../common/repositories/ledger/block.repository";
+import {IRecordTransactionRepositoryToken} from "../../common/repositories/ledger/record-transaction.interface.repository";
+import {RecordTransactionRepository} from "../../common/repositories/ledger/record-transaction.repository";
 
 export default class RepositoryDI implements DIInterface {
 
@@ -14,5 +18,7 @@ export default class RepositoryDI implements DIInterface {
         Container.set(IPersonalIdentityRepositoryToken, getCustomRepository(PersonalIdentityRepository));
         Container.set(ICommonIdentityRepositoryToken, getCustomRepository(CommonIdentityRepository));
         Container.set(IFilesRepositoryToken, getCustomRepository(FilesRepository));
+        Container.set(IBlockRepositoryToken, getCustomRepository(BlockRepository));
+        Container.set(IRecordTransactionRepositoryToken, getCustomRepository(RecordTransactionRepository));
     }
 }

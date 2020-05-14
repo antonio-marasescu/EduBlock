@@ -1,10 +1,18 @@
 import {ValidationError} from "class-validator/validation/ValidationError";
 import {EduError} from "./edu.error";
+import {NmsError} from "../../../../network-map-service/app/common/errors/nms.error";
 
 export function createInvalidSignatureError(target: any): EduError {
     const error = new ValidationError();
     error.target = target;
     error.constraints = {signatureValidation: 'Signature validity check failed'};
+    return new EduError(400, [error]);
+}
+
+export function createSignatureDoesNotExistError(target: any): EduError {
+    const error = new ValidationError();
+    error.target = target;
+    error.constraints = {signatureDoesNotExist: 'Signature does not exist!'};
     return new EduError(400, [error]);
 }
 
@@ -17,6 +25,13 @@ export function createInvalidRequestParamsError(target: any): EduError {
     error.target = target;
     error.constraints = {signatureValidation: 'The request had invalid parameters'};
     return new EduError(400, [error]);
+}
+
+export function createAttachmentsNotFoundLocallyError(target: any): EduError {
+    const error = new ValidationError();
+    error.target = target;
+    error.constraints = {notFound: 'The attachments for the required object were not found!'};
+    return new EduError(404, [error]);
 }
 
 export function createObjectNotFoundError(target: any): EduError {
@@ -45,4 +60,45 @@ export function createIdentityNotFound(target: any): EduError {
 
 export function createAxiosResponseError(axiosError: any) {
     return new EduError(axiosError.status, [axiosError.body]);
+}
+
+export function createMessageCouldNotBeSentError(target: any): EduError {
+    const error = new ValidationError();
+    error.target = target;
+    error.constraints = {messageCouldNotBeSent: 'The message could not be sent to the target!'};
+    return new EduError(400, [error]);
+}
+
+export function createInvalidHashError(target: any): NmsError {
+    const error = new ValidationError();
+    error.target = target;
+    error.constraints = {hashError: 'The hash of the data is not correct!'};
+    return new NmsError(400, [error]);
+}
+
+export function createCertificateAuthorityCouldNotBeFoundError(target: any) {
+    const error = new ValidationError();
+    error.target = target;
+    error.constraints = {certificateAuthorityCouldNotBeFound: 'The certificate authority could not be found for this transaction!'};
+    return new NmsError(400, [error]);
+}
+
+export function createNoTransactionStatusError(target: any): NmsError {
+    const error = new ValidationError();
+    error.target = target;
+    error.constraints = {transactionStatusError: 'The transaction status was invalid!'};
+    return new NmsError(400, [error]);
+}
+
+export function createNotEnoughTransactionsForBlockError(): NmsError {
+    const error = new ValidationError();
+    error.constraints = {transactionBlockCount: 'We do not have enough transactions to create a block!'};
+    return new NmsError(409, [error]);
+}
+
+export function createInvalidBlockEntityError(target: any, reason: string) {
+    const error = new ValidationError();
+    error.target = target;
+    error.constraints = {invalidBlock: 'The block entity was invalid!', reason: reason};
+    return new NmsError(400, [error]);
 }

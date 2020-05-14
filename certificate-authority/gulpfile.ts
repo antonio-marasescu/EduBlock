@@ -1,6 +1,6 @@
 import {exec} from "child_process";
 
-const childNames = ['npm run dev nms'];
+const childNames = ['npm run dev ca'];
 
 
 export function initGulpCA(gulp, workingDir) {

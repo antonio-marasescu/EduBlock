@@ -1,0 +1,18 @@
+# EduBlock Local Nodes Port Mappings
+
+- 3001 : node-uni-1
+- 3002 : node-uni-2
+- 3003 : node-uni-3
+- 3004 : node-uni-4
+- 3005 : nms
+- 3006 : cs
+- 3007 : node-worker-uni-1
+- 3008 : node-worker-uni-2
+- 3009 : node-worker-uni-3
+- 3010 : node-worker-uni-4
+- 5434 : node-uni-1-database
+- 5435 : node-uni-2-database
+- 5436 : node-uni-3-database
+- 5437 : node-uni-4-database
+- 5438 : nms-database
+- 5439 : ca-database

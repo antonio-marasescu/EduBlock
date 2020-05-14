@@ -4,5 +4,11 @@
     "alias": "NMS EU",
     "port": 3005,
     "host": "localhost"
+  },
+  "ca": {
+    "legalName": "Certificate Authority Romania",
+    "alias": "CA RO",
+    "port": 3006,
+    "host": "localhost"
   }
 }
