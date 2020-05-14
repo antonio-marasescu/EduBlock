@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import {Container} from "typedi";
-import {CaConfigurationModel, CaConfigurationModelToken} from "../../common/entities/config/ca-configuration.model";
+import {CaConfigurationModel, CaConfigurationModelToken} from "../../common/config/ca-configuration.model";
 
 export class InitializationHandler {
     public initialization() {

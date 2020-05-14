@@ -1,10 +1,10 @@
 import {Inject, Service, Token} from "typedi";
 import {ServerLogger, ServerLoggerToken} from "../../logger/server-logger.interface";
 import {EccService, EccServiceToken} from "../security/ecc.service";
-import {IFilesRepository, IFilesRepositoryToken} from "../../repositories/files/files.interface.repository";
 import {IdentityService, IdentityServiceToken} from "../security/identity.service";
 import {EduFileDto, EduFileMapper} from "../../dto/common/edu-file.dto";
 import {EduFileEntity} from "../../entities/files/edu-file.entity";
+import {IFilesRepository, IFilesRepositoryToken} from "../../repositories/vault/files.interface.repository";
 
 export const FilesServiceToken = new Token<FilesService>('services.common.files');
 

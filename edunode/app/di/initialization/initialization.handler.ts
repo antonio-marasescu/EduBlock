@@ -1,11 +1,8 @@
 import * as fs from 'fs';
-import {
-    NodeConfigurationModel,
-    NodeConfigurationModelToken
-} from "../../common/entities/config/node-configuration.model";
+import {NodeConfigurationModel, NodeConfigurationModelToken} from "../../common/config/node-configuration.model";
 import {Container} from "typedi";
 import {CommonIdentity} from "../../common/entities/identity/common-identity.entity";
-import {AxiosTokenNMS} from "../../common/services/axios/axios.config";
+import {AxiosTokenCA, AxiosTokenNMS, AxiosTokenWorker} from "../../common/services/axios/axios.config";
 import Axios from "axios";
 
 export class InitializationHandler {
@@ -29,15 +26,25 @@ export class InitializationHandler {
             throw new Error("Invalid identity parameter!");
         }
         Container.set(NodeConfigurationModelToken, ownIdentity);
+        const workerAxiosInstance = Axios.create({
+            baseURL: 'http://' + ownIdentity.workerConfiguration.host + ":" + ownIdentity.workerConfiguration.port
+        });
+        Container.set(AxiosTokenWorker, workerAxiosInstance);
     }
 
     private handleNetwork() {
         const rawData: Buffer = fs.readFileSync('resources/network.json');
         const network: { [key: string]: CommonIdentity } = JSON.parse(rawData.toString());
         const nms = network['nms'];
-        const axiosInstance = Axios.create({
+        const nmsAxiosInstance = Axios.create({
             baseURL: 'http://' + nms.host + ":" + nms.port
         });
-        Container.set(AxiosTokenNMS, axiosInstance);
+        Container.set(AxiosTokenNMS, nmsAxiosInstance);
+
+        const ca = network['ca'];
+        const caAxiosInstance = Axios.create({
+            baseURL: 'http://' + ca.host + ":" + ca.port
+        });
+        Container.set(AxiosTokenCA, caAxiosInstance);
     }
 }

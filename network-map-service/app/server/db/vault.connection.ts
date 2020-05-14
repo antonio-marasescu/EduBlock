@@ -5,7 +5,7 @@ import {VAULT_SCHEMA} from "./vault.schema";
 import {
     NmsConfigurationModel,
     NmsConfigurationModelToken
-} from "../../common/entities/config/nms-configuration.model";
+} from "../../common/config/nms-configuration.model";
 import {NmsLogger, NmsLoggerToken} from "../../common/logger/nms-logger.interface";
 
 export const VaultConnectionToken = new Token<VaultConnection>('vault.connection');

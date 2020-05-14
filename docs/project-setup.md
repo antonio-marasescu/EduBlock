@@ -1,4 +1,4 @@
-# Project Setup for Development
+# Project Setup for Development (Outdated)
 * Create Project Folder Structure
     * */app* folder
     * */app/common/* folder

@@ -6,7 +6,7 @@ import {SERVER_LOGGER_LEVELS, SERVER_LOGGER_OPTIONS} from "./nms-logger.config";
 import {
     NmsConfigurationModel,
     NmsConfigurationModelToken
-} from "../entities/config/nms-configuration.model";
+} from "../config/nms-configuration.model";
 
 @Service(NmsLoggerToken)
 export class NmsLoggerService implements NmsLogger {

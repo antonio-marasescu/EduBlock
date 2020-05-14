@@ -1,6 +1,7 @@
 import {NewNetworkMemberDto} from "../new-network-member.dto";
 import {NetworkMapEntity} from "../../../entities/network-map/network-map.entity";
 import {NetworkMemberDto} from "../network-member.dto";
+import {objectWithoutKeys} from "../../../utils/dictionary.utils";
 
 export class NetworkMapEntityMapper {
     public static toEntity(newNetworkMemberDto: NewNetworkMemberDto): NetworkMapEntity {
@@ -14,12 +15,14 @@ export class NetworkMapEntityMapper {
             networkMapEntity.promoterPublicKey = newNetworkMemberDto.proof.publicKey;
             networkMapEntity.promoterSignature = newNetworkMemberDto.proof.signature;
         }
-        return networkMapEntity;
+        const sortedNetworkMapEntity = new NetworkMapEntity();
+        Object.assign(sortedNetworkMapEntity, objectWithoutKeys(networkMapEntity, []));
+        return sortedNetworkMapEntity;
     }
 
     public static toDto(entity: NetworkMapEntity): NetworkMemberDto {
         const dto = new NetworkMemberDto();
-        Object.assign(dto, entity);
+        Object.assign(dto, objectWithoutKeys(entity, []));
         return dto;
     }
 }

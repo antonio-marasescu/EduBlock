@@ -1,6 +1,6 @@
 import {Inject, Service, Token} from "typedi";
 import {EccService, EccServiceToken} from "./ecc.service";
-import {CaConfigurationModel, CaConfigurationModelToken} from "../entities/config/ca-configuration.model";
+import {CaConfigurationModel, CaConfigurationModelToken} from "../config/ca-configuration.model";
 import {CaLogger, CaLoggerToken} from "../logger/ca-logger.interface";
 import IPersonalIdentityRepository, {IPersonalIdentityRepositoryToken} from "../repositories/identity/personal-identity.interface.repository";
 import {PersonalIdentity} from "../entities/identity/personal-identity.entity";

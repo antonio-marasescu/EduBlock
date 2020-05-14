@@ -1,0 +1,78 @@
+{
+  "node-worker-uni-1": {
+    "identity": {
+      "alias": "University of California Worker",
+      "port": 3007,
+      "host": "localhost"
+    },
+    "rabbitmqConfiguration": {
+      "url": "amqp://localhost",
+      "exchangeName": "edu-node-common-exchange",
+      "exchangeType": "direct",
+      "blockPublishQueue": "block-consumer"
+    },
+    "blockchainConfiguration": {
+      "difficultyLevel": 4,
+      "consensusChar": "0",
+      "numberOfTransactionUntilBlock": 4
+    },
+    "useFileLogging": false
+  },
+  "node-worker-uni-2": {
+    "identity": {
+      "alias": "University of Amsterdam Worker",
+      "port": 3008,
+      "host": "localhost"
+    },
+    "rabbitmqConfiguration": {
+      "url": "amqp://localhost",
+      "exchangeName": "edu-node-common-exchange",
+      "exchangeType": "direct",
+      "blockPublishQueue": "block-consumer"
+    },
+    "blockchainConfiguration": {
+      "difficultyLevel": 4,
+      "consensusChar": "0",
+      "numberOfTransactionUntilBlock": 4
+    },
+    "useFileLogging": false
+  },
+  "node-worker-uni-3": {
+    "identity": {
+      "alias": "University of Cluj-Napoca Worker",
+      "port": 3009,
+      "host": "localhost"
+    },
+    "rabbitmqConfiguration": {
+      "url": "amqp://localhost",
+      "exchangeName": "edu-node-common-exchange",
+      "exchangeType": "direct",
+      "blockPublishQueue": "block-consumer"
+    },
+    "blockchainConfiguration": {
+      "difficultyLevel": 4,
+      "consensusChar": "0",
+      "numberOfTransactionUntilBlock": 4
+    },
+    "useFileLogging": false
+  },
+  "node-worker-uni-4": {
+    "identity": {
+      "alias": "University of Bucharest Worker",
+      "port": 3010,
+      "host": "localhost"
+    },
+    "rabbitmqConfiguration": {
+      "url": "amqp://localhost",
+      "exchangeName": "edu-node-common-exchange",
+      "exchangeType": "direct",
+      "blockPublishQueue": "block-consumer"
+    },
+    "blockchainConfiguration": {
+      "difficultyLevel": 4,
+      "consensusChar": "0",
+      "numberOfTransactionUntilBlock": 4
+    },
+    "useFileLogging": false
+  }
+}

@@ -5,7 +5,7 @@
   "scripts": {
     "generate-dependency": "dependency-cruise -x \\\"node_modules\\\" -T dot edunode/app/app.ts | dot -T svg > docs/images/dependency-graph/clustered_complete.svg"
   },
-  "author": "",
+  "author": "Marasescu-Duran Antonio",
   "license": "ISC",
   "dependencies": {
     "@types/multer": "^1.4.3",

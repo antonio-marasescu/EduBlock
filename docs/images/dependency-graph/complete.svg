@@ -7,70 +7,111 @@
 <svg width="3233pt" height="1177pt"
  viewBox="0.00 0.00 3233.20 1177.31" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(21.6 1155.71)">
-<title>G</title>
-<polygon fill="#111111" stroke="none" points="-21.6,21.6 -21.6,-1155.71 3211.6,-1155.71 3211.6,21.6 -21.6,21.6"/>
-<!-- app.service.ts -->
-<g id="node1" class="node"><title>app.service.ts</title>
-<path fill="none" stroke="#c6c5fe" d="M189.333,-922.383C189.333,-922.383 99.6667,-922.383 99.6667,-922.383 95.8333,-922.383 92,-918.549 92,-914.716 92,-914.716 92,-907.049 92,-907.049 92,-903.216 95.8333,-899.383 99.6667,-899.383 99.6667,-899.383 189.333,-899.383 189.333,-899.383 193.167,-899.383 197,-903.216 197,-907.049 197,-907.049 197,-914.716 197,-914.716 197,-918.549 193.167,-922.383 189.333,-922.383"/>
-<text text-anchor="middle" x="144.5" y="-907.183" font-family="Arial" font-size="14.00" fill="#c6c5fe">app.service.ts</text>
-</g>
-<!-- server/edu.node.ts -->
-<g id="node2" class="node"><title>server/edu.node.ts</title>
-<path fill="none" stroke="#c6c5fe" d="M360.333,-960.383C360.333,-960.383 240.667,-960.383 240.667,-960.383 236.833,-960.383 233,-956.549 233,-952.716 233,-952.716 233,-945.049 233,-945.049 233,-941.216 236.833,-937.383 240.667,-937.383 240.667,-937.383 360.333,-937.383 360.333,-937.383 364.167,-937.383 368,-941.216 368,-945.049 368,-945.049 368,-952.716 368,-952.716 368,-956.549 364.167,-960.383 360.333,-960.383"/>
-<text text-anchor="middle" x="300.5" y="-945.183" font-family="Arial" font-size="14.00" fill="#c6c5fe">server/edu.node.ts</text>
-</g>
-<!-- app.service.ts&#45;&gt;server/edu.node.ts -->
-<g id="edge1" class="edge"><title>app.service.ts&#45;&gt;server/edu.node.ts</title>
-<path fill="none" stroke="#757575" d="M192.123,-922.387C208.032,-926.313 226.001,-930.747 242.624,-934.848"/>
-<polygon fill="#757575" stroke="#757575" points="242.223,-938.354 252.77,-937.352 243.9,-931.558 242.223,-938.354"/>
-</g>
-<!-- common/entities/config/node&#45;configuration.model.ts -->
-<g id="node5" class="node"><title>common/entities/config/node&#45;configuration.model.ts</title>
-<path fill="none" stroke="#c6c5fe" d="M1923.33,-844.383C1923.33,-844.383 1594.67,-844.383 1594.67,-844.383 1590.83,-844.383 1587,-840.549 1587,-836.716 1587,-836.716 1587,-829.049 1587,-829.049 1587,-825.216 1590.83,-821.383 1594.67,-821.383 1594.67,-821.383 1923.33,-821.383 1923.33,-821.383 1927.17,-821.383 1931,-825.216 1931,-829.049 1931,-829.049 1931,-836.716 1931,-836.716 1931,-840.549 1927.17,-844.383 1923.33,-844.383"/>
-<text text-anchor="middle" x="1759" y="-829.183" font-family="Arial" font-size="14.00" fill="#c6c5fe">common/entities/config/node&#45;configuration.model.ts</text>
-</g>
-<!-- server/edu.node.ts&#45;&gt;common/entities/config/node&#45;configuration.model.ts -->
-<g id="edge85" class="edge"><title>server/edu.node.ts&#45;&gt;common/entities/config/node&#45;configuration.model.ts</title>
-<path fill="none" stroke="#757575" d="M368.242,-946.28C550.168,-938.797 1069.91,-914.83 1500,-869.883 1559.91,-863.621 1627.28,-853.867 1678.15,-845.945"/>
-<polygon fill="#757575" stroke="#757575" points="1678.76,-849.392 1688.1,-844.386 1677.68,-842.476 1678.76,-849.392"/>
-</g>
-<!-- common/logger/server&#45;logger.interface.ts -->
-<g id="node12" class="node"><title>common/logger/server&#45;logger.interface.ts</title>
-<path fill="none" stroke="#cfffac" d="M1890.33,-903.383C1890.33,-903.383 1627.67,-903.383 1627.67,-903.383 1623.83,-903.383 1620,-899.549 1620,-895.716 1620,-895.716 1620,-888.049 1620,-888.049 1620,-884.216 1623.83,-880.383 1627.67,-880.383 1627.67,-880.383 1890.33,-880.383 1890.33,-880.383 1894.17,-880.383 1898,-884.216 1898,-888.049 1898,-888.049 1898,-895.716 1898,-895.716 1898,-899.549 1894.17,-903.383 1890.33,-903.383"/>
-<text text-anchor="middle" x="1759" y="-888.183" font-family="Arial" font-size="14.00" fill="#cfffac">common/logger/server&#45;logger.interface.ts</text>
-</g>
-<!-- server/edu.node.ts&#45;&gt;common/logger/server&#45;logger.interface.ts -->
-<g id="edge86" class="edge"><title>server/edu.node.ts&#45;&gt;common/logger/server&#45;logger.interface.ts</title>
-<path fill="none" stroke="#757575" d="M316.077,-960.431C335.066,-974.731 369.881,-998.472 404,-1008.88 870.232,-1151.14 1030.83,-1182.13 1500,-1049.88 1598.14,-1022.22 1695.8,-945.657 1737.27,-910.263"/>
-<polygon fill="#757575" stroke="#757575" points="1739.74,-912.75 1745.02,-903.563 1735.17,-907.453 1739.74,-912.75"/>
-</g>
-<!-- common/network/api/basic.api.register.ts -->
-<g id="node14" class="node"><title>common/network/api/basic.api.register.ts</title>
-<path fill="none" stroke="#c6c5fe" d="M670.333,-1000.38C670.333,-1000.38 411.667,-1000.38 411.667,-1000.38 407.833,-1000.38 404,-996.549 404,-992.716 404,-992.716 404,-985.049 404,-985.049 404,-981.216 407.833,-977.383 411.667,-977.383 411.667,-977.383 670.333,-977.383 670.333,-977.383 674.167,-977.383 678,-981.216 678,-985.049 678,-985.049 678,-992.716 678,-992.716 678,-996.549 674.167,-1000.38 670.333,-1000.38"/>
-<text text-anchor="middle" x="541" y="-985.183" font-family="Arial" font-size="14.00" fill="#c6c5fe">common/network/api/basic.api.register.ts</text>
-</g>
-<!-- server/edu.node.ts&#45;&gt;common/network/api/basic.api.register.ts -->
-<g id="edge87" class="edge"><title>server/edu.node.ts&#45;&gt;common/network/api/basic.api.register.ts</title>
-<path fill="none" stroke="#757575" d="M368.253,-960.078C397.1,-964.916 431.069,-970.613 461.149,-975.658"/>
-<polygon fill="#757575" stroke="#757575" points="460.747,-979.14 471.188,-977.342 461.905,-972.236 460.747,-979.14"/>
-</g>
-<!-- common/common/common/identity.service.ts -->
-<g id="node17" class="node"><title>common/services/common/identity.service.ts</title>
-<path fill="none" stroke="#c6c5fe" d="M1421.33,-723.383C1421.33,-723.383 1135.67,-723.383 1135.67,-723.383 1131.83,-723.383 1128,-719.549 1128,-715.716 1128,-715.716 1128,-708.049 1128,-708.049 1128,-704.216 1131.83,-700.383 1135.67,-700.383 1135.67,-700.383 1421.33,-700.383 1421.33,-700.383 1425.17,-700.383 1429,-704.216 1429,-708.049 1429,-708.049 1429,-715.716 1429,-715.716 1429,-719.549 1425.17,-723.383 1421.33,-723.383"/>
-<text text-anchor="middle" x="1278.5" y="-708.183" font-family="Arial" font-size="14.00" fill="#c6c5fe">common/services/common/identity.service.ts</text>
-</g>
-<!-- server/edu.node.ts&#45;&gt;common/common/common/identity.service.ts -->
-<g id="edge88" class="edge"><title>server/edu.node.ts&#45;&gt;common/services/common/identity.service.ts</title>
-<path fill="none" stroke="#757575" d="M368.39,-939.513C463.619,-924.977 631.87,-894.493 678,-854.883 709.437,-827.889 680.894,-793.801 714,-768.883 775.312,-722.734 980.618,-736.278 1057,-728.883 1076.71,-726.975 1097.42,-725.146 1117.93,-723.441"/>
-<polygon fill="#757575" stroke="#757575" points="1118.3,-726.923 1127.98,-722.615 1117.73,-719.946 1118.3,-726.923"/>
-</g>
-<!-- app.ts -->
-<g id="node3" class="node"><title>app.ts</title>
-<path fill="none" stroke="#c6c5fe" d="M48.3333,-883.383C48.3333,-883.383 7.66667,-883.383 7.66667,-883.383 3.83333,-883.383 3.55271e-015,-879.549 3.55271e-015,-875.716 3.55271e-015,-875.716 3.55271e-015,-868.049 3.55271e-015,-868.049 3.55271e-015,-864.216 3.83333,-860.383 7.66667,-860.383 7.66667,-860.383 48.3333,-860.383 48.3333,-860.383 52.1667,-860.383 56,-864.216 56,-868.049 56,-868.049 56,-875.716 56,-875.716 56,-879.549 52.1667,-883.383 48.3333,-883.383"/>
-<text text-anchor="middle" x="28" y="-868.183" font-family="Arial" font-size="14.00" fill="#c6c5fe">app.ts</text>
-</g>
-<!-- app.ts&#45;&gt;app.service.ts -->
-<g id="edge2" class="edge"><title>app.ts&#45;&gt;app.service.ts</title>
+    <title>G</title>
+    <polygon fill="#111111" stroke="none" points="-21.6,21.6 -21.6,-1155.71 3211.6,-1155.71 3211.6,21.6 -21.6,21.6"/>
+    <!-- app.service.ts -->
+    <g id="node1" class="node">
+        <title>app.service.ts</title>
+        <path fill="none" stroke="#c6c5fe"
+              d="M189.333,-922.383C189.333,-922.383 99.6667,-922.383 99.6667,-922.383 95.8333,-922.383 92,-918.549 92,-914.716 92,-914.716 92,-907.049 92,-907.049 92,-903.216 95.8333,-899.383 99.6667,-899.383 99.6667,-899.383 189.333,-899.383 189.333,-899.383 193.167,-899.383 197,-903.216 197,-907.049 197,-907.049 197,-914.716 197,-914.716 197,-918.549 193.167,-922.383 189.333,-922.383"/>
+        <text text-anchor="middle" x="144.5" y="-907.183" font-family="Arial" font-size="14.00" fill="#c6c5fe">
+            app.service.ts
+        </text>
+    </g>
+    <!-- server/edu.node.worker.ts -->
+    <g id="node2" class="node">
+        <title>server/edu.node.worker.ts</title>
+        <path fill="none" stroke="#c6c5fe"
+              d="M360.333,-960.383C360.333,-960.383 240.667,-960.383 240.667,-960.383 236.833,-960.383 233,-956.549 233,-952.716 233,-952.716 233,-945.049 233,-945.049 233,-941.216 236.833,-937.383 240.667,-937.383 240.667,-937.383 360.333,-937.383 360.333,-937.383 364.167,-937.383 368,-941.216 368,-945.049 368,-945.049 368,-952.716 368,-952.716 368,-956.549 364.167,-960.383 360.333,-960.383"/>
+        <text text-anchor="middle" x="300.5" y="-945.183" font-family="Arial" font-size="14.00" fill="#c6c5fe">
+            server/edu.node.worker.ts
+        </text>
+    </g>
+    <!-- app.service.ts&#45;&gt;server/edu.node.worker.ts -->
+    <g id="edge1" class="edge">
+        <title>app.service.ts&#45;&gt;server/edu.node.worker.ts</title>
+        <path fill="none" stroke="#757575" d="M192.123,-922.387C208.032,-926.313 226.001,-930.747 242.624,-934.848"/>
+        <polygon fill="#757575" stroke="#757575"
+                 points="242.223,-938.354 252.77,-937.352 243.9,-931.558 242.223,-938.354"/>
+    </g>
+    <!-- common/entities/config/node&#45;configuration.model.ts -->
+    <g id="node5" class="node">
+        <title>common/entities/config/node&#45;configuration.model.ts</title>
+        <path fill="none" stroke="#c6c5fe"
+              d="M1923.33,-844.383C1923.33,-844.383 1594.67,-844.383 1594.67,-844.383 1590.83,-844.383 1587,-840.549 1587,-836.716 1587,-836.716 1587,-829.049 1587,-829.049 1587,-825.216 1590.83,-821.383 1594.67,-821.383 1594.67,-821.383 1923.33,-821.383 1923.33,-821.383 1927.17,-821.383 1931,-825.216 1931,-829.049 1931,-829.049 1931,-836.716 1931,-836.716 1931,-840.549 1927.17,-844.383 1923.33,-844.383"/>
+        <text text-anchor="middle" x="1759" y="-829.183" font-family="Arial" font-size="14.00" fill="#c6c5fe">
+            common/entities/config/node&#45;configuration.model.ts
+        </text>
+    </g>
+    <!-- server/edu.node.worker.ts&#45;&gt;common/entities/config/node&#45;configuration.model.ts -->
+    <g id="edge85" class="edge">
+        <title>server/edu.node.worker.ts&#45;&gt;common/entities/config/node&#45;configuration.model.ts</title>
+        <path fill="none" stroke="#757575"
+              d="M368.242,-946.28C550.168,-938.797 1069.91,-914.83 1500,-869.883 1559.91,-863.621 1627.28,-853.867 1678.15,-845.945"/>
+        <polygon fill="#757575" stroke="#757575"
+                 points="1678.76,-849.392 1688.1,-844.386 1677.68,-842.476 1678.76,-849.392"/>
+    </g>
+    <!-- common/logger/server&#45;logger.interface.ts -->
+    <g id="node12" class="node">
+        <title>common/logger/server&#45;logger.interface.ts</title>
+        <path fill="none" stroke="#cfffac"
+              d="M1890.33,-903.383C1890.33,-903.383 1627.67,-903.383 1627.67,-903.383 1623.83,-903.383 1620,-899.549 1620,-895.716 1620,-895.716 1620,-888.049 1620,-888.049 1620,-884.216 1623.83,-880.383 1627.67,-880.383 1627.67,-880.383 1890.33,-880.383 1890.33,-880.383 1894.17,-880.383 1898,-884.216 1898,-888.049 1898,-888.049 1898,-895.716 1898,-895.716 1898,-899.549 1894.17,-903.383 1890.33,-903.383"/>
+        <text text-anchor="middle" x="1759" y="-888.183" font-family="Arial" font-size="14.00" fill="#cfffac">
+            common/logger/server&#45;logger.interface.ts
+        </text>
+    </g>
+    <!-- server/edu.node.worker.ts&#45;&gt;common/logger/server&#45;logger.interface.ts -->
+    <g id="edge86" class="edge">
+        <title>server/edu.node.worker.ts&#45;&gt;common/logger/server&#45;logger.interface.ts</title>
+        <path fill="none" stroke="#757575"
+              d="M316.077,-960.431C335.066,-974.731 369.881,-998.472 404,-1008.88 870.232,-1151.14 1030.83,-1182.13 1500,-1049.88 1598.14,-1022.22 1695.8,-945.657 1737.27,-910.263"/>
+        <polygon fill="#757575" stroke="#757575"
+                 points="1739.74,-912.75 1745.02,-903.563 1735.17,-907.453 1739.74,-912.75"/>
+    </g>
+    <!-- common/network/api/basic.api.register.ts -->
+    <g id="node14" class="node">
+        <title>common/network/api/basic.api.register.ts</title>
+        <path fill="none" stroke="#c6c5fe"
+              d="M670.333,-1000.38C670.333,-1000.38 411.667,-1000.38 411.667,-1000.38 407.833,-1000.38 404,-996.549 404,-992.716 404,-992.716 404,-985.049 404,-985.049 404,-981.216 407.833,-977.383 411.667,-977.383 411.667,-977.383 670.333,-977.383 670.333,-977.383 674.167,-977.383 678,-981.216 678,-985.049 678,-985.049 678,-992.716 678,-992.716 678,-996.549 674.167,-1000.38 670.333,-1000.38"/>
+        <text text-anchor="middle" x="541" y="-985.183" font-family="Arial" font-size="14.00" fill="#c6c5fe">
+            common/network/api/basic.api.register.ts
+        </text>
+    </g>
+    <!-- server/edu.node.worker.ts&#45;&gt;common/network/api/basic.api.register.ts -->
+    <g id="edge87" class="edge">
+        <title>server/edu.node.worker.ts&#45;&gt;common/network/api/basic.api.register.ts</title>
+        <path fill="none" stroke="#757575" d="M368.253,-960.078C397.1,-964.916 431.069,-970.613 461.149,-975.658"/>
+        <polygon fill="#757575" stroke="#757575"
+                 points="460.747,-979.14 471.188,-977.342 461.905,-972.236 460.747,-979.14"/>
+    </g>
+    <!-- common/common/common/identity.service.ts -->
+    <g id="node17" class="node">
+        <title>common/services/common/identity.service.ts</title>
+        <path fill="none" stroke="#c6c5fe"
+              d="M1421.33,-723.383C1421.33,-723.383 1135.67,-723.383 1135.67,-723.383 1131.83,-723.383 1128,-719.549 1128,-715.716 1128,-715.716 1128,-708.049 1128,-708.049 1128,-704.216 1131.83,-700.383 1135.67,-700.383 1135.67,-700.383 1421.33,-700.383 1421.33,-700.383 1425.17,-700.383 1429,-704.216 1429,-708.049 1429,-708.049 1429,-715.716 1429,-715.716 1429,-719.549 1425.17,-723.383 1421.33,-723.383"/>
+        <text text-anchor="middle" x="1278.5" y="-708.183" font-family="Arial" font-size="14.00" fill="#c6c5fe">
+            common/services/common/identity.service.ts
+        </text>
+    </g>
+    <!-- server/edu.node.worker.ts&#45;&gt;common/common/common/identity.service.ts -->
+    <g id="edge88" class="edge">
+        <title>server/edu.node.worker.ts&#45;&gt;common/services/common/identity.service.ts</title>
+        <path fill="none" stroke="#757575"
+              d="M368.39,-939.513C463.619,-924.977 631.87,-894.493 678,-854.883 709.437,-827.889 680.894,-793.801 714,-768.883 775.312,-722.734 980.618,-736.278 1057,-728.883 1076.71,-726.975 1097.42,-725.146 1117.93,-723.441"/>
+        <polygon fill="#757575" stroke="#757575"
+                 points="1118.3,-726.923 1127.98,-722.615 1117.73,-719.946 1118.3,-726.923"/>
+    </g>
+    <!-- app.ts -->
+    <g id="node3" class="node">
+        <title>app.ts</title>
+        <path fill="none" stroke="#c6c5fe"
+              d="M48.3333,-883.383C48.3333,-883.383 7.66667,-883.383 7.66667,-883.383 3.83333,-883.383 3.55271e-015,-879.549 3.55271e-015,-875.716 3.55271e-015,-875.716 3.55271e-015,-868.049 3.55271e-015,-868.049 3.55271e-015,-864.216 3.83333,-860.383 7.66667,-860.383 7.66667,-860.383 48.3333,-860.383 48.3333,-860.383 52.1667,-860.383 56,-864.216 56,-868.049 56,-868.049 56,-875.716 56,-875.716 56,-879.549 52.1667,-883.383 48.3333,-883.383"/>
+        <text text-anchor="middle" x="28" y="-868.183" font-family="Arial" font-size="14.00" fill="#c6c5fe">app.ts
+        </text>
+    </g>
+    <!-- app.ts&#45;&gt;app.service.ts -->
+    <g id="edge2" class="edge">
+        <title>app.ts&#45;&gt;app.service.ts</title>
 <path fill="none" stroke="#757575" d="M56.1349,-881.125C69.263,-885.597 85.3446,-891.074 100.116,-896.106"/>
 <polygon fill="#757575" stroke="#757575" points="98.9948,-899.421 109.589,-899.332 101.252,-892.795 98.9948,-899.421"/>
 </g>

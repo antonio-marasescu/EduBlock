@@ -2,7 +2,7 @@ import {Inject, Service, Token} from "typedi";
 import IPersonalIdentityRepository, {IPersonalIdentityRepositoryToken} from "../../repositories/identity/personal-identity.interface.repository";
 import {PersonalIdentity} from "../../entities/identity/personal-identity.entity";
 import {EccService, EccServiceToken} from "./ecc.service";
-import {NodeConfigurationModel, NodeConfigurationModelToken} from "../../entities/config/node-configuration.model";
+import {NodeConfigurationModel, NodeConfigurationModelToken} from "../../config/node-configuration.model";
 import {ServerLogger, ServerLoggerToken} from "../../logger/server-logger.interface";
 import {createIdentityNotFound} from "../../errors/edu.error.factory";
 

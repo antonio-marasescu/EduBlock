@@ -3,7 +3,7 @@ import {CaLogger, CaLoggerToken} from "./ca-logger.interface";
 import * as winston from 'winston';
 import {format, Logger as WinstonLogger} from 'winston';
 import {SERVER_LOGGER_LEVELS, SERVER_LOGGER_OPTIONS} from "./ca-logger.config";
-import {CaConfigurationModel, CaConfigurationModelToken} from "../entities/config/ca-configuration.model";
+import {CaConfigurationModel, CaConfigurationModelToken} from "../config/ca-configuration.model";
 
 @Service(CaLoggerToken)
 export class CaLoggerService implements CaLogger {

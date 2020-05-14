@@ -5,7 +5,7 @@ import {VAULT_SCHEMA} from "./vault.schema";
 import {
     CaConfigurationModel,
     CaConfigurationModelToken
-} from "../../common/entities/config/ca-configuration.model";
+} from "../../common/config/ca-configuration.model";
 import {CaLogger, CaLoggerToken} from "../../common/logger/ca-logger.interface";
 
 export const VaultConnectionToken = new Token<VaultConnection>('vault.connection');
