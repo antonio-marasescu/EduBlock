@@ -1,0 +1,11 @@
+<div class="action-bar-padding"></div>
+<mat-toolbar class="app-action-bar-container" *ngIf="actions">
+  <span class="app-toolbar-fill"></span>
+  <span *ngIf="actions.length > 0">
+    <button mat-flat-button *ngFor="let action of actions"
+            class="action-bar-item"
+            [color]="actionTypesColorMap[action.type]"
+            (click)="actionEvent.emit(action.eventName)">{{action.displayContent}}</button>
+  </span>
+</mat-toolbar>
+
