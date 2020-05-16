@@ -16,4 +16,11 @@ export class ActionBarComponent {
     accent: 'accent',
     success: 'primary'
   };
+
+  isDisabled(action: ActionBarInputModel) {
+    if (action.valid === undefined || action.valid === null) {
+      return false;
+    }
+    return !action.valid;
+  }
 }

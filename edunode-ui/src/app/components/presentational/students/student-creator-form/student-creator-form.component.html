@@ -1,0 +1,50 @@
+<mat-card *ngIf="form; else noForm">
+  <mat-card-content>
+    <form [formGroup]="form" role="form" class="form-container">
+      <div class="form-control-container">
+        <mat-form-field class="form-control-input">
+          <mat-label>Public Key</mat-label>
+          <textarea type="text" matInput formControlName="publicKey"></textarea>
+          <mat-hint align="end">The Public Key of the student</mat-hint>
+        </mat-form-field>
+      </div>
+
+      <div class="form-control-container">
+        <mat-form-field class="form-control-input">
+          <mat-label>Private Key</mat-label>
+          <textarea type="text" matInput formControlName="privateKey"></textarea>
+          <mat-hint align="end">The Private Key of the student</mat-hint>
+        </mat-form-field>
+      </div>
+
+      <div class="form-control-container">
+        <mat-form-field class="form-control-input">
+          <mat-label>Name</mat-label>
+          <input type="text" matInput formControlName="fullName" placeholder="E.g: John Smith">
+          <mat-hint align="end">The name of the student</mat-hint>
+        </mat-form-field>
+      </div>
+
+      <div class="form-control-container">
+        <mat-form-field class="form-control-input">
+          <mat-label>Group Id</mat-label>
+          <input type="text" matInput formControlName="groupId" placeholder="E.g: 30441">
+          <mat-hint align="end">The group of the student</mat-hint>
+        </mat-form-field>
+      </div>
+
+      <div class="form-control-container">
+        <mat-form-field class="form-control-input">
+          <mat-label>Faculty</mat-label>
+          <input type="text" matInput formControlName="faculty" placeholder="E.g: Computer Science Faculty">
+          <mat-hint align="end">The faculty of the student</mat-hint>
+        </mat-form-field>
+      </div>
+
+    </form>
+  </mat-card-content>
+</mat-card>
+<ng-template #noForm>
+  <app-loading-bar></app-loading-bar>
+</ng-template>
+

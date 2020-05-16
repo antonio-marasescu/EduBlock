@@ -31,6 +31,8 @@ export class SmartAddNetworkMemberComponent implements OnInit {
       host: new FormControl(null, [Validators.required]),
       port: new FormControl(null, [Validators.required]),
     });
+    this.form.valueChanges.subscribe(() => this.actions[1].valid = this.form.valid);
+    this.form.updateValueAndValidity();
   }
 
   async onAction(eventName: string) {

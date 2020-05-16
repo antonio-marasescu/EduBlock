@@ -5,6 +5,7 @@
     <button mat-flat-button *ngFor="let action of actions"
             class="action-bar-item"
             [color]="actionTypesColorMap[action.type]"
+            [disabled]="isDisabled(action)"
             (click)="actionEvent.emit(action.eventName)">{{action.displayContent}}</button>
   </span>
 </mat-toolbar>

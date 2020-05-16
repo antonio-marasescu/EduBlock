@@ -4,6 +4,7 @@ export class ActionBarInputModel {
   eventName: string;
   displayContent: string;
   type: ActionBarType;
+  valid?: boolean;
 }
 
 

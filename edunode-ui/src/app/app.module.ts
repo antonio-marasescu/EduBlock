@@ -46,6 +46,17 @@ import {NetworkMemberFormComponent} from './components/presentational/network/ne
 import {SmartRecordDetailsComponent} from './components/containers/records/smart-record-details/smart-record-details.component';
 import {SmartRecordsListComponent} from './components/containers/records/smart-records-list/smart-records-list.component';
 import {SmartRecordCreatorComponent} from './components/containers/records/smart-record-creator/smart-record-creator.component';
+import {RecordsListComponent} from './components/presentational/records/records-list/records-list.component';
+import {SmartRecordsListFilterOptionsComponent} from './components/containers/records/smart-records-list-filter-options/smart-records-list-filter-options.component';
+import {RecordDetailsComponent} from './components/presentational/records/record-details/record-details.component';
+import {RecordCreatorFormComponent} from './components/presentational/records/record-creator-form/record-creator-form.component';
+import {NgxFileDropModule} from 'ngx-file-drop';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import {SmartStudentsListComponent} from './components/containers/students/smart-students-list/smart-students-list.component';
+import {SmartStudentsListFilterOptionsComponent} from './components/containers/students/smart-students-list-filter-options/smart-students-list-filter-options.component';
+import {SmartStudentCreatorComponent} from './components/containers/students/smart-student-creator/smart-student-creator.component';
+import {StudentCreatorFormComponent} from './components/presentational/students/student-creator-form/student-creator-form.component';
+import {StudentsListComponent} from './components/presentational/students/students-list/students-list.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +71,16 @@ import {SmartRecordCreatorComponent} from './components/containers/records/smart
     NetworkMemberFormComponent,
     SmartRecordDetailsComponent,
     SmartRecordsListComponent,
-    SmartRecordCreatorComponent
+    SmartRecordCreatorComponent,
+    RecordsListComponent,
+    SmartRecordsListFilterOptionsComponent,
+    RecordDetailsComponent,
+    RecordCreatorFormComponent,
+    SmartStudentCreatorComponent,
+    SmartStudentsListFilterOptionsComponent,
+    SmartStudentsListComponent,
+    StudentCreatorFormComponent,
+    StudentsListComponent
   ],
   imports: [
     BrowserModule,
@@ -73,7 +93,8 @@ import {SmartRecordCreatorComponent} from './components/containers/records/smart
     MatDividerModule, MatIconModule, MatGridListModule, MatListModule, MatSidenavModule, MatDialogModule,
     MatToolbarModule, MatDatepickerModule, MatSelectModule, FormsModule,
     MatNativeDateModule, MatExpansionModule, MatStepperModule, MatChipsModule, MatBadgeModule,
-    MatAutocompleteModule, MatProgressSpinnerModule, MatMenuModule, MatTabsModule, MatTreeModule, MatProgressBarModule, ReactiveFormsModule
+    MatAutocompleteModule, MatProgressSpinnerModule, MatMenuModule, MatTabsModule, MatTreeModule, MatProgressBarModule,
+    ReactiveFormsModule, NgxFileDropModule, DragDropModule
   ],
   providers: [],
   bootstrap: [AppComponent]

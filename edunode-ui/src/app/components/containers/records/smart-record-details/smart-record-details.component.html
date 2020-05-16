@@ -1,0 +1,5 @@
+<div>
+  <app-loading-bar *ngIf="isLoading$ | async"></app-loading-bar>
+  <app-record-details [record]="record$ | async"
+                      [attachmentsDetails]="recordAttachmentsDetails$ | async"></app-record-details>
+</div>

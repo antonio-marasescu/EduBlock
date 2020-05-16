@@ -1,0 +1,110 @@
+<mat-card *ngIf="record">
+  <mat-card-header>
+    <h1>{{record.title}}</h1>
+    <mat-chip-list class="header-element">
+      <mat-chip color="primary" selected>Status: {{record.status}}</mat-chip>
+    </mat-chip-list>
+  </mat-card-header>
+  <mat-card-content class="details-content">
+    <mat-accordion>
+      <mat-expansion-panel expanded>
+        <mat-expansion-panel-header class="expansion-header">
+          <mat-panel-title class="expansion-header-title">
+            Basic Information
+          </mat-panel-title>
+          <mat-panel-description class="expansion-header-description">
+            Information regarding record transaction
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-list>
+          <mat-list-item>
+            <mat-icon mat-list-icon>school</mat-icon>
+            <div mat-line>ID</div>
+            <div mat-line>{{record.id}}</div>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <mat-icon mat-list-icon>enhanced_encryption</mat-icon>
+            <div mat-line>Record Hash</div>
+            <div mat-line>{{record.hash}}</div>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <mat-icon mat-list-icon>enhanced_encryption</mat-icon>
+            <div mat-line>Block Hash</div>
+            <div mat-line>{{record.blockHash}}</div>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <mat-icon mat-list-icon>event</mat-icon>
+            <div mat-line>Creation Date</div>
+            <div mat-line>{{record.creationDate}}</div>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <mat-icon mat-list-icon>history</mat-icon>
+            <div mat-line>Version</div>
+            <div mat-line>{{record.version}}</div>
+          </mat-list-item>
+        </mat-list>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title class="expansion-header-title">
+            Signatures
+          </mat-panel-title>
+          <mat-panel-description class="expansion-header-description">
+            Information regarding record signatures
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-list>
+          <mat-list-item>
+            <mat-icon mat-list-icon>fingerprint</mat-icon>
+            <div mat-line>Creator Public Key</div>
+            <div mat-line>{{record.creatorPublicKey}}</div>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <mat-icon mat-list-icon>enhanced_encryption</mat-icon>
+            <div mat-line>Creator Signature</div>
+            <div mat-line>{{record.creatorSignature}}</div>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <mat-icon mat-list-icon>fingerprint</mat-icon>
+            <div mat-line>Certificate Authority Public Key</div>
+            <div mat-line>{{record.certificateAuthorityPublicKey}}</div>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <mat-icon mat-list-icon>enhanced_encryption</mat-icon>
+            <div mat-line>Certificate Authority Signature</div>
+            <div mat-line>{{record.certificateSignature}}</div>
+          </mat-list-item>
+        </mat-list>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title class="expansion-header-title">
+            Attachments
+          </mat-panel-title>
+          <mat-panel-description class="expansion-header-description">
+            Attachments of the record transaction
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-grid-list cols="6" rowHeight="2:1" gutterSize="4">
+          <mat-grid-tile *ngFor="let attachment of record.attachments">
+            <div class="attachment-card" (click)="download.emit(attachment)">
+              <mat-icon mat-list-icon>note</mat-icon>
+              <h4>{{attachmentsDetails[attachment] ? attachmentsDetails[attachment].filename : attachment}}</h4>
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-card-content>
+  <mat-card-footer>
+
+  </mat-card-footer>
+</mat-card>
