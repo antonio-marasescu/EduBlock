@@ -44,6 +44,8 @@ export enum NetworkMembersActionTypes {
   styleUrls: ['./smart-network-members.component.scss']
 })
 export class SmartNetworkMembersComponent {
+  isLoading$: Observable<boolean> = of(false);
+
   constructor(private router: Router) {
   }
 

@@ -1,4 +1,4 @@
-<div *ngIf="members && members.length !== 0; else noData">
+<div *ngIf="members && members.length !== 0">
   <table mat-table [dataSource]="members" class="network-table">
     <ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumns">
       <th mat-header-cell *matHeaderCellDef> {{displayedColumnsTitleFormat[column]}} </th>
@@ -9,6 +9,3 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 </div>
-<ng-template #noData>
-  <app-loading-bar></app-loading-bar>
-</ng-template>

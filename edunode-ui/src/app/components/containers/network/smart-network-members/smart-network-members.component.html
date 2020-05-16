@@ -1,4 +1,5 @@
 <div>
+  <app-loading-bar *ngIf="isLoading$ | async"></app-loading-bar>
   <app-network-members-list [members]="networkMembers$ | async"></app-network-members-list>
   <app-action-bar [actions]="actions" (actionEvent)="onAction($event)"></app-action-bar>
 </div>
