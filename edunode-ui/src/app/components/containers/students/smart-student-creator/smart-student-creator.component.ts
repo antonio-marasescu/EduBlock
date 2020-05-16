@@ -59,8 +59,6 @@ export class SmartStudentCreatorComponent implements OnInit {
     this.form.valueChanges.pipe(tap(() => {
       const publicKey = this.form.get('publicKey').value;
       const privateKey = this.form.get('privateKey').value;
-      console.log(privateKey);
-      console.log(privateKey);
       if (!publicKey || !privateKey) {
         this.form.get('pair').setErrors({privateKey: 'Could not find the public key'}, {emitEvent: false});
       } else {
@@ -72,10 +70,12 @@ export class SmartStudentCreatorComponent implements OnInit {
 
   generatePublicPrivateKey(): void {
     this.loading = true;
+    this.actions[1].valid = false;
     const worker = new Worker('../../../../workers/keypair-generator.worker', {type: 'module'});
     worker.onmessage = (message) => {
       this.form.patchValue({publicKey: message.data.public, privateKey: message.data.private});
       this.loading = false;
+      this.actions[1].valid = true;
     };
   }
 

@@ -25,6 +25,9 @@ export class RecordCreatorFormComponent {
   }
 
   trimFileName(fileName: string): string {
+    if (fileName.length < 12) {
+      return fileName;
+    }
     const splitFilename = fileName.split('.');
     return splitFilename[0].substr(0, 12) + '...' + splitFilename[1];
   }

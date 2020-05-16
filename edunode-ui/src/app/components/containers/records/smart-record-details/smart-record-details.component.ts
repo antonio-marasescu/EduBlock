@@ -22,13 +22,13 @@ const mock: EduRecordModel = {
 const mockRecordAttachmentDetails: { [key: string]: EduRecordAttachmentModel } = {
   awrgagwrgrwa: {
     hash: 'awrgagwrgrwa',
-    filename: 'Test Filename',
+    filename: 'Test Filename.zip',
     encoding: 'pdf',
     size: 1515134
   } as EduRecordAttachmentModel,
   rwaggragwargwr: {
     hash: 'rwaggragwargwr',
-    filename: 'Test 2Filename',
+    filename: 'Test 2Filename.pdf',
     encoding: 'pdf',
     size: 1515134
   } as EduRecordAttachmentModel

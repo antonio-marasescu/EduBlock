@@ -96,7 +96,7 @@
           <mat-grid-tile *ngFor="let attachment of record.attachments">
             <div class="attachment-card" (click)="download.emit(attachment)">
               <mat-icon mat-list-icon>note</mat-icon>
-              <h4>{{attachmentsDetails[attachment] ? attachmentsDetails[attachment].filename : attachment}}</h4>
+              <h4>{{trimFileName(attachment)}}</h4>
             </div>
           </mat-grid-tile>
         </mat-grid-list>
