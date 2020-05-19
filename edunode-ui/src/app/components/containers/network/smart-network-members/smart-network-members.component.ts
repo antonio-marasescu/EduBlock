@@ -1,37 +1,16 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActionBarInputModel} from '../../../../core/models/actions/action-bar-input.model';
 import {ActionBarType} from '../../../../core/models/actions/action-bar-type.enum';
 import {NetworkMemberModel} from '../../../../core/models/network/network-member.model';
-import {Observable, of} from 'rxjs';
-import {delay} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 import {Router} from '@angular/router';
-
-const mock: NetworkMemberModel[] = [
-  {
-    id: 0,
-    legalIdentity: 'University of Amsterdam',
-    publicKey: '1425aegw24qgg2t432gq2',
-    promoterLegalIdentity: 'University of Bucharest',
-    promoterPublicKey: '152jggehawu2valawrgrw',
-    joinedDate: new Date().toDateString()
-  },
-  {
-    id: 1,
-    legalIdentity: 'University of Bucharest',
-    publicKey: '1435aegw24qgg2t432gq2',
-    promoterLegalIdentity: '',
-    promoterPublicKey: '',
-    joinedDate: new Date().toDateString()
-  },
-  {
-    id: 2,
-    legalIdentity: 'University of Cluj-Napoca',
-    publicKey: '1125aegw24qgg2t432gq2',
-    promoterLegalIdentity: '',
-    promoterPublicKey: '',
-    joinedDate: new Date().toDateString()
-  }
-];
+import {Store} from '@ngrx/store';
+import {AppState} from '../../../../store/app.state';
+import {GetNetworkMembers, LearnNetworkMembers} from '../../../../store/actions/network-members.actions';
+import {
+  selectNetworkMembers,
+  selectNetworkMembersStateIsLoading
+} from '../../../../store/reducers/network-members.reducer';
 
 export enum NetworkMembersActionTypes {
   Add = 'add',
@@ -43,17 +22,22 @@ export enum NetworkMembersActionTypes {
   templateUrl: './smart-network-members.component.html',
   styleUrls: ['./smart-network-members.component.scss']
 })
-export class SmartNetworkMembersComponent {
-  isLoading$: Observable<boolean> = of(false);
-
-  constructor(private router: Router) {
-  }
-
-  networkMembers$: Observable<NetworkMemberModel[]> = of(mock).pipe(delay(1000));
+export class SmartNetworkMembersComponent implements OnInit {
+  isLoading$: Observable<boolean>;
+  networkMembers$: Observable<NetworkMemberModel[]>;
   actions: ActionBarInputModel[] = [
     {eventName: NetworkMembersActionTypes.Add, type: ActionBarType.ACCENT, displayContent: 'Add Member'},
     {eventName: NetworkMembersActionTypes.Refresh, type: ActionBarType.ACCENT, displayContent: 'Refresh'},
   ];
+
+  constructor(private router: Router, private store: Store<AppState>) {
+  }
+
+  ngOnInit(): void {
+    this.isLoading$ = this.store.select(selectNetworkMembersStateIsLoading);
+    this.networkMembers$ = this.store.select(selectNetworkMembers);
+    this.store.dispatch(new GetNetworkMembers());
+  }
 
   async onAction(eventName: string) {
     switch (eventName) {
@@ -61,9 +45,12 @@ export class SmartNetworkMembersComponent {
         await this.router.navigateByUrl('network/add');
         break;
       case NetworkMembersActionTypes.Refresh:
+        this.store.dispatch(new LearnNetworkMembers());
         break;
       default:
         return;
     }
   }
+
+
 }

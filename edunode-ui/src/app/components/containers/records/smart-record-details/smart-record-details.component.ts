@@ -1,46 +1,46 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {EduRecordModel} from '../../../../core/models/records/edu-record.model';
-import {EduRecordStatus} from '../../../../core/models/records/edu-record-status.enum';
-import {Observable, of} from 'rxjs';
+import {Observable} from 'rxjs';
 import {EduRecordAttachmentModel} from '../../../../core/models/records/edu-record-attachment.model';
-
-const mock: EduRecordModel = {
-  id: '2qgq24t-awrg-awrgawgr',
-  hash: 'q2t444444agrrgwagwagawrg',
-  blockHash: 'q2t444444agrrgwagwagawrg',
-  title: 'Ion-An2-Notes',
-  version: 1.0,
-  creatorPublicKey: 'awg4q2tgq24gqgtgarw',
-  creatorSignature: 'SIG_rawhwawawarhawh',
-  certificateAuthorityPublicKey: '24fagwagwagrwgrgraw',
-  certificateSignature: 'SIG_heashahwahwhrwahaw',
-  creationDate: new Date().toDateString(),
-  targetPublicKey: 'argawgrwaq244tabawgrrawgaw',
-  attachments: ['awrgagwrgrwa', 'rwaggragwargwr', 'rwaggragwarwaggragwargwrrwaggragwargwrrwaggragwargwrrgwr', 'rwaggragwargwrwaggragwargwrrwaggragwargwrr', 'rwaggragwargwr', 'rwaggragwargwr', 'rwaggragwargwr', 'rwaggragwargwrwaggragwargwrrwaggragwargwrrwaggragwargwrr', 'rwaggragwargwr', 'rwaggragwargwr', 'rwaggragwargwr', 'rwaggragwargwr'],
-  status: EduRecordStatus.Certified
-};
-const mockRecordAttachmentDetails: { [key: string]: EduRecordAttachmentModel } = {
-  awrgagwrgrwa: {
-    hash: 'awrgagwrgrwa',
-    filename: 'Test Filename.zip',
-    encoding: 'pdf',
-    size: 1515134
-  } as EduRecordAttachmentModel,
-  rwaggragwargwr: {
-    hash: 'rwaggragwargwr',
-    filename: 'Test 2Filename.pdf',
-    encoding: 'pdf',
-    size: 1515134
-  } as EduRecordAttachmentModel
-};
+import {AppState} from '../../../../store/app.state';
+import {Store} from '@ngrx/store';
+import {ActivatedRoute} from '@angular/router';
+import {GetRecordTransactionByHash} from '../../../../store/actions/records.actions';
+import {selectCurrentRecord, selectRecordsStateIsLoading} from '../../../../store/reducers/records.reducer';
+import {selectFiles, selectFilesStateIsLoading} from '../../../../store/reducers/files.reducer';
+import {GetFilesOfTransactionByHash} from '../../../../store/actions/files.actions';
+import {saveAs} from 'file-saver';
 
 @Component({
   selector: 'app-smart-record-details',
   templateUrl: './smart-record-details.component.html',
   styleUrls: ['./smart-record-details.component.scss']
 })
-export class SmartRecordDetailsComponent {
-  isLoading$: Observable<boolean> = of(false);
-  record$: Observable<EduRecordModel> = of(mock);
-  recordAttachmentsDetails$: Observable<{ [key: string]: EduRecordAttachmentModel }> = of(mockRecordAttachmentDetails);
+export class SmartRecordDetailsComponent implements OnInit {
+  isLoadingRecord$: Observable<boolean>;
+  isLoadingFiles$: Observable<boolean>;
+  record$: Observable<EduRecordModel>;
+  recordAttachmentsDetails$: Observable<EduRecordAttachmentModel[]>;
+
+  constructor(private store: Store<AppState>, private activeRoute: ActivatedRoute) {
+  }
+
+  ngOnInit(): void {
+    this.record$ = this.store.select(selectCurrentRecord);
+    this.isLoadingRecord$ = this.store.select(selectRecordsStateIsLoading);
+    this.isLoadingFiles$ = this.store.select(selectFilesStateIsLoading);
+    this.recordAttachmentsDetails$ = this.store.select(selectFiles);
+    this.activeRoute.params.subscribe(params => {
+      const transactionHashId: string = params.id.toString();
+      this.store.dispatch(new GetRecordTransactionByHash(transactionHashId));
+      this.store.dispatch(new GetFilesOfTransactionByHash(transactionHashId));
+    });
+  }
+
+  onDownloadFile(file: EduRecordAttachmentModel) {
+    const fileBuffer = file.content as any;
+    const arrayBuffer = Uint8Array.from(fileBuffer.data).buffer;
+    const fileBlob = new Blob([arrayBuffer]);
+    saveAs(fileBlob, file.filename);
+  }
 }

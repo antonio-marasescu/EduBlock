@@ -3,6 +3,10 @@ import {ActionBarInputModel} from '../../../../core/models/actions/action-bar-in
 import {ActionBarType} from '../../../../core/models/actions/action-bar-type.enum';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
+import {Store} from '@ngrx/store';
+import {AppState} from '../../../../store/app.state';
+import {AddNetworkMember} from '../../../../store/actions/network-members.actions';
+import {AddNetworkMemberModel} from '../../../../core/models/network/add-network-member.model';
 
 export enum AddNetworkMemberActionTypes {
   Add = 'add',
@@ -21,7 +25,7 @@ export class SmartAddNetworkMemberComponent implements OnInit {
     {eventName: AddNetworkMemberActionTypes.Add, type: ActionBarType.ACCENT, displayContent: 'Add Member'},
   ];
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private store: Store<AppState>) {
   }
 
   ngOnInit(): void {
@@ -38,6 +42,13 @@ export class SmartAddNetworkMemberComponent implements OnInit {
   async onAction(eventName: string) {
     switch (eventName) {
       case AddNetworkMemberActionTypes.Add:
+        const payload: AddNetworkMemberModel = {
+          publicKey: this.form.get('publicKey').value,
+          legalIdentity: this.form.get('legalIdentity').value,
+          host: this.form.get('host').value,
+          port: parseInt(this.form.get('port').value, 10),
+        };
+        this.store.dispatch(new AddNetworkMember(payload));
         break;
       case AddNetworkMemberActionTypes.Exit:
         await this.router.navigateByUrl('/network');

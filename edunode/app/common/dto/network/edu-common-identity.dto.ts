@@ -1,5 +1,5 @@
-import {CommonIdentity} from "../../entities/identity/common-identity.entity";
-import {objectWithoutKeys} from "../../utils/dictionary.utils";
+import {CommonIdentity} from '../../entities/identity/common-identity.entity';
+import {objectWithoutKeys} from '../../utils/dictionary.utils';
 
 export class EduCommonIdentityDto {
     id?: number;
@@ -8,6 +8,7 @@ export class EduCommonIdentityDto {
     host: string;
     port: number;
     joinedDate: Date;
+    promoterLegalIdentity?: string;
     promoterSignature?: string;
     promoterPublicKey?: string;
     validatorSignature?: string;

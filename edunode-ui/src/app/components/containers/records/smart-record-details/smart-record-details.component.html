@@ -1,5 +1,6 @@
 <div>
-  <app-loading-bar *ngIf="isLoading$ | async"></app-loading-bar>
+  <app-loading-bar *ngIf="(isLoadingRecord$ | async) || (isLoadingFiles$ | async)"></app-loading-bar>
   <app-record-details [record]="record$ | async"
+                      (download)="onDownloadFile($event)"
                       [attachmentsDetails]="recordAttachmentsDetails$ | async"></app-record-details>
 </div>

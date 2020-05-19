@@ -1,6 +1,6 @@
-import {ValidationError} from "class-validator/validation/ValidationError";
-import {EduError} from "./edu.error";
-import {NmsError} from "../../../../network-map-service/app/common/errors/nms.error";
+import {ValidationError} from 'class-validator/validation/ValidationError';
+import {EduError} from './edu.error';
+import {NmsError} from '../../../../network-map-service/app/common/errors/nms.error';
 
 export function createInvalidSignatureError(target: any): EduError {
     const error = new ValidationError();
@@ -59,7 +59,8 @@ export function createIdentityNotFound(target: any): EduError {
 }
 
 export function createAxiosResponseError(axiosError: any) {
-    return new EduError(axiosError.status, [axiosError.body]);
+    const body = Array.isArray(axiosError.data) ? axiosError.data : [axiosError.data];
+    return new EduError(axiosError.status, body);
 }
 
 export function createMessageCouldNotBeSentError(target: any): EduError {
@@ -101,4 +102,11 @@ export function createInvalidBlockEntityError(target: any, reason: string) {
     error.target = target;
     error.constraints = {invalidBlock: 'The block entity was invalid!', reason: reason};
     return new NmsError(400, [error]);
+}
+
+export function createFileOwnerUnreachable(target: any): EduError {
+    const error = new ValidationError();
+    error.target = target;
+    error.constraints = {unreachableOwner: 'The owner of the files is currently unreachable!'};
+    return new EduError(404, [error]);
 }

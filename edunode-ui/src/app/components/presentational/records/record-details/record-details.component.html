@@ -93,10 +93,10 @@
           </mat-panel-description>
         </mat-expansion-panel-header>
         <mat-grid-list cols="6" rowHeight="2:1" gutterSize="4">
-          <mat-grid-tile *ngFor="let attachment of record.attachments">
+          <mat-grid-tile *ngFor="let attachment of attachmentsDetails">
             <div class="attachment-card" (click)="download.emit(attachment)">
               <mat-icon mat-list-icon>note</mat-icon>
-              <h4>{{trimFileName(attachment)}}</h4>
+              <h4>{{trimFileName(attachment.filename)}}</h4>
             </div>
           </mat-grid-tile>
         </mat-grid-list>

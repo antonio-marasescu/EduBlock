@@ -1,21 +1,25 @@
-import {Inject, Service, Token} from "typedi";
-import {ServerLogger, ServerLoggerToken} from "../../logger/server-logger.interface";
-import {EduNewNetworkMemberDto} from "../../dto/network/edu-new-network-member.dto";
+import {Inject, Service, Token} from 'typedi';
+import {ServerLogger, ServerLoggerToken} from '../../logger/server-logger.interface';
+import {EduNewNetworkMemberDto} from '../../dto/network/edu-new-network-member.dto';
 import {AxiosInstance, AxiosResponse} from 'axios'
-import {AxiosTokenNMS} from "../axios/axios.config";
-import {NmsNewNetworkMemberMapper} from "../../dto/nms/nms-new-network-member.dto";
-import {validate, ValidationError} from "class-validator";
-import {IdentityService, IdentityServiceToken} from "../security/identity.service";
-import {createInvalidSignatureError, createValidationError} from "../../errors/edu.error.factory";
-import {NmsCommonIdentityDto, NmsCommonIdentityDtoMapper} from "../../dto/nms/nms-common-identity.dto";
+import {AxiosTokenNMS} from '../axios/axios.config';
+import {NmsNewNetworkMemberMapper} from '../../dto/nms/nms-new-network-member.dto';
+import {validate, ValidationError} from 'class-validator';
+import {IdentityService, IdentityServiceToken} from '../security/identity.service';
+import {
+    createAxiosResponseError,
+    createInvalidSignatureError,
+    createValidationError
+} from '../../errors/edu.error.factory';
+import {NmsCommonIdentityDto, NmsCommonIdentityDtoMapper} from '../../dto/nms/nms-common-identity.dto';
 import {
     ICommonIdentityRepository,
     ICommonIdentityRepositoryToken
-} from "../../repositories/identity/common-identity.interface.repository";
-import {objectWithoutKeys} from "../../utils/dictionary.utils";
-import {EduCommonIdentityDto, EduCommonIdentityDtoMapper} from "../../dto/network/edu-common-identity.dto";
-import {CommonIdentity} from "../../entities/identity/common-identity.entity";
-import {validateAxiosResponse} from "../../utils/validators.utils";
+} from '../../repositories/identity/common-identity.interface.repository';
+import {objectWithoutKeys} from '../../utils/dictionary.utils';
+import {EduCommonIdentityDto, EduCommonIdentityDtoMapper} from '../../dto/network/edu-common-identity.dto';
+import {CommonIdentity} from '../../entities/identity/common-identity.entity';
+import {validateAxiosResponse} from '../../utils/validators.utils';
 
 export const NetworkMembersServiceToken = new Token<NetworkMembersService>('services.common.network-members');
 
@@ -30,31 +34,31 @@ export class NetworkMembersService {
     }
 
     public async getSingleNetworkMember(publicKey: string): Promise<EduCommonIdentityDto> {
-        this.logger.logInfo(this, "Handling get network member request.");
+        this.logger.logInfo(this, 'Handling get network member request.');
         const localCommonIdentity = await this.commonIdentityRepository.findOne({publicKey: publicKey});
         if (!localCommonIdentity) {
             return await this.learnSingleMember(publicKey)
         }
-        this.logger.logSuccess(this, "Get network member request handled.");
+        this.logger.logSuccess(this, 'Get network member request handled.');
         return EduCommonIdentityDtoMapper.toDto(localCommonIdentity);
     }
 
     public async getNetworkMembers(): Promise<EduCommonIdentityDto[]> {
-        this.logger.logInfo(this, "Handling get network members request.");
+        this.logger.logInfo(this, 'Handling get network members request.');
         const localCommonIdentities = await this.commonIdentityRepository.find({});
-        this.logger.logSuccess(this, "Get network members request handled.");
+        this.logger.logSuccess(this, 'Get network members request handled.');
         return localCommonIdentities.map(identity => EduCommonIdentityDtoMapper.toDto(identity));
     }
 
     public async learnSingleMember(publicKey: string): Promise<EduCommonIdentityDto> {
-        this.logger.logInfo(this, "Initializing Learn Single Member Flow");
-        this.logger.logInfo(this, "Sending get member request....");
+        this.logger.logInfo(this, 'Initializing Learn Single Member Flow');
+        this.logger.logInfo(this, 'Sending get member request....');
         const personalIdentity = await this.identityService.getPersonalIdentity();
         const response: AxiosResponse = await this.nmsAxiosInstance.get('network/members/' + publicKey, {headers: {'public-key': personalIdentity}});
-        this.logger.logInfo(this, "Get member request response was received!");
+        this.logger.logInfo(this, 'Get member request response was received!');
 
         await validateAxiosResponse(this, response);
-        const nmsResponseDto = await NetworkMembersService.axiosResponseToNmsDto(response);
+        const nmsResponseDto = NetworkMembersService.axiosResponseToNmsDto(response);
 
         await this.validateCommonIdentityDto(nmsResponseDto);
         const savedEntity = await this.saveCommonIdentityDto(nmsResponseDto);
@@ -63,11 +67,11 @@ export class NetworkMembersService {
     }
 
     public async learnMembers(): Promise<EduCommonIdentityDto[]> {
-        this.logger.logInfo(this, "Initializing learn members flow");
-        this.logger.logInfo(this, "Sending get members request....");
+        this.logger.logInfo(this, 'Initializing learn members flow');
+        this.logger.logInfo(this, 'Sending get members request....');
         const personalIdentity = await this.identityService.getPersonalIdentity();
         const response: AxiosResponse = await this.nmsAxiosInstance.get('network/members', {headers: {'public-key': personalIdentity}});
-        this.logger.logInfo(this, "Get members request response was received!");
+        this.logger.logInfo(this, 'Get members request response was received!');
 
         await validateAxiosResponse(this, response);
         const nmsResponseDtoList = await NetworkMembersService.axiosResponseToNmsDtoList(response);
@@ -81,7 +85,7 @@ export class NetworkMembersService {
     }
 
     public async addMember(memberDto: EduNewNetworkMemberDto): Promise<EduCommonIdentityDto> {
-        this.logger.logInfo(this, "Initializing Add Member Flow");
+        this.logger.logInfo(this, 'Initializing Add Member Flow');
         const validationErrors: ValidationError[] = await validate(memberDto);
         if (validationErrors.length > 0) {
             const error = createValidationError(validationErrors);
@@ -91,17 +95,25 @@ export class NetworkMembersService {
 
         const nmsDto = NmsNewNetworkMemberMapper.toDtoNms(memberDto);
         nmsDto.joinedDate = new Date(Date.now()).toISOString();
+        const signatureObject = objectWithoutKeys(nmsDto, []);
         const publicKey: string = await this.identityService.getPersonalIdentity();
-        const signature: string = await this.identityService.signData(nmsDto);
+        const signature: string = await this.identityService.signData(signatureObject);
         nmsDto.proof = {publicKey: publicKey, signature: signature};
 
-        this.logger.logInfo(this, "Sending add member request....");
+        this.logger.logInfo(this, 'Sending add member request....');
         const personalIdentity = await this.identityService.getPersonalIdentity();
-        const response: AxiosResponse = await this.nmsAxiosInstance.post('network/members', nmsDto, {headers: {'public-key': personalIdentity}});
-        this.logger.logInfo(this, "Add member request response was received!");
+        let response: AxiosResponse;
+        try {
+            response = await this.nmsAxiosInstance.post('network/members', nmsDto, {headers: {'public-key': personalIdentity}})
+        } catch (axiosError) {
+            const error = createAxiosResponseError(axiosError.response);
+            this.logger.logError(this, axiosError);
+            throw error;
+        }
+        this.logger.logInfo(this, 'Add member request response was received!');
 
         await validateAxiosResponse(this, response);
-        const nmsResponseDto = await NetworkMembersService.axiosResponseToNmsDto(response);
+        const nmsResponseDto = NetworkMembersService.axiosResponseToNmsDto(response);
 
         await this.validateCommonIdentityDto(nmsResponseDto);
         const savedEntity = await this.saveCommonIdentityDto(nmsResponseDto);
@@ -110,7 +122,7 @@ export class NetworkMembersService {
     }
 
     private async validateCommonIdentityDto(nmsResponseDto: NmsCommonIdentityDto): Promise<void> {
-        this.logger.logInfo(this, "Validation of member request response structure initiated...");
+        this.logger.logInfo(this, 'Validation of member request response structure initiated...');
 
 
         const responseValidationErrors: ValidationError[] = await validate(nmsResponseDto);
@@ -119,14 +131,15 @@ export class NetworkMembersService {
             this.logger.logError(this, JSON.stringify(error));
             throw error;
         }
-        this.logger.logSuccess(this, "Succeeded in validating member request response structure!");
+        this.logger.logSuccess(this, 'Succeeded in validating member request response structure!');
 
-        this.logger.logInfo(this, "Validation of Network Member Service signature initiated...");
+        this.logger.logInfo(this, 'Validation of Network Member Service signature initiated...');
 
         const blacklist = ['validatorPublicKey', 'validatorSignature', 'version', 'entityHash', 'id'];
         if (!nmsResponseDto.promoterSignature && !nmsResponseDto.promoterPublicKey) {
             blacklist.push('promoterSignature');
             blacklist.push('promoterPublicKey');
+            blacklist.push('promoterLegalIdentity');
         }
 
         const filteredData = objectWithoutKeys(nmsResponseDto, blacklist);
@@ -136,27 +149,27 @@ export class NetworkMembersService {
             this.logger.logError(this, JSON.stringify(error));
             throw error;
         }
-        this.logger.logSuccess(this, "Validation of Network Member Service signature succeeded");
+        this.logger.logSuccess(this, 'Validation of Network Member Service signature succeeded');
     }
 
     private async saveCommonIdentityDto(nmsResponseDto: NmsCommonIdentityDto): Promise<CommonIdentity> {
-        this.logger.logInfo(this, "Saving new network member to local Vault...");
+        this.logger.logInfo(this, 'Saving new network member to local Vault...');
         const commonIdentityEntity = NmsCommonIdentityDtoMapper.mapToEduEntity(nmsResponseDto);
         const savedEntity = await this.commonIdentityRepository.save(commonIdentityEntity);
-        this.logger.logSuccess(this, "Succeeded in saving the new network member to the local vault!");
+        this.logger.logSuccess(this, 'Succeeded in saving the new network member to the local vault!');
         return savedEntity;
     }
 
     private async saveCommonIdentityDtoList(nmsResponseDtoList: NmsCommonIdentityDto[]): Promise<CommonIdentity[]> {
-        this.logger.logInfo(this, "Saving new network member to local Vault...");
+        this.logger.logInfo(this, 'Saving new network member to local Vault...');
         const commonIdentityEntityList = nmsResponseDtoList.map(dto => NmsCommonIdentityDtoMapper.mapToEduEntity(dto));
         const savedEntityList = await this.commonIdentityRepository.save(commonIdentityEntityList);
-        this.logger.logSuccess(this, "Succeeded in saving the new network member to the local vault!");
+        this.logger.logSuccess(this, 'Succeeded in saving the new network member to the local vault!');
         return savedEntityList;
     }
 
 
-    private static async axiosResponseToNmsDto(response: AxiosResponse): Promise<NmsCommonIdentityDto> {
+    private static axiosResponseToNmsDto(response: AxiosResponse): NmsCommonIdentityDto {
         const nmsResponseDto = new NmsCommonIdentityDto();
         Object.assign(nmsResponseDto, response.data);
         return nmsResponseDto;

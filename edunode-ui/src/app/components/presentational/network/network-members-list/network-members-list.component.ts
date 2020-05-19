@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {NetworkMemberModel} from '../../../../core/models/network/network-member.model';
+import {trimString} from '../../../../core/utils/display.string';
 
 @Component({
   selector: 'app-network-members-list',
@@ -8,7 +9,8 @@ import {NetworkMemberModel} from '../../../../core/models/network/network-member
 })
 export class NetworkMembersListComponent {
   @Input() members: NetworkMemberModel[];
-  displayedColumns: string[] = ['id', 'legalIdentity', 'publicKey', 'promoterLegalIdentity', 'promoterPublicKey', 'joinedDate'];
+  nonActionColumns: string[] = ['id', 'legalIdentity', 'publicKey', 'promoterLegalIdentity', 'promoterPublicKey', 'joinedDate'];
+  displayedColumns = this.nonActionColumns.concat(['actions']);
   displayedColumnsTitleFormat: { [key: string]: string } = {
     id: 'ID',
     legalIdentity: 'Legal Identity',
@@ -17,4 +19,6 @@ export class NetworkMembersListComponent {
     promoterPublicKey: 'Promoter PK',
     joinedDate: 'Joined Date'
   };
+
+  trimData = (value: string) => trimString(value);
 }

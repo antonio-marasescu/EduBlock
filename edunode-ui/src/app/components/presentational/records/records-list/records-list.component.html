@@ -12,17 +12,17 @@
 
     <ng-container matColumnDef="hash">
       <th mat-header-cell *matHeaderCellDef> {{displayedColumnsTitleFormat.hash}} </th>
-      <td mat-cell *matCellDef="let element"> {{element.hash}} </td>
+      <td mat-cell *matCellDef="let element"> {{trimData(element.hash)}} </td>
     </ng-container>
 
     <ng-container matColumnDef="blockHash">
       <th mat-header-cell *matHeaderCellDef> {{displayedColumnsTitleFormat.blockHash}} </th>
-      <td mat-cell *matCellDef="let element"> {{element.blockHash}} </td>
+      <td mat-cell *matCellDef="let element"> {{trimData(element.blockHash)}} </td>
     </ng-container>
 
     <ng-container matColumnDef="targetPublicKey">
       <th mat-header-cell *matHeaderCellDef> {{displayedColumnsTitleFormat.targetPublicKey}} </th>
-      <td mat-cell *matCellDef="let element"> {{element.targetPublicKey}} </td>
+      <td mat-cell *matCellDef="let element"> {{trimData(element.targetPublicKey)}} </td>
     </ng-container>
 
     <ng-container matColumnDef="creationDate">

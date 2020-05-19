@@ -5,5 +5,6 @@ export class EduRecordAttachmentModel {
   filename: string;
   mimeType: string;
   encoding: string;
+  content: Buffer;
   size: number;
 }

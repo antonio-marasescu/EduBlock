@@ -1,5 +1,5 @@
-import {EduError} from "./edu.error";
-import {QueryFailedError} from "typeorm";
+import {EduError} from './edu.error';
+import {QueryFailedError} from 'typeorm';
 
 export class EduErrorHandler {
     public static handleError(error, res) {

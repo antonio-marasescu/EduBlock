@@ -1,45 +1,13 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActionBarInputModel} from '../../../../core/models/actions/action-bar-input.model';
 import {ActionBarType} from '../../../../core/models/actions/action-bar-type.enum';
 import {Router} from '@angular/router';
 import {EduRecordModel} from '../../../../core/models/records/edu-record.model';
 import {Observable, of} from 'rxjs';
-import {delay} from 'rxjs/operators';
-import {EduRecordStatus} from '../../../../core/models/records/edu-record-status.enum';
-
-const mockData: EduRecordModel[] = [
-  {
-    id: '2qgq24t-awrg-awrgawgr',
-    hash: 'q2t444444agrrgwagwagawrg',
-    blockHash: 'q2t444444agrrgwagwagawrg',
-    title: 'Ion-An2-Notes',
-    creationDate: new Date().toDateString(),
-    targetPublicKey: 'argawgrwaq244tabawgrrawgaw',
-    attachments: ['awrgagwrgrwa', 'rwaggragwargwr'],
-    status: EduRecordStatus.Certified
-  } as any,
-  {
-    id: '2qgq24t-awrg-awrgawgr',
-    hash: 'q2t444444agrrgwagwagawrg',
-    blockHash: 'q2t444444agrrgwagwagawrg',
-    title: 'Ion-An2-Notes',
-    creationDate: new Date().toDateString(),
-    targetPublicKey: '1afwaawfwagwgaw',
-    attachments: ['awrgagwrgrwa', 'rwaggragwargwr'],
-    status: EduRecordStatus.Certified
-  } as any,
-  {
-    id: '2qgq24t-awrg-awrgawgr',
-    hash: 'q2t444444agrrgwagwagawrg',
-    blockHash: 'q2t444444agrrgwagwagawrg',
-    title: 'Ion-An2-Notes',
-    creationDate: new Date().toDateString(),
-    targetPublicKey: '3rgawgrwawgbawgrrawgaw',
-    attachments: ['awrgagwrgrwa', 'rwaggragwargwr'],
-    status: EduRecordStatus.Created
-  } as any,
-];
-
+import {AppState} from '../../../../store/app.state';
+import {Store} from '@ngrx/store';
+import {GetRecordsTransaction} from '../../../../store/actions/records.actions';
+import {selectRecords, selectRecordsStateIsLoading} from '../../../../store/reducers/records.reducer';
 
 export enum RecordsListActionTypes {
   CREATE_TRANSACTION = 'create-transaction',
@@ -51,11 +19,11 @@ export enum RecordsListActionTypes {
   templateUrl: './smart-records-list.component.html',
   styleUrls: ['./smart-records-list.component.scss']
 })
-export class SmartRecordsListComponent {
+export class SmartRecordsListComponent implements OnInit {
 
-  records$: Observable<EduRecordModel[]> = of(mockData).pipe(delay(500));
+  records$: Observable<EduRecordModel[]>;
   filteredRecords$: Observable<EduRecordModel[]> = of([]);
-  isLoading$: Observable<boolean> = of(false);
+  isLoading$: Observable<boolean>;
 
   actions: ActionBarInputModel[] = [
     {
@@ -66,7 +34,7 @@ export class SmartRecordsListComponent {
     {eventName: RecordsListActionTypes.CREATE_BLOCK, type: ActionBarType.ACCENT, displayContent: 'Create Block'},
   ];
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private store: Store<AppState>) {
   }
 
   async onAction(eventName: string) {
@@ -81,5 +49,12 @@ export class SmartRecordsListComponent {
 
   onFilterEvent(filteredData: EduRecordModel[]) {
     this.filteredRecords$ = of(filteredData);
+  }
+
+  ngOnInit(): void {
+    this.records$ = this.store.select(selectRecords);
+    this.isLoading$ = this.store.select(selectRecordsStateIsLoading);
+    this.store.dispatch(new GetRecordsTransaction());
+
   }
 }

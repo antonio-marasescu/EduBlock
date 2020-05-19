@@ -57,6 +57,11 @@ import {SmartStudentsListFilterOptionsComponent} from './components/containers/s
 import {SmartStudentCreatorComponent} from './components/containers/students/smart-student-creator/smart-student-creator.component';
 import {StudentCreatorFormComponent} from './components/presentational/students/student-creator-form/student-creator-form.component';
 import {StudentsListComponent} from './components/presentational/students/students-list/students-list.component';
+import {AppEffects} from './store/app.effects';
+import {AppReducers} from './store/app.reducers';
+import {HttpClientModule} from '@angular/common/http';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {ClipboardModule} from '@angular/cdk/clipboard';
 
 @NgModule({
   declarations: [
@@ -86,15 +91,16 @@ import {StudentsListComponent} from './components/presentational/students/studen
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    StoreModule.forRoot({}, {}),
-    StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
-    EffectsModule.forRoot([]),
+    HttpClientModule,
+    StoreModule.forRoot(AppReducers),
+    StoreDevtoolsModule.instrument({maxAge: 42, logOnly: environment.production}),
+    EffectsModule.forRoot(AppEffects),
     MatInputModule, MatFormFieldModule, MatCardModule, MatTableModule, MatButtonModule, MatCheckboxModule,
     MatDividerModule, MatIconModule, MatGridListModule, MatListModule, MatSidenavModule, MatDialogModule,
     MatToolbarModule, MatDatepickerModule, MatSelectModule, FormsModule,
     MatNativeDateModule, MatExpansionModule, MatStepperModule, MatChipsModule, MatBadgeModule,
     MatAutocompleteModule, MatProgressSpinnerModule, MatMenuModule, MatTabsModule, MatTreeModule, MatProgressBarModule,
-    ReactiveFormsModule, NgxFileDropModule, DragDropModule
+    ReactiveFormsModule, NgxFileDropModule, DragDropModule, MatSnackBarModule, ClipboardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

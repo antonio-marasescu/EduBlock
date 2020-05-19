@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {EduRecordModel} from '../../../../core/models/records/edu-record.model';
+import {trimString} from '../../../../core/utils/display.string';
 
 @Component({
   selector: 'app-records-list',
@@ -18,4 +19,6 @@ export class RecordsListComponent {
     creationDate: 'Created At',
     status: 'Status'
   };
+
+  trimData = (value: string) => trimString(value);
 }

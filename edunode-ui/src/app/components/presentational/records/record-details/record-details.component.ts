@@ -9,8 +9,8 @@ import {EduRecordAttachmentModel} from '../../../../core/models/records/edu-reco
 })
 export class RecordDetailsComponent {
   @Input() record: EduRecordModel;
-  @Input() attachmentsDetails: { [key: string]: EduRecordAttachmentModel };
-  @Output() download: EventEmitter<string> = new EventEmitter<string>();
+  @Input() attachmentsDetails: EduRecordAttachmentModel[];
+  @Output() download: EventEmitter<EduRecordAttachmentModel> = new EventEmitter<EduRecordAttachmentModel>();
 
   trimFileName(attachment: string): string {
     const fileName = this.attachmentsDetails[attachment] ? this.attachmentsDetails[attachment].filename : attachment;
