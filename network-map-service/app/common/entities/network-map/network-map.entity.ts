@@ -28,6 +28,9 @@ export class NetworkMapEntity {
     joinedDate: string;
 
     @Column({nullable: true})
+    promoterLegalIdentity?: string;
+
+    @Column({nullable: true})
     promoterSignature?: string;
 
     @Column({nullable: true})

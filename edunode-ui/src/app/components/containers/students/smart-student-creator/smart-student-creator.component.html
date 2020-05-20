@@ -1,0 +1,5 @@
+<div>
+  <app-loading-bar *ngIf="loading"></app-loading-bar>
+  <app-student-creator-form [form]="form"></app-student-creator-form>
+  <app-action-bar [actions]="actions" (actionEvent)="onAction($event)"></app-action-bar>
+</div>

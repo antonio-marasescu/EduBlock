@@ -1,6 +1,5 @@
-import {ValidationError} from "class-validator/validation/ValidationError";
-import {EduError} from "./edu.error";
-import {NmsError} from "../../../../network-map-service/app/common/errors/nms.error";
+import {ValidationError} from 'class-validator/validation/ValidationError';
+import {EduError} from './edu.error';
 
 export function createInvalidSignatureError(target: any): EduError {
     const error = new ValidationError();
@@ -59,7 +58,8 @@ export function createIdentityNotFound(target: any): EduError {
 }
 
 export function createAxiosResponseError(axiosError: any) {
-    return new EduError(axiosError.status, [axiosError.body]);
+    const body = Array.isArray(axiosError.data) ? axiosError.data : [axiosError.data];
+    return new EduError(axiosError.status, body);
 }
 
 export function createMessageCouldNotBeSentError(target: any): EduError {
@@ -69,36 +69,43 @@ export function createMessageCouldNotBeSentError(target: any): EduError {
     return new EduError(400, [error]);
 }
 
-export function createInvalidHashError(target: any): NmsError {
+export function createInvalidHashError(target: any): EduError {
     const error = new ValidationError();
     error.target = target;
     error.constraints = {hashError: 'The hash of the data is not correct!'};
-    return new NmsError(400, [error]);
+    return new EduError(400, [error]);
 }
 
-export function createCertificateAuthorityCouldNotBeFoundError(target: any) {
+export function createCertificateAuthorityCouldNotBeFoundError(target: any): EduError {
     const error = new ValidationError();
     error.target = target;
     error.constraints = {certificateAuthorityCouldNotBeFound: 'The certificate authority could not be found for this transaction!'};
-    return new NmsError(400, [error]);
+    return new EduError(400, [error]);
 }
 
-export function createNoTransactionStatusError(target: any): NmsError {
+export function createNoTransactionStatusError(target: any): EduError {
     const error = new ValidationError();
     error.target = target;
     error.constraints = {transactionStatusError: 'The transaction status was invalid!'};
-    return new NmsError(400, [error]);
+    return new EduError(400, [error]);
 }
 
-export function createNotEnoughTransactionsForBlockError(): NmsError {
+export function createNotEnoughTransactionsForBlockError(): EduError {
     const error = new ValidationError();
     error.constraints = {transactionBlockCount: 'We do not have enough transactions to create a block!'};
-    return new NmsError(409, [error]);
+    return new EduError(400, [error]);
 }
 
-export function createInvalidBlockEntityError(target: any, reason: string) {
+export function createInvalidBlockEntityError(target: any, reason: string): EduError {
     const error = new ValidationError();
     error.target = target;
     error.constraints = {invalidBlock: 'The block entity was invalid!', reason: reason};
-    return new NmsError(400, [error]);
+    return new EduError(400, [error]);
+}
+
+export function createFileOwnerUnreachable(target: any): EduError {
+    const error = new ValidationError();
+    error.target = target;
+    error.constraints = {unreachableOwner: 'The owner of the files is currently unreachable!'};
+    return new EduError(404, [error]);
 }

@@ -1,0 +1,28 @@
+.header-element {
+  padding-left: 12px;
+}
+
+.details-content {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.expansion-header-title {
+  width: 40%;
+}
+
+.expansion-header-description {
+  justify-content: start;
+}
+
+.attachment-card {
+  width: 100%;
+  max-width: 150px;
+  padding: 16px;
+  text-align: center;
+}
+
+.attachment-card:hover {
+  cursor: pointer;
+  background-color: rgba(158, 158, 158, 0.1);
+}

@@ -1,10 +1,10 @@
-import {BasicApi} from "../basic.api";
-import express from "express";
-import asyncHandler from "express-async-handler";
-import {Inject, Service, Token} from "typedi";
-import {PingPublisher, PingPublisherToken} from "../../services/rabbitmq/publishers/ping.publisher";
-import {createInvalidRequestParamsError} from "../../errors/edu.error.factory";
-import {BasicMessageDto} from "../../dto/network/basic-message.dto";
+import {BasicApi} from '../basic.api';
+import express from 'express';
+import asyncHandler from 'express-async-handler';
+import {Inject, Service, Token} from 'typedi';
+import {PingPublisher, PingPublisherToken} from '../../services/rabbitmq/publishers/ping.publisher';
+import {createInvalidRequestParamsError} from '../../errors/edu.error.factory';
+import {BasicMessageDto} from '../../dto/network/basic-message.dto';
 
 export const P2pCommunicationApiToken = new Token<P2pCommunicationApi>('api.routes.p2p-communication');
 
@@ -23,7 +23,7 @@ export class P2pCommunicationApi implements BasicApi {
     }
 
     private registerRoutes() {
-        this.router.post('/p2p/messages/:publicKey',
+        this.router.post('/api/p2p/messages/:publicKey',
             asyncHandler(async (req, res) => this.handleSendMessage(req, res)));
     }
 

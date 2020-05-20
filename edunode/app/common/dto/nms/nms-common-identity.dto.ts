@@ -1,11 +1,15 @@
-import {EduCommonIdentityDto} from "../network/edu-common-identity.dto";
-import {objectWithoutKeys} from "../../utils/dictionary.utils";
-import {CommonIdentity} from "../../entities/identity/common-identity.entity";
-import {IsDateString, IsNotEmpty, IsNumber, IsString} from "class-validator";
+import {EduCommonIdentityDto} from '../network/edu-common-identity.dto';
+import {objectWithoutKeys} from '../../utils/dictionary.utils';
+import {CommonIdentity} from '../../entities/identity/common-identity.entity';
+import {IsDateString, IsNotEmpty, IsNumber, IsString} from 'class-validator';
 
 export class NmsCommonIdentityDto {
     @IsNumber()
     id?: number;
+
+    @IsString()
+    @IsNotEmpty()
+    entityHash?: string;
 
     @IsString()
     @IsNotEmpty()
@@ -14,10 +18,6 @@ export class NmsCommonIdentityDto {
     @IsString()
     @IsNotEmpty()
     legalIdentity: string;
-
-    @IsString()
-    @IsNotEmpty()
-    entityHash?: string;
 
     @IsNumber()
     version?: number;
@@ -33,6 +33,7 @@ export class NmsCommonIdentityDto {
     @IsNotEmpty()
     joinedDate: Date;
 
+    promoterLegalIdentity?: string;
     promoterSignature: string;
     promoterPublicKey: string;
 

@@ -1,11 +1,12 @@
-import {Inject, Service, Token} from "typedi";
-import {BasicApi} from "../basic.api";
-import express from "express";
-import {FilesService, FilesServiceToken} from "../../services/common/files.service";
-import asyncHandler from "express-async-handler";
-import multer from "multer";
-import {EduFileDto} from "../../dto/common/edu-file.dto";
-import {createInvalidRequestParamsError} from "../../errors/edu.error.factory";
+import {Inject, Service, Token} from 'typedi';
+import {BasicApi} from '../basic.api';
+import express from 'express';
+import {FilesService, FilesServiceToken} from '../../services/common/files.service';
+import asyncHandler from 'express-async-handler';
+import multer from 'multer';
+import {EduFileDto} from '../../dto/common/edu-file.dto';
+import {createInvalidRequestParamsError} from '../../errors/edu.error.factory';
+import {EduFileEntity} from '../../entities/files/edu-file.entity';
 
 export const FilesApiToken = new Token<FilesApi>('api.routes.files');
 
@@ -27,10 +28,12 @@ export class FilesApi implements BasicApi {
     }
 
     private registerRoutes() {
-        this.router.post('/files', this.multerMiddleware.single('file'), asyncHandler(
+        this.router.post('/api/files', this.multerMiddleware.single('file'), asyncHandler(
             async (req, res) => this.handleUploadFile(req, res)));
-        this.router.get('/files/:hashId', asyncHandler(
+        this.router.get('/api/files/:transactionHashId/:fileHashId', asyncHandler(
             async (req, res) => this.getFile(req, res)));
+        this.router.get('/api/files/:transactionHashId', asyncHandler(
+            async (req, res) => this.getFilesForTransaction(req, res)));
     }
 
     private async handleUploadFile(req, res) {
@@ -39,18 +42,25 @@ export class FilesApi implements BasicApi {
             throw createInvalidRequestParamsError('dto');
         }
         const savedFile = await this.filesService.saveFile(dto);
-        res.contentType(savedFile.mimeType);
-        res.send(savedFile.content);
+        res.send(savedFile);
     }
 
 
     private async getFile(req, res) {
-        const hashId: string = req.params.hashId;
+        const hashId: string = req.params.fileHashId;
         if (!hashId) {
-            throw createInvalidRequestParamsError('hashId');
+            throw createInvalidRequestParamsError('fileHashId');
         }
-        const foundFile = await this.filesService.getFile(hashId);
-        res.contentType(foundFile.mimeType);
-        res.send(foundFile.content);
+        const foundFile: EduFileEntity = await this.filesService.getFile(hashId);
+        res.send(foundFile);
+    }
+
+    private async getFilesForTransaction(req, res) {
+        const transactionHashId: string = req.params.transactionHashId;
+        if (!transactionHashId) {
+            throw createInvalidRequestParamsError('transactionHashId');
+        }
+        const foundFiles: EduFileEntity[] = await this.filesService.getFilesForTransaction(transactionHashId);
+        res.send(foundFiles);
     }
 }

@@ -1,0 +1,7 @@
+<div>
+  <app-loading-bar *ngIf="isLoading$ | async"></app-loading-bar>
+  <app-smart-students-list-filter-options [data]="students$ | async"
+                                          (filter)="onFilterEvent($event)"></app-smart-students-list-filter-options>
+  <app-students-list [students]="filteredStudents$ | async"></app-students-list>
+  <app-action-bar [actions]="actions" (actionEvent)="onAction($event)"></app-action-bar>
+</div>

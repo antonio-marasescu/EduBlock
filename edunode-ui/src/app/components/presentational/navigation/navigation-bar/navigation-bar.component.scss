@@ -1,0 +1,29 @@
+.app-container {
+  width: 100%;
+  height: 100vh;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.app-sidenav-content {
+  display: flex;
+}
+
+.app-sidenav {
+  padding: 20px;
+  width: 100%;
+  max-width: 220px;
+}
+
+.app-sidenav-list-item {
+  margin-top: 12px;
+  text-align: center;
+  justify-content: center;
+}
+
+.margin-right-icon {
+  margin-right: 12px;
+}
+
+.app-toolbar-fill {
+  flex: 1 1 auto;
+}

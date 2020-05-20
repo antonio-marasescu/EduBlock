@@ -1,0 +1,30 @@
+<div *ngIf="members && members.length !== 0">
+  <table mat-table [dataSource]="members" class="network-table">
+    <ng-container matColumnDef="{{column}}" *ngFor="let column of nonActionColumns">
+      <th mat-header-cell *matHeaderCellDef class="network-table-text"> {{displayedColumnsTitleFormat[column]}} </th>
+      <td mat-cell
+          *matCellDef="let element"
+          class="network-table-text equally-divided"> {{column != 'legalIdentity' ? trimData(element[column] || '-') : element[column] || '-'}}</td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef class="network-table-text"> Actions</th>
+      <td mat-cell *matCellDef="let element" class="network-table-text equally-divided">
+        <button mat-icon-button [matMenuTriggerFor]="actionMenu" aria-label="Menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #actionMenu="matMenu">
+          <button mat-menu-item [cdkCopyToClipboard]="element.publicKey || '-'">
+            <mat-icon>vpn_key</mat-icon>
+            Copy Public Key
+          </button>
+          <button mat-menu-item [cdkCopyToClipboard]="element.promoterPublicKey || '-'">
+            <mat-icon>vpn_key</mat-icon>
+            Copy Promoter Public Key
+          </button>
+        </mat-menu>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

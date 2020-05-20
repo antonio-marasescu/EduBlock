@@ -1,0 +1,19 @@
+<mat-card *ngIf="filterForm">
+  <mat-card-content>
+    <form [formGroup]="filterForm" class="form-control-container" role="form">
+      <mat-form-field class="form-control-filter filter-text">
+        <mat-label>Filter Value</mat-label>
+        <input matInput placeholder="Type something..." formControlName="filterValue">
+      </mat-form-field>
+
+      <mat-form-field class="form-control-filter">
+        <mat-label>Filter Options</mat-label>
+        <mat-select [formControl]="filterForm.get('filterType')">
+          <mat-option *ngFor="let option of options" [value]="optionsView(option)">
+            {{optionsView(option)}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+</mat-card>

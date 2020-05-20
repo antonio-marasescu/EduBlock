@@ -1,0 +1,22 @@
+$action-bar-height: 70px;
+
+.app-toolbar-fill {
+  flex: 1 1 auto;
+}
+
+.app-action-bar-container {
+  height: $action-bar-height;
+  position: fixed;
+  margin: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.action-bar-item {
+  margin-right: 12px;
+  text-align: center;
+}
+
+.action-bar-padding {
+  padding-top: $action-bar-height;
+}

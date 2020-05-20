@@ -1,12 +1,12 @@
-import {Inject, Service, Token} from "typedi";
-import {NetworkMapService, NetworkMapServiceToken} from "../../services/network-map.service";
-import {BasicApi} from "../basic.api";
-import express from "express";
-import {NewNetworkMemberDto} from "../../dto/network/new-network-member.dto";
-import {NetworkMemberDto} from "../../dto/network/network-member.dto";
+import {Inject, Service, Token} from 'typedi';
+import {NetworkMapService, NetworkMapServiceToken} from '../../services/network-map.service';
+import {BasicApi} from '../basic.api';
+import express from 'express';
+import {NewNetworkMemberDto} from '../../dto/network/new-network-member.dto';
+import {NetworkMemberDto} from '../../dto/network/network-member.dto';
 import asyncHandler from 'express-async-handler';
-import {createInvalidRequestParamsError} from "../../errors/nms.error.factory";
-import {IdentityService, IdentityServiceToken} from "../../services/identity.service";
+import {createInvalidRequestParamsError} from '../../errors/nms.error.factory';
+import {IdentityService, IdentityServiceToken} from '../../services/identity.service';
 
 export const NetworkMapApiToken = new Token<NetworkMapApi>('api.routes.network-map');
 
@@ -54,8 +54,10 @@ export class NetworkMapApi implements BasicApi {
     }
 
     private async addNetworkMember(req, res) {
+        const promoterPublicKey = req.headers['public-key'];
         const member = new NewNetworkMemberDto();
         Object.assign(member, req.body);
+        member.promoterPublicKey = promoterPublicKey;
         const response: NetworkMemberDto = await this.networkMapService.addNetworkMember(member);
         res.json(response);
     }

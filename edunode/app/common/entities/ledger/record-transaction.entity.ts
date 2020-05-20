@@ -33,8 +33,11 @@ export class RecordTransactionEntity {
     @Column()
     targetPublicKey: string;
 
-    @Column("simple-array")
+    @Column('simple-array')
     attachments: string[];
+
+    @Column()
+    title: string;
 
     @Column('enum', {name: 'record_transaction_status', enum: RecordTransactionStatus})
     status?: RecordTransactionStatus;
