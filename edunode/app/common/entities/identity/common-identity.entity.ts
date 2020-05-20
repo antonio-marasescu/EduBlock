@@ -1,5 +1,5 @@
-import {Column, Entity} from "typeorm";
-import {IdentityModel} from "./identity.model";
+import {Column, Entity} from 'typeorm';
+import {IdentityModel} from './identity.model';
 
 @Entity()
 export class CommonIdentity extends IdentityModel {
@@ -11,6 +11,12 @@ export class CommonIdentity extends IdentityModel {
     version?: number;
 
     @Column()
+    publicKey: string;
+
+    @Column()
+    legalIdentity: string;
+
+    @Column()
     host: string;
 
     @Column()
@@ -18,6 +24,9 @@ export class CommonIdentity extends IdentityModel {
 
     @Column()
     joinedDate: string;
+
+    @Column({nullable: true})
+    promoterLegalIdentity?: string;
 
     @Column({nullable: true})
     promoterSignature?: string;

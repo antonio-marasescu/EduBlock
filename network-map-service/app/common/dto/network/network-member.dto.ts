@@ -15,6 +15,8 @@ export class NetworkMemberDto {
 
     joinedDate: string;
 
+    promoterLegalIdentity?: string;
+
     promoterSignature?: string;
 
     promoterPublicKey?: string;

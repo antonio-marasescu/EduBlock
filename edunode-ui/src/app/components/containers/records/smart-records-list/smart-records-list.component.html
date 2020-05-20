@@ -1,0 +1,7 @@
+<div>
+  <app-loading-bar *ngIf="isLoading$ | async"></app-loading-bar>
+  <app-smart-records-list-filter-options [data]="records$ | async"
+                                         (filter)="onFilterEvent($event)"></app-smart-records-list-filter-options>
+  <app-records-list [records]="filteredRecords$ | async"></app-records-list>
+  <app-action-bar [actions]="actions" (actionEvent)="onAction($event)"></app-action-bar>
+</div>

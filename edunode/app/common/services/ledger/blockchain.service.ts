@@ -1,16 +1,16 @@
-import {Inject, Service, Token} from "typedi";
+import {Inject, Service, Token} from 'typedi';
 import {
     IRecordTransactionRepository,
     IRecordTransactionRepositoryToken
-} from "../../repositories/ledger/record-transaction.interface.repository";
-import {ServerLogger, ServerLoggerToken} from "../../logger/server-logger.interface";
-import {CreateTransactionDto, CreateTransactionDtoMapper} from "../../dto/common/create-transaction.dto";
+} from '../../repositories/ledger/record-transaction.interface.repository';
+import {ServerLogger, ServerLoggerToken} from '../../logger/server-logger.interface';
+import {CreateTransactionDto, CreateTransactionDtoMapper} from '../../dto/common/create-transaction.dto';
 import {
     CertifiedTransactionHashBlacklist,
     PendingTransactionHashBlacklist,
     RecordTransactionEntity
-} from "../../entities/ledger/record-transaction.entity";
-import {IFilesRepository, IFilesRepositoryToken} from "../../repositories/vault/files.interface.repository";
+} from '../../entities/ledger/record-transaction.entity';
+import {IFilesRepository, IFilesRepositoryToken} from '../../repositories/vault/files.interface.repository';
 import {
     createAttachmentsNotFoundLocallyError,
     createInvalidSignatureError,
@@ -18,27 +18,27 @@ import {
     createNoTransactionStatusError,
     createObjectNotFoundError,
     createValidationError
-} from "../../errors/edu.error.factory";
-import {RecordTransactionStatus} from "../../entities/ledger/record-transaction-status.enum";
-import {IdentityService, IdentityServiceToken} from "../security/identity.service";
-import {objectWithoutKeys} from "../../utils/dictionary.utils";
-import {CertificateAuthorityService, CertificateAuthorityServiceToken} from "../common/certificate-authority.service";
-import {CaTransactionDtoMapper} from "../../dto/ca/ca-transaction.dto";
-import {CaSignatureDto} from "../../dto/ca/ca-signature.dto";
-import {EccService, EccServiceToken} from "../security/ecc.service";
-import {TransactionPublisher, TransactionPublisherToken} from "../rabbitmq/publishers/transaction.publisher";
-import {NetworkTransactionDto, NetworkTransactionDtoMapper} from "../../dto/network/blockchain/network-transaction.dto";
-import {validate, ValidationError} from "class-validator";
-import {NodeConfigurationModel, NodeConfigurationModelToken} from "../../config/node-configuration.model";
-import {IBlockRepository, IBlockRepositoryToken} from "../../repositories/ledger/block.interface.repository";
-import {BlockEntity, BlockSignatureBlacklist} from "../../entities/ledger/block.entity";
-import {AxiosTokenWorker} from "../axios/axios.config";
-import {AxiosInstance, AxiosResponse} from "axios";
-import {NetworkBlockDto, NetworkBlockDtoMapper} from "../../dto/network/blockchain/network-block.dto";
-import {validateAxiosResponse} from "../../utils/validators.utils";
-import {BlockchainValidatorService, BlockchainValidatorServiceToken} from "./blockchain-validator.service";
-import {NetworkMembersService, NetworkMembersServiceToken} from "../common/network-members.service";
-import {buildAxiosInstance} from "../axios/axios.builder";
+} from '../../errors/edu.error.factory';
+import {RecordTransactionStatus} from '../../entities/ledger/record-transaction-status.enum';
+import {IdentityService, IdentityServiceToken} from '../security/identity.service';
+import {objectWithoutKeys} from '../../utils/dictionary.utils';
+import {CertificateAuthorityService, CertificateAuthorityServiceToken} from '../common/certificate-authority.service';
+import {CaTransactionDtoMapper} from '../../dto/ca/ca-transaction.dto';
+import {CaSignatureDto} from '../../dto/ca/ca-signature.dto';
+import {EccService, EccServiceToken} from '../security/ecc.service';
+import {TransactionPublisher, TransactionPublisherToken} from '../rabbitmq/publishers/transaction.publisher';
+import {NetworkTransactionDto, NetworkTransactionDtoMapper} from '../../dto/network/blockchain/network-transaction.dto';
+import {validate, ValidationError} from 'class-validator';
+import {NodeConfigurationModel, NodeConfigurationModelToken} from '../../config/node-configuration.model';
+import {IBlockRepository, IBlockRepositoryToken} from '../../repositories/ledger/block.interface.repository';
+import {BlockEntity, BlockSignatureBlacklist} from '../../entities/ledger/block.entity';
+import {AxiosTokenWorker} from '../axios/axios.config';
+import {AxiosInstance, AxiosResponse} from 'axios';
+import {NetworkBlockDto, NetworkBlockDtoMapper} from '../../dto/network/blockchain/network-block.dto';
+import {validateAxiosResponse} from '../../utils/validators.utils';
+import {BlockchainValidatorService, BlockchainValidatorServiceToken} from './blockchain-validator.service';
+import {NetworkMembersService, NetworkMembersServiceToken} from '../common/network-members.service';
+import {buildAxiosInstance} from '../axios/axios.builder';
 
 
 export const BlockchainServiceToken = new Token<BlockchainService>('services.ledger.blockchain');
@@ -62,10 +62,10 @@ export class BlockchainService {
     }
 
     public async createTransaction(transactionDto: CreateTransactionDto): Promise<RecordTransactionEntity> {
-        this.logger.logInfo(this, "Creating Transaction Flow started...");
-        this.logger.logInfo(this, "Validating transaction data transfer object...");
+        this.logger.logInfo(this, 'Creating Transaction Flow started...');
+        this.logger.logInfo(this, 'Validating transaction data transfer object...');
         await this.validateCreateTransactionDto(transactionDto);
-        this.logger.logSuccess(this, "Validation of transaction data transfer object succeeded");
+        this.logger.logSuccess(this, 'Validation of transaction data transfer object succeeded');
 
         const transaction: RecordTransactionEntity = CreateTransactionDtoMapper.toEntity(transactionDto);
         transaction.version = 1.0;
@@ -98,15 +98,15 @@ export class BlockchainService {
     }
 
     public async addTransaction(networkTransactionDto: NetworkTransactionDto) {
-        this.logger.logInfo(this, "Adding Transaction Flow has started...");
-        this.logger.logInfo(this, "Validating network transaction data transfer object...");
+        this.logger.logInfo(this, 'Adding Transaction Flow has started...');
+        this.logger.logInfo(this, 'Validating network transaction data transfer object...');
         const validationErrors: ValidationError[] = await validate(networkTransactionDto);
         if (validationErrors.length > 0) {
             const error = createValidationError(validationErrors);
             this.logger.logError(this, JSON.stringify(error));
             throw error;
         }
-        this.logger.logSuccess(this, "Validation of network transaction data transfer object succeeded...");
+        this.logger.logSuccess(this, 'Validation of network transaction data transfer object succeeded...');
 
         const transaction: RecordTransactionEntity = NetworkTransactionDtoMapper.toEntity(networkTransactionDto);
         await this.blockchainValidatorService.validateNetworkTransaction(transaction);
@@ -121,14 +121,14 @@ export class BlockchainService {
     }
 
     public async createBlock(): Promise<number> {
-        this.logger.logInfo(this, "Getting transactions for block creation...");
+        this.logger.logInfo(this, 'Getting transactions for block creation...');
         const certifiedTransactions = await this.recordTransactionRepository.find({status: RecordTransactionStatus.Certified});
         if (!certifiedTransactions || certifiedTransactions.length === 0) {
             const error = createNotEnoughTransactionsForBlockError();
-            this.logger.logWarning(this, JSON.stringify(error));
+            this.logger.logError(this, JSON.stringify(error));
             throw error;
         }
-        this.logger.logInfo(this, "Transaction found, block will be created with " + certifiedTransactions.length + " transactions");
+        this.logger.logInfo(this, 'Transaction found, block will be created with ' + certifiedTransactions.length + ' transactions');
         const noBlocks = await this.blockRepository.count({});
         const previousIndex = noBlocks - 1;
         let previousBlock = await this.blockRepository.findOne({index: previousIndex});
@@ -150,18 +150,18 @@ export class BlockchainService {
 
     public async addBlock(networkBlockDto: NetworkBlockDto): Promise<void> {
         try {
-            this.logger.logInfo(this, "Request to add block to the blockchain started...");
+            this.logger.logInfo(this, 'Request to add block to the blockchain started...');
             const networkEntity: BlockEntity = NetworkBlockDtoMapper.toEntity(networkBlockDto);
             this.logger.logInfo(this, JSON.stringify(networkEntity));
-            this.logger.logInfo(this, "Validating block...");
+            this.logger.logInfo(this, 'Validating block...');
             await this.blockchainValidatorService.validateBlock(networkEntity);
-            this.logger.logSuccess(this, "The validation for the block has succeeded...");
-            this.logger.logInfo(this, "Adding the block to the ledger...");
+            this.logger.logSuccess(this, 'The validation for the block has succeeded...');
+            this.logger.logInfo(this, 'Adding the block to the ledger...');
             await this.blockRepository.save(networkEntity);
-            this.logger.logSuccess(this, "The block was added to the ledger.");
-            this.logger.logInfo(this, "Updating local transactions block hash to the new block.");
+            this.logger.logSuccess(this, 'The block was added to the ledger.');
+            this.logger.logInfo(this, 'Updating local transactions block hash to the new block.');
             await this.reassignTransactionForBlocks(networkEntity);
-            this.logger.logSuccess(this, "Local transactions block hash updated.");
+            this.logger.logSuccess(this, 'Local transactions block hash updated.');
         } catch (error) {
             throw error;
         } finally {
@@ -170,81 +170,81 @@ export class BlockchainService {
     }
 
     private async blockChainConsensus(): Promise<void> {
-        this.logger.logInfo(this, "Blockchain Consensus Flow has started...");
+        this.logger.logInfo(this, 'Blockchain Consensus Flow has started...');
         const members = await this.networkMembersService.learnMembers();
         const consensusBlockchainModels: BlockEntity[][] = [];
 
-        this.logger.logInfo(this, "Getting blockchain from each known member...");
+        this.logger.logInfo(this, 'Getting blockchain from each known member...');
         for (let member of members) {
             const memberAxiosInstance = buildAxiosInstance(member.host, member.port);
-            const response = await memberAxiosInstance.get<NetworkBlockDto[]>('/blockchain');
+            const response = await memberAxiosInstance.get<NetworkBlockDto[]>('/api/blockchain');
             if (response.status !== 200) {
                 continue;
             }
             const data: BlockEntity[] = response.data.map(b => NetworkBlockDtoMapper.toEntity(b));
             consensusBlockchainModels.push(data);
         }
-        this.logger.logSuccess(this, "Received blockchain from each known member");
+        this.logger.logSuccess(this, 'Received blockchain from each known member');
 
-        this.logger.logInfo(this, "Sorting blockchain's by length");
+        this.logger.logInfo(this, 'Sorting blockchain by length');
         consensusBlockchainModels.sort((a, b) => b.length - a.length);
 
-        this.logger.logInfo(this, "Updating local blockchain through the consensus mechanism");
+        this.logger.logInfo(this, 'Updating local blockchain through the consensus mechanism');
         for (const blockchain of consensusBlockchainModels) {
             const valid = await this.blockchainValidatorService.validateChain(blockchain);
             if (valid) {
-                this.logger.logInfo(this, "New blockchain length: " + blockchain.length);
+                this.logger.logInfo(this, 'New blockchain length: ' + blockchain.length);
 
-                this.logger.logInfo(this, "Updating local blockchain.");
+                this.logger.logInfo(this, 'Updating local blockchain.');
                 await this.blockRepository.save(blockchain);
-                this.logger.logSuccess(this, "Local blockchain updated.");
+                this.logger.logSuccess(this, 'Local blockchain updated.');
 
-                this.logger.logInfo(this, "Updating local transactions block hash to the new blockchain.");
+                this.logger.logInfo(this, 'Updating local transactions block hash to the new blockchain.');
                 for (const block of blockchain) {
                     await this.reassignTransactionForBlocks(block);
                 }
-                this.logger.logSuccess(this, "Local transactions for the new blockchain updated.");
+                this.logger.logSuccess(this, 'Local transactions for the new blockchain updated.');
             }
         }
-        this.logger.logSuccess(this, "Local blockchain was updated through the consensus mechanism");
-        this.logger.logSuccess(this, "Blockchain Consensus Flow has finished.");
+        this.logger.logSuccess(this, 'Local blockchain was updated through the consensus mechanism');
+        this.logger.logSuccess(this, 'Blockchain Consensus Flow has finished.');
     }
 
     public async getBlockChain(): Promise<NetworkBlockDto[]> {
-        this.logger.logInfo(this, "Get local blockchain flow started.");
+        this.logger.logInfo(this, 'Get local blockchain flow started.');
         const localBlockchain = await this.blockRepository.find({});
-        this.logger.logSuccess(this, "Get local blockchain flow has ended.");
+        this.logger.logSuccess(this, 'Get local blockchain flow has ended.');
         return localBlockchain.map(b => NetworkBlockDtoMapper.toDto(b));
     }
 
     public async getBlockByHash(hash: string): Promise<NetworkBlockDto> {
-        this.logger.logInfo(this, "Searching for block by hash: " + hash);
+        this.logger.logInfo(this, 'Searching for block by hash: ' + hash);
         const block = await this.blockRepository.findOne({hash: hash});
         if (!block) {
             const error = createObjectNotFoundError(hash);
             this.logger.logWarning(this, JSON.stringify(error));
             throw error;
         }
-        this.logger.logSuccess(this, "Block found in the local vault!");
+        this.logger.logSuccess(this, 'Block found in the local vault!');
         return block;
     }
 
     public async getTransactionDetailsByHash(hash: string): Promise<NetworkTransactionDto> {
-        this.logger.logInfo(this, "Searching for transaction by hash: " + hash);
+        this.logger.logInfo(this, 'Searching for transaction by hash: ' + hash);
         const transaction = await this.recordTransactionRepository.findOne({hash: hash});
         if (!transaction) {
             const error = createObjectNotFoundError(hash);
             this.logger.logWarning(this, JSON.stringify(error));
             throw error;
         }
-        this.logger.logSuccess(this, "Transaction found in the local vault!");
+        this.logger.logSuccess(this, 'Transaction found in the local vault!');
         return NetworkTransactionDtoMapper.toDto(transaction);
     }
 
     public async getAllTransactions(): Promise<NetworkTransactionDto[]> {
-        this.logger.logInfo(this, "Getting all transactions flow started.");
+        this.logger.logInfo(this, 'Getting all transactions flow started.');
         const transactions = await this.recordTransactionRepository.find();
-        this.logger.logSuccess(this, "Getting all transactions flow has ended.");
+        this.logger.logSuccess(this, 'Getting all transactions flow has ended.');
         return transactions.map(t => NetworkTransactionDtoMapper.toDto(t));
     }
 
@@ -252,7 +252,7 @@ export class BlockchainService {
         for (let transaction of networkEntity.transactions) {
             const localTransaction = await this.recordTransactionRepository.findOne({hash: transaction});
             if (!localTransaction) {
-                this.logger.logWarning(this, "We do not own transaction: " + transaction);
+                this.logger.logWarning(this, 'We do not own transaction: ' + transaction);
                 continue;
             }
             localTransaction.blockHash = networkEntity.hash;
@@ -262,31 +262,31 @@ export class BlockchainService {
     }
 
     private async runtimeTransactionCheck(): Promise<void> {
-        this.logger.logInfo(this, "Running runtime transaction checks...");
+        this.logger.logInfo(this, 'Running runtime transaction checks...');
         const certifiedTransactionCount = await this.recordTransactionRepository.count({status: RecordTransactionStatus.Certified});
         if (certifiedTransactionCount >= this.nodeConfigurationModelToken.blockchainConfiguration.numberOfTransactionUntilBlock) {
-            this.logger.logInfo(this, "Automatic block creation process started!");
+            this.logger.logInfo(this, 'Automatic block creation process started!');
             this.createBlock();
         }
-        this.logger.logSuccess(this, "Runtime transaction checks have finished...");
+        this.logger.logSuccess(this, 'Runtime transaction checks have finished...');
     }
 
     private async validateCreateTransactionDto(transactionDto: CreateTransactionDto): Promise<void> {
-        this.logger.logInfo(this, "Validating transaction attachments...");
+        this.logger.logInfo(this, 'Validating transaction attachments...');
         const files = await this.filesRepository.findFileByIds(transactionDto.attachments);
         if (files.length !== transactionDto.attachments.length) {
             const error = createAttachmentsNotFoundLocallyError(transactionDto.attachments);
             this.logger.logError(this, JSON.stringify(error));
             throw error;
         }
-        this.logger.logSuccess(this, "Validation succeeded of transaction attachments...");
+        this.logger.logSuccess(this, 'Validation succeeded of transaction attachments...');
     }
 
     private async checkpointTransaction(transaction: RecordTransactionEntity, newStatus: RecordTransactionStatus): Promise<RecordTransactionEntity> {
-        this.logger.logInfo(this, "Checkpointing transaction to status: " + newStatus);
+        this.logger.logInfo(this, 'Checkpointing transaction to status: ' + newStatus);
         transaction.status = newStatus;
         const savedTransaction: any = await this.recordTransactionRepository.save(transaction).catch(error => this.logger.logError(this, JSON.stringify(error)));
-        this.logger.logSuccess(this, "Checkpointing transaction " + transaction.id + " succeeded.");
+        this.logger.logSuccess(this, 'Checkpointing transaction ' + transaction.id + ' succeeded.');
         return savedTransaction;
     }
 

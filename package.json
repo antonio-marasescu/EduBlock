@@ -8,7 +8,9 @@
   "author": "Marasescu-Duran Antonio",
   "license": "ISC",
   "dependencies": {
+    "@types/file-saver": "^2.0.1",
     "@types/multer": "^1.4.3",
+    "file-saver": "^2.0.2",
     "gulp-stylus": "^2.7.0",
     "madge": "^3.8.0",
     "multer": "^1.4.2",

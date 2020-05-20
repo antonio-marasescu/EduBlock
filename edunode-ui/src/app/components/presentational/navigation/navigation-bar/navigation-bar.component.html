@@ -1,0 +1,50 @@
+<mat-sidenav-container class="app-container" autosize>
+  <mat-sidenav #sidenav class="app-sidenav" mode="side">
+    <mat-nav-list *ngIf="user">
+      <mat-list-item routerLink="/network">
+        <mat-icon matListIcon class="margin-right-icon">cloud</mat-icon>
+        Network
+      </mat-list-item>
+      <mat-list-item class="app-sidenav-list-item" routerLink="/records">
+        <mat-icon matListIcon class="margin-right-icon">assignment</mat-icon>
+        Records
+      </mat-list-item>
+      <mat-list-item class="app-sidenav-list-item" routerLink="/students">
+        <mat-icon matListIcon class="margin-right-icon">emoji_people</mat-icon>
+        Students
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <div class="app-sidenav-content">
+    <mat-toolbar color="primary">
+      <span *ngIf="user">
+        <button mat-icon-button (click)="sidenav.toggle()">
+          <mat-icon>dehaze</mat-icon>
+        </button>
+      </span>
+      <span class="app-toolbar-fill"></span>
+      <span>
+        <div *ngIf="user; else noUser">
+          <button mat-button>
+            <mat-icon class="margin-right-icon">group</mat-icon>
+            {{user.legalIdentity}}
+          </button>
+          <button mat-stroked-button>
+            Logout
+          </button>
+        </div>
+        <ng-template #noUser>
+          <div>
+          <button mat-raised-button>
+            Login
+          </button>
+          </div>
+        </ng-template>
+      </span>
+    </mat-toolbar>
+  </div>
+
+  <ng-content></ng-content>
+
+</mat-sidenav-container>
