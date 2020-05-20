@@ -6,7 +6,7 @@ import {EduRecordModel} from '../../../../core/models/records/edu-record.model';
 import {Observable, of} from 'rxjs';
 import {AppState} from '../../../../store/app.state';
 import {Store} from '@ngrx/store';
-import {GetRecordsTransaction} from '../../../../store/actions/records.actions';
+import {CreateBlock, GetRecordsTransaction} from '../../../../store/actions/records.actions';
 import {selectRecords, selectRecordsStateIsLoading} from '../../../../store/reducers/records.reducer';
 
 export enum RecordsListActionTypes {
@@ -43,6 +43,7 @@ export class SmartRecordsListComponent implements OnInit {
         await this.router.navigateByUrl('/records/create');
         break;
       case RecordsListActionTypes.CREATE_BLOCK:
+        this.store.dispatch(new CreateBlock());
         break;
     }
   }

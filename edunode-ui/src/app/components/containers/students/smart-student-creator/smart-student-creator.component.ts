@@ -1,9 +1,13 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActionBarInputModel} from '../../../../core/models/actions/action-bar-input.model';
 import {ActionBarType} from '../../../../core/models/actions/action-bar-type.enum';
 import {Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {tap} from 'rxjs/operators';
+import {EduStudentModel} from '../../../../core/models/students/edu-student.model';
+import {AppState} from '../../../../store/app.state';
+import {Store} from '@ngrx/store';
+import {AddStudent} from '../../../../store/actions/students.actions';
 
 export enum StudentCreatorActionTypes {
   CREATE = 'create',
@@ -30,7 +34,7 @@ export class SmartStudentCreatorComponent implements OnInit {
   form: FormGroup;
   eccInitialized: boolean;
 
-  constructor(private router: Router, private changeDetectorRef: ChangeDetectorRef) {
+  constructor(private router: Router, private store: Store<AppState>) {
   }
 
   async onAction(eventName: string) {
@@ -42,6 +46,12 @@ export class SmartStudentCreatorComponent implements OnInit {
         this.generatePublicPrivateKey();
         break;
       case StudentCreatorActionTypes.CREATE:
+        const publicKey = this.form.get('publicKey').value;
+        const fullName = this.form.get('fullName').value;
+        const groupId = this.form.get('groupId').value;
+        const faculty = this.form.get('faculty').value;
+        const payload: EduStudentModel = {publicKey, fullName, groupId, faculty};
+        this.store.dispatch(new AddStudent(payload));
         break;
     }
   }

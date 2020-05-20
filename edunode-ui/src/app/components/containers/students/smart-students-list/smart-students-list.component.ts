@@ -1,25 +1,13 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActionBarInputModel} from '../../../../core/models/actions/action-bar-input.model';
 import {ActionBarType} from '../../../../core/models/actions/action-bar-type.enum';
 import {Router} from '@angular/router';
 import {Observable, of} from 'rxjs';
-import {delay} from 'rxjs/operators';
 import {EduStudentModel} from '../../../../core/models/students/edu-student.model';
-
-const mockData: EduStudentModel[] = [
-  {
-    publicKey: '2qgq24t-awrg-awrgawgr',
-    fullName: 'Ion matur',
-    groupId: '304431',
-    faculty: 'Calculatore Borate',
-  },
-  {
-    publicKey: '3qgq24t-awrg-awrgawgr',
-    fullName: 'ADy matur',
-    groupId: '304441',
-    faculty: 'Calculatore Borate',
-  },
-];
+import {AppState} from '../../../../store/app.state';
+import {Store} from '@ngrx/store';
+import {selectStudents, selectStudentsStateIsLoading} from '../../../../store/reducers/students.reducer';
+import {GetStudents} from '../../../../store/actions/students.actions';
 
 
 export enum StudentsListActionTypes {
@@ -31,11 +19,10 @@ export enum StudentsListActionTypes {
   templateUrl: './smart-students-list.component.html',
   styleUrls: ['./smart-students-list.component.scss']
 })
-export class SmartStudentsListComponent {
-
-  students$: Observable<EduStudentModel[]> = of(mockData).pipe(delay(500));
-  filteredStudents$: Observable<EduStudentModel[]> = of([]);
-  isLoading$: Observable<boolean> = of(false);
+export class SmartStudentsListComponent implements OnInit {
+  students$: Observable<EduStudentModel[]>;
+  filteredStudents$: Observable<EduStudentModel[]>;
+  isLoading$: Observable<boolean>;
 
   actions: ActionBarInputModel[] = [
     {
@@ -45,7 +32,13 @@ export class SmartStudentsListComponent {
     },
   ];
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private store: Store<AppState>) {
+  }
+
+  ngOnInit(): void {
+    this.students$ = this.store.select(selectStudents);
+    this.isLoading$ = this.store.select(selectStudentsStateIsLoading);
+    this.store.dispatch(new GetStudents());
   }
 
   async onAction(eventName: string) {

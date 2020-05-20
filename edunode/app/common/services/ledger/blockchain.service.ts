@@ -125,7 +125,7 @@ export class BlockchainService {
         const certifiedTransactions = await this.recordTransactionRepository.find({status: RecordTransactionStatus.Certified});
         if (!certifiedTransactions || certifiedTransactions.length === 0) {
             const error = createNotEnoughTransactionsForBlockError();
-            this.logger.logWarning(this, JSON.stringify(error));
+            this.logger.logError(this, JSON.stringify(error));
             throw error;
         }
         this.logger.logInfo(this, 'Transaction found, block will be created with ' + certifiedTransactions.length + ' transactions');

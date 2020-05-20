@@ -6,6 +6,7 @@ export enum StudentsActionsTypes {
   GetStudentsSuccess = '[Students] Get Students Success',
   AddStudent = '[Students] Add Student',
   AddStudentSuccess = '[Students] Add Student Success',
+  StopLoading = '[Students] Stop Loading'
 }
 
 export class GetStudents implements Action {
@@ -33,4 +34,8 @@ export class AddStudentSuccess implements Action {
   }
 }
 
-export type StudentsActions = GetStudents | GetStudentsSuccess | AddStudent | AddStudentSuccess;
+export class StopLoading implements Action {
+  public readonly type = StudentsActionsTypes.StopLoading;
+}
+
+export type StudentsActions = GetStudents | GetStudentsSuccess | AddStudent | AddStudentSuccess | StopLoading;

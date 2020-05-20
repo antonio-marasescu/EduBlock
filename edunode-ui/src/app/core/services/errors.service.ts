@@ -10,7 +10,7 @@ export class ErrorsService {
 
   setError(httpErrorObject: any) {
     const message = this.parseErrorMessage(httpErrorObject);
-    this.snackBar.open(message, 'ok', {});
+    this.snackBar.open(message, 'Ok', {});
   }
 
   unsetError() {

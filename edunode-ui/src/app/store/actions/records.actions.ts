@@ -11,6 +11,7 @@ export enum RecordsActionsTypes {
   CreateRecordTransactionSuccess = '[Records-Transactions] Create Transaction Success',
   CreateBlock = '[Records-Transactions] Create Block',
   CreateBlockSuccess = '[Records-Transactions] Create Block Success',
+  StopLoading = '[Records-Transactions] Stop Loading'
 }
 
 export class GetRecordsTransaction implements Action {
@@ -63,6 +64,10 @@ export class CreateBlockSuccess implements Action {
   }
 }
 
+export class StopLoading implements Action {
+  public readonly type = RecordsActionsTypes.StopLoading;
+}
+
 export type RecordsActions =
   GetRecordsTransaction
   | GetRecordsTransactionSuccess
@@ -71,4 +76,5 @@ export type RecordsActions =
   | CreateRecordTransaction
   | CreateRecordTransactionSuccess
   | CreateBlock
-  | CreateBlockSuccess;
+  | CreateBlockSuccess
+  | StopLoading;

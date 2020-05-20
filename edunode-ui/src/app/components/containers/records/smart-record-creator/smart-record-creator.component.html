@@ -1,5 +1,5 @@
 <div>
-  <app-loading-bar *ngIf="isLoading$ | async"></app-loading-bar>
+  <app-loading-bar *ngIf="(isLoadingFiles$ | async) || (isLoadingStudents$ | async)"></app-loading-bar>
   <app-record-creator-form [form]="form" [availableStudents]="availableStudents$ | async"
                            (addedFile)="dropped($event)"
                            (removeFile)="removeFile($event)"

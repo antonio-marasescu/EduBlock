@@ -8,10 +8,10 @@ import {
   FilesActionsTypes,
   GetFilesOfTransactionByHash,
   GetFilesOfTransactionByHashSuccess,
+  StopLoading,
   UploadFile,
   UploadFileSuccess
 } from '../actions/files.actions';
-import {StopLoading} from '../actions/network-members.actions';
 
 @Injectable()
 export class FilesEffects {

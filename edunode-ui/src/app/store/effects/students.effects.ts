@@ -1,15 +1,15 @@
 import {Injectable} from '@angular/core';
 import {Actions, Effect, ofType} from '@ngrx/effects';
 import {Router} from '@angular/router';
-import {catchError, map, switchMap} from 'rxjs/operators';
+import {catchError, map, switchMap, tap} from 'rxjs/operators';
 import {SetError} from '../actions/http-errors.actions';
-import {of} from 'rxjs';
 import {StudentsService} from '../../core/services/students.service';
 import {
   AddStudent,
   AddStudentSuccess,
   GetStudents,
   GetStudentsSuccess,
+  StopLoading,
   StudentsActionsTypes
 } from '../actions/students.actions';
 
@@ -23,21 +23,27 @@ export class StudentsEffects {
   }
 
   @Effect()
-  getRecordsTransaction$ = this.actions$.pipe(
+  getStudents$ = this.actions$.pipe(
     ofType<GetStudents>(StudentsActionsTypes.GetStudents),
     switchMap(() => this.studentsService.getStudents().pipe(
       map(students => new GetStudentsSuccess(students)),
-      catchError(error => of(new SetError(error)))
+      catchError(error => [new SetError(error), new StopLoading()])
     ))
   );
 
   @Effect()
-  createRecordTransaction$ = this.actions$.pipe(
+  createStudent$ = this.actions$.pipe(
     ofType<AddStudent>(StudentsActionsTypes.AddStudent),
     map(action => action.payload),
     switchMap(newStudent => this.studentsService.addStudent(newStudent).pipe(
       map(addedStudent => new AddStudentSuccess(addedStudent)),
-      catchError(error => of(new SetError(error)))
+      catchError(error => [new SetError(error), new StopLoading()])
     ))
+  );
+
+  @Effect({dispatch: false})
+  createStudentSuccess$ = this.actions$.pipe(
+    ofType<AddStudentSuccess>(StudentsActionsTypes.AddStudentSuccess),
+    tap(() => this.router.navigateByUrl('/students'))
   );
 }

@@ -27,7 +27,7 @@ export class SmartStudentsListFilterOptionsComponent implements OnInit, OnChange
   ngOnInit(): void {
     this.filterForm = new FormGroup({
       filterValue: new FormControl(null),
-      filterType: new FormControl(null)
+      filterType: new FormControl(StudentFilterOptions.ByName)
     });
     this.filterForm.valueChanges.pipe(
       debounceTime(150),

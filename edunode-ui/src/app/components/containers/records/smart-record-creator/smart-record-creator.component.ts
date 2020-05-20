@@ -14,18 +14,13 @@ import {EduRecordAttachmentModel} from '../../../../core/models/records/edu-reco
 import {selectFilesStateIsUploadingFiles, selectUploadedFiles} from '../../../../store/reducers/files.reducer';
 import {CreateEduRecordModel} from '../../../../core/models/records/create-edu-record.model';
 import {CreateRecordTransaction} from '../../../../store/actions/records.actions';
+import {selectStudents, selectStudentsStateIsLoading} from '../../../../store/reducers/students.reducer';
+import {GetStudents} from '../../../../store/actions/students.actions';
 
 export enum RecordCreatorActionTypes {
   CREATE = 'create',
   EXIT = 'exit'
 }
-
-const mockStudentData: EduStudentModel[] = [{
-  publicKey: '42qgq4t4q2t',
-  fullName: 'Ion Pasvante',
-  groupId: '30441',
-  faculty: 'Computer Science'
-}];
 
 @Component({
   selector: 'app-smart-record-creator',
@@ -34,9 +29,10 @@ const mockStudentData: EduStudentModel[] = [{
 })
 export class SmartRecordCreatorComponent implements OnInit {
 
-  isLoading$: Observable<boolean> = of(false);
+  isLoadingFiles$: Observable<boolean> = of(false);
+  isLoadingStudents$: Observable<boolean> = of(false);
   latestAvailableStudents: EduStudentModel[] = [];
-  availableStudents$: Observable<EduStudentModel[]> = of(mockStudentData);
+  availableStudents$: Observable<EduStudentModel[]>;
   actions: ActionBarInputModel[] = [
     {eventName: RecordCreatorActionTypes.EXIT, type: ActionBarType.STANDARD, displayContent: 'Close'},
     {eventName: RecordCreatorActionTypes.CREATE, type: ActionBarType.ACCENT, displayContent: 'Create'},
@@ -67,7 +63,11 @@ export class SmartRecordCreatorComponent implements OnInit {
   ngOnInit(): void {
     this.isCreating = false;
     this.store.dispatch(new ClearUploadedFiles());
-    this.isLoading$ = this.store.select(selectFilesStateIsUploadingFiles);
+
+    this.isLoadingFiles$ = this.store.select(selectFilesStateIsUploadingFiles);
+    this.isLoadingStudents$ = this.store.select(selectStudentsStateIsLoading);
+
+    this.availableStudents$ = this.store.select(selectStudents);
     this.filesUploaded$ = this.store.select(selectUploadedFiles);
 
     this.filesUploaded$.pipe(
@@ -96,6 +96,8 @@ export class SmartRecordCreatorComponent implements OnInit {
       }
     })).subscribe(() => this.actions[1].valid = this.form.valid && !this.isCreating);
     this.form.updateValueAndValidity();
+
+    this.store.dispatch(new GetStudents());
   }
 
   public dropped(files: NgxFileDropEntry[]) {

@@ -11,18 +11,20 @@ import {
   GetRecordsTransactionSuccess,
   GetRecordTransactionByHash,
   GetRecordTransactionByHashSuccess,
-  RecordsActionsTypes
+  RecordsActionsTypes,
+  StopLoading
 } from '../actions/records.actions';
 import {catchError, map, switchMap, tap} from 'rxjs/operators';
 import {SetError} from '../actions/http-errors.actions';
-import {of} from 'rxjs';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Injectable()
 export class RecordsEffects {
   constructor(
     private recordsService: RecordsService,
     private actions$: Actions,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {
   }
 
@@ -31,7 +33,7 @@ export class RecordsEffects {
     ofType<GetRecordsTransaction>(RecordsActionsTypes.GetRecordsTransaction),
     switchMap(() => this.recordsService.getRecordTransactions().pipe(
       map(records => new GetRecordsTransactionSuccess(records)),
-      catchError(error => of(new SetError(error)))
+      catchError(error => [new SetError(error), new StopLoading()])
     ))
   );
 
@@ -41,7 +43,7 @@ export class RecordsEffects {
     map(action => action.payload),
     switchMap(hash => this.recordsService.getRecordTransactionByHash(hash).pipe(
       map(record => new GetRecordTransactionByHashSuccess(record)),
-      catchError(error => of(new SetError(error)))
+      catchError(error => [new SetError(error), new StopLoading()])
     ))
   );
 
@@ -51,7 +53,7 @@ export class RecordsEffects {
     map(action => action.payload),
     switchMap(newRecord => this.recordsService.createRecordTransaction(newRecord).pipe(
       map(addedRecord => new CreateRecordTransactionSuccess(addedRecord)),
-      catchError(error => of(new SetError(error)))
+      catchError(error => [new SetError(error), new StopLoading()])
     ))
   );
 
@@ -66,7 +68,14 @@ export class RecordsEffects {
     ofType<CreateBlock>(RecordsActionsTypes.CreateBlock),
     switchMap(() => this.recordsService.createBlock().pipe(
       map(blockIndex => new CreateBlockSuccess(blockIndex)),
-      catchError(error => of(new SetError(error)))
+      catchError(error => [new SetError(error), new StopLoading()])
     ))
+  );
+
+  // TODO: Move messages to a specialized service
+  @Effect({dispatch: false})
+  createBlockSuccess$ = this.actions$.pipe(
+    ofType<CreateBlockSuccess>(RecordsActionsTypes.CreateBlockSuccess),
+    tap(() => this.snackBar.open('Block under creation!', 'Ok', {duration: 4000}))
   );
 }

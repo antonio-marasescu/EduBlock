@@ -4,6 +4,7 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {debounceTime, tap} from 'rxjs/operators';
 
 export enum RecordFilterOptions {
+  ByTitle = 'Title',
   ById = 'Record Id',
   ByBlock = 'Block Hash',
   ByHash = 'Record Hash',
@@ -28,7 +29,7 @@ export class SmartRecordsListFilterOptionsComponent implements OnInit, OnChanges
   ngOnInit(): void {
     this.filterForm = new FormGroup({
       filterValue: new FormControl(null),
-      filterType: new FormControl(null)
+      filterType: new FormControl(RecordFilterOptions.ByTitle)
     });
     this.filterForm.valueChanges.pipe(
       debounceTime(150),
@@ -40,6 +41,9 @@ export class SmartRecordsListFilterOptionsComponent implements OnInit, OnChanges
     let filteredData: EduRecordModel[] = this.data;
     if (filterFormValue.filterValue) {
       switch (filterFormValue.filterType) {
+        case RecordFilterOptions.ByTitle:
+          filteredData = this.data.filter(x => x.title.includes(filterFormValue.filterValue));
+          break;
         case RecordFilterOptions.ById:
           filteredData = this.data.filter(x => x.id.includes(filterFormValue.filterValue));
           break;

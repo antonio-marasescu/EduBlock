@@ -61,6 +61,11 @@ export function recordsReducer(state: RecordsState = initialRecordState, action:
         isLoading: false,
         records: state.records.concat([action.payload])
       };
+    case RecordsActionsTypes.StopLoading:
+      return {
+        ...state,
+        isLoading: false
+      };
     default:
       return state;
   }
