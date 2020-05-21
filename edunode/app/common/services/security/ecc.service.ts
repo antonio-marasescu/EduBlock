@@ -1,6 +1,6 @@
 import ecc from 'eosjs-ecc'
-import {Service, Token} from "typedi";
-import {PersonalIdentity} from "../../entities/identity/personal-identity.entity";
+import {Service, Token} from 'typedi';
+import {PersonalIdentity} from '../../entities/identity/personal-identity.entity';
 
 export const EccServiceToken = new Token<EccService>('services.security.ecc');
 
@@ -18,6 +18,10 @@ export class EccService {
         }
         await ecc.initialize();
         this.initialized = true;
+    }
+
+    public async generateRandomKey(): Promise<string> {
+        return await ecc.randomKey();
     }
 
     public async generateIdentity(): Promise<PersonalIdentity> {
@@ -40,5 +44,9 @@ export class EccService {
 
     public async hashData(data: any): Promise<string> {
         return ecc.sha256(JSON.stringify(data));
+    }
+
+    public async hashStringData(data: string): Promise<string> {
+        return ecc.sha256(data);
     }
 }

@@ -1,11 +1,13 @@
-import express, {Express} from "express";
+import express, {Express} from 'express';
 import bodyParser from 'body-parser'
-import {Container, Inject, Service, Token} from "typedi";
-import {NodeConfigurationModel, NodeConfigurationModelToken} from "../common/config/node-configuration.model";
-import {ServerLogger, ServerLoggerToken} from "../common/logger/server-logger.interface";
-import {IdentityServiceToken} from "../common/services/security/identity.service";
-import {EduErrorHandler} from "../common/errors/edu.error.handler";
-import {API_REGISTER_TOKENS} from "../common/api/basic.api.register";
+import {Container, Inject, Service, Token} from 'typedi';
+import {NodeConfigurationModel, NodeConfigurationModelToken} from '../common/config/node-configuration.model';
+import {ServerLogger, ServerLoggerToken} from '../common/logger/server-logger.interface';
+import {IdentityServiceToken} from '../common/services/security/identity.service';
+import {EduErrorHandler} from '../common/errors/edu.error.handler';
+import {API_REGISTER_TOKENS} from '../common/api/basic.api.register';
+import {jwtVerification} from '../common/api/auth/jwt-verification.middleware';
+import {AuthenticationApiToken} from '../common/api/auth/authentication.api';
 
 export const EduNodeToken = new Token<EduNode>('EduNode');
 
@@ -28,7 +30,7 @@ export class EduNode {
         this.app.listen(this.nodeConfiguration.identity.port, async function () {
             const identityService = Container.get(IdentityServiceToken);
             const identity = await identityService.getPersonalIdentity();
-            that.logger.logInfo(that, "Identity (Public Key): " + identity);
+            that.logger.logInfo(that, 'Identity (Public Key): ' + identity);
             that.logger.logSuccess(that, 'Node ' + that.nodeConfiguration.identity.alias + ' is listening....');
         });
     }
@@ -36,6 +38,8 @@ export class EduNode {
     private async applyMiddleware(): Promise<void> {
         this.app.use(bodyParser.json());
         this.app.use(bodyParser.urlencoded({extended: false}));
+        this.app.use(Container.get(AuthenticationApiToken).getRouter());
+        this.app.use(jwtVerification);
         API_REGISTER_TOKENS.forEach(token => this.app.use(Container.get(token).getRouter()));
         this.app.use((error, _, res, __) => EduErrorHandler.handleError(error, res))
     }
