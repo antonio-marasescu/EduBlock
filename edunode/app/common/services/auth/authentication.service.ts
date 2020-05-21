@@ -4,7 +4,7 @@ import {ServerLogger, ServerLoggerToken} from '../../logger/server-logger.interf
 import jwt from 'jsonwebtoken'
 import {IUserRepository, IUserRepositoryToken} from '../../repositories/university/user.interface.repository';
 import {EduUserDto, EduUserDtoMapper} from '../../dto/common/edu-user.dto';
-import {EduUserEntity} from '../../entities/university/edu-user.entity';
+import {EduUserEntity, EduUserRoles} from '../../entities/university/edu-user.entity';
 import {validate, ValidationError} from 'class-validator';
 import {
     createInvalidCredentials,
@@ -69,6 +69,7 @@ export class AuthenticationService {
         this.logger.logSuccess(this, 'Validation was a success!');
 
         const user: EduUserEntity = EduUserDtoMapper.toEntity(data);
+        user.role = EduUserRoles.USER;
         user.password = await this.eccService.hashStringData(user.password);
         const savedUser = await this.userRepository.save(user);
         this.logger.logSuccess(this, 'Registering a new user was a success!');
@@ -87,16 +88,16 @@ export class AuthenticationService {
         return token;
     }
 
-    public async verifyToken(token: string): Promise<boolean> {
+    public async verifyToken(token: string): Promise<EduUserDto | null> {
         this.logger.logInfo(this, 'Verifying jwt token....');
-        let decodedToken;
+        let decodedToken: EduUserDto | any = null;
         try {
             decodedToken = jwt.verify(token, this.inMemorySecret, {ignoreExpiration: true});
         } catch (e) {
             this.logger.logError(this, JSON.stringify(e));
-            return false;
+            return null;
         }
-        this.logger.logInfo(this, 'Verification result of jwt token: ' + !!decodedToken);
-        return !!decodedToken;
+        this.logger.logInfo(this, 'Verification result of jwt token: ' + decodedToken);
+        return decodedToken;
     }
 }

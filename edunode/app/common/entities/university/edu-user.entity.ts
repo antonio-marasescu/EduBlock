@@ -1,5 +1,10 @@
 import {Column, Entity, PrimaryGeneratedColumn} from 'typeorm';
 
+export enum EduUserRoles {
+    USER = 'User',
+    ADMIN = 'Admin'
+}
+
 @Entity()
 export class EduUserEntity {
     @PrimaryGeneratedColumn('uuid')
@@ -11,6 +16,6 @@ export class EduUserEntity {
     @Column()
     password: string;
 
-    @Column()
-    role: string;
+    @Column('enum', {name: 'edu_user_role', enum: EduUserRoles})
+    role: EduUserRoles;
 }

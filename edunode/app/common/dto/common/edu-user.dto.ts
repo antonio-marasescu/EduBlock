@@ -13,9 +13,7 @@ export class EduUserDto {
     @IsNotEmpty()
     password: string;
 
-    @IsString()
-    @IsNotEmpty()
-    role: string;
+    role?: string;
 }
 
 export class EduUserDtoMapper {
@@ -23,7 +21,6 @@ export class EduUserDtoMapper {
         const entity = new EduUserEntity();
         entity.email = dto.email;
         entity.password = dto.password;
-        entity.role = dto.role;
         const sortedEntity = new EduUserEntity();
         Object.assign(sortedEntity, objectWithoutKeys(entity, []));
         return sortedEntity;
