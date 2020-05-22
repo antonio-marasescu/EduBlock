@@ -8,11 +8,15 @@ import {
   AuthActionsTypes,
   GetCurrentUser,
   GetCurrentUserSuccess,
+  LoginRedirect,
   LoginUser,
   LoginUserSuccess,
-  LogoutUser
+  LogoutUser,
+  RegisterUser,
+  RegisterUseSuccess
 } from '../actions/auth.actions';
 import {SetError} from '../actions/http-errors.actions';
+import {GetNetworkPersonalIdentity} from '../actions/network-members.actions';
 
 @Injectable()
 export class AuthEffects {
@@ -36,8 +40,24 @@ export class AuthEffects {
   @Effect()
   loginUserSuccess$ = this.actions$.pipe(
     ofType<LoginUserSuccess>(AuthActionsTypes.LoginUserSuccess),
-    tap(() => this.router.navigateByUrl('/home')),
-    switchMap(() => of(new GetCurrentUser(false)))
+    tap(() => this.router.navigateByUrl('/network')),
+    switchMap(() => [new GetCurrentUser(false), new GetNetworkPersonalIdentity()])
+  );
+
+  @Effect()
+  registerUser$ = this.actions$.pipe(
+    ofType<RegisterUser>(AuthActionsTypes.RegisterUser),
+    map(action => action.payload),
+    switchMap(userCredentials => this.authService.register(userCredentials).pipe(
+      map(data => new RegisterUseSuccess(data)),
+      catchError(error => of(new SetError(error)))
+    ))
+  );
+
+  @Effect({dispatch: false})
+  registerUserSuccess$ = this.actions$.pipe(
+    ofType<RegisterUseSuccess>(AuthActionsTypes.RegisterUseSuccess),
+    tap(() => this.router.navigateByUrl('/login'))
   );
 
   @Effect()
@@ -46,7 +66,7 @@ export class AuthEffects {
     map(action => action.payload),
     switchMap(willRefresh => this.authService.getMe().pipe(
       map(user => new GetCurrentUserSuccess(user)),
-      catchError(error => of(new SetError(error)))
+      catchError(error => of(new LoginRedirect(willRefresh)))
     ))
   );
 
@@ -54,7 +74,18 @@ export class AuthEffects {
   @Effect({dispatch: false})
   logoutUser$ = this.actions$.pipe(
     ofType<LogoutUser>(AuthActionsTypes.LogoutUser),
-    tap(() => this.authService.logout().subscribe(() => this.router.navigateByUrl('/login')
-    ))
+    tap(() => this.authService.logout().subscribe(() => this.router.navigateByUrl('/login')))
+  );
+
+
+  @Effect({dispatch: false})
+  loginRedirect$ = this.actions$.pipe(
+    ofType<LoginRedirect>(AuthActionsTypes.LoginRedirect),
+    map(action => action.payload),
+    tap(willRefresh => {
+      if (willRefresh) {
+        this.router.navigateByUrl('/login');
+      }
+    })
   );
 }

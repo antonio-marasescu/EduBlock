@@ -28,7 +28,8 @@ export class UsersApi implements BasicApi {
 
     private async handleGetMe(req, res) {
         const bearerToken = req.headers['authorization'];
-        const user: EduUserDto | null = await this.authenticationService.verifyToken(bearerToken);
+        const token = bearerToken.split(' ')[1];
+        const user: EduUserDto | null = await this.authenticationService.verifyToken(token);
         res.json(user);
     }
 }

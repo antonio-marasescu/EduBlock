@@ -1,5 +1,7 @@
 import {UserDetailsModel} from '../../core/models/users/user-details.model';
 import {AuthActions, AuthActionsTypes} from '../actions/auth.actions';
+import {AppState} from '../app.state';
+import {createSelector} from '@ngrx/store';
 
 export interface AuthState {
   authUser: UserDetailsModel;
@@ -35,3 +37,9 @@ export function authReducer(state: AuthState = initialAuthState, action: AuthAct
       return state;
   }
 }
+
+const selectAuthState = (state: AppState) => state.auth;
+export const selectAuthUser = createSelector(selectAuthState,
+  (state: AuthState) => state.authUser);
+export const selectAuthStateIsLoading = createSelector(selectAuthState,
+  (state: AuthState) => state.isLoading);

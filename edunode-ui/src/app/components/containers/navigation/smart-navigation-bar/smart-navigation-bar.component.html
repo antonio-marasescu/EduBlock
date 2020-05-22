@@ -1,3 +1,5 @@
-<app-navigation-bar [user]="user">
+<app-navigation-bar [personalIdentity]="personalIdentity$ | async"
+                    (logout)="onLogout()"
+                    [user]="user$ | async">
   <ng-content></ng-content>
 </app-navigation-bar>
