@@ -10,25 +10,26 @@ import {UserDetailsModel} from '../models/users/user-details.model';
 export class AuthService {
   httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded'
+      'Content-Type': 'application/json'
     })
   };
 
   constructor(private http: HttpClient) {
   }
 
+  register(credentials: UserCredentialsModel): Observable<UserDetailsModel> {
+    return this.http.post<UserDetailsModel>('api/register', credentials, this.httpOptions);
+  }
+
   login(credentials: UserCredentialsModel): Observable<{}> {
-    const body = new URLSearchParams();
-    body.append('email', credentials.email);
-    body.append('password', credentials.password);
-    return this.http.post('api/login', body.toString(), this.httpOptions);
+    return this.http.post('api/login', credentials, this.httpOptions);
   }
 
   logout(): Observable<{}> {
-    return this.http.post('/api/logout', '', this.httpOptions);
+    return this.http.post('/api/logout', this.httpOptions);
   }
 
   getMe(): Observable<UserDetailsModel> {
-    return this.http.get<UserDetailsModel>('/api/me', this.httpOptions);
+    return this.http.get<UserDetailsModel>('/api/users/me', this.httpOptions);
   }
 }

@@ -13,6 +13,8 @@ import {IRecordTransactionRepositoryToken} from '../../common/repositories/ledge
 import {RecordTransactionRepository} from '../../common/repositories/ledger/record-transaction.repository';
 import {IStudentRepositoryToken} from '../../common/repositories/university/student.interface.repository';
 import {StudentRepository} from '../../common/repositories/university/student.repository';
+import {IUserRepositoryToken} from '../../common/repositories/university/user.interface.repository';
+import {UserRepository} from '../../common/repositories/university/user.repository';
 
 export default class RepositoryDI implements DIInterface {
 
@@ -23,5 +25,6 @@ export default class RepositoryDI implements DIInterface {
         Container.set(IBlockRepositoryToken, getCustomRepository(BlockRepository));
         Container.set(IRecordTransactionRepositoryToken, getCustomRepository(RecordTransactionRepository));
         Container.set(IStudentRepositoryToken, getCustomRepository(StudentRepository));
+        Container.set(IUserRepositoryToken, getCustomRepository(UserRepository));
     }
 }

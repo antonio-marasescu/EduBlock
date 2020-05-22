@@ -7,6 +7,7 @@ import {EduNewNetworkMemberDto} from '../../dto/network/edu-new-network-member.d
 import asyncHandler from 'express-async-handler';
 import {createInvalidRequestParamsError} from '../../errors/edu.error.factory';
 import {EduCommonIdentityDto} from '../../dto/network/edu-common-identity.dto';
+import {PersonalIdentity} from '../../entities/identity/personal-identity.entity';
 
 export const NetworkApiToken = new Token<NetworkApi>('api.routes.network');
 
@@ -40,8 +41,8 @@ export class NetworkApi implements BasicApi {
     }
 
     private async handleGetPersonalIdentity(_, res) {
-        const identity: string = await this.identityService.getPersonalIdentity();
-        res.json({identity: identity});
+        const identity: PersonalIdentity = await this.identityService.getPersonalIdentityDetails();
+        res.json(identity);
     }
 
     private async handleGetNetworkMembers(_, res) {

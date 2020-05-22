@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {NetworkMemberModel} from '../models/network/network-member.model';
 import {AddNetworkMemberModel} from '../models/network/add-network-member.model';
+import {PersonalIdentityModel} from '../models/network/personal-identity.model';
 
 @Injectable({
   providedIn: 'root'
@@ -27,5 +28,9 @@ export class NetworkMembersService {
 
   addNetworkMember(payload: AddNetworkMemberModel): Observable<NetworkMemberModel> {
     return this.http.post<NetworkMemberModel>('api/network/members', payload, this.httpOptions);
+  }
+
+  getPersonalIdentity(): Observable<PersonalIdentityModel> {
+    return this.http.get<PersonalIdentityModel>('api/network/identity/me', this.httpOptions);
   }
 }

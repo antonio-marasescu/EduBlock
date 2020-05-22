@@ -1,11 +1,12 @@
-import {DIInterface} from "./di.interface";
-import {DI_REGISTER, DI_REGISTER_DEPENDENTS} from "./di.register";
-import {Container} from "typedi";
-import {VaultConnectionToken} from "../server/db/vault.connection";
-import {EccServiceToken} from "../common/services/security/ecc.service";
-import {InitializationHandler} from "./initialization/initialization.handler";
-import {IdentityServiceToken} from "../common/services/security/identity.service";
-import {RabbitMqServiceToken} from "../common/services/rabbitmq/rabbit-mq.service";
+import {DIInterface} from './di.interface';
+import {DI_REGISTER, DI_REGISTER_DEPENDENTS} from './di.register';
+import {Container} from 'typedi';
+import {VaultConnectionToken} from '../server/db/vault.connection';
+import {EccServiceToken} from '../common/services/security/ecc.service';
+import {InitializationHandler} from './initialization/initialization.handler';
+import {IdentityServiceToken} from '../common/services/security/identity.service';
+import {RabbitMqServiceToken} from '../common/services/rabbitmq/rabbit-mq.service';
+import {AuthenticationServiceToken} from '../common/services/auth/authentication.service';
 
 export default class DIExecutor {
     public inject(params: any) {
@@ -27,6 +28,8 @@ export default class DIExecutor {
         await identity.checkOrGeneratePersonalIdentity();
         const rabbitmq = Container.get(RabbitMqServiceToken);
         await rabbitmq.initializeService();
+        const auth = Container.get(AuthenticationServiceToken);
+        await auth.initializeService();
     }
 
     private async initializeDependents() {

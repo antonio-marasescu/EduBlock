@@ -7,17 +7,27 @@ import {SmartRecordCreatorComponent} from './components/containers/records/smart
 import {SmartRecordDetailsComponent} from './components/containers/records/smart-record-details/smart-record-details.component';
 import {SmartStudentsListComponent} from './components/containers/students/smart-students-list/smart-students-list.component';
 import {SmartStudentCreatorComponent} from './components/containers/students/smart-student-creator/smart-student-creator.component';
+import {AuthGuard} from './core/guards/auth.guard';
+import {SmartAuthPageComponent} from './components/containers/auth/smart-auth-page/smart-auth-page.component';
+import {SmartRegisterPageComponent} from './components/containers/auth/smart-register-page/smart-register-page.component';
 
 
 const routes: Routes = [
   {path: '', redirectTo: '/network', pathMatch: 'full'},
-  {path: 'network', component: SmartNetworkMembersComponent},
-  {path: 'network/add', component: SmartAddNetworkMemberComponent},
-  {path: 'records', component: SmartRecordsListComponent},
-  {path: 'records/create', component: SmartRecordCreatorComponent},
-  {path: 'records/:id', component: SmartRecordDetailsComponent},
-  {path: 'students', component: SmartStudentsListComponent},
-  {path: 'students/create', component: SmartStudentCreatorComponent},
+  {path: 'login', component: SmartAuthPageComponent},
+  {path: 'register', component: SmartRegisterPageComponent},
+  {path: 'network', component: SmartNetworkMembersComponent, canActivate: [AuthGuard], data: {roles: 'User'}},
+  {path: 'network/add', component: SmartAddNetworkMemberComponent, canActivate: [AuthGuard], data: {roles: 'User'}},
+  {path: 'records', component: SmartRecordsListComponent, canActivate: [AuthGuard], data: {roles: 'User'}},
+  {path: 'records/create', component: SmartRecordCreatorComponent, canActivate: [AuthGuard], data: {roles: 'User'}},
+  {path: 'records/:id', component: SmartRecordDetailsComponent, canActivate: [AuthGuard], data: {roles: 'User'}},
+  {path: 'students', component: SmartStudentsListComponent, canActivate: [AuthGuard], data: {roles: 'User'}},
+  {
+    path: 'students/create',
+    component: SmartStudentCreatorComponent,
+    canActivate: [AuthGuard],
+    data: {roles: 'PATIENT'}
+  },
 ];
 
 @NgModule({

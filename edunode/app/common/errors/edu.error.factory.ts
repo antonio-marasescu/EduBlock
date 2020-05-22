@@ -109,3 +109,10 @@ export function createFileOwnerUnreachable(target: any): EduError {
     error.constraints = {unreachableOwner: 'The owner of the files is currently unreachable!'};
     return new EduError(404, [error]);
 }
+
+export function createInvalidCredentials(target: any) {
+    const error = new ValidationError();
+    error.target = target;
+    error.constraints = {invalidCredentials: 'The email or the password was invalid!'};
+    return new EduError(403, [error]);
+}
