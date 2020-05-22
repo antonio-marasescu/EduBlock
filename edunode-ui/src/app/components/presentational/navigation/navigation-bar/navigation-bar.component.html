@@ -25,22 +25,15 @@
       </span>
       <span class="app-toolbar-fill"></span>
       <span>
-        <div *ngIf="user; else noUser">
+        <div *ngIf="user;">
           <button mat-button>
             <mat-icon class="margin-right-icon">group</mat-icon>
-            {{user.legalIdentity}}
+            <span *ngIf="personalIdentity">{{personalIdentity.legalIdentity}}</span>
           </button>
-          <button mat-stroked-button>
+          <button mat-stroked-button (click)="logout.emit()">
             Logout
           </button>
         </div>
-        <ng-template #noUser>
-          <div>
-          <button mat-raised-button>
-            Login
-          </button>
-          </div>
-        </ng-template>
       </span>
     </mat-toolbar>
   </div>

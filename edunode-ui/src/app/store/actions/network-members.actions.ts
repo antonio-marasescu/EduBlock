@@ -1,6 +1,7 @@
 import {Action} from '@ngrx/store';
 import {NetworkMemberModel} from '../../core/models/network/network-member.model';
 import {AddNetworkMemberModel} from '../../core/models/network/add-network-member.model';
+import {PersonalIdentityModel} from '../../core/models/network/personal-identity.model';
 
 export enum NetworkMembersActionsTypes {
   GetNetworkMembers = '[Network-Members] Get Network Members',
@@ -9,8 +10,22 @@ export enum NetworkMembersActionsTypes {
   LearnNetworkMembersSuccess = '[Network-Members] Learn Network Members Success',
   AddNetworkMember = '[Network-Members] Add Network Member',
   AddNetworkMemberSuccess = '[Network-Members] Add Network Member Success',
+  GetNetworkPersonalIdentity = '[Network-Members] Get Personal Identity',
+  GetNetworkPersonalIdentitySuccess = '[Network-Members] Get Personal Identity Success',
   StopLoading = '[Network-Members] Stop Loading'
 }
+
+export class GetNetworkPersonalIdentity implements Action {
+  public readonly type = NetworkMembersActionsTypes.GetNetworkPersonalIdentity;
+}
+
+export class GetNetworkPersonalIdentitySuccess implements Action {
+  public readonly type = NetworkMembersActionsTypes.GetNetworkPersonalIdentitySuccess;
+
+  constructor(public payload: PersonalIdentityModel) {
+  }
+}
+
 
 export class GetNetworkMembers implements Action {
   public readonly type = NetworkMembersActionsTypes.GetNetworkMembers;
@@ -59,4 +74,6 @@ export type NetworkMembersActions =
   | LearnNetworkMembersSuccess
   | AddNetworkMember
   | AddNetworkMemberSuccess
+  | GetNetworkPersonalIdentity
+  | GetNetworkPersonalIdentitySuccess
   | StopLoading;

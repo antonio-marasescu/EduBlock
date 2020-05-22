@@ -1,5 +1,5 @@
 export class UserDetailsModel {
-  username: string;
-  legalIdentity: string;
+  id: string;
+  email: string;
   role: string;
 }

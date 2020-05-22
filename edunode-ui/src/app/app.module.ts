@@ -59,9 +59,14 @@ import {StudentCreatorFormComponent} from './components/presentational/students/
 import {StudentsListComponent} from './components/presentational/students/students-list/students-list.component';
 import {AppEffects} from './store/app.effects';
 import {AppReducers} from './store/app.reducers';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {ClipboardModule} from '@angular/cdk/clipboard';
+import {SmartAuthPageComponent} from './components/containers/auth/smart-auth-page/smart-auth-page.component';
+import {JwtInterceptor} from './core/interceptors/jwt.interceptor';
+import {LoginFormComponent} from './components/presentational/auth/login-form/login-form.component';
+import {SmartRegisterPageComponent} from './components/containers/auth/smart-register-page/smart-register-page.component';
+import {RegisterFormComponent} from './components/presentational/auth/register-form/register-form.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +90,11 @@ import {ClipboardModule} from '@angular/cdk/clipboard';
     SmartStudentsListFilterOptionsComponent,
     SmartStudentsListComponent,
     StudentCreatorFormComponent,
-    StudentsListComponent
+    StudentsListComponent,
+    SmartAuthPageComponent,
+    LoginFormComponent,
+    SmartRegisterPageComponent,
+    RegisterFormComponent
   ],
   imports: [
     BrowserModule,
@@ -102,7 +111,11 @@ import {ClipboardModule} from '@angular/cdk/clipboard';
     MatAutocompleteModule, MatProgressSpinnerModule, MatMenuModule, MatTabsModule, MatTreeModule, MatProgressBarModule,
     ReactiveFormsModule, NgxFileDropModule, DragDropModule, MatSnackBarModule, ClipboardModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: JwtInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule {

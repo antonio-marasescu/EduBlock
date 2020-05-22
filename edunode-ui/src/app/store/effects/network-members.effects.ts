@@ -7,6 +7,8 @@ import {
   AddNetworkMemberSuccess,
   GetNetworkMembers,
   GetNetworkMembersSuccess,
+  GetNetworkPersonalIdentity,
+  GetNetworkPersonalIdentitySuccess,
   LearnNetworkMembers,
   LearnNetworkMembersSuccess,
   NetworkMembersActionsTypes,
@@ -14,6 +16,7 @@ import {
 } from '../actions/network-members.actions';
 import {catchError, map, switchMap, tap} from 'rxjs/operators';
 import {SetError} from '../actions/http-errors.actions';
+import {of} from 'rxjs';
 
 @Injectable()
 export class NetworkMembersEffects {
@@ -57,5 +60,15 @@ export class NetworkMembersEffects {
     ofType<AddNetworkMemberSuccess>(NetworkMembersActionsTypes.AddNetworkMemberSuccess),
     tap(() => this.router.navigateByUrl('/network'))
   );
+
+  @Effect()
+  getPersonalIdentity = this.actions$.pipe(
+    ofType<GetNetworkPersonalIdentity>(NetworkMembersActionsTypes.GetNetworkPersonalIdentity),
+    switchMap(() => this.networkMembersService.getPersonalIdentity().pipe(
+      map(personalIdentity => new GetNetworkPersonalIdentitySuccess(personalIdentity)),
+      catchError(error => of(new SetError(error)))
+    ))
+  );
+
 }
 

@@ -7,9 +7,26 @@ export enum AuthActionsTypes {
   GetCurrentUserSuccess = '[Auth-User] Get Current Success',
   LoginUser = '[Auth-User] Login',
   LoginUserSuccess = '[Auth-User] Login Success',
-  LoginRedirect = '[Auth-User] LoginRedirect',
+  LoginRedirect = '[Auth-User] Login Redirect',
   LogoutUser = '[Auth-User] Logout',
+  RegisterUser = '[Auth-User] Register User',
+  RegisterUseSuccess = '[Auth-User] Register User Success'
 }
+
+export class RegisterUser implements Action {
+  public readonly type = AuthActionsTypes.RegisterUser;
+
+  constructor(public payload: UserCredentialsModel) {
+  }
+}
+
+export class RegisterUseSuccess implements Action {
+  public readonly type = AuthActionsTypes.RegisterUseSuccess;
+
+  constructor(public payload: any) {
+  }
+}
+
 
 export class GetCurrentUser implements Action {
   public readonly type = AuthActionsTypes.GetCurrentUser;
@@ -55,5 +72,7 @@ export type AuthActions =
   | LoginUserSuccess
   | LoginRedirect
   | LogoutUser
+  | RegisterUser
+  | RegisterUseSuccess
   | GetCurrentUserSuccess
   | GetCurrentUser;
