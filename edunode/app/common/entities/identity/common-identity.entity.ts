@@ -39,4 +39,7 @@ export class CommonIdentity extends IdentityModel {
 
     @Column({nullable: true})
     validatorPublicKey?: string;
+
+    @Column({nullable: true})
+    accessToken: string;
 }

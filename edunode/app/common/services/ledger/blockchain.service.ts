@@ -39,6 +39,10 @@ import {validateAxiosResponse} from '../../utils/validators.utils';
 import {BlockchainValidatorService, BlockchainValidatorServiceToken} from './blockchain-validator.service';
 import {NetworkMembersService, NetworkMembersServiceToken} from '../common/network-members.service';
 import {buildAxiosInstance} from '../axios/axios.builder';
+import {
+    ICommonIdentityRepository,
+    ICommonIdentityRepositoryToken
+} from '../../repositories/identity/common-identity.interface.repository';
 
 
 export const BlockchainServiceToken = new Token<BlockchainService>('services.ledger.blockchain');
@@ -57,6 +61,7 @@ export class BlockchainService {
         @Inject(BlockchainValidatorServiceToken) private blockchainValidatorService: BlockchainValidatorService,
         @Inject(NetworkMembersServiceToken) private networkMembersService: NetworkMembersService,
         @Inject(AxiosTokenWorker) private workerAxiosInstance: AxiosInstance,
+        @Inject(ICommonIdentityRepositoryToken) private commonIdentityRepository: ICommonIdentityRepository,
         @Inject(ServerLoggerToken) private logger: ServerLogger,
     ) {
     }
@@ -171,13 +176,14 @@ export class BlockchainService {
 
     private async blockChainConsensus(): Promise<void> {
         this.logger.logInfo(this, 'Blockchain Consensus Flow has started...');
-        const members = await this.networkMembersService.learnMembers();
+        await this.networkMembersService.learnMembers();
+        const members = await this.commonIdentityRepository.find({});
         const consensusBlockchainModels: BlockEntity[][] = [];
 
         this.logger.logInfo(this, 'Getting blockchain from each known member...');
         for (let member of members) {
             const memberAxiosInstance = buildAxiosInstance(member.host, member.port);
-            const response = await memberAxiosInstance.get<NetworkBlockDto[]>('/api/blockchain');
+            const response = await memberAxiosInstance.get<NetworkBlockDto[]>('/api/blockchain', {headers: {'authorization': 'Bearer ' + member.accessToken}});
             if (response.status !== 200) {
                 continue;
             }

@@ -12,6 +12,10 @@ import {
 import {NetworkMembersService, NetworkMembersServiceToken} from './network-members.service';
 import {buildAxiosInstance} from '../axios/axios.builder';
 import {createFileOwnerUnreachable} from '../../errors/edu.error.factory';
+import {
+    ICommonIdentityRepository,
+    ICommonIdentityRepositoryToken
+} from '../../repositories/identity/common-identity.interface.repository';
 
 export const FilesServiceToken = new Token<FilesService>('services.common.files');
 
@@ -23,6 +27,7 @@ export class FilesService {
         @Inject(IFilesRepositoryToken) private filesRepository: IFilesRepository,
         @Inject(IdentityServiceToken) private identityService: IdentityService,
         @Inject(NetworkMembersServiceToken) private networkMembersService: NetworkMembersService,
+        @Inject(ICommonIdentityRepositoryToken) private commonIdentityRepository: ICommonIdentityRepository,
         @Inject(IRecordTransactionRepositoryToken) private recordTransactionRepository: IRecordTransactionRepository,
     ) {
     }
@@ -58,12 +63,13 @@ export class FilesService {
                 return files;
             }
             this.logger.logInfo(this, 'Searching for files transaction owner..');
-            const filesOwner = await this.networkMembersService.getSingleNetworkMember(transaction.creatorPublicKey);
+            await this.networkMembersService.getSingleNetworkMember(transaction.creatorPublicKey);
+            const filesOwner = await this.commonIdentityRepository.findOneOrFail({publicKey: transaction.creatorPublicKey});
             this.logger.logSuccess(this, 'Files transaction owner found.');
 
             this.logger.logInfo(this, 'Sending requests for files');
             const memberAxiosInstance = buildAxiosInstance(filesOwner.host, filesOwner.port);
-            const response = await memberAxiosInstance.get<EduFileEntity[]>('/api/files/' + transactionHashId);
+            const response = await memberAxiosInstance.get<EduFileEntity[]>('/api/files/' + transactionHashId, {headers: {'authorization': 'Bearer ' + filesOwner.accessToken}});
             this.logger.logInfo(this, 'Requests for files received');
             if (response.status !== 200) {
                 const error = createFileOwnerUnreachable(transaction.creatorPublicKey);
