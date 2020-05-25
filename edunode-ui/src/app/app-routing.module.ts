@@ -16,17 +16,37 @@ const routes: Routes = [
   {path: '', redirectTo: '/network', pathMatch: 'full'},
   {path: 'login', component: SmartAuthPageComponent},
   {path: 'register', component: SmartRegisterPageComponent},
-  {path: 'network', component: SmartNetworkMembersComponent, canActivate: [AuthGuard], data: {roles: 'User'}},
-  {path: 'network/add', component: SmartAddNetworkMemberComponent, canActivate: [AuthGuard], data: {roles: 'User'}},
-  {path: 'records', component: SmartRecordsListComponent, canActivate: [AuthGuard], data: {roles: 'User'}},
-  {path: 'records/create', component: SmartRecordCreatorComponent, canActivate: [AuthGuard], data: {roles: 'User'}},
-  {path: 'records/:id', component: SmartRecordDetailsComponent, canActivate: [AuthGuard], data: {roles: 'User'}},
-  {path: 'students', component: SmartStudentsListComponent, canActivate: [AuthGuard], data: {roles: 'User'}},
+  {
+    path: 'network',
+    component: SmartNetworkMembersComponent,
+    canActivate: [AuthGuard],
+    data: {roles: ['User', 'Admin']}
+  },
+  {
+    path: 'network/add',
+    component: SmartAddNetworkMemberComponent,
+    canActivate: [AuthGuard],
+    data: {roles: ['User', 'Admin']}
+  },
+  {path: 'records', component: SmartRecordsListComponent, canActivate: [AuthGuard], data: {roles: ['User', 'Admin']}},
+  {
+    path: 'records/create',
+    component: SmartRecordCreatorComponent,
+    canActivate: [AuthGuard],
+    data: {roles: ['User', 'Admin']}
+  },
+  {
+    path: 'records/:id',
+    component: SmartRecordDetailsComponent,
+    canActivate: [AuthGuard],
+    data: {roles: ['User', 'Admin']}
+  },
+  {path: 'students', component: SmartStudentsListComponent, canActivate: [AuthGuard], data: {roles: ['User', 'Admin']}},
   {
     path: 'students/create',
     component: SmartStudentCreatorComponent,
     canActivate: [AuthGuard],
-    data: {roles: 'PATIENT'}
+    data: {roles: ['User', 'Admin']}
   },
 ];
 

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {ChangeDetectorRef, Component, EventEmitter, Input, Output} from '@angular/core';
 import {PersonalIdentityModel} from '../../../../core/models/network/personal-identity.model';
 import {UserDetailsModel} from '../../../../core/models/users/user-details.model';
 
@@ -11,4 +11,7 @@ export class NavigationBarComponent {
   @Input() personalIdentity: PersonalIdentityModel;
   @Input() user: UserDetailsModel;
   @Output() logout: EventEmitter<void> = new EventEmitter<void>();
+
+  constructor(private changeDetectorRef: ChangeDetectorRef) {
+  }
 }

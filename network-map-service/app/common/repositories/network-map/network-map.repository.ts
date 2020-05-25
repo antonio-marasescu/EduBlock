@@ -1,6 +1,6 @@
-import {INetworkMapRepository} from "./network-map.interface.repository";
-import {EntityRepository, Repository} from "typeorm";
-import {NetworkMapEntity} from "../../entities/network-map/network-map.entity";
+import {INetworkMapRepository} from './network-map.interface.repository';
+import {EntityRepository, Repository} from 'typeorm';
+import {NetworkMapEntity} from '../../entities/network-map/network-map.entity';
 
 @EntityRepository(NetworkMapEntity)
 export class NetworkMapRepository extends Repository<NetworkMapEntity> implements INetworkMapRepository {
@@ -20,6 +20,10 @@ export class NetworkMapRepository extends Repository<NetworkMapEntity> implement
     public async networkMemberExists(publicKey: string): Promise<boolean> {
         const member = this.findOne({publicKey: publicKey});
         return !!member;
+    }
+
+    public async clearMembers(): Promise<void> {
+        return this.clear();
     }
 
 }

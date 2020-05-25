@@ -4,6 +4,7 @@ import {EduRecordAttachmentModel} from '../../core/models/records/edu-record-att
 export enum FilesActionsTypes {
   GetFilesOfTransactionByHash = '[Files] Get Files Of Transaction By Hash',
   GetFilesOfTransactionByHashSuccess = '[Files] Get Files Of Transaction By Hash Success',
+  UploadMultipleFiles = '[Files] Upload Multiple Files',
   UploadFile = '[Files] Upload File',
   UploadFileSuccess = '[Files] Upload File Success',
   ClearUploadedFiles = '[Files] Clear Uploaded Files',
@@ -23,6 +24,14 @@ export class GetFilesOfTransactionByHashSuccess implements Action {
   constructor(public payload: EduRecordAttachmentModel[]) {
   }
 }
+
+export class UploadMultipleFiles implements Action {
+  public readonly type = FilesActionsTypes.UploadMultipleFiles;
+
+  constructor(public payload: File[]) {
+  }
+}
+
 
 export class UploadFile implements Action {
   public readonly type = FilesActionsTypes.UploadFile;
@@ -49,6 +58,7 @@ export class ClearUploadedFiles implements Action {
 export type FilesActions =
   GetFilesOfTransactionByHash
   | GetFilesOfTransactionByHashSuccess
+  | UploadMultipleFiles
   | UploadFile
   | UploadFileSuccess
   | ClearUploadedFiles

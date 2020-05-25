@@ -138,5 +138,40 @@
       "host": "localhost"
     },
     "useFileLogging": false
+  },
+  "node-uni-tests": {
+    "identity": {
+      "legalName": "University of California",
+      "alias": "University of California",
+      "port": 3001,
+      "host": "localhost"
+    },
+    "databaseConfiguration": {
+      "username": "nodeuser1",
+      "password": "nodepass1",
+      "databaseName": "edublock",
+      "host": "localhost",
+      "port": 5434,
+      "logging": [
+        "error"
+      ],
+      "logger": "advanced-console"
+    },
+    "rabbitmqConfiguration": {
+      "url": "amqp://localhost",
+      "exchangeName": "edu-node-common-exchange",
+      "exchangeType": "direct"
+    },
+    "blockchainConfiguration": {
+      "difficultyLevel": 4,
+      "consensusChar": "0",
+      "numberOfTransactionUntilBlock": 4
+    },
+    "workerConfiguration": {
+      "alias": "University of California Worker",
+      "port": 3007,
+      "host": "localhost"
+    },
+    "useFileLogging": false
   }
 }

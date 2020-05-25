@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {UserDetailsModel} from '../../../../core/models/users/user-details.model';
 import {Observable} from 'rxjs';
 import {PersonalIdentityModel} from '../../../../core/models/network/personal-identity.model';

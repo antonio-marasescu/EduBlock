@@ -41,7 +41,7 @@ export class AuthenticationApi implements BasicApi {
     private async handleRegister(req, res) {
         const dto = new EduUserDto();
         Object.assign(dto, req.body);
-        const savedUser: EduUserDto = await this.authenticationService.registerUser(dto);
+        const savedUser: EduUserDto = await this.authenticationService.registerUser(dto, false);
         res.json(savedUser);
     }
 }

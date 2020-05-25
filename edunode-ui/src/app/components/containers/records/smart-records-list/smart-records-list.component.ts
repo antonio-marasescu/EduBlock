@@ -10,6 +10,7 @@ import {CreateBlock, GetRecordsTransaction} from '../../../../store/actions/reco
 import {selectRecords, selectRecordsStateIsLoading} from '../../../../store/reducers/records.reducer';
 
 export enum RecordsListActionTypes {
+  REFRESH_TRANSACTIONS = 'refresh-transactions',
   CREATE_TRANSACTION = 'create-transaction',
   CREATE_BLOCK = 'create-block'
 }
@@ -26,6 +27,11 @@ export class SmartRecordsListComponent implements OnInit {
   isLoading$: Observable<boolean>;
 
   actions: ActionBarInputModel[] = [
+    {
+      eventName: RecordsListActionTypes.REFRESH_TRANSACTIONS,
+      type: ActionBarType.ACCENT,
+      displayContent: 'Refresh'
+    },
     {
       eventName: RecordsListActionTypes.CREATE_TRANSACTION,
       type: ActionBarType.ACCENT,
@@ -44,6 +50,9 @@ export class SmartRecordsListComponent implements OnInit {
         break;
       case RecordsListActionTypes.CREATE_BLOCK:
         this.store.dispatch(new CreateBlock());
+        break;
+      case RecordsListActionTypes.REFRESH_TRANSACTIONS:
+        this.store.dispatch(new GetRecordsTransaction());
         break;
     }
   }

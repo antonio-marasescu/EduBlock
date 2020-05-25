@@ -67,7 +67,7 @@ export class NetworkApi implements BasicApi {
     private async handleAddNetworkMember(req, res) {
         const member = new EduNewNetworkMemberDto();
         Object.assign(member, req.body);
-        const response = await this.networkMembersService.addMember(member);
+        const response: EduCommonIdentityDto = await this.networkMembersService.addMember(member);
         res.json(response);
     }
 }
