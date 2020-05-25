@@ -44,7 +44,11 @@ export class AuthenticationService {
         this.logger.logInfo(this, 'Initializing Authentication Service...');
         this.inMemorySecret = Buffer.from(crypto.randomBytes(256)).toString('hex');
         this.logger.logInfo(this, 'Authentication Service Secret: ' + this.inMemorySecret);
+        await this.publishAuthorizationToken();
+        this.logger.logSuccess(this, 'Authentication Service was initialized!');
+    }
 
+    public async publishAuthorizationToken(): Promise<void> {
         this.logger.logInfo(this, 'Creating network access token');
         const accessToken = new AccessTokenDto();
         const accessIdentity = await this.identityService.getPersonalIdentityDetails();
@@ -54,7 +58,6 @@ export class AuthenticationService {
 
         this.logger.logSuccess(this, 'Network access token was created');
         await this.accessTokenPublisher.publish(accessToken);
-        this.logger.logSuccess(this, 'Authentication Service was initialized!');
     }
 
     public async login(data: EduUserCredentialsDto): Promise<EduUserDto> {
@@ -79,7 +82,7 @@ export class AuthenticationService {
         return EduUserDtoMapper.toDto(actualUser);
     }
 
-    public async registerUser(data: EduUserDto): Promise<EduUserDto> {
+    public async registerUser(data: EduUserDto, isAdmin: boolean): Promise<EduUserDto> {
         this.logger.logInfo(this, 'Registering a new user...');
 
         this.logger.logInfo(this, 'Validating new user data transfer object..');
@@ -92,7 +95,7 @@ export class AuthenticationService {
         this.logger.logSuccess(this, 'Validation was a success!');
 
         const user: EduUserEntity = EduUserDtoMapper.toEntity(data);
-        user.role = EduUserRoles.USER;
+        user.role = (isAdmin) ? EduUserRoles.ADMIN : EduUserRoles.USER;
         user.password = await this.eccService.hashStringData(user.password);
         const savedUser = await this.userRepository.save(user);
         this.logger.logSuccess(this, 'Registering a new user was a success!');
@@ -120,7 +123,7 @@ export class AuthenticationService {
             this.logger.logError(this, JSON.stringify(e));
             return null;
         }
-        this.logger.logInfo(this, 'Verification result of jwt token: ' + decodedToken);
+        this.logger.logInfo(this, 'Verification result of jwt token: ' + JSON.stringify(decodedToken));
         return decodedToken;
     }
 

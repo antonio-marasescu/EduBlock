@@ -1,4 +1,4 @@
-import {EntityRepository, Repository} from "typeorm";
+import {EntityRepository, Repository} from 'typeorm';
 import {EduFileEntity} from '../../entities/files/edu-file.entity';
 import {IFilesRepository, SaveFilesOptions} from './files.interface.repository';
 
@@ -21,6 +21,10 @@ export class FilesRepository extends Repository<EduFileEntity> implements IFiles
         if (options && options.isPureFile)
             return savedFile;
         return this.mapFileToReadable(savedFile);
+    }
+
+    async clearFiles(): Promise<void> {
+        await this.clear();
     }
 
     private mapFileToReadable(file: EduFileEntity): EduFileEntity {

@@ -19,7 +19,7 @@ export default class DIExecutor {
 
     public async initialize(params: any) {
         const argumentHandler = new InitializationHandler();
-        argumentHandler.handleInitialization();
+        argumentHandler.handleInitialization(params && params.init);
         this.inject(params);
         await this.initializeDependents();
         this.injectDependents(params);

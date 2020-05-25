@@ -12,6 +12,8 @@ export interface IFilesRepository {
     findFileByIds(ids: string[]): Promise<EduFileEntity[]>;
 
     saveFile(entity: EduFileEntity, options?: SaveFilesOptions): Promise<EduFileEntity>;
+
+    clearFiles(): Promise<void>;
 }
 
 

@@ -1,12 +1,9 @@
-import {createConnection} from "typeorm";
-import {Inject, Service, Token} from "typedi";
-import {
-    NodeConfigurationModel,
-    NodeConfigurationModelToken
-} from "../../common/config/node-configuration.model";
-import {Connection} from "typeorm/connection/Connection";
-import {VAULT_SCHEMA} from "./vault.schema";
-import {ServerLogger, ServerLoggerToken} from "../../common/logger/server-logger.interface";
+import {createConnection} from 'typeorm';
+import {Inject, Service, Token} from 'typedi';
+import {NodeConfigurationModel, NodeConfigurationModelToken} from '../../common/config/node-configuration.model';
+import {Connection} from 'typeorm/connection/Connection';
+import {VAULT_SCHEMA} from './vault.schema';
+import {ServerLogger, ServerLoggerToken} from '../../common/logger/server-logger.interface';
 
 export const VaultConnectionToken = new Token<VaultConnection>('vault.connection');
 
@@ -21,10 +18,10 @@ export class VaultConnection {
 
     public async initializeConnection(): Promise<void> {
 
-        this.logger.logInfo(this, "Database Connection initializing...");
+        this.logger.logInfo(this, 'Database Connection initializing...');
         const that = this;
         await createConnection({
-            type: "postgres",
+            type: 'postgres',
             host: this.nodeConfiguration.databaseConfiguration.host,
             port: this.nodeConfiguration.databaseConfiguration.port,
             username: this.nodeConfiguration.databaseConfiguration.username,
@@ -36,11 +33,15 @@ export class VaultConnection {
         })
             .then(connection => {
                 that.connection = connection as Connection;
-                that.logger.logSuccess(that, "Database Connection established.");
+                that.logger.logSuccess(that, 'Database Connection established.');
             })
             .catch(error => {
                 that.logger.logError(that, error)
             });
         await this.connection?.synchronize().catch(error => this.logger.logError(this, JSON.stringify(error)));
+    }
+
+    public async killConnection(): Promise<void> {
+        await this.connection?.close();
     }
 }

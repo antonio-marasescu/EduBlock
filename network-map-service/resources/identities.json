@@ -17,6 +17,8 @@
       ],
       "logger": "advanced-console"
     },
-    "useFileLogging": false
+    "useFileLogging": false,
+    "clearOnSeed": false,
+    "isRunningTests": true
   }
 }

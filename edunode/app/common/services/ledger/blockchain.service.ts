@@ -177,25 +177,28 @@ export class BlockchainService {
     private async blockChainConsensus(): Promise<void> {
         this.logger.logInfo(this, 'Blockchain Consensus Flow has started...');
         await this.networkMembersService.learnMembers();
+        const ownIdentityPublicKey = await this.identityService.getPersonalIdentity();
         const members = await this.commonIdentityRepository.find({});
         const consensusBlockchainModels: BlockEntity[][] = [];
 
         this.logger.logInfo(this, 'Getting blockchain from each known member...');
-        for (let member of members) {
-            const memberAxiosInstance = buildAxiosInstance(member.host, member.port);
-            const response = await memberAxiosInstance.get<NetworkBlockDto[]>('/api/blockchain', {headers: {'authorization': 'Bearer ' + member.accessToken}});
-            if (response.status !== 200) {
-                continue;
+        for (let member of members)
+            if (member.publicKey != ownIdentityPublicKey) {
+                const memberAxiosInstance = buildAxiosInstance(member.host, member.port);
+                const response = await memberAxiosInstance.get<NetworkBlockDto[]>('/api/blockchain', {headers: {'authorization': 'Bearer ' + member.accessToken}});
+                if (response.status !== 200) {
+                    continue;
+                }
+                const data: BlockEntity[] = response.data.map(b => NetworkBlockDtoMapper.toEntity(b));
+                consensusBlockchainModels.push(data);
             }
-            const data: BlockEntity[] = response.data.map(b => NetworkBlockDtoMapper.toEntity(b));
-            consensusBlockchainModels.push(data);
-        }
         this.logger.logSuccess(this, 'Received blockchain from each known member');
 
         this.logger.logInfo(this, 'Sorting blockchain by length');
         consensusBlockchainModels.sort((a, b) => b.length - a.length);
 
         this.logger.logInfo(this, 'Updating local blockchain through the consensus mechanism');
+        const selectedBlockHashIds: string[] = [];
         for (const blockchain of consensusBlockchainModels) {
             const valid = await this.blockchainValidatorService.validateChain(blockchain);
             if (valid) {
@@ -208,10 +211,19 @@ export class BlockchainService {
                 this.logger.logInfo(this, 'Updating local transactions block hash to the new blockchain.');
                 for (const block of blockchain) {
                     await this.reassignTransactionForBlocks(block);
+                    selectedBlockHashIds.push(block.hash);
                 }
                 this.logger.logSuccess(this, 'Local transactions for the new blockchain updated.');
             }
         }
+        const nodeTransactions = await this.recordTransactionRepository.find({});
+        for (const nodeTransaction of nodeTransactions)
+            if (nodeTransaction.blockHash && selectedBlockHashIds.length > 0) {
+                if (!selectedBlockHashIds.includes(nodeTransaction.blockHash)) {
+                    await this.recordTransactionRepository.delete({id: nodeTransaction.id})
+                }
+            }
+
         this.logger.logSuccess(this, 'Local blockchain was updated through the consensus mechanism');
         this.logger.logSuccess(this, 'Blockchain Consensus Flow has finished.');
     }
@@ -279,6 +291,12 @@ export class BlockchainService {
 
     private async validateCreateTransactionDto(transactionDto: CreateTransactionDto): Promise<void> {
         this.logger.logInfo(this, 'Validating transaction attachments...');
+        const validationErrors: ValidationError[] = await validate(transactionDto);
+        if (validationErrors.length > 0) {
+            const error = createValidationError(validationErrors);
+            this.logger.logError(this, JSON.stringify(error));
+            throw error;
+        }
         const files = await this.filesRepository.findFileByIds(transactionDto.attachments);
         if (files.length !== transactionDto.attachments.length) {
             const error = createAttachmentsNotFoundLocallyError(transactionDto.attachments);
