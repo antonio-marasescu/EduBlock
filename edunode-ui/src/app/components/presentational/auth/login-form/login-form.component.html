@@ -1,4 +1,7 @@
 <mat-card *ngIf="form; else noForm">
+  <mat-card-header class="card-header-container">
+    <img mat-card-image src="/assets//edublock-logo-login.png" class="card-header-container-image">
+  </mat-card-header>
   <mat-card-content>
     <form [formGroup]="form" class="form-container" role="form">
       <div class="form-control-container">

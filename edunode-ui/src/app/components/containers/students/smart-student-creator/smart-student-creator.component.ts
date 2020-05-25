@@ -8,9 +8,12 @@ import {EduStudentModel} from '../../../../core/models/students/edu-student.mode
 import {AppState} from '../../../../store/app.state';
 import {Store} from '@ngrx/store';
 import {AddStudent} from '../../../../store/actions/students.actions';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {JsonPipe} from '@angular/common';
 
 export enum StudentCreatorActionTypes {
   CREATE = 'create',
+  EXPORT = 'export',
   GENERATE = 'generate',
   EXIT = 'exit'
 }
@@ -24,6 +27,7 @@ export class SmartStudentCreatorComponent implements OnInit {
   loading = false;
   actions: ActionBarInputModel[] = [
     {eventName: StudentCreatorActionTypes.EXIT, type: ActionBarType.STANDARD, displayContent: 'Close'},
+    {eventName: StudentCreatorActionTypes.EXPORT, type: ActionBarType.ACCENT, displayContent: 'Export Keys'},
     {
       eventName: StudentCreatorActionTypes.GENERATE,
       type: ActionBarType.ACCENT,
@@ -34,7 +38,7 @@ export class SmartStudentCreatorComponent implements OnInit {
   form: FormGroup;
   eccInitialized: boolean;
 
-  constructor(private router: Router, private store: Store<AppState>) {
+  constructor(private router: Router, private store: Store<AppState>, private snackBar: MatSnackBar, private jsonPipe: JsonPipe) {
   }
 
   async onAction(eventName: string) {
@@ -42,7 +46,16 @@ export class SmartStudentCreatorComponent implements OnInit {
       case StudentCreatorActionTypes.EXIT:
         await this.router.navigateByUrl('/students');
         break;
+      case StudentCreatorActionTypes.EXPORT:
+        const keys = {
+          publicKey: this.form.get('publicKey').value,
+          privateKey: this.form.get('privateKey').value,
+        };
+        await navigator.clipboard.writeText(this.jsonPipe.transform(keys));
+        this.snackBar.open('Keys have been copied to the clipboard', 'Ok', {duration: 2000});
+        break;
       case StudentCreatorActionTypes.GENERATE:
+        this.snackBar.open('Generating public and private key pair', 'Ok', {duration: 2000});
         this.generatePublicPrivateKey();
         break;
       case StudentCreatorActionTypes.CREATE:
@@ -74,18 +87,20 @@ export class SmartStudentCreatorComponent implements OnInit {
       } else {
         this.form.get('pair').setErrors(null, {emitEvent: false});
       }
-    })).subscribe(() => this.actions[2].valid = this.form.valid);
+    })).subscribe(() => this.actions[3].valid = this.form.valid);
     this.form.updateValueAndValidity();
   }
 
   generatePublicPrivateKey(): void {
     this.loading = true;
     this.actions[1].valid = false;
+    this.actions[2].valid = false;
     const worker = new Worker('../../../../workers/keypair-generator.worker', {type: 'module'});
     worker.onmessage = (message) => {
       this.form.patchValue({publicKey: message.data.public, privateKey: message.data.private});
       this.loading = false;
       this.actions[1].valid = true;
+      this.actions[2].valid = true;
     };
   }
 

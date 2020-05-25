@@ -58,7 +58,7 @@ describe('SmartRecordCreatorComponent', () => {
     expect(mockStore.dispatch).toHaveBeenCalledWith(new GetStudents());
   });
 
-  it('Actions button should be to set to valid on valid form data', () => {
+  it('should set actions button to valid on valid form data', () => {
     const student: EduStudentModel = {
       publicKey: '1',
       faculty: 'test',

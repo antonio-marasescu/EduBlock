@@ -27,3 +27,13 @@
 .app-toolbar-fill {
   flex: 1 1 auto;
 }
+
+.toolbar-title {
+  display: inline-flex;
+  vertical-align: middle;
+  padding-left: 8px;
+}
+
+.toolbar-left-content {
+  vertical-align: middle;
+}
