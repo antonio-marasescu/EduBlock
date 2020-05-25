@@ -67,6 +67,7 @@ import {JwtInterceptor} from './core/interceptors/jwt.interceptor';
 import {LoginFormComponent} from './components/presentational/auth/login-form/login-form.component';
 import {SmartRegisterPageComponent} from './components/containers/auth/smart-register-page/smart-register-page.component';
 import {RegisterFormComponent} from './components/presentational/auth/register-form/register-form.component';
+import {JsonPipe} from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -111,11 +112,13 @@ import {RegisterFormComponent} from './components/presentational/auth/register-f
     MatAutocompleteModule, MatProgressSpinnerModule, MatMenuModule, MatTabsModule, MatTreeModule, MatProgressBarModule,
     ReactiveFormsModule, NgxFileDropModule, DragDropModule, MatSnackBarModule, ClipboardModule
   ],
-  providers: [{
-    provide: HTTP_INTERCEPTORS,
-    useClass: JwtInterceptor,
-    multi: true
-  }],
+  providers: [
+    JsonPipe,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {NetworkMemberModel} from '../../../../core/models/network/network-member.model';
 import {trimString} from '../../../../core/utils/display.string';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-network-members-list',
@@ -19,6 +20,13 @@ export class NetworkMembersListComponent {
     promoterPublicKey: 'Promoter PK',
     joinedDate: 'Joined Date'
   };
+
+  constructor(private snackBar: MatSnackBar) {
+  }
+
+  showExportMessage() {
+    this.snackBar.open('The information has been copied to the clipboard', 'Ok', {duration: 2000});
+  }
 
   trimData = (value: string) => trimString(value);
 }
