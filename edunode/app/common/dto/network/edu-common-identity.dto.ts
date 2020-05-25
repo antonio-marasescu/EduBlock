@@ -18,7 +18,7 @@ export class EduCommonIdentityDto {
 export class EduCommonIdentityDtoMapper {
     public static toDto(entity: CommonIdentity): EduCommonIdentityDto {
         const dto = new EduCommonIdentityDto();
-        Object.assign(dto, objectWithoutKeys(entity, ['version', 'entityHash']));
+        Object.assign(dto, objectWithoutKeys(entity, ['version', 'entityHash', 'accessToken']));
         return dto;
     }
 }

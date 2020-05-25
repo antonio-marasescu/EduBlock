@@ -14,15 +14,17 @@
         Students
       </mat-list-item>
     </mat-nav-list>
+    <img mat-card-image src="/assets//edublock-logo.png" class="sidenav-container-image">
   </mat-sidenav>
 
   <div class="app-sidenav-content">
     <mat-toolbar color="primary">
-      <span *ngIf="user">
+      <span *ngIf="user" class="toolbar-left-content">
         <button mat-icon-button (click)="sidenav.toggle()">
           <mat-icon>dehaze</mat-icon>
         </button>
       </span>
+      <h2 class="toolbar-title">EduBlock</h2>
       <span class="app-toolbar-fill"></span>
       <span>
         <div *ngIf="user;">

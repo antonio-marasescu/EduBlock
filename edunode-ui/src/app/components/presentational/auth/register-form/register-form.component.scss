@@ -3,6 +3,17 @@
   display: block;
 }
 
+.card-header-container {
+  width: 100%;;
+  justify-content: center;
+  text-align: center;
+}
+
+.card-header-container-image {
+  max-width: 200px;
+  max-height: 150px;
+}
+
 .form-control-container {
   width: 100%;
   display: flex;
