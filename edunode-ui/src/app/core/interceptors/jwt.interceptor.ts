@@ -7,7 +7,6 @@ import {tap} from 'rxjs/operators';
 export class JwtInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log(req.url);
     if (req.url.includes('logout')) {
       localStorage.removeItem('authorization');
       return of(new HttpResponse({status: 200}));

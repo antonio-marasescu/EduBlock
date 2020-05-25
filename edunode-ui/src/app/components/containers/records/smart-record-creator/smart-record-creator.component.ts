@@ -9,7 +9,7 @@ import {FileSystemFileEntry, NgxFileDropEntry} from 'ngx-file-drop';
 import {filter, tap} from 'rxjs/operators';
 import {AppState} from '../../../../store/app.state';
 import {Store} from '@ngrx/store';
-import {ClearUploadedFiles, UploadFile} from '../../../../store/actions/files.actions';
+import {ClearUploadedFiles, UploadMultipleFiles} from '../../../../store/actions/files.actions';
 import {EduRecordAttachmentModel} from '../../../../core/models/records/edu-record-attachment.model';
 import {selectFilesStateIsUploadingFiles, selectUploadedFiles} from '../../../../store/reducers/files.reducer';
 import {CreateEduRecordModel} from '../../../../core/models/records/create-edu-record.model';
@@ -53,9 +53,8 @@ export class SmartRecordCreatorComponent implements OnInit {
       case RecordCreatorActionTypes.CREATE:
         this.isCreating = true;
         this.actions[1].valid = false;
-        for (const file of this.files) {
-          this.store.dispatch(new UploadFile(file));
-        }
+        console.log(this.files);
+        this.store.dispatch(new UploadMultipleFiles([...this.files]));
         break;
     }
   }
@@ -90,7 +89,7 @@ export class SmartRecordCreatorComponent implements OnInit {
     this.availableStudents$.subscribe(value => this.latestAvailableStudents = value);
     this.form.valueChanges.pipe(tap(() => {
       const selectedStudent = this.form.get('selectedStudent').value;
-      const includedInActual = this.latestAvailableStudents.includes(selectedStudent);
+      const includedInActual = this.latestAvailableStudents && this.latestAvailableStudents.includes(selectedStudent);
       if (!includedInActual) {
         this.form.get('selectedStudent').setErrors({invalidStudent: selectedStudent}, {emitEvent: false});
       }

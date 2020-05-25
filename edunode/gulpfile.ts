@@ -1,6 +1,6 @@
-import {exec} from "child_process";
+import {exec} from 'child_process';
 
-import madge from "madge";
+import madge from 'madge';
 
 const childNames = ['npm run dev node-uni-1', 'npm run dev node-uni-2', 'npm run dev node-uni-3', 'npm run dev node-uni-4'];
 
@@ -41,6 +41,7 @@ export function initGulpEduNode(gulp, workingDir) {
             complete();
         }
     );
+
     gulp.task('eduNode:runNode:D', async (complete) => {
             const child = exec(childNames[3], {cwd: workingDir});
             if (!child) {
@@ -52,6 +53,7 @@ export function initGulpEduNode(gulp, workingDir) {
             complete();
         }
     );
+
     gulp.task('eduNode:runNode:all', async (complete) => {
             childNames.forEach(name => {
                 const child = exec(name, {cwd: workingDir}
@@ -65,6 +67,7 @@ export function initGulpEduNode(gulp, workingDir) {
             complete();
         }
     );
+
     gulp.task('eduNode:generate:dependency-graph', async (complete) => {
             madge(workingDir + '/app/app.ts')
                 .then((res) => res.image('docs/images/dependency-graph/complete.svg'))

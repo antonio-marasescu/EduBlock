@@ -1,5 +1,5 @@
-import {Token} from "typedi";
-import {NetworkMapEntity} from "../../entities/network-map/network-map.entity";
+import {Token} from 'typedi';
+import {NetworkMapEntity} from '../../entities/network-map/network-map.entity';
 
 export interface INetworkMapRepository {
     createNetworkMember(entity: NetworkMapEntity): Promise<NetworkMapEntity>;
@@ -9,6 +9,8 @@ export interface INetworkMapRepository {
     getAllNetworkMembers(): Promise<NetworkMapEntity[]>;
 
     networkMemberExists(publicKey: string): Promise<boolean>;
+
+    clearMembers(): Promise<void>;
 }
 
 export const INetworkMapRepositoryToken = new Token<INetworkMapRepository>('repositories.network-map');

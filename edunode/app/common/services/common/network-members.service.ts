@@ -79,7 +79,6 @@ export class NetworkMembersService {
             await this.validateCommonIdentityDto(dto);
         }
 
-        await this.commonIdentityRepository.clear();
         const entityList = await this.saveCommonIdentityDtoList(nmsResponseDtoList);
         return entityList.map(e => EduCommonIdentityDtoMapper.toDto(e));
     }
@@ -155,6 +154,11 @@ export class NetworkMembersService {
     private async saveCommonIdentityDto(nmsResponseDto: NmsCommonIdentityDto): Promise<CommonIdentity> {
         this.logger.logInfo(this, 'Saving new network member to local Vault...');
         const commonIdentityEntity = NmsCommonIdentityDtoMapper.mapToEduEntity(nmsResponseDto);
+        const oldIdentity = await this.commonIdentityRepository.findOne({publicKey: commonIdentityEntity.publicKey});
+        if (oldIdentity) {
+            commonIdentityEntity.accessToken = oldIdentity.accessToken;
+            commonIdentityEntity.id = oldIdentity.id;
+        }
         const savedEntity = await this.commonIdentityRepository.save(commonIdentityEntity);
         this.logger.logSuccess(this, 'Succeeded in saving the new network member to the local vault!');
         return savedEntity;
@@ -162,8 +166,11 @@ export class NetworkMembersService {
 
     private async saveCommonIdentityDtoList(nmsResponseDtoList: NmsCommonIdentityDto[]): Promise<CommonIdentity[]> {
         this.logger.logInfo(this, 'Saving new network member to local Vault...');
-        const commonIdentityEntityList = nmsResponseDtoList.map(dto => NmsCommonIdentityDtoMapper.mapToEduEntity(dto));
-        const savedEntityList = await this.commonIdentityRepository.save(commonIdentityEntityList);
+        const savedEntityList: CommonIdentity[] = [];
+        for (const nmsResponseDto of nmsResponseDtoList) {
+            const newIdentity = await this.saveCommonIdentityDto(nmsResponseDto);
+            savedEntityList.push(newIdentity);
+        }
         this.logger.logSuccess(this, 'Succeeded in saving the new network member to the local vault!');
         return savedEntityList;
     }

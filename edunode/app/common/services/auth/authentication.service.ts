@@ -8,11 +8,20 @@ import {EduUserEntity, EduUserRoles} from '../../entities/university/edu-user.en
 import {validate, ValidationError} from 'class-validator';
 import {
     createInvalidCredentials,
+    createInvalidSignatureError,
     createObjectNotFoundError,
     createValidationError
 } from '../../errors/edu.error.factory';
 import {EduUserCredentialsDto} from '../../dto/common/edu-user-credentials.dto';
 import * as crypto from 'crypto'
+import {AccessTokenDto} from '../../dto/network/access-token.dto';
+import {IdentityService, IdentityServiceToken} from '../security/identity.service';
+import {NetworkMembersService, NetworkMembersServiceToken} from '../common/network-members.service';
+import {
+    ICommonIdentityRepository,
+    ICommonIdentityRepositoryToken
+} from '../../repositories/identity/common-identity.interface.repository';
+import {AccessTokenPublisher, AccessTokenPublisherToken} from '../rabbitmq/publishers/access-token.publisher';
 
 export const AuthenticationServiceToken = new Token<AuthenticationService>('services.auth.authentication');
 
@@ -22,7 +31,11 @@ export class AuthenticationService {
 
     constructor(
         @Inject(EccServiceToken) private eccService: EccService,
+        @Inject(IdentityServiceToken) private identityService: IdentityService,
         @Inject(IUserRepositoryToken) private userRepository: IUserRepository,
+        @Inject(NetworkMembersServiceToken) private networkMembersService: NetworkMembersService,
+        @Inject(ICommonIdentityRepositoryToken) private commonIdentityRepository: ICommonIdentityRepository,
+        @Inject(AccessTokenPublisherToken) private accessTokenPublisher: AccessTokenPublisher,
         @Inject(ServerLoggerToken) private logger: ServerLogger,
     ) {
     }
@@ -31,7 +44,20 @@ export class AuthenticationService {
         this.logger.logInfo(this, 'Initializing Authentication Service...');
         this.inMemorySecret = Buffer.from(crypto.randomBytes(256)).toString('hex');
         this.logger.logInfo(this, 'Authentication Service Secret: ' + this.inMemorySecret);
+        await this.publishAuthorizationToken();
         this.logger.logSuccess(this, 'Authentication Service was initialized!');
+    }
+
+    public async publishAuthorizationToken(): Promise<void> {
+        this.logger.logInfo(this, 'Creating network access token');
+        const accessToken = new AccessTokenDto();
+        const accessIdentity = await this.identityService.getPersonalIdentityDetails();
+        accessToken.token = await jwt.sign(JSON.stringify(accessIdentity), this.inMemorySecret);
+        accessToken.identitySignature = await this.identityService.signData(accessToken.token);
+        accessToken.identityPublicKey = await this.identityService.getPersonalIdentity();
+
+        this.logger.logSuccess(this, 'Network access token was created');
+        await this.accessTokenPublisher.publish(accessToken);
     }
 
     public async login(data: EduUserCredentialsDto): Promise<EduUserDto> {
@@ -56,7 +82,7 @@ export class AuthenticationService {
         return EduUserDtoMapper.toDto(actualUser);
     }
 
-    public async registerUser(data: EduUserDto): Promise<EduUserDto> {
+    public async registerUser(data: EduUserDto, isAdmin: boolean): Promise<EduUserDto> {
         this.logger.logInfo(this, 'Registering a new user...');
 
         this.logger.logInfo(this, 'Validating new user data transfer object..');
@@ -69,7 +95,7 @@ export class AuthenticationService {
         this.logger.logSuccess(this, 'Validation was a success!');
 
         const user: EduUserEntity = EduUserDtoMapper.toEntity(data);
-        user.role = EduUserRoles.USER;
+        user.role = (isAdmin) ? EduUserRoles.ADMIN : EduUserRoles.USER;
         user.password = await this.eccService.hashStringData(user.password);
         const savedUser = await this.userRepository.save(user);
         this.logger.logSuccess(this, 'Registering a new user was a success!');
@@ -97,7 +123,36 @@ export class AuthenticationService {
             this.logger.logError(this, JSON.stringify(e));
             return null;
         }
-        this.logger.logInfo(this, 'Verification result of jwt token: ' + decodedToken);
+        this.logger.logInfo(this, 'Verification result of jwt token: ' + JSON.stringify(decodedToken));
         return decodedToken;
+    }
+
+    public async addAuthorizationToIdentity(accessToken: AccessTokenDto): Promise<void> {
+        this.logger.logInfo(this, 'Add Authorization Token to Network Member Flow has started...');
+
+        this.logger.logInfo(this, 'Validating Access token data transfer object...');
+        const validationErrors: ValidationError[] = await validate(accessToken);
+        if (validationErrors.length > 0) {
+            const error = createValidationError(validationErrors);
+            this.logger.logError(this, JSON.stringify(error));
+            throw error;
+        }
+        const valid = await this.identityService.verifyData(accessToken.token, accessToken.identitySignature, accessToken.identityPublicKey);
+        if (!valid) {
+            const error = createInvalidSignatureError(accessToken);
+            this.logger.logError(this, JSON.stringify(error));
+            throw error;
+        }
+        this.logger.logSuccess(this, 'Validation of Access token data transfer object has succeeded!');
+
+        this.logger.logInfo(this, 'Searching for network member identity...');
+        await this.networkMembersService.getSingleNetworkMember(accessToken.identityPublicKey);
+        const member = await this.commonIdentityRepository.findOneOrFail({publicKey: accessToken.identityPublicKey});
+        this.logger.logSuccess(this, 'Network member was found for the access token!');
+
+        this.logger.logInfo(this, 'Adding access token to the identity...');
+        member.accessToken = accessToken.token;
+        await this.commonIdentityRepository.save(member);
+        this.logger.logSuccess(this, 'Access token added! Add Authorization Token to Network Member Flow has ended!');
     }
 }
