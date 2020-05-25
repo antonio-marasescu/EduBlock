@@ -12,6 +12,7 @@
   padding: 20px;
   width: 100%;
   max-width: 220px;
+  text-align: center;
 }
 
 .app-sidenav-list-item {
@@ -36,4 +37,13 @@
 
 .toolbar-left-content {
   vertical-align: middle;
+}
+
+.sidenav-container-image {
+  position: absolute;
+  margin: 0;
+  left: 36px;
+  bottom: 12px;
+  max-width: 150px;
+  max-height: 100px;
 }
