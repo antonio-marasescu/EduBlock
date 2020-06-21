@@ -28,8 +28,7 @@ describe('Authentication Integration Tests', function () {
         expect(authToken).to.exist;
     });
 
-
-    it('Should have an authorization token', async function () {
+    it('Should get an authorization token', async function () {
         const agent = buildRequest();
         const req = await agent.get('/api/users/me').set('authorization', 'Bearer ' + authToken).send();
         expect(req).to.have.status(200);
