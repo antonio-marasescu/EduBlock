@@ -3,7 +3,7 @@
 ### Brief
 
 EduBlock represents a private blockchain platform intended
-for the sharing of educational records between universities.
+for the sharing of educational records between universities. It was created to serve as my bachelor thesis degree.
 
 ### Prerequisites
     The following software must be installed in order to run the setup:
