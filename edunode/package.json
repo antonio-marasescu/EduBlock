@@ -16,7 +16,7 @@
     "@types/body-parser": "^1.19.0",
     "@types/jsonwebtoken": "^8.5.0",
     "amqp-ts": "^1.8.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "class-validator": "^0.11.1",
     "eosjs-ecc": "^4.0.7",
     "express": "^4.17.1",
